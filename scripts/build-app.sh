@@ -50,6 +50,7 @@ cat > "$OUT/Contents/Info.plist" <<PLIST
 <plist version="1.0">
 <dict>
     <key>CFBundleExecutable</key><string>$APP_NAME</string>
+    <key>CFBundleIconFile</key><string>AppIcon</string>
     <key>CFBundleIdentifier</key><string>$BUNDLE_ID</string>
     <key>CFBundleName</key><string>$APP_NAME</string>
     <key>CFBundleDisplayName</key><string>$APP_NAME</string>
@@ -66,6 +67,7 @@ cat > "$OUT/Contents/Info.plist" <<PLIST
 </plist>
 PLIST
 plutil -lint "$OUT/Contents/Info.plist" >/dev/null
+cp "$ROOT/app/Resources/AppIcon.icns" "$OUT/Contents/Resources/AppIcon.icns"
 
 # Sign inner to outer. No --deep, so every nested bundle gets its own signature.
 FW="$OUT/Contents/Frameworks/Sparkle.framework/Versions/B"
