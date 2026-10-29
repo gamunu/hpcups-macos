@@ -77,25 +77,30 @@ If a job fails, `log show --last 5m --predicate 'process == "hpcups"'` and
 
 ## Status app
 
-`hpcups Status` is a small menu bar app (SwiftUI, no Xcode project) for the
-queue. It talks to CUPS through libcups, not `lpstat`.
+`hpcups Status` is a normal Mac app (SwiftUI, no Xcode project) with a Dock
+icon, a main window and a menu bar item. It talks to CUPS through libcups,
+not `lpstat`.
 
-- Lists queues whose PPD make-and-model contains "hpcups-macos" (all queues
-  if none match). `HP_DeskJet_2300` is the default.
-- Shows the printer state, the state message and the state reasons in plain
-  words, for example "Out of paper" or "Printer offline or unplugged".
-  Reasons starting with `com.hp.` are shown raw as "Driver reported".
-- Checks that the USB device is connected by matching the serial in the
-  queue's device URI against the USB registry.
-- Shows ink levels read from the printer (see "Ink levels" below).
-- Has maintenance actions: clean, deep clean, diagnostics page, alignment
-  (see "Maintenance" below).
-- Lists active and recent jobs with a cancel button, plus cancel all,
-  pause or resume the printer, and a test page.
-- The menu bar icon changes when the printer is processing, and shows a
-  warning when it is stopped, offline or reports an error.
-- Polls every 3 seconds and sends a notification when a job completes or
-  fails. It asks for notification permission on first launch.
+The window has a sidebar with five sections:
+
+- Overview: printer name and model, a state card (Ready, Printing, Needs
+  attention, Disconnected) with the reasons in plain words, USB status, ink
+  summary, the current job and quick actions.
+- Jobs: a table of active and past jobs (title, state, size, submitted time),
+  cancel selected, cancel all, pause or resume the queue.
+- Ink: one cartridge picture each for black and tri-color, level, state,
+  cartridge number and last read time. See "Ink levels" below.
+- Maintenance: guided flows for clean, deep clean, diagnostics page and
+  alignment. See "Maintenance" below.
+- Settings: notifications, ink refresh interval, queue polling interval and
+  "Show in menu bar".
+
+The menu bar popover is a short status view: state, ink bars, the active job
+and an "Open hpcups Status" button. Closing the window keeps the menu bar item
+running. Queues whose PPD make-and-model contains "hpcups-macos" are listed
+(all queues if none match). Reasons starting with `com.hp.` are shown raw as
+"Driver reported". The app sends a notification when a job completes or fails
+and when ink gets low. The first launch asks for notification permission.
 
 Build:
 
@@ -106,10 +111,8 @@ This runs `swift build -c release` in `app/` and writes
 
     open "build/hpcups Status.app"
 
-The app has no Dock icon. Look for the printer icon in the menu bar. Quit
-from the Quit button in the popover.
-
-For a text check without the GUI:
+`--open-section overview|jobs|ink|maintenance|settings` picks the section the
+window starts in. For a text check without the GUI:
 
     "build/hpcups Status.app/Contents/MacOS/hpcups Status" --dump
 
@@ -134,21 +137,37 @@ reports `marker-levels` and the printer read fails, those values are shown.
 
 ## Maintenance
 
-The Maintenance section has four actions:
+The Maintenance section has four guided flows:
 
 - Clean print heads (`cleaningPage`)
 - Deep clean (`cleaningPageLevel2`)
 - Print diagnostics page (`diagnosticsPage`)
 - Align print heads (calibration session, semi-automatic)
 
-Each one asks for confirmation first. All of them use ink and paper, and deep
-clean uses the most ink. Load plain paper before you start. The buttons are
-disabled while a print job is active, while the printer is processing, or when
+Each flow opens a sheet with steps, and polls the printer every 2 seconds
+(`/DevMgmt/ProductStatusDyn.xml`) to show what it is doing. If the printer
+reports an empty or open paper tray the sheet says "Load paper", and for an
+open door it says "Close the door". The job continues by itself once that is
+fixed. All flows use ink and paper, and deep clean uses the most ink. The
+actions are disabled, with the reason shown, while a print job is active or
 the USB device is not found.
 
-For alignment the printer prints a page. Put it face down on the scanner glass
-and press the Enter or Scan button on the printer. The app watches the
-printer's calibration state and shows the result.
+Clean and deep clean print no page on the DeskJet 2300. The flow is done when
+the printer goes from processing back to ready, and it offers to print the
+diagnostics page to check. The diagnostics flow ends with guidance on reading
+the page.
+
+Alignment on this printer goes through `/Calibration/State` like this:
+CalibrationRequired, then Printing (status calibrating), then ScanRequested
+(the page is out; place it printed side down on the scanner glass, top edge to
+the back, in the marker corner, close the lid, press Color Copy once), then
+Scanning, then back to CalibrationRequired with status ready after about 15
+seconds. The printer does not report CalibrationValid after a good alignment.
+The app counts the alignment as done when the state passed through Scanning
+and the printer is ready with nothing to fix. CalibrationValid also counts. If
+the printer returns to ready without ever scanning, the app says the scan was
+not detected. If the printer's Attention light is blinking afterwards, the
+alignment failed; reload the page and try again.
 
 ## How it talks to the printer
 

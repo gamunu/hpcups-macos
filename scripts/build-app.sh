@@ -1,5 +1,5 @@
 #!/bin/sh
-# Build the hpcups Status menu bar app and wrap it into build/hpcups Status.app.
+# Build the hpcups Status window app with a menu bar item and wrap it into build/hpcups Status.app.
 set -eu
 
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
@@ -29,7 +29,6 @@ cat > "$OUT/Contents/Info.plist" <<PLIST
     <key>CFBundleShortVersionString</key><string>$VERSION</string>
     <key>CFBundleVersion</key><string>$VERSION</string>
     <key>LSMinimumSystemVersion</key><string>14.0</string>
-    <key>LSUIElement</key><true/>
     <key>NSHighResolutionCapable</key><true/>
 </dict>
 </plist>

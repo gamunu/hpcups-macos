@@ -189,31 +189,3 @@ enum MaintenanceJob: String, CaseIterable, Identifiable, Sendable {
         }
     }
 }
-
-enum Maintenance {
-    // Body from HPLIP base/maint.py (CleanXML, setCleanType), sent as in cleanTypeLedm.
-    static func jobXML(_ jobType: String) -> String {
-        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!--  THIS DATA SUBJECT TO DISCLAIMER(S)INCLUDED WITH THE PRODUCT OF ORIGIN. -->\n<ipcap:InternalPrintCap xmlns:ipcap=\"http://www.hp.com/schemas/imaging/con/ledm/internalprintcap/2008/03/21\" xmlns:ipdyn=\"http://www.hp.com/schemas/imaging/con/ledm/internalprintdyn/2008/03/21\" xmlns:dd=\"http://www.hp.com/schemas/imaging/con/dictionaries/1.0/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.hp.com/schemas/imaging/con/ledm/internalprintcap/2008/03/21 ../schemas/InternalPrintCap.xsd http://www.hp.com/schemas/imaging/con/ledm/internalprintdyn/2008/03/21 ../schemas/InternalPrintDyn.xsd http://www.hp.com/schemas/imaging/con/dictionaries/1.0/ ../schemas/dd/DataDictionaryMasterLEDM.xsd\">\n                                <ipdyn:JobType>\(jobType)</ipdyn:JobType>\n</ipcap:InternalPrintCap>"
-    }
-
-    // base/maint.py dataModelHelper, with the attribute quotes written as plain quotes.
-    static let calibrationPrintingXML = "<cal:CalibrationState xmlns:cal=\"http://www.hp.com/schemas/imaging/con/cnx/markingagentcalibration/2009/04/08\" xmlns:dd=\"http://www.hp.com/schemas/imaging/con/dictionaries/1.0/\">Printing</cal:CalibrationState>"
-
-    static func supportedJobTypes(_ data: Data) -> [String] {
-        guard let root = parseXML(data) else { return [] }
-        return root.descendants("JobType").map { $0.text.trimmingCharacters(in: .whitespacesAndNewlines) }
-    }
-
-    /// Status categories from ProductStatusDyn.
-    static func statusCategories(_ data: Data) -> [String] {
-        guard let root = parseXML(data) else { return [] }
-        return root.all("Status").compactMap { $0.value("StatusCategory") }
-    }
-
-    static func isBusy(_ categories: [String]) -> Bool {
-        categories.contains { c in
-            let l = c.lowercased()
-            return ["process", "clean", "align", "calibrat", "busy", "printing", "initializ", "warm"].contains { l.contains($0) }
-        }
-    }
-}

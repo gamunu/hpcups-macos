@@ -97,3 +97,21 @@ func ledmGetAndExit(path: String) -> Never {
         exit(1)
     }
 }
+
+/// Cancels one job through the same code path the GUI uses.
+func cancelJobAndExit(id: Int?) -> Never {
+    guard let id else {
+        FileHandle.standardError.write(Data("usage: --cancel <job-id> [--printer <name>]\n".utf8))
+        exit(64)
+    }
+    var name = "HP_DeskJet_2300"
+    if let i = cliArgs.firstIndex(of: "--printer"), i + 1 < cliArgs.count { name = cliArgs[i + 1] }
+    do {
+        try Cups.cancel(job: id, printer: name)
+        print("Canceled job \(id) on \(name)")
+        exit(0)
+    } catch {
+        FileHandle.standardError.write(Data("error: \(error.localizedDescription)\n".utf8))
+        exit(1)
+    }
+}
