@@ -40,7 +40,7 @@ jobs:
       - name: Build filter
         run: make
 
-      - name: Test filter
+      - name: Test filter and PPDs
         run: make test
 
       - name: Test app
