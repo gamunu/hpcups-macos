@@ -4,7 +4,7 @@
   "packages": {
     ".": {
       "release-type": "simple",
-      "package-name": "hpcups-macos",
+      "package-name": "smudge",
       "version-file": "VERSION",
       "changelog-path": "CHANGELOG.md",
       "include-v-in-tag": true,

@@ -21,10 +21,10 @@ extension StatusStore {
         }
     }
 
-    /// Model for display. The nickname ends in ", hpcups-macos", which is not part of the model.
+    /// Model for display. The nickname ends in ", Smudge", which is not part of the model.
     nonisolated static func model(of p: PrinterInfo) -> String {
         var m = p.makeAndModel
-        if let r = m.range(of: ", hpcups-macos", options: [.caseInsensitive, .backwards]) { m.removeSubrange(r) }
+        if let r = m.range(of: ", Smudge", options: [.caseInsensitive, .backwards]) { m.removeSubrange(r) }
         return m.isEmpty ? (DeviceURI.model(p.deviceURI) ?? "Unknown model") : m
     }
 }

@@ -2,7 +2,7 @@
 // Copyright (C) 2026 Gamunu Balagalla
 
 import XCTest
-@testable import HPCupsStatus
+@testable import Smudge
 
 final class LEDMHTTPTests: XCTestCase {
     private let body = Fixture.calibrationState("CalibrationRequired")

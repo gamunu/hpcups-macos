@@ -5,7 +5,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "HPCupsStatus",
+    name: "Smudge",
     platforms: [.macOS(.v14)],
     dependencies: [
         .package(url: "https://github.com/sparkle-project/Sparkle", exact: "2.10.1"),
@@ -18,7 +18,7 @@ let package = Package(
             linkerSettings: [.linkedLibrary("cups")]
         ),
         .executableTarget(
-            name: "HPCupsStatus",
+            name: "Smudge",
             dependencies: [
                 "CCups",
                 .product(name: "Sparkle", package: "Sparkle"),
@@ -36,8 +36,8 @@ let package = Package(
             ]
         ),
         .testTarget(
-            name: "HPCupsStatusTests",
-            dependencies: ["HPCupsStatus"],
+            name: "SmudgeTests",
+            dependencies: ["Smudge"],
             swiftSettings: [.swiftLanguageMode(.v5)]
         ),
     ]

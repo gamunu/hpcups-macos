@@ -2,7 +2,7 @@
 // Copyright (C) 2026 Gamunu Balagalla
 
 import XCTest
-@testable import HPCupsStatus
+@testable import Smudge
 
 final class DeviceURITests: XCTestCase {
     func testSerialFromURI() {
@@ -208,13 +208,13 @@ final class SelectionTests: XCTestCase {
     }
 
     func testShowsQueuesEndingInOurMarker() {
-        let all = [q("A", "HP DeskJet 2300 series, hpcups-macos"), q("B", "HP DeskJet 2300 series, hpcups-macos"),
+        let all = [q("A", "HP DeskJet 2300 series, Smudge"), q("B", "HP DeskJet 2300 series, Smudge"),
                    q("C", "HP OfficeJet 3830, 2.8.1"), q("D", "Generic PostScript")]
         XCTAssertEqual(PrinterChoice.shown(all).map(\.name), ["A", "B"])
     }
 
     func testMarkerMustBeAtTheEnd() {
-        let all = [q("A", "hpcups-macos test queue"), q("B", "HP Envy 6000, hpcups-macos")]
+        let all = [q("A", "smudge test queue"), q("B", "HP Envy 6000, Smudge")]
         XCTAssertEqual(PrinterChoice.shown(all).map(\.name), ["B"])
     }
 
@@ -250,7 +250,7 @@ final class SelectionTests: XCTestCase {
     }
 
     func testModelNameDropsTheDriverMarker() {
-        XCTAssertEqual(StatusStore.model(of: q("A", "HP DeskJet 2300 series, hpcups-macos")), "HP DeskJet 2300 series")
+        XCTAssertEqual(StatusStore.model(of: q("A", "HP DeskJet 2300 series, Smudge")), "HP DeskJet 2300 series")
         XCTAssertEqual(StatusStore.model(of: q("B", "", "usb://HP/ENVY%206000%20series?serial=Z")), "ENVY 6000 series")
     }
 }

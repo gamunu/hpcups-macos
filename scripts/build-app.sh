@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # Copyright (C) 2026 Gamunu Balagalla
 
-# Build the hpcups Status window app with a menu bar item and wrap it into
-# build/hpcups Status.app, with Sparkle embedded and everything ad-hoc signed.
+# Build the Smudge window app with a menu bar item and wrap it into
+# build/app.noindex/Smudge.app, with Sparkle embedded and everything ad-hoc signed.
 #
 # Environment:
 #   VERSION            override the version (see scripts/version.sh)
@@ -13,11 +13,11 @@
 set -eu
 
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
-APP_NAME="hpcups Status"
-BUNDLE_ID="io.github.gamunu.hpcups-status"
+APP_NAME="Smudge"
+BUNDLE_ID="io.github.gamunu.smudge"
 VERSION=$("$ROOT/scripts/version.sh")
-FEED_URL="https://github.com/gamunu/hpcups-macos/releases/latest/download/appcast.xml"
-OUT="$ROOT/build/$APP_NAME.app"
+FEED_URL="https://github.com/gamunu/smudge/releases/latest/download/appcast.xml"
+OUT="$ROOT/build/app.noindex/$APP_NAME.app"
 
 cd "$ROOT/app"
 swift build -c release
@@ -28,7 +28,7 @@ SPARKLE_FW="$ROOT/app/.build/artifacts/sparkle/Sparkle/Sparkle.xcframework/macos
 
 rm -rf "$OUT"
 mkdir -p "$OUT/Contents/MacOS" "$OUT/Contents/Resources" "$OUT/Contents/Frameworks"
-cp "$BIN_DIR/HPCupsStatus" "$OUT/Contents/MacOS/$APP_NAME"
+cp "$BIN_DIR/Smudge" "$OUT/Contents/MacOS/$APP_NAME"
 # ditto keeps the symlinks inside the framework bundle.
 ditto "$SPARKLE_FW" "$OUT/Contents/Frameworks/Sparkle.framework"
 

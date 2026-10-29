@@ -13,13 +13,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool { false }
 }
 
-struct HPCupsStatusApp: App {
+struct SmudgeApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var delegate
     @StateObject private var store = StatusStore()
     @AppStorage("showMenuBar") private var showMenuBar = true
 
     var body: some Scene {
-        Window("hpcups Status", id: "main") {
+        Window("Smudge", id: "main") {
             MainWindow(store: store)
                 .frame(minWidth: 820, minHeight: 560)
         }
@@ -34,7 +34,7 @@ struct HPCupsStatusApp: App {
             MenuBarView(store: store)
         } label: {
             Image(systemName: store.iconName)
-                .accessibilityLabel("hpcups Status: \(store.healthTitle)")
+                .accessibilityLabel("Smudge: \(store.healthTitle)")
                 .task { store.start() }
         }
         .menuBarExtraStyle(.window)

@@ -14,7 +14,7 @@ out=${2:?appcast output path}
 notes=${3:-}
 version=$("$root/scripts/version.sh")
 sign="$root/app/.build/artifacts/sparkle/Sparkle/bin/sign_update"
-url="https://github.com/gamunu/hpcups-macos/releases/download/v$version/$(basename "$pkg")"
+url="https://github.com/gamunu/smudge/releases/download/v$version/$(basename "$pkg")"
 
 [ -n "${SPARKLE_PRIVATE_KEY:-}" ] || { echo "SPARKLE_PRIVATE_KEY is not set" >&2; exit 1; }
 [ -x "$sign" ] || { echo "missing $sign, run scripts/build-app.sh first" >&2; exit 1; }
@@ -32,7 +32,7 @@ cat > "$out" <<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
   <channel>
-    <title>hpcups Status</title>
+    <title>Smudge</title>
     <item>
       <title>Version $version</title>
       <pubDate>$(LC_ALL=C date -u '+%a, %d %b %Y %H:%M:%S +0000')</pubDate>

@@ -1,18 +1,18 @@
 <p align="center">
-  <img src="docs/images/icon.png" width="128" alt="hpcups Status icon">
+  <img src="docs/images/icon.png" width="128" alt="Smudge icon">
 </p>
 
-<h1 align="center">hpcups-macos</h1>
+<h1 align="center">Smudge</h1>
 
 <p align="center">
-  A working Mac driver and a friendly status app for the HP DeskJet 2300 over USB.<br>
+  A working Mac driver and a friendly status app for HP printers over USB.<br>
   Built from HP's own open-source code, because HP would not ship one.
 </p>
 
 <p align="center">
-  <a href="https://github.com/gamunu/hpcups-macos/actions/workflows/ci.yml"><img src="https://github.com/gamunu/hpcups-macos/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-  <a href="https://github.com/gamunu/hpcups-macos/actions/workflows/codeql.yml"><img src="https://github.com/gamunu/hpcups-macos/actions/workflows/codeql.yml/badge.svg" alt="CodeQL"></a>
-  <a href="https://github.com/gamunu/hpcups-macos/releases/latest"><img src="https://img.shields.io/github/v/release/gamunu/hpcups-macos?include_prereleases&sort=semver" alt="Latest release"></a>
+  <a href="https://github.com/gamunu/smudge/actions/workflows/ci.yml"><img src="https://github.com/gamunu/smudge/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://github.com/gamunu/smudge/actions/workflows/codeql.yml"><img src="https://github.com/gamunu/smudge/actions/workflows/codeql.yml/badge.svg" alt="CodeQL"></a>
+  <a href="https://github.com/gamunu/smudge/releases/latest"><img src="https://img.shields.io/github/v/release/gamunu/smudge?include_prereleases&sort=semver" alt="Latest release"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-AGPL--3.0--or--later-blue" alt="License: AGPL-3.0-or-later"></a>
   <img src="https://img.shields.io/badge/macOS-Apple%20Silicon-black" alt="macOS on Apple Silicon">
 </p>
@@ -68,17 +68,17 @@ Fuck you, HP.
 
 Paste this into Terminal:
 
-    curl -fsSL https://raw.githubusercontent.com/gamunu/hpcups-macos/main/install.sh | sh
+    curl -fsSL https://raw.githubusercontent.com/gamunu/smudge/main/install.sh | sh
 
 The script downloads the latest release, checks it against the release's `SHA256SUMS`, and installs it with Apple's `installer` command. It asks for your Mac password once.
 
-Then plug in the printer, open **System Settings > Printers & Scanners**, click **Add Printer**, pick your HP printer, and set **Use** to the "..., hpcups-macos" driver.
+Then plug in the printer, open **System Settings > Printers & Scanners**, click **Add Printer**, pick your HP printer, and set **Use** to the "..., Smudge" driver.
 
 ### With Homebrew
 
     brew tap gamunu/tap
     brew trust gamunu/tap
-    brew install --cask hpcups-macos
+    brew install --cask smudge
 
 Homebrew also installs the package with `installer`, so there is no prompt. `brew upgrade` and the app's own updates both work.
 
@@ -86,24 +86,24 @@ Homebrew also installs the package with `installer`, so there is no prompt. `bre
 
 The package is not signed with a paid Apple Developer ID, so macOS says it "could not verify" it when you open it from Finder. To install it anyway:
 
-1. Download `hpcups-macos-<version>.pkg` from the [latest release](https://github.com/gamunu/hpcups-macos/releases/latest) and double-click it.
+1. Download `smudge-<version>.pkg` from the [latest release](https://github.com/gamunu/smudge/releases/latest) and double-click it.
 2. Click **Done** on the warning. Do not move it to the Bin.
 3. Open **System Settings > Privacy & Security**, scroll down, and click **Open Anyway** next to the package name.
 
 Right click > Open no longer skips this check on macOS 15 and later. Updates from inside the app are checked against this project's signing key and do not show the warning.
 
-The package installs the filter, a PPD for each supported printer, and `/Applications/hpcups Status.app`. It does not add the printer for you.
+The package installs the filter, a PPD for each supported printer, and `/Applications/Smudge.app`. It does not add the printer for you.
 
 From a shell, the same steps are:
 
-    sudo installer -pkg hpcups-macos-<version>.pkg -target /
+    sudo installer -pkg smudge-<version>.pkg -target /
     lpinfo -v | grep -i usb
     sudo lpadmin -p HP_DeskJet_2300 -E -v "<usb uri from lpinfo>" \
-        -P "/Library/Printers/PPDs/Contents/Resources/HP DeskJet 2300 series (hpcups-macos).ppd.gz"
+        -P "/Library/Printers/PPDs/Contents/Resources/HP DeskJet 2300 series (Smudge).ppd.gz"
 
 ## Using the app
 
-Open **hpcups Status** from Applications. The Overview tells you whether the printer is ready and what to do if it is not.
+Open **Smudge** from Applications. The Overview tells you whether the printer is ready and what to do if it is not.
 
 ### Faint or streaky prints
 
@@ -135,7 +135,7 @@ Only the DeskJet 2300 series has been tested on real hardware. The rest are chec
 
 Models that need HP's closed binary plugin are left out, 46 PPD files in all. So are 33 JBIG-compressed LaserJet files (ZJS and ZX stream) that need the plugin's JBIG code even though HP's data does not say so, and 3 JetReady and QuickConnect files whose JPEG color table is not ported. `ppd/hplip/excluded.tsv` has every excluded file with its reason.
 
-Printers are added in **System Settings > Printers & Scanners** as before. The PPDs are in `/Library/Printers/PPDs/Contents/Resources/hpcups-macos/`.
+Printers are added in **System Settings > Printers & Scanners** as before. The PPDs are in `/Library/Printers/PPDs/Contents/Resources/smudge/`.
 
 ## How it works
 
@@ -156,10 +156,10 @@ You need Xcode and `brew install jpeg-turbo pkgconf`.
     make                   # the hpcups filter in build/hpcups
     make test              # renders pages offline and checks the PCL output
     cd app && swift test   # unit tests for the app's printer logic
-    scripts/build-app.sh   # build/hpcups Status.app
-    make pkg               # build/hpcups-macos-<version>.pkg
+    scripts/build-app.sh   # build/app.noindex/Smudge.app
+    make pkg               # build/smudge-<version>.pkg
 
-`"build/hpcups Status.app/Contents/MacOS/hpcups Status" --dump` prints the printer state, ink and job list as text. `--ledm-get <path>` prints one raw printer document. `--preview-step <name>` opens a maintenance step with fake data, so you can look at the screens without printing.
+`build/app.noindex/Smudge.app/Contents/MacOS/Smudge --dump` prints the printer state, ink and job list as text. `--ledm-get <path>` prints one raw printer document. `--preview-step <name>` opens a maintenance step with fake data, so you can look at the screens without printing.
 
 ## Releases and updates
 
@@ -179,9 +179,9 @@ Do this before the first release. A build without the public key can never verif
     BIN="$PWD/app/.build/artifacts/sparkle/Sparkle/bin"
     "$BIN/generate_keys"
     "$BIN/generate_keys" -x /tmp/sparkle_private_key
-    gh secret set SPARKLE_PRIVATE_KEY --repo gamunu/hpcups-macos < /tmp/sparkle_private_key
+    gh secret set SPARKLE_PRIVATE_KEY --repo gamunu/smudge < /tmp/sparkle_private_key
     rm /tmp/sparkle_private_key
-    gh variable set SPARKLE_PUBLIC_KEY --repo gamunu/hpcups-macos --body "$("$BIN/generate_keys" -p)"
+    gh variable set SPARKLE_PUBLIC_KEY --repo gamunu/smudge --body "$("$BIN/generate_keys" -p)"
 
 Back the private key up in a password manager. Lose it and every installed copy needs a manual reinstall.
 
@@ -194,7 +194,7 @@ This removes the app, the filter, the PPDs and the installer receipt.
 
 ## License
 
-hpcups-macos is AGPL-3.0-or-later. See [LICENSE](LICENSE).
+Smudge is AGPL-3.0-or-later. See [LICENSE](LICENSE).
 
 HP's files in `src/hpcups/` and `src/common/` keep their own headers: BSD-style, MIT, or GPL-2.0-or-later. All three can be combined into an AGPL-3.0-or-later work. [LICENSING.md](LICENSING.md) lists which file carries which license. HPLIP's license text is in [COPYING](COPYING).
 

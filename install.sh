@@ -2,9 +2,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # Copyright (C) 2026 Gamunu Balagalla
 #
-# Install the latest hpcups-macos release:
+# Install the latest Smudge release:
 #
-#   curl -fsSL https://raw.githubusercontent.com/gamunu/hpcups-macos/main/install.sh | sh
+#   curl -fsSL https://raw.githubusercontent.com/gamunu/smudge/main/install.sh | sh
 #
 # Downloads the newest .pkg from GitHub Releases, checks it against the
 # release's SHA256SUMS, and installs it with Apple's installer command.
@@ -12,13 +12,13 @@
 
 set -eu
 
-REPO=gamunu/hpcups-macos
+REPO=gamunu/smudge
 
 say() { printf '%s\n' "$*"; }
 die() { printf 'error: %s\n' "$*" >&2; exit 1; }
 
 [ "$(uname -s)" = Darwin ] || die "this installer is for macOS"
-[ "$(uname -m)" = arm64 ] || die "hpcups-macos is built for Apple Silicon Macs only"
+[ "$(uname -m)" = arm64 ] || die "Smudge is built for Apple Silicon Macs only"
 
 if [ -n "${HPCUPS_VERSION:-}" ]; then
     tag="v${HPCUPS_VERSION#v}"
@@ -28,7 +28,7 @@ else
     [ -n "$tag" ] || die "could not find the latest release"
 fi
 version=${tag#v}
-pkg="hpcups-macos-$version.pkg"
+pkg="smudge-$version.pkg"
 base="https://github.com/$REPO/releases/download/$tag"
 
 tmp=$(mktemp -d)
@@ -48,7 +48,7 @@ say "Installing (macOS will ask for your password)"
 sudo installer -pkg "$tmp/$pkg" -target / || die "installer failed"
 
 say ""
-say "hpcups-macos $version is installed."
+say "Smudge $version is installed."
 say "Next: plug in the printer, open System Settings > Printers & Scanners,"
 say "click Add Printer, pick your HP printer, and set Use to the"
-say "\"..., hpcups-macos\" driver. Then open hpcups Status from Applications."
+say "\"..., Smudge\" driver. Then open Smudge from Applications."
