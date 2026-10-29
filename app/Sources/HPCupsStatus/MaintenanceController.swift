@@ -8,6 +8,8 @@ enum FlowStage: Equatable {
     case running            // printer is busy (printing, cleaning, calibrating)
     case awaitScan          // alignment page is out, waiting for the user
     case scanning           // printer is scanning the alignment page
+    case cancelling         // asking the printer to cancel its job
+    case cancelled(String)  // result of the cancel request
     case done
     case failed(String)
 }
@@ -41,7 +43,105 @@ enum Attention: Equatable {
     }
 }
 
+/// One entry of /Jobs/JobList.
+struct LEDMJob: Equatable, Sendable {
+    var url: String
+    var category: String
+    var state: String
+    var calibrationState: String?
+
+    /// Anything that is not finished: Processing, Pending, Paused and so on.
+    var isActive: Bool {
+        let l = state.lowercased()
+        return !l.isEmpty && l != "completed" && l != "canceled" && l != "cancelled"
+    }
+}
+
+/// What a cancel request did.
+struct CancelResult: Sendable {
+    var found = 0                              // active jobs in the list
+    var puts: [(url: String, status: Int)] = []
+    var finalCategories: [String]?
+    var error: String?
+
+    var stillRunning: Bool {
+        guard let c = finalCategories else { return false }
+        return c.contains { ["processing", "calibrating"].contains($0.lowercased()) }
+    }
+
+    var lines: [String] {
+        var out: [String] = []
+        if let e = error { return ["Could not reach the printer to cancel: \(e)"] }
+        let final = finalCategories.map { Maintenance.liveText($0) } ?? "unknown"
+        if found == 0 {
+            out.append("The printer has no active job to cancel.")
+            if stillRunning {
+                out.append("It still reports \(final.lowercased()). Press the Cancel (X) button on the printer.")
+            } else {
+                out.append("Printer status: \(final).")
+            }
+            return out
+        }
+        out.append("Cancelled \(puts.count) of \(found) active job\(found == 1 ? "" : "s").")
+        for p in puts { out.append("PUT \(p.url): HTTP \(p.status)") }
+        if stillRunning {
+            out.append("The printer still reports \(final.lowercased()). Press the Cancel (X) button on the printer.")
+        } else {
+            out.append("Printer status: \(final).")
+        }
+        return out
+    }
+    var summary: String { lines.joined(separator: "\n") }
+}
+
 enum Maintenance {
+    static let cancelJobXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<j:Job xmlns:j=\"http://www.hp.com/schemas/imaging/con/ledm/jobs/2009/04/30\" xmlns:dd=\"http://www.hp.com/schemas/imaging/con/dictionaries/1.0/\" xmlns:fax=\"http://www.hp.com/schemas/imaging/con/fax/2008/06/13\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.hp.com/schemas/imaging/con/ledm/jobs/2009/04/30 ../schemas/Jobs.xsd\"><j:JobState>Canceled</j:JobState></j:Job>"
+
+    /// Jobs from /Jobs/JobList.
+    static func parseJobList(_ data: Data) -> [LEDMJob] {
+        guard let root = parseXML(data) else { return [] }
+        return root.descendants("Job").compactMap { n in
+            guard let url = n.value("JobUrl") else { return nil }
+            return LEDMJob(url: url,
+                           category: n.value("JobCategory") ?? "",
+                           state: n.value("JobState") ?? "",
+                           calibrationState: n.descendants("CalibrationState").first?.text
+                               .trimmingCharacters(in: .whitespacesAndNewlines))
+        }
+    }
+
+    /// Cancels every active job on the printer, then waits up to 20 s for it to stop.
+    /// Blocking: call off the main thread.
+    static func cancelActivePrinterJobs(client: LEDMClient = .shared) -> CancelResult {
+        var result = CancelResult()
+        do {
+            let list = try client.get("/Jobs/JobList", expectRoot: "JobList")
+            guard list.status == 200 else {
+                result.error = "HTTP \(list.status) \(list.reason) reading the job list"
+                return result
+            }
+            let active = parseJobList(list.body).filter(\.isActive)
+            result.found = active.count
+            for j in active {
+                let r = try client.put(j.url, xml: cancelJobXML)
+                result.puts.append((j.url, r.status))
+            }
+            let deadline = Date().addingTimeInterval(active.isEmpty ? 0 : 20)
+            while true {
+                if let s = try? client.get("/DevMgmt/ProductStatusDyn.xml"), s.status == 200 {
+                    let cats = statusCategories(s.body)
+                    result.finalCategories = cats.isEmpty ? nil : cats
+                    if !result.stillRunning { break }
+                }
+                if Date() >= deadline { break }
+                Thread.sleep(forTimeInterval: 2)
+            }
+        } catch {
+            result.error = error.localizedDescription
+        }
+        return result
+    }
+
     // Body from HPLIP base/maint.py (CleanXML, setCleanType), sent as in cleanTypeLedm.
     static func jobXML(_ jobType: String) -> String {
         "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!--  THIS DATA SUBJECT TO DISCLAIMER(S)INCLUDED WITH THE PRODUCT OF ORIGIN. -->\n<ipcap:InternalPrintCap xmlns:ipcap=\"http://www.hp.com/schemas/imaging/con/ledm/internalprintcap/2008/03/21\" xmlns:ipdyn=\"http://www.hp.com/schemas/imaging/con/ledm/internalprintdyn/2008/03/21\" xmlns:dd=\"http://www.hp.com/schemas/imaging/con/dictionaries/1.0/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.hp.com/schemas/imaging/con/ledm/internalprintcap/2008/03/21 ../schemas/InternalPrintCap.xsd http://www.hp.com/schemas/imaging/con/ledm/internalprintdyn/2008/03/21 ../schemas/InternalPrintDyn.xsd http://www.hp.com/schemas/imaging/con/dictionaries/1.0/ ../schemas/dd/DataDictionaryMasterLEDM.xsd\">\n                                <ipdyn:JobType>\(jobType)</ipdyn:JobType>\n</ipcap:InternalPrintCap>"
@@ -112,12 +212,15 @@ final class MaintenanceController: ObservableObject {
     @Published var reached = 0                   // index of the furthest step shown
     @Published var note: String?                 // extra line on the done screen
     @Published var supported: [String]?          // JobType values from InternalPrintCap
+    @Published var cancelling = false            // a cancel request is in progress
+    @Published var cancelOutcome: String?        // result of the last cancel, shown for a while
 
     private var task: Task<Void, Never>?
     private let client = LEDMClient.shared
     private let pollInterval: Duration = .seconds(2)
 
     var isBusy: Bool {
+        if cancelling { return true }
         guard job != nil else { return false }
         switch stage {
         case .starting, .running, .awaitScan, .scanning: return true
@@ -155,6 +258,36 @@ final class MaintenanceController: ObservableObject {
         self.job = job
     }
 
+    /// Stops the running flow, then asks the printer to cancel whatever job it has.
+    func cancelFlow() async {
+        guard job != nil, !cancelling else { return }
+        task?.cancel()
+        await task?.value          // let an in-flight request finish so it cannot overwrite the stage
+        task = nil
+        stage = .cancelling
+        let r = await performCancel()
+        attention = nil
+        stage = .cancelled(r.summary)
+    }
+
+    /// Cancel from outside the sheet (Overview, menu bar).
+    func cancelPrinterJob() async {
+        guard !cancelling else { return }
+        let r = await performCancel()
+        cancelOutcome = r.summary
+        let shown = r.summary
+        Task { [weak self] in
+            try? await Task.sleep(for: .seconds(20))
+            if self?.cancelOutcome == shown { self?.cancelOutcome = nil }
+        }
+    }
+
+    private func performCancel() async -> CancelResult {
+        cancelling = true
+        defer { cancelling = false }
+        return await Task.detached { Maintenance.cancelActivePrinterJobs() }.value
+    }
+
     /// Closes the sheet. The printer keeps going with a job it already started.
     func close() {
         task?.cancel()
@@ -177,6 +310,7 @@ final class MaintenanceController: ObservableObject {
         attention = nil
         reached = 0
         note = nil
+        cancelOutcome = nil
     }
 
     func begin() {

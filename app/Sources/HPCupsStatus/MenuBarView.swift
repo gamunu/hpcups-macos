@@ -4,6 +4,7 @@ import AppKit
 struct MenuBarView: View {
     @ObservedObject var store: StatusStore
     @Environment(\.openWindow) private var openWindow
+    @State private var confirmCancel = false
 
     var body: some View {
         let h = store.health
@@ -28,6 +29,25 @@ struct MenuBarView: View {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(j.title).font(.callout).lineLimit(1)
                     Text("\(j.stateText), \(j.sizeKB) KB").font(.caption).foregroundStyle(.secondary)
+                }
+            }
+            if store.canCancelAlignment || store.maint.cancelling || store.maint.cancelOutcome != nil {
+                Divider()
+                VStack(alignment: .leading, spacing: 6) {
+                    if store.maint.cancelling {
+                        HStack(spacing: 8) { ProgressView().controlSize(.small); Text("Asking the printer to cancel").font(.callout) }
+                    } else if confirmCancel {
+                        Text("Stop the alignment on the printer?").font(.callout)
+                        HStack {
+                            Button("Cancel alignment", role: .destructive) { confirmCancel = false; store.cancelAlignment() }
+                            Button("Keep going") { confirmCancel = false }
+                        }
+                    } else if store.canCancelAlignment {
+                        Button("Cancel alignment", role: .destructive) { confirmCancel = true }
+                    }
+                    if let o = store.maint.cancelOutcome {
+                        Text(o).font(.caption).foregroundStyle(.secondary)
+                    }
                 }
             }
             Divider()

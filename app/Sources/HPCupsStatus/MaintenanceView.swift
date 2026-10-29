@@ -34,7 +34,7 @@ struct MaintenanceView: View {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 300), spacing: 16, alignment: .top)], alignment: .leading, spacing: 16) {
                     ForEach(MaintenanceJob.allCases) { job in card(job) }
                 }
-                Text("Each task walks you through the steps and shows what the printer reports. These tasks use ink and paper. Load plain paper first.")
+                Text("Each task walks you through the steps and shows what the printer reports. These tasks use ink and paper. Load blank plain paper first.")
                     .font(.callout).foregroundStyle(.secondary)
             }
             .padding(20)
@@ -65,6 +65,7 @@ struct MaintenanceView: View {
 struct MaintenanceSheet: View {
     @ObservedObject var store: StatusStore
     @ObservedObject var maint: MaintenanceController
+    @State private var confirmCancel = false
 
     var body: some View {
         if let job = maint.job {
@@ -84,6 +85,12 @@ struct MaintenanceSheet: View {
             .padding(20)
             .frame(width: 520, height: 460)
             .interactiveDismissDisabled(maint.isBusy)
+            .confirmationDialog("Cancel this job on the printer?", isPresented: $confirmCancel, titleVisibility: .visible) {
+                Button("Cancel job", role: .destructive) { Task { await maint.cancelFlow() } }
+                Button("Keep going", role: .cancel) {}
+            } message: {
+                Text("The printer stops what it is doing. Ink already used is not recovered.")
+            }
         }
     }
 
@@ -97,6 +104,12 @@ struct MaintenanceSheet: View {
         case .starting:
             Label("Sending the request to the printer", systemImage: "paperplane").foregroundStyle(.secondary)
             ProgressView()
+        case .cancelling:
+            HStack(spacing: 10) { ProgressView().controlSize(.small); Text("Asking the printer to cancel").font(.headline) }
+            Text("This can take up to 20 seconds.").foregroundStyle(.secondary)
+        case .cancelled(let msg):
+            Label("Cancel requested", systemImage: "xmark.circle.fill").font(.headline)
+            Text(msg).foregroundStyle(.secondary)
         case .running: running(job)
         case .awaitScan: scanInstructions(scanning: false)
         case .scanning: scanInstructions(scanning: true)
@@ -108,7 +121,7 @@ struct MaintenanceSheet: View {
 
     private func prepare(_ job: MaintenanceJob) -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            Label("Load plain paper in the input tray.", systemImage: "doc.badge.plus")
+            Label("Load blank plain paper in the input tray. The job prints on whatever sheet is on top.", systemImage: "doc.badge.plus")
             Text(job.summary).foregroundStyle(.secondary)
             switch job {
             case .deepClean:
@@ -232,6 +245,13 @@ struct MaintenanceSheet: View {
                 Text("Closing this window does not stop the printer.").font(.caption).foregroundStyle(.secondary)
                 Spacer()
                 Button("Stop watching") { maint.close() }
+                Button("Cancel", role: .destructive) { confirmCancel = true }
+            case .cancelling:
+                ProgressView().controlSize(.small)
+                Spacer()
+            case .cancelled:
+                Spacer()
+                Button("Close") { maint.close() }.keyboardShortcut(.defaultAction)
             case .done:
                 Spacer()
                 if job == .clean || job == .deepClean {

@@ -152,6 +152,12 @@ fixed. All flows use ink and paper, and deep clean uses the most ink. The
 actions are disabled, with the reason shown, while a print job is active or
 the USB device is not found.
 
+Every running step has a Cancel button. It stops the flow and sends a cancel
+to each active printer job (`PUT /Jobs/JobList/<n>` with JobState Canceled).
+The Overview card and the menu bar show "Cancel alignment" while the printer
+reports calibrating. `--maint cancel` does the same from the command line and
+`--ledm-jobs` lists the printer's own job list.
+
 Clean and deep clean print no page on the DeskJet 2300. The flow is done when
 the printer goes from processing back to ready, and it offers to print the
 diagnostics page to check. The diagnostics flow ends with guidance on reading

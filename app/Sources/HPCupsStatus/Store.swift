@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
 import UserNotifications
+import Combine
 
 @MainActor
 final class StatusStore: ObservableObject {
@@ -28,6 +29,12 @@ final class StatusStore: ObservableObject {
     @Published var inkError: String?
     @Published var inkLoading = false
     let maint = MaintenanceController()
+    private var maintSink: AnyCancellable?
+
+    init() {
+        // Views read maint.cancelling and maint.cancelOutcome through the store.
+        maintSink = maint.objectWillChange.sink { [weak self] _ in self?.objectWillChange.send() }
+    }
 
     static let defaultPollSeconds = 3.0
     static let defaultInkSeconds = 60.0
@@ -129,6 +136,17 @@ final class StatusStore: ObservableObject {
 
     /// The printer reports an alignment in progress (LEDM "calibrating").
     var isCalibrating: Bool { ledmCategories?.contains("calibrating") ?? false }
+
+    /// Show "Cancel alignment": the printer is calibrating and CUPS has no job.
+    var canCancelAlignment: Bool { isCalibrating && activeJob == nil && !maint.cancelling }
+
+    func cancelAlignment() {
+        Task {
+            await maint.cancelPrinterJob()
+            lastLedmFetch = .distantPast
+            await refresh()
+        }
+    }
 
     /// Plain-language reasons behind the current state.
     var healthDetails: [String] {

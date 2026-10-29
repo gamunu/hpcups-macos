@@ -3,6 +3,7 @@ import SwiftUI
 struct OverviewView: View {
     @ObservedObject var store: StatusStore
     var goTo: (SidebarItem) -> Void
+    @State private var confirmCancel = false
 
     var body: some View {
         ScrollView {
@@ -64,6 +65,17 @@ struct OverviewView: View {
                     Button("Reset queue") { store.resetQueue() }
                         .padding(.top, 2)
                 }
+                if store.canCancelAlignment {
+                    Button("Cancel alignment", role: .destructive) { confirmCancel = true }
+                        .padding(.top, 2)
+                }
+                if store.maint.cancelling {
+                    HStack(spacing: 8) { ProgressView().controlSize(.small); Text("Asking the printer to cancel") }
+                        .padding(.top, 2)
+                }
+                if let o = store.maint.cancelOutcome {
+                    Text(o).font(.callout).padding(.top, 2)
+                }
             }
             Spacer()
         }
@@ -71,7 +83,12 @@ struct OverviewView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(RoundedRectangle(cornerRadius: 14).fill(h.color.opacity(0.12)))
         .overlay(RoundedRectangle(cornerRadius: 14).strokeBorder(h.color.opacity(0.35)))
-        .accessibilityElement(children: .combine)
+        .confirmationDialog("Cancel the alignment?", isPresented: $confirmCancel, titleVisibility: .visible) {
+            Button("Cancel alignment", role: .destructive) { store.cancelAlignment() }
+            Button("Keep going", role: .cancel) {}
+        } message: {
+            Text("The printer stops the alignment. The page that was printed is not used.")
+        }
     }
 
     private var inkCard: some View {

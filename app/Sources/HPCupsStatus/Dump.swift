@@ -65,10 +65,17 @@ func dumpAndExit() -> Never {
 /// Starts a clean, deep clean or diagnostics page from the command line.
 func maintJobAndExit(name: String) -> Never {
     LEDMClient.shared.verbose = cliArgs.contains("-v")
-    guard let job = MaintenanceJob(rawValue: name) else {
-        FileHandle.standardError.write(Data("usage: --maint clean|deepClean|diagnostics|align\n".utf8))
+    guard name == "cancel" || MaintenanceJob(rawValue: name) != nil else {
+        FileHandle.standardError.write(Data("usage: --maint clean|deepClean|diagnostics|align|cancel\n".utf8))
         exit(64)
     }
+    if name == "cancel" {
+        LEDMClient.shared.serial = cliSerial()
+        let r = Maintenance.cancelActivePrinterJobs()
+        print(r.summary)
+        exit(r.error == nil ? 0 : 1)
+    }
+    let job = MaintenanceJob(rawValue: name)!
     do {
         let r: LEDMResponse
         if let jt = job.jobType {
@@ -109,6 +116,35 @@ func cancelJobAndExit(id: Int?) -> Never {
     do {
         try Cups.cancel(job: id, printer: name)
         print("Canceled job \(id) on \(name)")
+        exit(0)
+    } catch {
+        FileHandle.standardError.write(Data("error: \(error.localizedDescription)\n".utf8))
+        exit(1)
+    }
+}
+
+/// USB serial of the printer queue named by --printer (default HP_DeskJet_2300), for LEDM.
+func cliSerial() -> String? {
+    var name = "HP_DeskJet_2300"
+    if let i = cliArgs.firstIndex(of: "--printer"), i + 1 < cliArgs.count { name = cliArgs[i + 1] }
+    let all = Snapshot.filtered(Cups.listPrinters())
+    guard let info = all.first(where: { $0.name == name }) ?? all.first else { return nil }
+    return USBCheck.serial(fromURI: Cups.printerStatus(info).deviceURI)
+}
+
+/// Prints the parsed /Jobs/JobList (read-only).
+func ledmJobsAndExit() -> Never {
+    LEDMClient.shared.verbose = cliArgs.contains("-v")
+    LEDMClient.shared.serial = cliSerial()
+    do {
+        let r = try LEDMClient.shared.get("/Jobs/JobList", expectRoot: "JobList")
+        guard r.status == 200 else { print("HTTP \(r.status) \(r.reason)"); exit(2) }
+        let jobs = Maintenance.parseJobList(r.body)
+        print("Printer jobs: \(jobs.count), active: \(jobs.filter(\.isActive).count)")
+        for j in jobs {
+            let cal = j.calibrationState.map { " calibration=\($0)" } ?? ""
+            print("  \(j.url) category=\(j.category) state=\(j.state) active=\(j.isActive ? "yes" : "no")\(cal)")
+        }
         exit(0)
     } catch {
         FileHandle.standardError.write(Data("error: \(error.localizedDescription)\n".utf8))
