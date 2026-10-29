@@ -16,6 +16,12 @@ final class StatusStore: ObservableObject {
     @Published var usbPresent: Bool?
     @Published var jobs: [PrintJob] = []
     @Published var actionMessage: String?
+    @Published var ink: InkReport?
+    @Published var inkError: String?
+    let maint = MaintenanceController()
+
+    private var lastInkFetch = Date.distantPast
+    private var inkInFlight = false
 
     private var previousJobStates: [Int: Int] = [:]
     private var pollCount = 0
@@ -44,6 +50,57 @@ final class StatusStore: ObservableObject {
                 await self.refresh()
                 try? await Task.sleep(for: .seconds(3))
             }
+        }
+        Task { [weak self] in
+            while let self {
+                await self.refreshInk()
+                try? await Task.sleep(for: .seconds(60))
+            }
+        }
+    }
+
+    /// True when maintenance buttons may be used.
+    var canMaintain: Bool {
+        guard usbPresent != false, !maint.phase.isBusy else { return false }
+        if jobs.contains(where: \.isActive) { return false }
+        return status?.stateCode != 4
+    }
+
+    /// Reads ink levels over LEDM. Called on open and every 60 s.
+    func refreshInk(force: Bool = false) async {
+        guard !inkInFlight, !maint.phase.isBusy else { return }
+        guard force || Date().timeIntervalSince(lastInkFetch) > 10 else { return }
+        if usbPresent == false { ink = nil; inkError = "Printer not connected over USB"; return }
+        inkInFlight = true
+        defer { inkInFlight = false }
+        lastInkFetch = Date()
+        if let uri = status?.deviceURI { LEDMClient.shared.serial = USBCheck.serial(fromURI: uri) }
+        do {
+            let r = try await LEDMClient.shared.getAsync("/DevMgmt/ConsumableConfigDyn.xml")
+            guard r.status == 200, let report = InkParser.parse(r.body) else {
+                inkError = "Printer returned no ink data (HTTP \(r.status))"
+                return
+            }
+            ink = report
+            inkError = nil
+            notifyInk(report)
+        } catch {
+            inkError = error.localizedDescription
+        }
+        await maint.loadCapabilities()
+    }
+
+    /// One notification per cartridge each time its state changes to a problem state.
+    private func notifyInk(_ report: InkReport) {
+        let d = UserDefaults.standard
+        for c in report.cartridges {
+            let key = "inkState.\(c.label)"
+            let prev = d.string(forKey: key)
+            guard prev != c.state.rawValue else { continue }
+            d.set(c.state.rawValue, forKey: key)
+            guard c.state.needsAttention else { continue }
+            let pct = c.percent.map { ", \($0)% left" } ?? ""
+            notifier.post(title: "\(c.name) ink: \(c.state.text.lowercased())", body: "The \(c.name.lowercased()) cartridge is \(c.state.text.lowercased())\(pct).")
         }
     }
 

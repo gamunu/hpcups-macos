@@ -87,7 +87,9 @@ queue. It talks to CUPS through libcups, not `lpstat`.
   Reasons starting with `com.hp.` are shown raw as "Driver reported".
 - Checks that the USB device is connected by matching the serial in the
   queue's device URI against the USB registry.
-- Shows ink levels when the queue reports them.
+- Shows ink levels read from the printer (see "Ink levels" below).
+- Has maintenance actions: clean, deep clean, diagnostics page, alignment
+  (see "Maintenance" below).
 - Lists active and recent jobs with a cancel button, plus cancel all,
   pause or resume the printer, and a test page.
 - The menu bar icon changes when the printer is processing, and shows a
@@ -111,10 +113,59 @@ For a text check without the GUI:
 
     "build/hpcups Status.app/Contents/MacOS/hpcups Status" --dump
 
-Ink levels depend on the printer reporting supplies to CUPS
-(`marker-names`, `marker-levels`, `marker-colors`). When the queue reports
-none, the app shows "Ink levels not available yet" and nothing else. It
-does not estimate levels.
+## Ink levels
+
+The app reads ink levels from the printer itself. It shows one bar for the
+black cartridge and one for the tri-color cartridge, the percentage the
+printer reports, and a state: OK, Low, Very low, Empty, Missing, or Non-HP or
+refilled. Levels refresh when the popover opens and every 60 seconds. If the
+printer does not report a percentage the app shows "unknown". It never
+estimates. You get one notification when a cartridge changes to low, very
+low, empty or missing.
+
+`--dump` prints the parsed ink data and the supported maintenance job types.
+`--ledm-get <path>` prints the raw reply for one printer resource, for
+debugging:
+
+    "build/hpcups Status.app/Contents/MacOS/hpcups Status" --ledm-get /DevMgmt/ConsumableConfigDyn.xml
+
+If the printer is not reachable the Ink section shows the reason. If CUPS
+reports `marker-levels` and the printer read fails, those values are shown.
+
+## Maintenance
+
+The Maintenance section has four actions:
+
+- Clean print heads (`cleaningPage`)
+- Deep clean (`cleaningPageLevel2`)
+- Print diagnostics page (`diagnosticsPage`)
+- Align print heads (calibration session, semi-automatic)
+
+Each one asks for confirmation first. All of them use ink and paper, and deep
+clean uses the most ink. Load plain paper before you start. The buttons are
+disabled while a print job is active, while the printer is processing, or when
+the USB device is not found.
+
+For alignment the printer prints a page. Put it face down on the scanner glass
+and press the Enter or Scan button on the printer. The app watches the
+printer's calibration state and shows the result.
+
+## How it talks to the printer
+
+The printer exposes an HTTP server (LEDM, the "embedded web server") on a
+vendor USB interface (class 255, subclass 4, protocol 1). HPLIP uses the same
+interface on Linux. The app claims that interface through IOUSBHost and sends
+HTTP requests over its bulk endpoints. There is no libusb or Homebrew
+dependency. CUPS keeps using the separate printing interface, so printing is
+not affected.
+
+Replies from this printer are slow and sometimes arrive late. The client
+sends one request at a time, discards leftover bytes before each request,
+reads until the HTTP reply is complete (Content-Length or the last chunk), and
+checks that the XML root matches the resource it asked for. A reply that does
+not match is dropped and the client keeps reading. Request formats for the
+maintenance jobs are copied from HPLIP 3.25.2 (`base/maint.py`,
+`base/device.py`).
 
 ## Uninstall
 

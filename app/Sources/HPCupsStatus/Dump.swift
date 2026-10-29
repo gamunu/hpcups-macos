@@ -33,10 +33,45 @@ func dumpAndExit() -> Never {
     } else {
         for s in st.ink { print("Ink: \(s.name) \(s.level)% \(s.colorHex ?? "")") }
     }
+    LEDMClient.shared.serial = USBCheck.serial(fromURI: st.deviceURI)
+    LEDMClient.shared.verbose = args.contains("-v")
+    print("\nLEDM (live over USB):")
+    do {
+        let r = try LEDMClient.shared.get("/DevMgmt/ConsumableConfigDyn.xml")
+        if let rep = InkParser.parse(r.body), !rep.cartridges.isEmpty {
+            for c in rep.cartridges {
+                let pct = c.percent.map { "\($0)%" } ?? "unknown"
+                print("Ink: \(c.name) (\(c.label)) level=\(pct) state=\(c.state.text) raw=\(c.rawState) measured=\(c.measured) product=\(c.product ?? "?")")
+            }
+            print("Alignment mode: \(rep.alignmentMode ?? "unknown")")
+        } else {
+            print("Ink: unknown (HTTP \(r.status), no cartridges parsed)")
+        }
+        let cap = try LEDMClient.shared.get("/DevMgmt/InternalPrintCap.xml")
+        let types = Maintenance.supportedJobTypes(cap.body)
+        print("Maintenance job types: \(types.isEmpty ? "unknown" : types.joined(separator: ", "))")
+    } catch {
+        print("LEDM error: \(error.localizedDescription)")
+    }
     let jobs = Cups.jobs(for: info.name)
     print("Jobs: \(jobs.count)")
     for j in jobs {
         print("  #\(j.id) \(j.stateText) \"\(j.title)\" user=\(j.user) \(j.sizeKB)KB \(j.time.formatted(date: .abbreviated, time: .standard)) reasons=\(j.reasons.joined(separator: ","))")
     }
     exit(0)
+}
+
+/// Debug helper: GET one LEDM resource and print the raw body.
+func ledmGetAndExit(path: String) -> Never {
+    LEDMClient.shared.verbose = cliArgs.contains("-v")
+    do {
+        let r = try LEDMClient.shared.get(path)
+        FileHandle.standardError.write(Data("HTTP \(r.status) \(r.reason)\n".utf8))
+        FileHandle.standardOutput.write(r.body)
+        if r.body.last != 10 { print("") }
+        exit(r.status == 200 ? 0 : 2)
+    } catch {
+        FileHandle.standardError.write(Data("error: \(error.localizedDescription)\n".utf8))
+        exit(1)
+    }
 }
