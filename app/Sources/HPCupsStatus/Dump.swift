@@ -65,12 +65,17 @@ func dumpAndExit() -> Never {
 /// Starts a clean, deep clean or diagnostics page from the command line.
 func maintJobAndExit(name: String) -> Never {
     LEDMClient.shared.verbose = cliArgs.contains("-v")
-    guard let job = MaintenanceJob(rawValue: name), let jt = job.jobType else {
-        FileHandle.standardError.write(Data("usage: --maint clean|deepClean|diagnostics\n".utf8))
+    guard let job = MaintenanceJob(rawValue: name) else {
+        FileHandle.standardError.write(Data("usage: --maint clean|deepClean|diagnostics|align\n".utf8))
         exit(64)
     }
     do {
-        let r = try LEDMClient.shared.post("/DevMgmt/InternalPrintDyn.xml", xml: Maintenance.jobXML(jt))
+        let r: LEDMResponse
+        if let jt = job.jobType {
+            r = try LEDMClient.shared.post("/DevMgmt/InternalPrintDyn.xml", xml: Maintenance.jobXML(jt))
+        } else {
+            r = try LEDMClient.shared.postFooter("/Calibration/Session", xml: Maintenance.calibrationPrintingXML)
+        }
         print("\(job.title): HTTP \(r.status) \(r.reason)")
         exit((200..<300).contains(r.status) ? 0 : 2)
     } catch {
