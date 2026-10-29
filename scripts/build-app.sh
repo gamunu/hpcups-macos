@@ -1,4 +1,7 @@
 #!/bin/sh
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Copyright (C) 2026 Gamunu Balagalla
+
 # Build the hpcups Status window app with a menu bar item and wrap it into
 # build/hpcups Status.app, with Sparkle embedded and everything ad-hoc signed.
 #
@@ -47,6 +50,7 @@ cat > "$OUT/Contents/Info.plist" <<PLIST
 <plist version="1.0">
 <dict>
     <key>CFBundleExecutable</key><string>$APP_NAME</string>
+    <key>CFBundleIconFile</key><string>AppIcon</string>
     <key>CFBundleIdentifier</key><string>$BUNDLE_ID</string>
     <key>CFBundleName</key><string>$APP_NAME</string>
     <key>CFBundleDisplayName</key><string>$APP_NAME</string>
@@ -54,6 +58,7 @@ cat > "$OUT/Contents/Info.plist" <<PLIST
     <key>CFBundleShortVersionString</key><string>$VERSION</string>
     <key>CFBundleVersion</key><string>$VERSION</string>
     <key>LSMinimumSystemVersion</key><string>14.0</string>
+    <key>NSHumanReadableCopyright</key><string>Copyright (C) 2026 Gamunu Balagalla. AGPL-3.0-or-later.</string>
     <key>NSHighResolutionCapable</key><true/>
     <key>SUFeedURL</key><string>$FEED_URL</string>
     <key>SUEnableAutomaticChecks</key><true/>
@@ -62,6 +67,7 @@ cat > "$OUT/Contents/Info.plist" <<PLIST
 </plist>
 PLIST
 plutil -lint "$OUT/Contents/Info.plist" >/dev/null
+cp "$ROOT/app/Resources/AppIcon.icns" "$OUT/Contents/Resources/AppIcon.icns"
 
 # Sign inner to outer. No --deep, so every nested bundle gets its own signature.
 FW="$OUT/Contents/Frameworks/Sparkle.framework/Versions/B"

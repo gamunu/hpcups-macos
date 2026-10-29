@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Copyright (C) 2026 Gamunu Balagalla
+
 name: ci
 
 on:
@@ -22,6 +25,9 @@ jobs:
     steps:
       - uses: actions/checkout@v7.0.1
 
+      - name: Check license headers
+        run: scripts/check-spdx.sh
+
       - name: Select Xcode
         run: |
           sudo xcode-select -s /Applications/Xcode_26.6.app
@@ -36,6 +42,10 @@ jobs:
 
       - name: Test filter
         run: make test
+
+      - name: Test app
+        working-directory: app
+        run: swift test
 
       - name: Build app
         run: scripts/build-app.sh

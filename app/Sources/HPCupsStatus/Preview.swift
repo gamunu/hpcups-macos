@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2026 Gamunu Balagalla
+
 import Foundation
 
 /// Hidden launch argument `--preview-step <name>` opens the maintenance sheet on a fixed step

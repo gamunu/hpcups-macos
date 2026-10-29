@@ -1,3 +1,7 @@
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * Copyright (C) 2026 Gamunu Balagalla
+ */
+
 #ifndef CCUPS_H
 #define CCUPS_H
 

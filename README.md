@@ -1,280 +1,181 @@
-# hpcups-macos
+<p align="center">
+  <img src="docs/images/icon.png" width="128" alt="hpcups Status icon">
+</p>
 
-The `hpcups` CUPS filter from HPLIP 3.25.2, built natively for macOS (arm64),
-with a PPD and an installer package for the HP DeskJet 2300 series over USB.
+<h1 align="center">hpcups-macos</h1>
 
-HP does not ship a macOS driver for this printer that works on current macOS.
-This project builds HPLIP's open-source raster filter and installs it where
-the macOS print system can use it. No HP binary plugin is needed for this
-model.
+<p align="center">
+  A working Mac driver and a friendly status app for the HP DeskJet 2300 over USB.<br>
+  Built from HP's own open-source code, because HP would not ship one.
+</p>
 
-## Supported printers
+<p align="center">
+  <a href="https://github.com/gamunu/hpcups-macos/actions/workflows/ci.yml"><img src="https://github.com/gamunu/hpcups-macos/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://github.com/gamunu/hpcups-macos/actions/workflows/codeql.yml"><img src="https://github.com/gamunu/hpcups-macos/actions/workflows/codeql.yml/badge.svg" alt="CodeQL"></a>
+  <a href="https://github.com/gamunu/hpcups-macos/releases/latest"><img src="https://img.shields.io/github/v/release/gamunu/hpcups-macos?include_prereleases&sort=semver" alt="Latest release"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-AGPL--3.0--or--later-blue" alt="License: AGPL-3.0-or-later"></a>
+  <img src="https://img.shields.io/badge/macOS-Apple%20Silicon-black" alt="macOS on Apple Silicon">
+</p>
 
-- HP DeskJet 2300 series (also sold as DeskJet Ink Advantage 2300)
+<p align="center">
+  <img src="docs/images/overview.png" width="760" alt="The Overview screen showing the printer ready, ink levels and quick actions">
+</p>
 
-Other HP models that use `*hpPrinterLanguage: "pcl3gui2"` in their HPLIP PPD
-may work with a modified PPD. Only the 2300 series has been prepared here.
+## Why this exists
 
-## What is different from upstream
+I plugged a DeskJet 2300 into a Mac with a USB cable. The Mac saw it straight away. It just would not print.
 
-- Built without HP's prebuilt image processor library (`DISABLE_IMAGEPROCESSOR`).
-- Built without dbus status reporting.
-- libjpeg is linked statically, so the filter only depends on system libraries.
-- Small portability changes are listed in `src/hpcups/UPSTREAM`.
-- The JetReady and QuickConnect JPEG colour table tweak is not built. The
-  2300 series does not use it.
+macOS has no driver for this model. The printer has no AirPrint over USB, so the driverless path is closed too. The generic drivers macOS offers send garbage, or nothing.
 
-## Build
+HP's answer was its app. The app only looks for printers on Wi-Fi or Ethernet. This printer has neither. HP Easy Start searched and said it could not find any software for the product.
 
-Requires Xcode command line tools and a static libjpeg
-(`brew install jpeg-turbo pkgconf`).
+Apple's HP driver package is from 2020. It does not include this model, and its installer refuses to run on anything newer than macOS 12.
 
-    make
+HP does publish a driver that supports this printer. It is called HPLIP, it is open source, and it only builds for Linux. So this project builds it for the Mac.
 
-This writes `build/hpcups`. The result links only against `/usr/lib`:
+## A note to HP
 
-    otool -L build/hpcups
+You sold this printer with a USB port and a scanner on top. Then you made sure a Mac owner could use neither.
 
-Use `make JPEG_PREFIX=/path/to/jpeg` if libjpeg is somewhere else.
+- No macOS driver. Not an old one, not a broken one. None.
+- An app that cannot see a USB printer at all.
+- An "Easy Start" that searches, finds nothing, and links to a support page.
+- Head cleaning, alignment and ink levels locked behind software that does not exist for this printer on this platform.
+- A working driver you wrote yourselves, sitting in HPLIP under an open license, that you never built for the Mac.
 
-## Test without a printer
+Every one of those features was already in the printer. It answers ink and maintenance requests over its own USB cable. You just never wrote the Mac side.
 
-    make test
+Getting one page out of it cost me an evening. This repository is the Mac side you skipped.
 
-This renders a text page to CUPS raster with `cupsfilter`, runs it through
-`build/hpcups` and checks that PCL3GUI2 output comes out.
+Fuck you, HP.
+
+## What you get
+
+**A real print driver.** The `hpcups` filter from HPLIP 3.25.2, built natively for Apple Silicon. It links only against macOS system libraries and installs where the Mac print system expects it.
+
+**A status app** with a Dock icon, a main window and a menu bar item.
+
+- Printer state in plain words: ready, printing, needs paper, door open, unplugged.
+- Ink levels for the black and tri-color cartridges, read from the printer itself.
+- Your print jobs, with cancel and pause.
+- Guided cleaning, deep cleaning, a diagnostics page and head alignment, with pictures for every step.
+
+<p align="center">
+  <img src="docs/images/ink.png" width="760" alt="The Ink screen with the black cartridge at 100 percent and tri-color at 90 percent">
+</p>
 
 ## Install
 
-Download `hpcups-macos-<version>.pkg` from the
-[Releases](https://github.com/gamunu/hpcups-macos/releases/latest) page.
+1. Download `hpcups-macos-<version>.pkg` from the [latest release](https://github.com/gamunu/hpcups-macos/releases/latest).
+2. The package is not signed with an Apple Developer ID. Right click it in Finder, choose **Open**, then **Open** again.
+3. Plug in the printer.
+4. Open **System Settings > Printers & Scanners**, click **Add Printer**, pick **DeskJet 2300 series**, and set **Use** to "HP DeskJet 2300 series, hpcups-macos".
 
-The package is not signed with an Apple Developer ID, so macOS blocks a
-double click. Right click the file in Finder, choose Open, then Open again.
-If it still refuses, System Settings > Privacy & Security shows an
-"Open Anyway" button for it. From a shell:
+If macOS still refuses the package, **System Settings > Privacy & Security** shows an **Open Anyway** button for it.
+
+The package installs the filter, the PPD and `/Applications/hpcups Status.app`. It does not add the printer for you.
+
+From a shell, the same steps are:
 
     sudo installer -pkg hpcups-macos-<version>.pkg -target /
-
-One package installs everything:
-
-- `/Library/Printers/hpcups-macos/filter/hpcups`
-- `/Library/Printers/PPDs/Contents/Resources/HP DeskJet 2300 series (hpcups-macos).ppd.gz`
-- `/Applications/hpcups Status.app`
-
-The installer does not add a printer. Do that in the next section.
-
-To build the package yourself:
-
-    make pkg
-
-This writes `build/hpcups-macos-<version>.pkg`. The version is the tag
-(`vX.Y.Z`) when HEAD is tagged, otherwise the `VERSION` file, otherwise
-`0.0.0-dev`. `VERSION=1.2.3 make pkg` overrides it.
-
-## Add the printer
-
-Connect the printer by USB, then either use System Settings > Printers & Scanners
-and pick "HP DeskJet 2300 series, hpcups-macos" as the driver, or from a shell:
-
     lpinfo -v | grep -i usb
     sudo lpadmin -p HP_DeskJet_2300 -E -v "<usb uri from lpinfo>" \
         -P "/Library/Printers/PPDs/Contents/Resources/HP DeskJet 2300 series (hpcups-macos).ppd.gz"
 
-Print a test page:
+## Using the app
 
-    lp -d HP_DeskJet_2300 /etc/hosts
+Open **hpcups Status** from Applications. The Overview tells you whether the printer is ready and what to do if it is not.
 
-If a job fails, `log show --last 5m --predicate 'process == "hpcups"'` and
-`/var/log/cups/error_log` show the filter messages.
+### Faint or streaky prints
 
-## Status app
+1. Go to **Maintenance** and run **Clean print heads**. Load blank paper first.
+2. Run **Print diagnostics page** and look at it. The app tells you what to do next.
+3. Still faint after a deep clean? Take the cartridge out and wipe its copper contacts with a dry, soft cloth.
 
-`hpcups Status` is a normal Mac app (SwiftUI, no Xcode project) with a Dock
-icon, a main window and a menu bar item. It talks to CUPS through libcups,
-not `lpstat`.
+That last step is what brought a "dead" black cartridge back during testing. It was full of ink. Dried ink on the contacts stopped the nozzles from firing.
 
-The window has a sidebar with five sections:
+<p align="center">
+  <img src="docs/images/diagnostics-check.png" width="760" alt="The diagnostics step asking how the page looked, with advice for each answer">
+</p>
 
-- Overview: printer name and model, a state card (Ready, Printing, Needs
-  attention, Disconnected) with the reasons in plain words, USB status, ink
-  summary, the current job and quick actions.
-- Jobs: a table of active and past jobs (title, state, size, submitted time),
-  cancel selected, cancel all, pause or resume the queue.
-- Ink: one cartridge picture each for black and tri-color, level, state,
-  cartridge number and last read time. See "Ink levels" below.
-- Maintenance: guided flows for clean, deep clean, diagnostics page and
-  alignment. See "Maintenance" below.
-- Settings: notifications, ink refresh interval, queue polling interval and
-  "Show in menu bar".
+### Lining up the print heads
 
-The menu bar popover is a short status view: state, ink bars, the active job
-and an "Open hpcups Status" button. Closing the window keeps the menu bar item
-running. Queues whose PPD make-and-model contains "hpcups-macos" are listed
-(all queues if none match). Reasons starting with `com.hp.` are shown raw as
-"Driver reported". The app sends a notification when a job completes or fails
-and when ink gets low. The first launch asks for notification permission.
+**Line up print heads** prints a page, then walks you through scanning it. Lift the lid, put the page face down in the marker corner, close the lid, press **Color Copy**. The app follows the printer and highlights the step it is waiting for.
 
-Build:
+<p align="center">
+  <img src="docs/images/align-scan.png" width="760" alt="The alignment scan step with four numbered picture cards">
+</p>
+
+Every running task has a **Cancel** button. If the printer gets stuck waiting for a scan, the Overview and the menu bar offer **Cancel alignment**.
+
+## Supported printers
+
+- HP DeskJet 2300 series, also sold as DeskJet Ink Advantage 2300.
+
+Other HP models whose HPLIP PPD says `*hpPrinterLanguage: "pcl3gui2"` may print with a modified PPD. Ink and maintenance need the printer to answer HP's LEDM protocol over USB. Only the 2300 has been tested.
+
+## How it works
+
+**Printing.** CUPS turns your document into raster pages and hands them to `hpcups`, which encodes them as PCL3GUI for the printer. The filter is HPLIP's code with HP's prebuilt image library and dbus left out. `src/hpcups/UPSTREAM` lists the changes.
+
+**Ink and maintenance.** The printer has a second USB interface (class 255, subclass 4, protocol 1) with a small web server on it. HP calls it LEDM. HPLIP uses it on Linux. The app claims that interface through IOUSBHost and sends HTTP requests to it.
+
+CUPS keeps the printing interface, so the two never fight over the cable.
+
+This printer answers slowly, and a reply can arrive after the next request has gone out. The client sends one request at a time, drains leftover bytes, reads the full reply and checks the XML root matches what it asked for.
+
+Alignment on this model goes Printing, ScanRequested, Scanning, then back to ready. It never reports "CalibrationValid", even after a good alignment, so the app treats a pass through Scanning as done.
+
+## Build from source
+
+You need Xcode and `brew install jpeg-turbo pkgconf`.
+
+    make                   # the hpcups filter in build/hpcups
+    make test              # renders pages offline and checks the PCL output
+    cd app && swift test   # unit tests for the app's printer logic
+    scripts/build-app.sh   # build/hpcups Status.app
+    make pkg               # build/hpcups-macos-<version>.pkg
+
+`"build/hpcups Status.app/Contents/MacOS/hpcups Status" --dump` prints the printer state, ink and job list as text. `--ledm-get <path>` prints one raw printer document. `--preview-step <name>` opens a maintenance step with fake data, so you can look at the screens without printing.
+
+## Releases and updates
+
+The app checks for updates with Sparkle once a day, and **Check for Updates...** is in the app menu. An update is the same `.pkg` as a fresh install, so the driver and the app move together.
+
+To cut a release, tag it and push the tag:
+
+    git tag -a v0.1.0 -m "What changed"
+    git push origin v0.1.0
+
+The release workflow builds the package, signs it for Sparkle, writes `appcast.xml` and publishes a GitHub Release. Tags with a `-`, such as `v0.2.0-rc1`, become pre-releases and are not offered to installed apps.
+
+### One-time setup for maintainers
+
+Do this before the first release. A build without the public key can never verify an update, so its users would have to reinstall by hand.
 
     scripts/build-app.sh
+    BIN="$PWD/app/.build/artifacts/sparkle/Sparkle/bin"
+    "$BIN/generate_keys"
+    "$BIN/generate_keys" -x /tmp/sparkle_private_key
+    gh secret set SPARKLE_PRIVATE_KEY --repo gamunu/hpcups-macos < /tmp/sparkle_private_key
+    rm /tmp/sparkle_private_key
+    gh variable set SPARKLE_PUBLIC_KEY --repo gamunu/hpcups-macos --body "$("$BIN/generate_keys" -p)"
 
-This runs `swift build -c release` in `app/` and writes
-`build/hpcups Status.app` with Sparkle embedded, ad-hoc signed. Run it with:
-
-    open "build/hpcups Status.app"
-
-`--open-section overview|jobs|ink|maintenance|settings` picks the section the
-window starts in. For a text check without the GUI:
-
-    "build/hpcups Status.app/Contents/MacOS/hpcups Status" --dump
-
-## Ink levels
-
-The app reads ink levels from the printer itself. It shows one bar for the
-black cartridge and one for the tri-color cartridge, the percentage the
-printer reports, and a state: OK, Low, Very low, Empty, Missing, or Non-HP or
-refilled. Levels refresh when the popover opens and every 60 seconds. If the
-printer does not report a percentage the app shows "unknown". It never
-estimates. You get one notification when a cartridge changes to low, very
-low, empty or missing.
-
-`--dump` prints the parsed ink data and the supported maintenance job types.
-`--ledm-get <path>` prints the raw reply for one printer resource, for
-debugging:
-
-    "build/hpcups Status.app/Contents/MacOS/hpcups Status" --ledm-get /DevMgmt/ConsumableConfigDyn.xml
-
-If the printer is not reachable the Ink section shows the reason. If CUPS
-reports `marker-levels` and the printer read fails, those values are shown.
-
-## Maintenance
-
-The Maintenance section has four guided flows:
-
-- Clean print heads (`cleaningPage`)
-- Deep clean (`cleaningPageLevel2`)
-- Print diagnostics page (`diagnosticsPage`)
-- Align print heads (calibration session, semi-automatic)
-
-Each flow opens a sheet with steps, and polls the printer every 2 seconds
-(`/DevMgmt/ProductStatusDyn.xml`) to show what it is doing. If the printer
-reports an empty or open paper tray the sheet says "Load paper", and for an
-open door it says "Close the door". The job continues by itself once that is
-fixed. All flows use ink and paper, and deep clean uses the most ink. The
-actions are disabled, with the reason shown, while a print job is active or
-the USB device is not found.
-
-Every running step has a Cancel button. It stops the flow and sends a cancel
-to each active printer job (`PUT /Jobs/JobList/<n>` with JobState Canceled).
-The Overview card and the menu bar show "Cancel alignment" while the printer
-reports calibrating. `--maint cancel` does the same from the command line and
-`--ledm-jobs` lists the printer's own job list.
-
-Clean and deep clean print no page on the DeskJet 2300. The flow is done when
-the printer goes from processing back to ready, and it offers to print the
-diagnostics page to check. The diagnostics flow ends with guidance on reading
-the page.
-
-Alignment on this printer goes through `/Calibration/State` like this:
-CalibrationRequired, then Printing (status calibrating), then ScanRequested
-(the page is out; place it printed side down on the scanner glass, top edge to
-the back, in the marker corner, close the lid, press Color Copy once), then
-Scanning, then back to CalibrationRequired with status ready after about 15
-seconds. The printer does not report CalibrationValid after a good alignment.
-The app counts the alignment as done when the state passed through Scanning
-and the printer is ready with nothing to fix. CalibrationValid also counts. If
-the printer returns to ready without ever scanning, the app says the scan was
-not detected. If the printer's Attention light is blinking afterwards, the
-alignment failed; reload the page and try again.
-
-## How it talks to the printer
-
-The printer exposes an HTTP server (LEDM, the "embedded web server") on a
-vendor USB interface (class 255, subclass 4, protocol 1). HPLIP uses the same
-interface on Linux. The app claims that interface through IOUSBHost and sends
-HTTP requests over its bulk endpoints. There is no libusb or Homebrew
-dependency. CUPS keeps using the separate printing interface, so printing is
-not affected.
-
-Replies from this printer are slow and sometimes arrive late. The client
-sends one request at a time, discards leftover bytes before each request,
-reads until the HTTP reply is complete (Content-Length or the last chunk), and
-checks that the XML root matches the resource it asked for. A reply that does
-not match is dropped and the client keeps reading. Request formats for the
-maintenance jobs are copied from HPLIP 3.25.2 (`base/maint.py`,
-`base/device.py`).
-
-## Updates
-
-The app checks for updates with Sparkle, once a day by default. "Check for
-Updates..." is in the app menu and in Settings, which also has the automatic
-check toggle and the time of the last check.
-
-An update is the same `.pkg` as a fresh install, so the driver and the app are
-updated together. Sparkle verifies the package with an EdDSA signature and
-then opens it in Installer. Because the package is unsigned, that signature is
-the only check, and the public key is baked into the app.
-
-Builds made without `SPARKLE_PUBLIC_KEY` cannot verify updates and will refuse
-them.
-
-## Releasing
-
-Tag the version and push the tag:
-
-    git tag -a v1.2.3 -m "Release notes go here"
-    git push origin v1.2.3
-
-The `release` workflow builds the package, signs it for Sparkle, writes
-`appcast.xml` and creates a GitHub Release with both attached. The tag message
-is the release text. A lightweight tag falls back to the commit subjects since
-the previous tag. Tags with a `-` (for example `v1.2.3-rc1`) are marked as
-pre-releases and are not offered to installed apps.
-
-The `ci` workflow builds and tests every push and pull request and uploads the
-package as an artifact.
-
-## One-time setup for maintainers
-
-Without these, releases still build, but there is no `appcast.xml` and the app
-cannot verify updates.
-
-1. Get Sparkle's tools. Build the app once, then use the copy SwiftPM fetched:
-
-        scripts/build-app.sh
-        BIN="$PWD/app/.build/artifacts/sparkle/Sparkle/bin"
-
-2. Generate the key pair. The private key goes into your login keychain and
-   the command prints the public key:
-
-        "$BIN/generate_keys"
-
-3. Export the private key to a file, store it as a repository secret, then
-   delete the file:
-
-        "$BIN/generate_keys" -x /tmp/sparkle_private_key
-        gh secret set SPARKLE_PRIVATE_KEY --repo gamunu/hpcups-macos < /tmp/sparkle_private_key
-        rm /tmp/sparkle_private_key
-
-4. Store the public key as a repository variable:
-
-        gh variable set SPARKLE_PUBLIC_KEY --repo gamunu/hpcups-macos --body "$("$BIN/generate_keys" -p)"
-
-Keep a backup of the private key in a password manager. If it is lost, every
-installed copy of the app needs a manual reinstall, because it only accepts
-updates signed with the matching key.
+Back the private key up in a password manager. Lose it and every installed copy needs a manual reinstall.
 
 ## Uninstall
-
-Remove the printer queue first, then run the uninstall script from this
-repository:
 
     sudo lpadmin -x HP_DeskJet_2300
     sudo scripts/uninstall.sh
 
-It removes the app, the filter, the PPD and the installer receipt.
+This removes the app, the filter, the PPD and the installer receipt.
 
 ## License
 
-See `LICENSE`. HPLIP sources keep their original headers (GPL v2, MIT, BSD).
+hpcups-macos is AGPL-3.0-or-later. See [LICENSE](LICENSE).
+
+HP's files in `src/hpcups/` and `src/common/` keep their own headers: BSD-style, MIT, or GPL-2.0-or-later. All three can be combined into an AGPL-3.0-or-later work. [LICENSING.md](LICENSING.md) lists which file carries which license. HPLIP's license text is in [COPYING](COPYING).
+
+## Thanks
+
+To the HPLIP developers, for writing and publishing the driver HP itself would not ship for the Mac. Every page this printer prints on a Mac goes through their code.

@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2026 Gamunu Balagalla
+
 import Foundation
 import SwiftUI
 import UserNotifications
@@ -21,10 +24,9 @@ final class StatusStore: ObservableObject {
     @Published var ledmCategories: [String]?
     /// True when CUPS says "processing" but has had no active job for a while.
     @Published var queueStuck = false
-    private var staleSince: Date?
+    private var stuckRule = StuckQueueRule()
     private var ledmInFlight = false
     private var lastLedmFetch = Date.distantPast
-    static let staleSeconds = 10.0
     @Published var ink: InkReport?
     @Published var inkError: String?
     @Published var inkLoading = false
@@ -237,13 +239,8 @@ final class StatusStore: ObservableObject {
 
     /// Tracks how long CUPS has reported "processing" with no active job.
     private func updateStale() {
-        if status?.stateCode == 4 && activeJob == nil {
-            if staleSince == nil { staleSince = Date() }
-        } else {
-            staleSince = nil
-        }
-        let stuck = staleSince.map { Date().timeIntervalSince($0) > StatusStore.staleSeconds } ?? false
-        queueStuck = stuck && !isBusy
+        queueStuck = stuckRule.update(stateCode: status?.stateCode, hasActiveJob: activeJob != nil,
+                                      printerBusy: isBusy, now: Date())
     }
 
     /// Reads the printer's own status over LEDM, at most every 5 s and never during maintenance.

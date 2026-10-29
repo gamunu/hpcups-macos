@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2026 Gamunu Balagalla
+
 import SwiftUI
 
 /// Friendly, front-on drawings of an all-in-one inkjet (DeskJet 2300 style). Everything is

@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Copyright (C) 2026 Gamunu Balagalla
+
 # Plain make build of the HPLIP hpcups filter for macOS.
 # Usage: make            (builds build/hpcups)
 #        make ARCHS="arm64 x86_64"   (universal, needs a universal libjpeg.a)
