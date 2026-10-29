@@ -15,5 +15,5 @@ if let i = cliArgs.firstIndex(of: "--ledm-get") {
 } else if cliArgs.contains("--dump") {
     dumpAndExit()
 } else {
-    HPCupsStatusApp.main()
+    SmudgeApp.main()
 }

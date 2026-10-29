@@ -3,26 +3,26 @@
 # Copyright (C) 2026 Gamunu Balagalla
 
 # Build one unsigned installer package into build/. Does not install anything.
-# It installs the CUPS driver (filter and PPDs) and /Applications/hpcups Status.app.
+# It installs the CUPS driver (filter and PPDs) and /Applications/Smudge.app.
 # The version comes from scripts/version.sh (VERSION env, git tag vX.Y.Z, VERSION file).
 set -euo pipefail
 
 root=$(cd "$(dirname "$0")/.." && pwd)
 version=$("$root/scripts/version.sh")
-id=io.github.hpcups-macos
-stage="$root/build/pkgroot"
-out="$root/build/hpcups-macos-$version.pkg"
-app="hpcups Status.app"
+id=io.github.gamunu.smudge
+stage="$root/build/pkgroot.noindex"
+out="$root/build/smudge-$version.pkg"
+app="Smudge.app"
 
 [ -x "$root/build/hpcups" ] || make -C "$root"
 VERSION=$version "$root/scripts/build-app.sh"
 
 rm -rf "$stage" "$root/build/component.pkg" "$root/build/component.plist"
-mkdir -p "$stage/Library/Printers/hpcups-macos/filter" \
+mkdir -p "$stage/Library/Printers/smudge/filter" \
          "$stage/Library/Printers/PPDs/Contents/Resources" \
          "$stage/Applications"
 
-install -m 755 "$root/build/hpcups" "$stage/Library/Printers/hpcups-macos/filter/hpcups"
+install -m 755 "$root/build/hpcups" "$stage/Library/Printers/smudge/filter/hpcups"
 # One PPD per HPLIP model family, rewritten for macOS. The DeskJet 2300 keeps
 # its old top-level path; the rest go in a subfolder.
 ppds="$stage/Library/Printers/PPDs/Contents/Resources"
@@ -30,8 +30,8 @@ python3 -I "$root/scripts/gen-ppds.py" build --out "$ppds"
 python3 -I "$root/scripts/gen-ppds.py" check "$ppds"
 find "$ppds" -type f -exec chmod 644 {} +
 find "$ppds" -type d -exec chmod 755 {} +
-cp "$root/COPYING" "$root/LICENSE" "$root/LICENSING.md" "$stage/Library/Printers/hpcups-macos/"
-ditto --norsrc "$root/build/$app" "$stage/Applications/$app"
+cp "$root/COPYING" "$root/LICENSE" "$root/LICENSING.md" "$stage/Library/Printers/smudge/"
+ditto --norsrc "$root/build/app.noindex/$app" "$stage/Applications/$app"
 
 xattr -cr "$stage"
 export COPYFILE_DISABLE=1
@@ -60,13 +60,13 @@ cp "$root/LICENSE" "$res/LICENSE.txt"
 cat > "$root/build/distribution.xml" <<DIST
 <?xml version="1.0" encoding="utf-8"?>
 <installer-gui-script minSpecVersion="2">
-    <title>hpcups-macos $version</title>
+    <title>Smudge $version</title>
     <license file="LICENSE.txt" mime-type="text/plain"/>
     <options customize="never" require-scripts="false" hostArchitectures="arm64"/>
     <choices-outline>
         <line choice="default"/>
     </choices-outline>
-    <choice id="default" title="hpcups-macos (AGPL-3.0-or-later)">
+    <choice id="default" title="Smudge (AGPL-3.0-or-later)">
         <pkg-ref id="$id"/>
     </choice>
     <pkg-ref id="$id" version="$version">component.pkg</pkg-ref>

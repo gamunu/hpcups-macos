@@ -2,7 +2,7 @@
  * Copyright (C) 2026 Gamunu Balagalla
  */
 
-/* hpcups-macos: replacement for hp_rgb_ycc_setup() from HPLIP's jccolor.c.
+/* smudge: replacement for hp_rgb_ycc_setup() from HPLIP's jccolor.c.
  *
  * The original selects a modified RGB->YCC table ("Mojave CSC") for the
  * JetReady and QuickConnect JPEG paths. That file depends on libjpeg 6b

@@ -16,8 +16,8 @@ docs/supported-printers.md.
 
 The installed PPDs are made at build time by `scripts/gen-ppds.py build`.
 Changes made to each PPD on the way:
-- *cupsFilter points at /Library/Printers/hpcups-macos/filter/hpcups.
-- *NickName becomes "<model name>, hpcups-macos" and *ShortNickName is
+- *cupsFilter points at /Library/Printers/smudge/filter/hpcups.
+- *NickName becomes "<model name>, Smudge" and *ShortNickName is
   rewritten to fit the 31 character limit.
 - Duplicate *PageSize, *PageRegion, *PaperDimension and *ImageableArea
   choices are dropped, and *UIConstraints that name a paper size the PPD

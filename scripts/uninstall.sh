@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # Copyright (C) 2026 Gamunu Balagalla
 
-# Remove hpcups-macos: the app, the filter, the PPDs and the installer receipt.
+# Remove Smudge: the app, the filter, the PPDs and the installer receipt.
 # Run with sudo. Printer queues are not touched; remove them first with
 #   sudo lpadmin -x <queue name>
 set -euo pipefail
@@ -12,18 +12,18 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-pkill -x "hpcups Status" 2>/dev/null || true
+pkill -x "Smudge" 2>/dev/null || true
 
-rm -rf "/Applications/hpcups Status.app"
-rm -rf /Library/Printers/hpcups-macos
-rm -f "/Library/Printers/PPDs/Contents/Resources/HP DeskJet 2300 series (hpcups-macos).ppd.gz"
-rm -rf /Library/Printers/PPDs/Contents/Resources/hpcups-macos
-pkgutil --forget io.github.hpcups-macos >/dev/null 2>&1 || true
+rm -rf "/Applications/Smudge.app"
+rm -rf /Library/Printers/smudge
+rm -f "/Library/Printers/PPDs/Contents/Resources/HP DeskJet 2300 series (Smudge).ppd.gz"
+rm -rf /Library/Printers/PPDs/Contents/Resources/smudge
+pkgutil --forget io.github.gamunu.smudge >/dev/null 2>&1 || true
 
 # Per-user settings of the app, for the user who ran sudo.
 if [ -n "${SUDO_USER:-}" ]; then
     home=$(dscl . -read "/Users/$SUDO_USER" NFSHomeDirectory | awk '{print $2}')
-    rm -f "$home/Library/Preferences/io.github.gamunu.hpcups-status.plist"
+    rm -f "$home/Library/Preferences/io.github.gamunu.smudge.plist"
 fi
 
-echo "hpcups-macos removed."
+echo "Smudge removed."

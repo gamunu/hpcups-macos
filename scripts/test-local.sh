@@ -23,7 +23,7 @@ python3 -I "$root/scripts/gen-ppds.py" build --out "$ppds" > /dev/null
 python3 -I "$root/scripts/gen-ppds.py" check "$ppds" \
     || { echo "FAIL: PPD keyword check" >&2; exit 1; }
 # The 2300 PPD must stay byte for byte what earlier packages installed.
-legacy="$ppds/HP DeskJet 2300 series (hpcups-macos).ppd.gz"
+legacy="$ppds/HP DeskJet 2300 series (Smudge).ppd.gz"
 [ -f "$legacy" ] || { echo "FAIL: legacy DeskJet 2300 PPD path is gone" >&2; exit 1; }
 
 command -v cupstestppd > /dev/null \
@@ -88,7 +88,7 @@ check_language() {
     esac
 }
 
-printf 'hpcups-macos local test page\nThe quick brown fox jumps over the lazy dog.\n' > "$tmp/page.txt"
+printf 'Smudge local test page\nThe quick brown fox jumps over the lazy dog.\n' > "$tmp/page.txt"
 
 # language:PPD basename. Every language in ppd/hplip/manifest.tsv needs a row.
 reps="pcl3gui2:hp-deskjet_2300_series
@@ -115,7 +115,7 @@ for row in $reps; do
     if [ "$name" = hp-deskjet_2300_series ]; then
         gz=$legacy
     else
-        gz="$ppds/hpcups-macos/$name.ppd.gz"
+        gz="$ppds/smudge/$name.ppd.gz"
     fi
     ppd="$tmp/$name.ppd"
     gzip -dc "$gz" > "$ppd"

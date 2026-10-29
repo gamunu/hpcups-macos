@@ -277,7 +277,7 @@ enum Cups {
 
     static func printTestPage(printer: String) throws -> Int {
         let text = """
-        hpcups Status test page
+        Smudge test page
 
         Printer: \(printer)
         Date: \(Date().formatted(date: .abbreviated, time: .standard))
@@ -286,10 +286,10 @@ enum Cups {
         abcdefghijklmnopqrstuvwxyz
         0123456789
         """
-        let url = FileManager.default.temporaryDirectory.appendingPathComponent("hpcups-status-test-\(getpid()).txt")
+        let url = FileManager.default.temporaryDirectory.appendingPathComponent("smudge-test-\(getpid()).txt")
         try text.write(to: url, atomically: true, encoding: .utf8)
         defer { try? FileManager.default.removeItem(at: url) }
-        let id = cupsPrintFile2(nil, printer, url.path, "hpcups Status test page", 0, nil)
+        let id = cupsPrintFile2(nil, printer, url.path, "Smudge test page", 0, nil)
         if id == 0 { throw CupsError.ipp(lastError()) }
         return Int(id)
     }

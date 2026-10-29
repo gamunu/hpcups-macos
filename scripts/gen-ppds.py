@@ -42,8 +42,8 @@ EXCLUDED = os.path.join(VENDOR, "excluded.tsv")
 DOC = os.path.join(ROOT, "docs", "supported-printers.md")
 
 STOCK_FILTER = 'application/vnd.cups-raster 0 hpcups'
-FILTER_PATH = "/Library/Printers/hpcups-macos/filter/hpcups"
-SUBDIR = "hpcups-macos"
+FILTER_PATH = "/Library/Printers/smudge/filter/hpcups"
+SUBDIR = "smudge"
 
 # Languages whose encapsulator is compiled into build/hpcups (every
 # src/hpcups/*.cpp is built and EncapsulatorFactory.cpp knows all of them).
@@ -78,7 +78,7 @@ LANGUAGES = {
 LEGACY = {
     "hp-deskjet_2300_series.ppd": {
         "name": "HP DeskJet 2300 series",
-        "path": "HP DeskJet 2300 series (hpcups-macos).ppd.gz",
+        "path": "HP DeskJet 2300 series (Smudge).ppd.gz",
     }
 }
 
@@ -279,9 +279,9 @@ def rewrite(text, name):
 
     text = repair(text)
     sub("cupsFilter", "application/vnd.cups-raster 0 " + FILTER_PATH)
-    sub("NickName", "%s, hpcups-macos" % name)
+    sub("NickName", "%s, Smudge" % name)
     # PPD spec: ShortNickName is at most 31 chars. Cut the model name to fit.
-    tag = " hpcups-macos"
+    tag = " Smudge"
     sub("ShortNickName", name[: 31 - len(tag)].rstrip() + tag if len(name + tag) > 31 else name + tag)
     return text
 
@@ -336,7 +336,7 @@ def cmd_check(args):
         if len(re.findall(r"^\*cupsFilter2?:", text, re.M)) != 1:
             problems.append("%s: expected one cupsFilter line" % rel)
         nick = re.search(r'^\*NickName:\s*"(.*)"', text, re.M)
-        if not nick or not nick.group(1).endswith(", hpcups-macos"):
+        if not nick or not nick.group(1).endswith(", Smudge"):
             problems.append("%s: NickName %r" % (rel, nick and nick.group(1)))
         elif nick.group(1) in seen:
             problems.append("%s: NickName %r also used by %s" % (rel, nick.group(1), seen[nick.group(1)]))

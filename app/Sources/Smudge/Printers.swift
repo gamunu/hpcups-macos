@@ -139,7 +139,7 @@ enum LEDMSupport: Equatable, Sendable {
 
 enum PrinterChoice {
     static func isOurs(_ p: PrinterInfo) -> Bool {
-        p.makeAndModel.trimmingCharacters(in: .whitespaces).lowercased().hasSuffix("hpcups-macos")
+        p.makeAndModel.trimmingCharacters(in: .whitespaces).lowercased().hasSuffix("smudge")
     }
 
     static func isHP(_ p: PrinterInfo) -> Bool {

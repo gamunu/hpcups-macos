@@ -1,6 +1,6 @@
 # Licensing
 
-hpcups-macos as a whole is distributed under the GNU Affero General Public
+Smudge as a whole is distributed under the GNU Affero General Public
 License, version 3 or (at your option) any later version
 (AGPL-3.0-or-later). The full text is in `LICENSE`.
 
@@ -11,7 +11,7 @@ The project mixes two kinds of files, and each keeps its own license notice.
 These carry `SPDX-License-Identifier: AGPL-3.0-or-later` and
 `Copyright (C) 2026 Gamunu Balagalla` at the top:
 
-- `app/` (the hpcups Status app, its tests and `Package.swift`)
+- `app/` (the Smudge app, its tests and `Package.swift`)
 - `scripts/` (shell and Python)
 - `Makefile`
 - `src/compat/`
@@ -54,8 +54,8 @@ distributed as a whole under AGPL-3.0-or-later. Each HP file stays under
 its own notice for anyone who takes it out of this tree.
 
 The installer package ships `LICENSE`, `LICENSING.md` and `COPYING` under
-`/Library/Printers/hpcups-macos/`. The source is at
-https://github.com/gamunu/hpcups-macos.
+`/Library/Printers/smudge/`. The source is at
+https://github.com/gamunu/smudge.
 
 ## Binaries and libraries
 
