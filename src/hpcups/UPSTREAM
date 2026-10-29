@@ -1,0 +1,14 @@
+HPLIP 3.25.2
+https://sourceforge.net/projects/hplip/files/hplip/3.25.2/hplip-3.25.2.tar.gz
+
+Files are copied from prnt/hpcups/ in the tarball, except the HPLIP
+shared libraries libImageProcessor-x86_32.so and libImageProcessor-x86_64.so
+(prebuilt binaries, not included). common/utils.c and common/utils.h live
+in ../common/ as hplip_utils.c and hplip_utils.h.
+
+Local changes to upstream sources:
+- #include "utils.h" became #include "hplip_utils.h" in the .cpp files that
+  use it (macOS file systems are case-insensitive and "utils.h" matched
+  Utils.h in this directory).
+- genPCLm.cpp includes "hplip_utils.h" instead of "./../../common/utils.h".
+- jccolor.c is kept for reference but is not built; see src/compat/.

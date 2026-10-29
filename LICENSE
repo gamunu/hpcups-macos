@@ -1,0 +1,16 @@
+hpcups-macos
+============
+
+The code under src/hpcups/ and src/common/ is taken from HPLIP 3.25.2 and
+keeps its original license headers. HPLIP is distributed under a mix of
+GPL v2, MIT and BSD licenses; the header of each file says which one
+applies to it. The text HP ships in the HPLIP tarball is in COPYING.
+
+The files added by this project (Makefile, scripts/, src/compat/, ppd/
+changes, README.md) are licensed under the GNU General Public License,
+version 2 or (at your option) any later version, so the combined work can
+be distributed under GPL-2.0-or-later terms. The PPD is derived from the
+HPLIP PPD for the DeskJet 2300 series and carries HP's copyright.
+
+Binaries link libjpeg-turbo statically (IJG and BSD-3-Clause licenses; its
+notices are in its own LICENSE.md and README.ijg).
