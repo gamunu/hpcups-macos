@@ -37,6 +37,10 @@ jobs:
       - name: Test filter
         run: make test
 
+      - name: Test app
+        working-directory: app
+        run: swift test
+
       - name: Build app
         run: scripts/build-app.sh
 

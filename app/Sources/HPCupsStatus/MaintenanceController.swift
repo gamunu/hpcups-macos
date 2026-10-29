@@ -150,6 +150,13 @@ enum Maintenance {
     // base/maint.py dataModelHelper, with the attribute quotes written as plain quotes.
     static let calibrationPrintingXML = "<cal:CalibrationState xmlns:cal=\"http://www.hp.com/schemas/imaging/con/cnx/markingagentcalibration/2009/04/08\" xmlns:dd=\"http://www.hp.com/schemas/imaging/con/dictionaries/1.0/\">Printing</cal:CalibrationState>"
 
+    /// Words for the calibration state XML. ScanRequested is checked before Scanning.
+    static func calibrationWord(_ xml: String) -> String? {
+        for w in ["CalibrationValid", "CalibrationRequired", "ParmsRequested", "ScanRequested", "Scanning", "Printing"]
+        where xml.contains(w) { return w }
+        return nil
+    }
+
     static func supportedJobTypes(_ data: Data) -> [String] {
         guard let root = parseXML(data) else { return [] }
         return root.descendants("JobType").map { $0.text.trimmingCharacters(in: .whitespacesAndNewlines) }
@@ -389,17 +396,10 @@ final class MaintenanceController: ObservableObject {
 
     // MARK: alignment (base/maint.py dataModelHelper, AlignType15)
 
-    /// Words for the calibration state XML. ScanRequested is checked before Scanning.
-    static func calibrationWord(_ xml: String) -> String? {
-        for w in ["CalibrationValid", "CalibrationRequired", "ParmsRequested", "ScanRequested", "Scanning", "Printing"]
-        where xml.contains(w) { return w }
-        return nil
-    }
-
     private func readCalibration() async -> String? {
         guard let s = try? await client.getAsync("/Calibration/State", expectRoot: "CalibrationState"),
               s.status == 200 else { return nil }
-        return Self.calibrationWord(s.text)
+        return Maintenance.calibrationWord(s.text)
     }
 
     /// Sequence seen on a DeskJet 2300 over USB:
@@ -446,58 +446,26 @@ final class MaintenanceController: ObservableObject {
             }
             stage = .running
 
-            var left = false          // state moved off the starting point
-            var sawScan = false
-            var settled = 0           // consecutive polls that look ready
-            var failures = 0
-            let started = Date()
+            var tracker = AlignTracker(started: Date())
             while true {
                 try await Task.sleep(for: pollInterval)
-                let elapsed = Date().timeIntervalSince(started)
-                if elapsed > 900 {
-                    fail("The scan was not detected. The page was never scanned within 15 minutes.")
-                    return
-                }
-                if !left && elapsed > 60 {
-                    fail("The printer did not start printing the alignment page.")
-                    return
-                }
+                if case .failed(let m) = tracker.checkTimeout(now: Date()) { fail(m); return }
                 let cats = await readCategories()
                 let cal = await readCalibration()
-                if cats == nil && cal == nil {
-                    failures += 1
-                    if failures >= 10 { fail("The printer stopped answering."); return }
-                    continue
-                }
-                failures = 0
-                if let c = cats { categories = c; attention = Maintenance.attention(c) }
-                if let w = cal { calState = w }
-                let word = cal ?? calState
-
-                switch word {
-                case "ScanRequested":
-                    left = true
-                    stage = .awaitScan
-                    reached = 2
-                case "Scanning":
-                    left = true
-                    sawScan = true
-                    stage = .scanning
-                    reached = 2
-                case "Printing", "ParmsRequested":
-                    left = true
-                case "CalibrationValid":
-                    if left || sawScan { finishAlign(); return }
-                default: break
-                }
-                let busy = cats.map(Maintenance.isBusy) ?? true
-                if busy && cats != nil { left = true }
-                let ready = cats != nil && !busy && attention == nil
-                    && (word == "CalibrationRequired" || word == "CalibrationValid")
-                settled = ready ? settled + 1 : 0
-                if sawScan && settled >= 1 { finishAlign(); return }
-                if left && !sawScan && settled >= 10 {
-                    fail("The printer went back to ready without scanning the page. The scan was not detected.")
+                let step = tracker.observe(cats: cats, cal: cal)
+                categories = tracker.categories
+                calState = tracker.calState
+                attention = tracker.attention
+                switch step {
+                case .keepGoing:
+                    stage = tracker.stage
+                    reached = tracker.reached
+                case .done:
+                    stage = .done
+                    reached = 3
+                    return
+                case .failed(let m):
+                    fail(m)
                     return
                 }
             }
@@ -505,10 +473,5 @@ final class MaintenanceController: ObservableObject {
         } catch {
             fail(error.localizedDescription)
         }
-    }
-
-    private func finishAlign() {
-        stage = .done
-        reached = 3
     }
 }

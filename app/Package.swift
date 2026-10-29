@@ -32,5 +32,10 @@ let package = Package(
                 .linkedFramework("UserNotifications"),
             ]
         ),
+        .testTarget(
+            name: "HPCupsStatusTests",
+            dependencies: ["HPCupsStatus"],
+            swiftSettings: [.swiftLanguageMode(.v5)]
+        ),
     ]
 )

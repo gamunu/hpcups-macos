@@ -68,6 +68,36 @@ enum LEDMHTTP {
         return (make(Data()), pos)
     }
 
+    // Request formats copied from HPLIP (base/device.py, base/maint.py).
+
+    static func getRequest(_ path: String) -> Data {
+        Data("GET \(path) HTTP/1.1\r\nHost: localhost\r\nAccept: text/plain\r\nUser-Agent: hplip\r\n\r\n".utf8)
+    }
+
+    /// PUT in the format HPLIP uses for calibration data (base/maint.py, AlignType16Manual).
+    static func putRequest(_ path: String, xml: String) -> Data {
+        let body = Data(xml.utf8)
+        var req = Data("PUT \(path) HTTP/1.1\r\nHost: localhost\r\nUser-Agent: hp\r\nAccept: text/plain\r\nAccept-Language: en-us,en\r\nAccept-Charset:utf-8\r\nContent-Type: text/xml\r\nContent-Length: \(body.count)\r\n\r\n".utf8)
+        req.append(body)
+        return req
+    }
+
+    /// POST in the format of HPLIP's Device.post, used for the InternalPrintDyn job request.
+    static func postRequest(_ path: String, xml: String) -> Data {
+        let body = Data(xml.utf8)
+        var req = Data("POST \(path) HTTP/1.1\r\nConnection: Keep-alive\r\nUser-agent: hplip/2.0\r\nHost: localhost\r\nContent-type: text/xml\r\nContent-length: \(body.count)\r\n\r\n".utf8)
+        req.append(body)
+        return req
+    }
+
+    /// POST in the format of HPLIP's LocalOpenerEWS_LEDM.open_hp footer branch, used for /Calibration/Session.
+    static func postFooterRequest(_ path: String, xml: String) -> Data {
+        let body = Data(xml.utf8)
+        var req = Data("POST \(path) HTTP/1.1\r\nContent-Type:text/xml\r\nContent-Length:\(body.count)\r\nAccept-Encoding: UTF-8\r\nHost:localhost\r\nUser-Agent:hplip\r\n\r\n".utf8)
+        req.append(body)
+        return req
+    }
+
     /// Local name of the first XML element, namespace prefix removed.
     static func rootElement(_ body: Data) -> String? {
         let s = String(decoding: body.prefix(4096), as: UTF8.self)
@@ -79,6 +109,37 @@ enum LEDMHTTP {
             var end = n
             while end < s.endIndex, !" \t\r\n/>".contains(s[end]) { end = s.index(after: end) }
             return String(s[n..<end]).split(separator: ":").last.map(String.init)
+        }
+        return nil
+    }
+}
+
+/// Collects bytes from the USB channel and hands back the first complete reply
+/// that answers the request. Junk, 100 Continue and late replies to earlier
+/// requests (wrong XML root) are dropped.
+struct LEDMReplyReader {
+    var buffer = Data()
+    let expectRoot: String?
+    var log: ((String) -> Void)?
+
+    init(expectRoot: String?, log: ((String) -> Void)? = nil) {
+        self.expectRoot = expectRoot
+        self.log = log
+    }
+
+    mutating func feed(_ bytes: Data) -> LEDMResponse? {
+        buffer.append(bytes)
+        while let (resp, used) = LEDMHTTP.parse(buffer) {
+            buffer = Data(buffer.dropFirst(used))
+            if resp.status < 0 || resp.status == 100 { continue }
+            if let want = expectRoot, resp.status == 200 {
+                let got = LEDMHTTP.rootElement(resp.body)
+                if got != want {
+                    log?("ledm: stale reply root \(got ?? "nil"), want \(want)")
+                    continue   // late reply to an earlier request; keep reading
+                }
+            }
+            return resp
         }
         return nil
     }
@@ -100,34 +161,24 @@ final class LEDMClient: @unchecked Sendable {
     // MARK: blocking API (call off the main thread)
 
     func get(_ path: String, expectRoot: String? = nil) throws -> LEDMResponse {
-        let req = "GET \(path) HTTP/1.1\r\nHost: localhost\r\nAccept: text/plain\r\nUser-Agent: hplip\r\n\r\n"
-        return try send(Data(req.utf8), expectRoot: expectRoot ?? Self.defaultRoot(path))
+        try send(LEDMHTTP.getRequest(path), expectRoot: expectRoot ?? Self.defaultRoot(path))
     }
 
     /// PUT in the format HPLIP uses for calibration data (base/maint.py, AlignType16Manual).
     func put(_ path: String, xml: String) throws -> LEDMResponse {
-        let body = Data(xml.utf8)
-        var req = Data("PUT \(path) HTTP/1.1\r\nHost: localhost\r\nUser-Agent: hp\r\nAccept: text/plain\r\nAccept-Language: en-us,en\r\nAccept-Charset:utf-8\r\nContent-Type: text/xml\r\nContent-Length: \(body.count)\r\n\r\n".utf8)
-        req.append(body)
-        return try send(req, expectRoot: nil, retry: false)
+        try send(LEDMHTTP.putRequest(path, xml: xml), expectRoot: nil, retry: false)
     }
 
     /// POST in the format of HPLIP's Device.post (base/device.py), used for
     /// the InternalPrintDyn job request.
     func post(_ path: String, xml: String) throws -> LEDMResponse {
-        let body = Data(xml.utf8)
-        var req = Data("POST \(path) HTTP/1.1\r\nConnection: Keep-alive\r\nUser-agent: hplip/2.0\r\nHost: localhost\r\nContent-type: text/xml\r\nContent-length: \(body.count)\r\n\r\n".utf8)
-        req.append(body)
-        return try send(req, expectRoot: nil, retry: false)
+        try send(LEDMHTTP.postRequest(path, xml: xml), expectRoot: nil, retry: false)
     }
 
     /// POST in the format of HPLIP's LocalOpenerEWS_LEDM.open_hp footer branch
     /// (base/device.py), used for /Calibration/Session.
     func postFooter(_ path: String, xml: String) throws -> LEDMResponse {
-        let body = Data(xml.utf8)
-        var req = Data("POST \(path) HTTP/1.1\r\nContent-Type:text/xml\r\nContent-Length:\(body.count)\r\nAccept-Encoding: UTF-8\r\nHost:localhost\r\nUser-Agent:hplip\r\n\r\n".utf8)
-        req.append(body)
-        return try send(req, expectRoot: nil, retry: false)
+        try send(LEDMHTTP.postFooterRequest(path, xml: xml), expectRoot: nil, retry: false)
     }
 
     // MARK: async wrappers (run on the serial LEDM queue)
@@ -183,21 +234,9 @@ final class LEDMClient: @unchecked Sendable {
         conn.drain(quiet: 1.0)
         try conn.write(request)
         let deadline = Date().addingTimeInterval(overallTimeout)
-        var buf = Data()
+        var reader = LEDMReplyReader(expectRoot: expectRoot) { [self] in log($0) }
         while Date() < deadline {
-            buf.append(try conn.read(timeout: 1.0))
-            while let (resp, used) = LEDMHTTP.parse(buf) {
-                buf = Data(buf.dropFirst(used))
-                if resp.status < 0 || resp.status == 100 { continue }
-                if let want = expectRoot, resp.status == 200 {
-                    let got = LEDMHTTP.rootElement(resp.body)
-                    if got != want {
-                        log("ledm: stale reply root \(got ?? "nil"), want \(want)")
-                        continue   // late reply to an earlier request; keep reading
-                    }
-                }
-                return resp
-            }
+            if let resp = reader.feed(try conn.read(timeout: 1.0)) { return resp }
         }
         throw LEDMError.timeout
     }
