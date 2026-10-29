@@ -157,8 +157,8 @@ enum MaintenanceJob: String, CaseIterable, Identifiable, Sendable {
         switch self {
         case .clean: return "Clean print heads"
         case .deepClean: return "Deep clean"
-        case .diagnostics: return "Print diagnostics page"
-        case .align: return "Align print heads"
+        case .diagnostics: return "Check print quality"
+        case .align: return "Line up print heads"
         }
     }
     /// InternalPrintDyn JobType, nil for alignment.
@@ -168,52 +168,6 @@ enum MaintenanceJob: String, CaseIterable, Identifiable, Sendable {
         case .deepClean: return "cleaningPageLevel2"
         case .diagnostics: return "diagnosticsPage"
         case .align: return nil
-        }
-    }
-    var detail: String {
-        switch self {
-        case .clean: return "Runs a nozzle cleaning cycle. Print a diagnostics page afterwards to check the result."
-        case .deepClean: return "A stronger cleaning cycle. Use it after a normal clean did not help."
-        case .diagnostics: return "Prints a page with the printer's self-test patterns."
-        case .align: return "Prints an alignment page, then you scan it on the printer."
-        }
-    }
-    var warning: String {
-        switch self {
-        case .align:
-            return "This uses ink and one sheet of plain paper. Load plain paper in the printer first."
-        case .deepClean:
-            return "This uses a noticeable amount of ink and at least one sheet of paper."
-        default:
-            return "This uses ink and at least one sheet of paper. Load plain paper in the printer first."
-        }
-    }
-}
-
-enum Maintenance {
-    // Body from HPLIP base/maint.py (CleanXML, setCleanType), sent as in cleanTypeLedm.
-    static func jobXML(_ jobType: String) -> String {
-        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!--  THIS DATA SUBJECT TO DISCLAIMER(S)INCLUDED WITH THE PRODUCT OF ORIGIN. -->\n<ipcap:InternalPrintCap xmlns:ipcap=\"http://www.hp.com/schemas/imaging/con/ledm/internalprintcap/2008/03/21\" xmlns:ipdyn=\"http://www.hp.com/schemas/imaging/con/ledm/internalprintdyn/2008/03/21\" xmlns:dd=\"http://www.hp.com/schemas/imaging/con/dictionaries/1.0/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.hp.com/schemas/imaging/con/ledm/internalprintcap/2008/03/21 ../schemas/InternalPrintCap.xsd http://www.hp.com/schemas/imaging/con/ledm/internalprintdyn/2008/03/21 ../schemas/InternalPrintDyn.xsd http://www.hp.com/schemas/imaging/con/dictionaries/1.0/ ../schemas/dd/DataDictionaryMasterLEDM.xsd\">\n                                <ipdyn:JobType>\(jobType)</ipdyn:JobType>\n</ipcap:InternalPrintCap>"
-    }
-
-    // base/maint.py dataModelHelper, with the attribute quotes written as plain quotes.
-    static let calibrationPrintingXML = "<cal:CalibrationState xmlns:cal=\"http://www.hp.com/schemas/imaging/con/cnx/markingagentcalibration/2009/04/08\" xmlns:dd=\"http://www.hp.com/schemas/imaging/con/dictionaries/1.0/\">Printing</cal:CalibrationState>"
-
-    static func supportedJobTypes(_ data: Data) -> [String] {
-        guard let root = parseXML(data) else { return [] }
-        return root.descendants("JobType").map { $0.text.trimmingCharacters(in: .whitespacesAndNewlines) }
-    }
-
-    /// Status categories from ProductStatusDyn.
-    static func statusCategories(_ data: Data) -> [String] {
-        guard let root = parseXML(data) else { return [] }
-        return root.all("Status").compactMap { $0.value("StatusCategory") }
-    }
-
-    static func isBusy(_ categories: [String]) -> Bool {
-        categories.contains { c in
-            let l = c.lowercased()
-            return ["process", "clean", "align", "calibrat", "busy", "printing", "initializ", "warm"].contains { l.contains($0) }
         }
     }
 }

@@ -59,8 +59,9 @@ struct PrintJob: Identifiable, Equatable {
 
 enum CupsError: Error, LocalizedError {
     case ipp(String)
+    case denied(String)     // CUPS answered forbidden or not authorized
     var errorDescription: String? {
-        switch self { case .ipp(let s): return s }
+        switch self { case .ipp(let s), .denied(let s): return s }
     }
 }
 
@@ -203,20 +204,72 @@ enum Cups {
         return map
     }
 
-    static func cancel(job: Int, printer: String) throws {
-        if cupsCancelJob2(nil, printer, Int32(job), 0).rawValue >= IPP_STATUS_ERROR_BAD_REQUEST.rawValue { throw CupsError.ipp(lastError()) }
+    /// True for the IPP statuses CUPS returns when the policy refuses the caller.
+    private static func isDenied(_ status: ipp_status_t) -> Bool {
+        status == IPP_STATUS_ERROR_FORBIDDEN || status == IPP_STATUS_ERROR_NOT_AUTHORIZED
+            || status == IPP_STATUS_ERROR_NOT_AUTHENTICATED
     }
 
+    /// Message for a failed request. Refusals get a plain explanation instead of the raw CUPS text.
+    private static func failure(_ what: String, status: ipp_status_t, operatorOnly: Bool) -> CupsError {
+        if isDenied(status) {
+            let need = operatorOnly
+                ? "This needs printer operator rights. Use an administrator account, or run the matching command with sudo."
+                : "CUPS only lets the job owner or an administrator do this."
+            return .denied("\(what): CUPS refused the request (not authorized). \(need)")
+        }
+        return .ipp("\(what): \(lastError())")
+    }
+
+    /// Cancel-Job as the current user. The default CUPS policy lets the job owner do this
+    /// without operator rights, as long as requesting-user-name matches the owner and no
+    /// operator-only attribute such as purge-job is sent.
+    private static func sendCancel(job: Int, printer: String, useJobURI: Bool) -> ipp_status_t {
+        let req = ippNewRequest(IPP_OP_CANCEL_JOB)!
+        if useJobURI {
+            ippAddString(req, IPP_TAG_OPERATION, IPP_TAG_URI, "job-uri", nil, "ipp://localhost/jobs/\(job)")
+        } else {
+            ippAddString(req, IPP_TAG_OPERATION, IPP_TAG_URI, "printer-uri", nil, printerURI(printer))
+            ippAddInteger(req, IPP_TAG_OPERATION, IPP_TAG_INTEGER, "job-id", Int32(job))
+        }
+        ippAddString(req, IPP_TAG_OPERATION, IPP_TAG_NAME, "requesting-user-name", nil, String(cString: cupsUser()))
+        if let resp = cupsDoRequest(nil, req, "/jobs/") { ippDelete(resp) }
+        return cupsLastError()
+    }
+
+    static func cancel(job: Int, printer: String) throws {
+        var status = sendCancel(job: job, printer: printer, useJobURI: false)
+        if isDenied(status) { status = sendCancel(job: job, printer: printer, useJobURI: true) }
+        if status.rawValue >= IPP_STATUS_ERROR_BAD_REQUEST.rawValue {
+            throw failure("Cancel job \(job)", status: status, operatorOnly: false)
+        }
+    }
+
+    /// Cancels each active job on its own. The all-jobs operation (Cancel-Jobs) is operator-only.
     static func cancelAll(printer: String) throws {
-        if cupsCancelJob2(nil, printer, CUPS_JOBID_ALL, 0).rawValue >= IPP_STATUS_ERROR_BAD_REQUEST.rawValue { throw CupsError.ipp(lastError()) }
+        var firstError: Error?
+        for j in jobs(for: printer, limit: 100) where j.isActive {
+            do { try cancel(job: j.id, printer: printer) } catch { firstError = firstError ?? error }
+        }
+        if let e = firstError { throw e }
     }
 
     static func setPaused(_ pause: Bool, printer: String) throws {
         let req = newRequest(pause ? IPP_OP_PAUSE_PRINTER : IPP_OP_RESUME_PRINTER, printer: printer)
-        if let resp = cupsDoRequest(nil, req, "/") { ippDelete(resp) }
-        if cupsLastError().rawValue >= IPP_STATUS_ERROR_BAD_REQUEST.rawValue {
-            throw CupsError.ipp(lastError())
+        if let resp = cupsDoRequest(nil, req, "/admin/") { ippDelete(resp) }
+        let st = cupsLastError()
+        if st.rawValue >= IPP_STATUS_ERROR_BAD_REQUEST.rawValue {
+            throw failure(pause ? "Pause" : "Resume", status: st, operatorOnly: true)
         }
+    }
+
+    /// Pause then resume, the same as cupsdisable followed by cupsenable. Clears a queue that
+    /// still reports "processing" after its job is gone.
+    static func resetQueue(printer: String) throws {
+        var pauseError: Error?
+        do { try setPaused(true, printer: printer) } catch { pauseError = error }
+        try setPaused(false, printer: printer)
+        if let e = pauseError { throw e }
     }
 
     static func printTestPage(printer: String) throws -> Int {
