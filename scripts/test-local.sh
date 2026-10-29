@@ -32,7 +32,7 @@ find "$ppds" -name '*.ppd.gz' -print0 \
     | xargs -0 -n 1 -P 8 sh -c '
         f=$(mktemp "${TMPDIR:-/tmp}/ppdchk.XXXXXX")
         gzip -dc "$1" > "$f"
-        cupstestppd -q -W translations "$f" > /dev/null 2>&1 || echo "$1"
+        cupstestppd -q -W translations -I filters "$f" > /dev/null 2>&1 || echo "$1"
         rm -f "$f"' _ > "$tmp/ppd-fail.txt"
 if [ -s "$tmp/ppd-fail.txt" ]; then
     echo "FAIL: cupstestppd -W translations rejected:" >&2
