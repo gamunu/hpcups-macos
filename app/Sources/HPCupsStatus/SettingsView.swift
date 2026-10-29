@@ -28,6 +28,7 @@ struct SettingsView: View {
             Section("Menu bar") {
                 Toggle("Show in menu bar", isOn: $showMenuBar)
             }
+            UpdatesSection()
         }
         .formStyle(.grouped)
     }

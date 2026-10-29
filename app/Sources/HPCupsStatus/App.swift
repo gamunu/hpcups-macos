@@ -21,6 +21,11 @@ struct HPCupsStatusApp: App {
                 .frame(minWidth: 820, minHeight: 560)
         }
         .defaultSize(width: 980, height: 660)
+        .commands {
+            CommandGroup(after: .appInfo) {
+                Button("Check for Updates...") { Updater.shared.checkForUpdates() }
+            }
+        }
 
         MenuBarExtra(isInserted: $showMenuBar) {
             MenuBarView(store: store)

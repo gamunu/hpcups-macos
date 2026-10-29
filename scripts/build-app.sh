@@ -1,20 +1,45 @@
 #!/bin/sh
-# Build the hpcups Status window app with a menu bar item and wrap it into build/hpcups Status.app.
+# Build the hpcups Status window app with a menu bar item and wrap it into
+# build/hpcups Status.app, with Sparkle embedded and everything ad-hoc signed.
+#
+# Environment:
+#   VERSION            override the version (see scripts/version.sh)
+#   SPARKLE_PUBLIC_KEY EdDSA public key for update checks (base64). When unset,
+#                      the app is built without SUPublicEDKey and cannot
+#                      verify updates.
 set -eu
 
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 APP_NAME="hpcups Status"
 BUNDLE_ID="io.github.gamunu.hpcups-status"
-VERSION="${VERSION:-0.1.0}"
+VERSION=$("$ROOT/scripts/version.sh")
+FEED_URL="https://github.com/gamunu/hpcups-macos/releases/latest/download/appcast.xml"
 OUT="$ROOT/build/$APP_NAME.app"
 
 cd "$ROOT/app"
 swift build -c release
 BIN_DIR=$(swift build -c release --show-bin-path)
 
+SPARKLE_FW="$ROOT/app/.build/artifacts/sparkle/Sparkle/Sparkle.xcframework/macos-arm64_x86_64/Sparkle.framework"
+[ -d "$SPARKLE_FW" ] || { echo "missing $SPARKLE_FW" >&2; exit 1; }
+
 rm -rf "$OUT"
-mkdir -p "$OUT/Contents/MacOS" "$OUT/Contents/Resources"
+mkdir -p "$OUT/Contents/MacOS" "$OUT/Contents/Resources" "$OUT/Contents/Frameworks"
 cp "$BIN_DIR/HPCupsStatus" "$OUT/Contents/MacOS/$APP_NAME"
+# ditto keeps the symlinks inside the framework bundle.
+ditto "$SPARKLE_FW" "$OUT/Contents/Frameworks/Sparkle.framework"
+
+# Package.swift adds this rpath already. Add it only if missing.
+if ! otool -l "$OUT/Contents/MacOS/$APP_NAME" | grep -q '@executable_path/../Frameworks'; then
+    install_name_tool -add_rpath "@executable_path/../Frameworks" "$OUT/Contents/MacOS/$APP_NAME"
+fi
+
+if [ -n "${SPARKLE_PUBLIC_KEY:-}" ]; then
+    KEY_XML="<key>SUPublicEDKey</key><string>$SPARKLE_PUBLIC_KEY</string>"
+else
+    KEY_XML=""
+    echo "warning: SPARKLE_PUBLIC_KEY is not set. This build cannot verify updates." >&2
+fi
 
 cat > "$OUT/Contents/Info.plist" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
@@ -30,9 +55,20 @@ cat > "$OUT/Contents/Info.plist" <<PLIST
     <key>CFBundleVersion</key><string>$VERSION</string>
     <key>LSMinimumSystemVersion</key><string>14.0</string>
     <key>NSHighResolutionCapable</key><true/>
+    <key>SUFeedURL</key><string>$FEED_URL</string>
+    <key>SUEnableAutomaticChecks</key><true/>
+    $KEY_XML
 </dict>
 </plist>
 PLIST
+plutil -lint "$OUT/Contents/Info.plist" >/dev/null
 
+# Sign inner to outer. No --deep, so every nested bundle gets its own signature.
+FW="$OUT/Contents/Frameworks/Sparkle.framework/Versions/B"
+for x in "$FW"/XPCServices/*.xpc "$FW/Autoupdate" "$FW/Updater.app"; do
+    [ -e "$x" ] && codesign --force -s - "$x"
+done
+codesign --force -s - "$OUT/Contents/Frameworks/Sparkle.framework"
 codesign --force -s - "$OUT"
-echo "Built $OUT"
+codesign --verify --strict "$OUT"
+echo "Built $OUT ($VERSION)"
