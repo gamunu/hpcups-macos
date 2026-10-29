@@ -74,6 +74,14 @@ The script downloads the latest release, checks it against the release's `SHA256
 
 Then plug in the printer, open **System Settings > Printers & Scanners**, click **Add Printer**, pick your HP printer, and set **Use** to the "..., hpcups-macos" driver.
 
+### With Homebrew
+
+    brew tap gamunu/tap
+    brew trust gamunu/tap
+    brew install --cask hpcups-macos
+
+Homebrew also installs the package with `installer`, so there is no prompt. `brew upgrade` and the app's own updates both work.
+
 ### Installing the .pkg by hand
 
 The package is not signed with a paid Apple Developer ID, so macOS says it "could not verify" it when you open it from Finder. To install it anyway:
