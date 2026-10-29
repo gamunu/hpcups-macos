@@ -88,8 +88,11 @@ jobs:
           scripts/make-appcast.sh build/hpcups-macos-*.pkg build/appcast.xml build/notes.md
           cat build/appcast.xml
 
+      - name: Checksums
+        run: (cd build && shasum -a 256 hpcups-macos-*.pkg > SHA256SUMS && cat SHA256SUMS)
+
       - name: Upload assets
         run: |
-          set -- build/hpcups-macos-*.pkg
+          set -- build/hpcups-macos-*.pkg build/SHA256SUMS
           [ -f build/appcast.xml ] && set -- "$@" build/appcast.xml
           gh release upload "$TAG" "$@" --clobber
