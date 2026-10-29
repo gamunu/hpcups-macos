@@ -157,8 +157,8 @@ enum MaintenanceJob: String, CaseIterable, Identifiable, Sendable {
         switch self {
         case .clean: return "Clean print heads"
         case .deepClean: return "Deep clean"
-        case .diagnostics: return "Print diagnostics page"
-        case .align: return "Align print heads"
+        case .diagnostics: return "Check print quality"
+        case .align: return "Line up print heads"
         }
     }
     /// InternalPrintDyn JobType, nil for alignment.
@@ -168,24 +168,6 @@ enum MaintenanceJob: String, CaseIterable, Identifiable, Sendable {
         case .deepClean: return "cleaningPageLevel2"
         case .diagnostics: return "diagnosticsPage"
         case .align: return nil
-        }
-    }
-    var detail: String {
-        switch self {
-        case .clean: return "Runs a nozzle cleaning cycle. Print a diagnostics page afterwards to check the result."
-        case .deepClean: return "A stronger cleaning cycle. Use it after a normal clean did not help."
-        case .diagnostics: return "Prints a page with the printer's self-test patterns."
-        case .align: return "Prints an alignment page, then you scan it on the printer."
-        }
-    }
-    var warning: String {
-        switch self {
-        case .align:
-            return "This uses ink and one sheet of plain paper. Load plain paper in the printer first."
-        case .deepClean:
-            return "This uses a noticeable amount of ink and at least one sheet of paper."
-        default:
-            return "This uses ink and at least one sheet of paper. Load plain paper in the printer first."
         }
     }
 }

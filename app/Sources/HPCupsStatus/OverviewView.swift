@@ -7,24 +7,24 @@ struct OverviewView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .leading, spacing: Space.l) {
                 header
                 stateCard
-                HStack(alignment: .top, spacing: 16) {
+                CardRow {
                     inkCard
                     jobCard
                 }
                 actionsCard
             }
-            .padding(20)
+            .padding(Space.page)
         }
     }
 
     private var header: some View {
         HStack(alignment: .firstTextBaseline) {
             VStack(alignment: .leading, spacing: 2) {
-                Text(store.selected.replacingOccurrences(of: "_", with: " ")).font(.title2.bold())
-                Text(model).font(.callout).foregroundStyle(.secondary)
+                Text(store.selected.replacingOccurrences(of: "_", with: " ")).font(TypeScale.screenTitle)
+                Text(model).font(TypeScale.secondary).foregroundStyle(.secondary)
             }
             Spacer()
             usbBadge
@@ -41,7 +41,7 @@ struct OverviewView: View {
         let text = usb == true ? "USB connected" : usb == false ? "USB not found" : "USB not checked"
         let color: Color = usb == true ? .green : usb == false ? .red : .secondary
         return Label(text, systemImage: usb == false ? "cable.connector.slash" : "cable.connector")
-            .font(.callout)
+            .font(TypeScale.secondary)
             .foregroundStyle(color)
             .padding(.horizontal, 10).padding(.vertical, 5)
             .background(Capsule().fill(color.opacity(0.12)))
@@ -50,36 +50,34 @@ struct OverviewView: View {
 
     private var stateCard: some View {
         let h = store.health
-        return HStack(alignment: .top, spacing: 16) {
+        return HStack(alignment: .top, spacing: Space.l) {
             Image(systemName: h.symbol)
                 .font(.system(size: 44))
                 .foregroundStyle(h.color)
                 .frame(width: 56)
                 .accessibilityHidden(true)
-            VStack(alignment: .leading, spacing: 6) {
+            VStack(alignment: .leading, spacing: Space.s) {
                 Text(store.healthTitle).font(.largeTitle.bold())
                 ForEach(store.healthDetails, id: \.self) { line in
-                    Text(line).foregroundStyle(.secondary)
+                    Text(line).font(TypeScale.lead).foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
                 if store.queueStuck {
-                    Button("Reset queue") { store.resetQueue() }
-                        .padding(.top, 2)
+                    Button("Fix the print queue") { store.resetQueue() }.primaryAction()
                 }
                 if store.canCancelAlignment {
-                    Button("Cancel alignment", role: .destructive) { confirmCancel = true }
-                        .padding(.top, 2)
+                    Button("Cancel alignment", role: .destructive) { confirmCancel = true }.secondaryAction()
                 }
                 if store.maint.cancelling {
-                    HStack(spacing: 8) { ProgressView().controlSize(.small); Text("Asking the printer to cancel") }
-                        .padding(.top, 2)
+                    HStack(spacing: Space.s) { ProgressView().controlSize(.small); Text("Asking the printer to cancel") }
                 }
                 if let o = store.maint.cancelOutcome {
-                    Text(o).font(.callout).padding(.top, 2)
+                    Text(o).font(TypeScale.secondary)
                 }
             }
-            Spacer()
+            Spacer(minLength: 0)
         }
-        .padding(20)
+        .padding(Space.page)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(RoundedRectangle(cornerRadius: 14).fill(h.color.opacity(0.12)))
         .overlay(RoundedRectangle(cornerRadius: 14).strokeBorder(h.color.opacity(0.35)))
@@ -102,11 +100,12 @@ struct OverviewView: View {
                         Text(s.name)
                         Spacer()
                         Text(s.level >= 0 ? "\(min(s.level, 100))%" : "unknown").foregroundStyle(.secondary)
-                    }.font(.callout)
+                    }.font(TypeScale.secondary)
                 }
             } else {
-                Text(store.inkError ?? "Reading ink levels").font(.callout).foregroundStyle(.secondary)
+                Text(store.inkError ?? "Reading ink levels").font(TypeScale.secondary).foregroundStyle(.secondary)
             }
+            Spacer(minLength: 0)
             Button("Show ink details") { goTo(.ink) }.buttonStyle(.link)
         }
     }
@@ -115,34 +114,42 @@ struct OverviewView: View {
         Card(title: "Current job") {
             if let j = store.activeJob {
                 Text(j.title).font(.body.weight(.medium)).lineLimit(2)
-                Text("\(j.stateText), \(j.sizeKB) KB, \(j.user)").font(.callout).foregroundStyle(.secondary)
-                Button("Cancel job") { store.cancel(j) }
-            } else if store.isBusy {
-                Text("The printer is working.").font(.callout).foregroundStyle(.secondary)
-                Button("Show job history") { goTo(.jobs) }.buttonStyle(.link)
+                Text("\(j.stateText), \(j.sizeKB) KB, \(j.user)").font(TypeScale.secondary).foregroundStyle(.secondary)
+                Spacer(minLength: 0)
+                Button("Cancel job") { store.cancel(j) }.secondaryAction()
             } else {
-                Text("No job is printing.").font(.callout).foregroundStyle(.secondary)
+                Text(store.isBusy ? "The printer is working." : "Nothing is printing.")
+                    .font(TypeScale.secondary).foregroundStyle(.secondary)
+                Spacer(minLength: 0)
                 Button("Show job history") { goTo(.jobs) }.buttonStyle(.link)
             }
         }
     }
 
     private var actionsCard: some View {
-        Card(title: "Quick actions") {
-            HStack {
-                Button { store.testPage() } label: { Label("Print test page", systemImage: "doc.text") }
-                    .disabled(store.usbPresent == false)
-                Button { store.maint.open(.clean) } label: { Label("Clean heads", systemImage: "sparkles") }
-                    .disabled(!store.canMaintain)
-                Button { store.maint.open(.align) } label: { Label("Align heads", systemImage: "arrow.left.and.right") }
-                    .disabled(!store.canMaintain)
-                Spacer()
+        Card(title: "What do you want to do?") {
+            HStack(spacing: Space.m) {
+                Button { store.testPage() } label: {
+                    Label("Print a test page", systemImage: "doc.text").frame(maxWidth: .infinity)
+                }
+                .primaryAction()
+                .disabled(store.usbPresent == false)
+                Button { store.maint.open(.clean) } label: {
+                    Label("Clean print heads", systemImage: "sparkles").frame(maxWidth: .infinity)
+                }
+                .secondaryAction()
+                .disabled(!store.canMaintain)
+                Button { store.maint.open(.align) } label: {
+                    Label("Line up print heads", systemImage: "arrow.left.and.right").frame(maxWidth: .infinity)
+                }
+                .secondaryAction()
+                .disabled(!store.canMaintain)
             }
             if let why = store.maintenanceBlockReason {
-                Text("Maintenance is off: \(why)").font(.caption).foregroundStyle(.secondary)
+                Text("Cleaning and lining up are off right now. \(why)").font(TypeScale.note).foregroundStyle(.secondary)
             }
             if let m = store.actionMessage {
-                Text(m).font(.caption).foregroundStyle(.red)
+                Text(m).font(TypeScale.note).foregroundStyle(.red)
             }
         }
     }

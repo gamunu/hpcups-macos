@@ -8,19 +8,20 @@ struct MenuBarView: View {
 
     var body: some View {
         let h = store.health
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: Space.m) {
             HStack(spacing: 10) {
                 Image(systemName: h.symbol).font(.title2).foregroundStyle(h.color)
                 VStack(alignment: .leading, spacing: 1) {
                     Text(store.healthTitle).font(.headline)
-                    Text(store.healthDetails.first ?? "").font(.caption).foregroundStyle(.secondary).lineLimit(2)
+                    Text(store.healthDetails.first ?? "").font(TypeScale.note).foregroundStyle(.secondary).lineLimit(3)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
                 Spacer()
             }
             .accessibilityElement(children: .combine)
             Divider()
             if let r = store.ink, !r.cartridges.isEmpty {
-                VStack(spacing: 6) { ForEach(r.cartridges) { InkBar(cartridge: $0) } }
+                VStack(spacing: Space.s) { ForEach(r.cartridges) { InkBar(cartridge: $0) } }
             } else {
                 Text(store.inkError ?? "Reading ink levels").font(.caption).foregroundStyle(.secondary)
             }
@@ -37,7 +38,7 @@ struct MenuBarView: View {
                     if store.maint.cancelling {
                         HStack(spacing: 8) { ProgressView().controlSize(.small); Text("Asking the printer to cancel").font(.callout) }
                     } else if confirmCancel {
-                        Text("Stop the alignment on the printer?").font(.callout)
+                        Text("Stop the alignment on the printer?").font(TypeScale.secondary)
                         HStack {
                             Button("Cancel alignment", role: .destructive) { confirmCancel = false; store.cancelAlignment() }
                             Button("Keep going") { confirmCancel = false }
@@ -52,18 +53,19 @@ struct MenuBarView: View {
             }
             Divider()
             HStack {
-                Button("Open hpcups Status") {
+                Button("Open window") {
                     openWindow(id: "main")
                     NSApp.setActivationPolicy(.regular)
                     NSApp.activate(ignoringOtherApps: true)
                 }
+                .primaryAction()
                 .keyboardShortcut(.defaultAction)
                 Spacer()
-                Button("Quit") { NSApp.terminate(nil) }
+                Button("Quit") { NSApp.terminate(nil) }.secondaryAction()
             }
         }
-        .padding(14)
-        .frame(width: 320)
+        .padding(Space.page)
+        .frame(width: 360)
         .onAppear { Task { await store.refreshInk() } }
     }
 }

@@ -39,7 +39,7 @@ struct JobsView: View {
         .overlay {
             if shown.isEmpty {
                 ContentUnavailableView("No jobs", systemImage: "tray",
-                                       description: Text(filter == .active ? "Nothing is printing." : "The queue has no jobs yet."))
+                                       description: Text(filter == .active ? "Nothing is printing." : "No jobs have been sent to this printer yet."))
             }
         }
         .toolbar {
@@ -49,7 +49,7 @@ struct JobsView: View {
                 }.pickerStyle(.segmented)
             }
             ToolbarItem {
-                Button { store.cancel(ids: selectedActive) } label: { Label("Cancel selected", systemImage: "xmark.circle") }
+                Button { store.cancel(ids: selectedActive) } label: { Label("Cancel selected jobs", systemImage: "xmark.circle") }
                     .disabled(selectedActive.isEmpty)
                     .help("Cancel the selected active jobs")
             }
@@ -61,14 +61,14 @@ struct JobsView: View {
             ToolbarItem {
                 let paused = store.status?.stateCode == 5
                 Button { store.togglePause() } label: {
-                    Label(paused ? "Resume queue" : "Pause queue", systemImage: paused ? "play.fill" : "pause.fill")
+                    Label(paused ? "Resume printing" : "Pause printing", systemImage: paused ? "play.fill" : "pause.fill")
                 }
-                .help(paused ? "Resume the queue" : "Pause the queue")
+                .help(paused ? "Let the printer carry on" : "Hold all jobs for now")
             }
         }
         .safeAreaInset(edge: .bottom) {
             if let m = store.actionMessage {
-                Text(m).font(.caption).foregroundStyle(.red).padding(8)
+                Text(m).font(TypeScale.note).foregroundStyle(.red).padding(Space.page).frame(maxWidth: .infinity, alignment: .leading)
             }
         }
     }

@@ -22,16 +22,16 @@ enum Attention: Equatable {
 
     var title: String {
         switch self {
-        case .loadPaper: return "Load paper"
-        case .closeDoor: return "Close the door"
+        case .loadPaper: return "Put paper in the printer"
+        case .closeDoor: return "Close the front door"
         case .other(let s): return s
         }
     }
     var detail: String {
         switch self {
-        case .loadPaper: return "Load plain paper in the input tray and push the tray in. The job continues by itself."
-        case .closeDoor: return "Close the printer's door or cover. The job continues by itself."
-        case .other: return "Check the printer. The job continues once the problem is fixed."
+        case .loadPaper: return "Put plain paper in the tray at the back. The job carries on by itself."
+        case .closeDoor: return "Close the front door of the printer. The job carries on by itself."
+        case .other: return "Check the printer. The job carries on once the problem is fixed."
         }
     }
     var symbol: String {
@@ -71,7 +71,7 @@ struct CancelResult: Sendable {
 
     var lines: [String] {
         var out: [String] = []
-        if let e = error { return ["Could not reach the printer to cancel: \(e)"] }
+        if let e = error { return ["The printer did not answer, so nothing was cancelled.", "Details: \(e)"] }
         let final = finalCategories.map { Maintenance.liveText($0) } ?? "unknown"
         if found == 0 {
             out.append("The printer has no active job to cancel.")
@@ -186,7 +186,7 @@ enum Maintenance {
         switch category.lowercased() {
         case "ready": return "Ready"
         case "processing": return "Printing"
-        case "calibrating": return "Calibrating"
+        case "calibrating": return "Aligning"
         case "trayemptyoropen": return "Paper tray empty or open"
         case "closedoororcover": return "Door or cover open"
         case "genuinehp": return "Genuine HP cartridges"
@@ -234,6 +234,16 @@ final class MaintenanceController: ObservableObject {
         case .diagnostics: return ["Prepare", "Printing", "Check"]
         case .align: return ["Prepare", "Printing", "Scan", "Done"]
         }
+    }
+
+    /// Shows a fixed step with fake state. No printer calls. Only used by `--preview-step`.
+    func applyPreview(_ spec: PreviewMode.Spec) {
+        job = spec.job
+        stage = spec.stage
+        reached = spec.reached
+        attention = spec.attention
+        categories = spec.categories
+        calState = spec.calState
     }
 
     func supports(_ job: MaintenanceJob) -> Bool {
@@ -340,7 +350,7 @@ final class MaintenanceController: ObservableObject {
         do {
             let r = try await client.postAsync("/DevMgmt/InternalPrintDyn.xml", xml: Maintenance.jobXML(jt))
             guard (200..<300).contains(r.status) else {
-                fail("The printer refused the request (HTTP \(r.status) \(r.reason)).")
+                fail("The printer did not accept the request. Try again.\nDetails: HTTP \(r.status) \(r.reason)")
                 return
             }
             stage = .running
@@ -425,7 +435,7 @@ final class MaintenanceController: ObservableObject {
             }
             let r = try await client.postFooterAsync("/Calibration/Session", xml: Maintenance.calibrationPrintingXML)
             guard (200..<300).contains(r.status) else {
-                fail("The printer refused the request (HTTP \(r.status) \(r.reason)).")
+                fail("The printer did not accept the request. Try again.\nDetails: HTTP \(r.status) \(r.reason)")
                 return
             }
             if mode == "automatic" {

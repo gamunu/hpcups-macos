@@ -71,7 +71,7 @@ final class StatusStore: ObservableObject {
     }
 
     func start() {
-        guard !started else { return }
+        guard !started, !PreviewMode.isActive else { return }
         started = true
         StatusStore.registerDefaults()
         if UserDefaults.standard.bool(forKey: "notificationsEnabled") { notifier.requestAuthorization() }
@@ -91,6 +91,7 @@ final class StatusStore: ObservableObject {
 
     /// Why maintenance is unavailable, nil when it can start.
     var maintenanceBlockReason: String? {
+        if PreviewMode.isActive { return nil }
         if usbPresent == false { return "The printer is not connected over USB." }
         if maint.isBusy { return "A maintenance job is running." }
         if jobs.contains(where: \.isActive) { return "A print job is active. Wait for it to finish or cancel it." }
@@ -131,8 +132,8 @@ final class StatusStore: ObservableObject {
         }
     }
 
-    static let stuckNote = "The print queue reports a job that does not exist."
-    static let calibratingNote = "The printer is in the middle of a head alignment. If the alignment page is out, place it face down on the scanner glass and press Color Copy. To stop the alignment instead, press the Cancel (X) button on the printer."
+    static let stuckNote = "The printer looks busy, but nothing is printing."
+    static let calibratingNote = "The printer is lining up its print heads. If the page is out, put it face down on the scanner glass and press Color Copy. To stop, press the Cancel (X) button on the printer."
 
     /// The printer reports an alignment in progress (LEDM "calibrating").
     var isCalibrating: Bool { ledmCategories?.contains("calibrating") ?? false }
@@ -154,7 +155,7 @@ final class StatusStore: ObservableObject {
         guard let s = status else { return ["Reading the printer state"] }
         if usbPresent == false { out.append("The USB cable is unplugged or the printer is off.") }
         if let e = s.error { out.append(e) }
-        if s.stateCode == 5 { out.append("The queue is paused or stopped.") }
+        if s.stateCode == 5 { out.append("Printing is paused.") }
         if isCalibrating && activeJob == nil { out.append(Self.calibratingNote) }
         out += reasonLines
         if let ink = ink {
@@ -187,7 +188,7 @@ final class StatusStore: ObservableObject {
         do {
             let r = try await LEDMClient.shared.getAsync("/DevMgmt/ConsumableConfigDyn.xml")
             guard r.status == 200, let report = InkParser.parse(r.body) else {
-                inkError = "Printer returned no ink data (HTTP \(r.status))"
+                inkError = "The printer did not send its ink levels."
                 return
             }
             ink = report

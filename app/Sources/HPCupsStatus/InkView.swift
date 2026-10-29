@@ -5,21 +5,22 @@ struct InkView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                HStack {
+            VStack(alignment: .leading, spacing: Space.l) {
+                HStack(alignment: .firstTextBaseline) {
                     VStack(alignment: .leading, spacing: 2) {
-                        Text("Cartridges").font(.title2.bold())
-                        Text(lastRead).font(.callout).foregroundStyle(.secondary)
+                        Text("Cartridges").font(TypeScale.screenTitle)
+                        Text(lastRead).font(TypeScale.secondary).foregroundStyle(.secondary)
                     }
                     Spacer()
                     if store.inkLoading { ProgressView().controlSize(.small) }
                     Button { Task { await store.refreshInk(force: true) } } label: {
                         Label("Refresh", systemImage: "arrow.clockwise")
                     }
+                    .secondaryAction()
                     .disabled(store.inkLoading || store.maint.isBusy)
                 }
                 if let r = store.ink, !r.cartridges.isEmpty {
-                    HStack(alignment: .top, spacing: 16) {
+                    CardRow {
                         ForEach(r.cartridges.sorted { $0.label == "K" && $1.label != "K" }) { CartridgeCard(cartridge: $0) }
                     }
                 } else {
@@ -29,7 +30,7 @@ struct InkView: View {
                     }
                 }
             }
-            .padding(20)
+            .padding(Space.page)
         }
     }
 
@@ -44,20 +45,20 @@ struct CartridgeCard: View {
 
     var body: some View {
         Card {
-            HStack(alignment: .center, spacing: 20) {
+            HStack(alignment: .center, spacing: Space.page) {
                 CartridgeShape(cartridge: cartridge)
                     .frame(width: 110, height: 170)
-                VStack(alignment: .leading, spacing: 6) {
+                VStack(alignment: .leading, spacing: Space.s) {
                     Text(cartridge.name).font(.title3.bold())
                     Text(cartridge.percentText)
-                        .font(.system(size: 34, weight: .semibold, design: .rounded))
+                        .font(TypeScale.bigNumber)
                         .foregroundStyle(cartridge.percent == nil ? .secondary : .primary)
                     Label(cartridge.state.text, systemImage: symbol)
                         .foregroundStyle(cartridge.stateColor)
                     Text("HP \(cartridge.product ?? "unknown") cartridge")
-                        .font(.callout).foregroundStyle(.secondary)
+                        .font(TypeScale.secondary).foregroundStyle(.secondary)
                     if cartridge.percent == nil {
-                        Text("The printer does not report a level.").font(.caption).foregroundStyle(.secondary)
+                        Text("The printer does not say how full it is.").font(TypeScale.note).foregroundStyle(.secondary)
                     }
                 }
                 Spacer(minLength: 0)
