@@ -73,7 +73,7 @@ Fuck you, HP.
 
 If macOS still refuses the package, **System Settings > Privacy & Security** shows an **Open Anyway** button for it.
 
-The package installs the filter, the PPD and `/Applications/hpcups Status.app`. It does not add the printer for you.
+The package installs the filter, a PPD for each supported printer, and `/Applications/hpcups Status.app`. It does not add the printer for you.
 
 From a shell, the same steps are:
 
@@ -172,7 +172,7 @@ Back the private key up in a password manager. Lose it and every installed copy 
     sudo lpadmin -x HP_DeskJet_2300
     sudo scripts/uninstall.sh
 
-This removes the app, the filter, the PPD and the installer receipt.
+This removes the app, the filter, the PPDs and the installer receipt.
 
 ## License
 
