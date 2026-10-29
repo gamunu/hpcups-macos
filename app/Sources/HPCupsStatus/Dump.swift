@@ -62,6 +62,23 @@ func dumpAndExit() -> Never {
 }
 
 /// Debug helper: GET one LEDM resource and print the raw body.
+/// Starts a clean, deep clean or diagnostics page from the command line.
+func maintJobAndExit(name: String) -> Never {
+    LEDMClient.shared.verbose = cliArgs.contains("-v")
+    guard let job = MaintenanceJob(rawValue: name), let jt = job.jobType else {
+        FileHandle.standardError.write(Data("usage: --maint clean|deepClean|diagnostics\n".utf8))
+        exit(64)
+    }
+    do {
+        let r = try LEDMClient.shared.post("/DevMgmt/InternalPrintDyn.xml", xml: Maintenance.jobXML(jt))
+        print("\(job.title): HTTP \(r.status) \(r.reason)")
+        exit((200..<300).contains(r.status) ? 0 : 2)
+    } catch {
+        FileHandle.standardError.write(Data("error: \(error.localizedDescription)\n".utf8))
+        exit(1)
+    }
+}
+
 func ledmGetAndExit(path: String) -> Never {
     LEDMClient.shared.verbose = cliArgs.contains("-v")
     do {
