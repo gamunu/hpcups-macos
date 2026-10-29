@@ -172,7 +172,7 @@ enum MaintenanceJob: String, CaseIterable, Identifiable, Sendable {
     }
     var detail: String {
         switch self {
-        case .clean: return "Cleans the nozzles and prints a cleaning page."
+        case .clean: return "Runs a nozzle cleaning cycle. Print a diagnostics page afterwards to check the result."
         case .deepClean: return "A stronger cleaning cycle. Use it after a normal clean did not help."
         case .diagnostics: return "Prints a page with the printer's self-test patterns."
         case .align: return "Prints an alignment page, then you scan it on the printer."
