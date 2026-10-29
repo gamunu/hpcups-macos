@@ -26,7 +26,7 @@ struct OverviewView: View {
     private var header: some View {
         HStack(alignment: .firstTextBaseline) {
             VStack(alignment: .leading, spacing: 2) {
-                Text(store.selected.replacingOccurrences(of: "_", with: " ")).font(TypeScale.screenTitle)
+                Text(store.selected.isEmpty ? "No printer" : store.displayName).font(TypeScale.screenTitle)
                 Text(model).font(TypeScale.secondary).foregroundStyle(.secondary)
             }
             Spacer()
@@ -35,8 +35,8 @@ struct OverviewView: View {
     }
 
     private var model: String {
-        let m = store.status?.makeAndModel ?? ""
-        return m.isEmpty ? "Printer model unknown" : m
+        guard let p = store.selectedInfo else { return "Printer model unknown" }
+        return StatusStore.model(of: p)
     }
 
     private var usbBadge: some View {
@@ -137,19 +137,23 @@ struct OverviewView: View {
                 }
                 .primaryAction()
                 .disabled(store.usbPresent == false)
-                Button { store.maint.open(.clean) } label: {
-                    Label("Clean print heads", systemImage: "sparkles").frame(maxWidth: .infinity)
+                if store.maint.caps == nil || store.maint.supports(.clean) {
+                    Button { store.maint.open(.clean) } label: {
+                        Label("Clean print heads", systemImage: "sparkles").frame(maxWidth: .infinity)
+                    }
+                    .secondaryAction()
+                    .disabled(!store.canMaintain || store.maint.caps == nil)
                 }
-                .secondaryAction()
-                .disabled(!store.canMaintain)
-                Button { store.maint.open(.align) } label: {
-                    Label("Line up print heads", systemImage: "arrow.left.and.right").frame(maxWidth: .infinity)
+                if store.maint.caps == nil || store.maint.supports(.align) {
+                    Button { store.maint.open(.align) } label: {
+                        Label("Line up print heads", systemImage: "arrow.left.and.right").frame(maxWidth: .infinity)
+                    }
+                    .secondaryAction()
+                    .disabled(!store.canMaintain || store.maint.caps == nil)
                 }
-                .secondaryAction()
-                .disabled(!store.canMaintain)
             }
             if let why = store.maintenanceBlockReason {
-                Text("Cleaning and lining up are off right now. \(why)").font(TypeScale.note).foregroundStyle(.secondary)
+                Text(why).font(TypeScale.note).foregroundStyle(.secondary)
             }
             if let m = store.actionMessage {
                 Text(m).font(TypeScale.note).foregroundStyle(.red)

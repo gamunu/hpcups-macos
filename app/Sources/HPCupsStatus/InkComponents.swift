@@ -32,18 +32,18 @@ func isBlackHex(_ hex: String?) -> Bool {
     return r < 0x50 && g < 0x50 && b < 0x50
 }
 
-/// Colored dot for one ink. Tri-color is split into cyan, magenta and yellow.
+/// Colored dot for one ink. Multi-color cartridges are split into their bands.
 struct InkDot: View {
     var isBlack: Bool = false
-    var isTri: Bool = false
+    var bands: [InkBand] = []
     var hex: String?
     @Environment(\.colorScheme) private var scheme
 
     var body: some View {
         Group {
-            if isTri {
+            if bands.count > 1 {
                 VStack(spacing: 0) {
-                    inkCyan; inkMagenta; inkYellow
+                    ForEach(Array(bands.enumerated()), id: \.offset) { _, b in bandColor(b, scheme) }
                 }
                 .clipShape(Circle())
             } else if isBlack {
@@ -58,9 +58,15 @@ struct InkDot: View {
     }
 }
 
-extension InkCartridge {
-    var isBlack: Bool { label == "K" }
-    var isTri: Bool { label == "CMY" }
+/// Fill color of one band. Black adapts to the color scheme, the rest are fixed.
+func bandColor(_ band: InkBand, _ scheme: ColorScheme) -> Color {
+    switch band {
+    case .cyan: return inkCyan
+    case .magenta: return inkMagenta
+    case .yellow: return inkYellow
+    case .black: return blackInk(scheme)
+    default: return inkColor(band.hex)
+    }
 }
 
 /// Bar with an empty track. Black ink is a near-black fill with an outline, tri-color is three
@@ -88,12 +94,10 @@ struct InkLevelBar: View {
     }
 
     @ViewBuilder private var fill: some View {
-        if cartridge.isTri {
-            VStack(spacing: 0) { inkCyan; inkMagenta; inkYellow }
-        } else if cartridge.isBlack {
-            blackInk(scheme)
+        if cartridge.isMulti {
+            VStack(spacing: 0) { ForEach(Array(cartridge.bands.enumerated()), id: \.offset) { _, b in bandColor(b, scheme) } }
         } else {
-            inkColor(cartridge.colorHex)
+            bandColor(cartridge.bands.first ?? .other, scheme)
         }
     }
 }
@@ -103,7 +107,7 @@ struct InkBar: View {
     let cartridge: InkCartridge
     var body: some View {
         HStack(spacing: 8) {
-            InkDot(isBlack: cartridge.isBlack, isTri: cartridge.isTri, hex: cartridge.colorHex)
+            InkDot(isBlack: cartridge.isBlack, bands: cartridge.bands, hex: cartridge.colorHex)
             Text(cartridge.name).frame(width: 72, alignment: .leading)
             InkLevelBar(cartridge: cartridge)
             Text(cartridge.percentText).monospacedDigit().foregroundStyle(.secondary)

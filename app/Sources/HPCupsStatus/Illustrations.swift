@@ -3,7 +3,7 @@
 
 import SwiftUI
 
-/// Friendly, front-on drawings of an all-in-one inkjet (DeskJet 2300 style). Everything is
+/// Friendly, front-on drawings of an generic all-in-one inkjet. Everything is
 /// drawn with shapes and SF Symbols on a 300 x 200 canvas, so it follows light and dark mode
 /// and needs no image files.
 enum IllustrationScene: Equatable {

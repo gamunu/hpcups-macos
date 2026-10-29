@@ -12,6 +12,10 @@ extension MaintenanceJob {
         case .align: return "arrow.left.and.right"
         }
     }
+    func summary(for alignment: AlignmentSupport?) -> String {
+        if self == .align && alignment == .automatic { return "The printer prints and checks a page by itself. This lines up the print heads." }
+        return summary
+    }
     var summary: String {
         switch self {
         case .clean: return "Fixes faint prints and gaps. Try this first."
@@ -39,11 +43,18 @@ struct MaintenanceView: View {
                 if let why = store.maintenanceBlockReason {
                     Banner { Label(why, systemImage: "exclamationmark.circle") }
                 }
-                let jobs = MaintenanceJob.allCases
-                ForEach(Array(stride(from: 0, to: jobs.count, by: 2)), id: \.self) { i in
-                    CardRow {
-                        ForEach(jobs[i..<min(i + 2, jobs.count)]) { card($0) }
+                if let caps = store.maint.caps {
+                    let jobs = caps.cards
+                    ForEach(Array(stride(from: 0, to: jobs.count, by: 2)), id: \.self) { i in
+                        CardRow {
+                            ForEach(jobs[i..<min(i + 2, jobs.count)]) { card($0) }
+                        }
                     }
+                    if let note = caps.alignmentNote {
+                        Banner { Label(note, systemImage: "info.circle") }
+                    }
+                } else if store.ledmSupport == .available || store.ledmSupport == .unknown {
+                    Card { Label("Reading what this printer can do", systemImage: "info.circle").foregroundStyle(.secondary) }
                 }
                 Text("These tasks use ink and paper. Put plain paper in the printer first.")
                     .font(TypeScale.secondary).foregroundStyle(.secondary)
@@ -53,23 +64,19 @@ struct MaintenanceView: View {
     }
 
     private func card(_ job: MaintenanceJob) -> some View {
-        let supported = store.maint.supports(job)
         return Card {
             HStack(spacing: Space.m) {
                 Image(systemName: job.symbol).font(.title).frame(width: 36, height: 36).foregroundStyle(Color.accentColor)
                     .accessibilityHidden(true)
                 Text(job.title).font(TypeScale.cardTitle)
             }
-            Text(job.summary).font(TypeScale.secondary).foregroundStyle(.secondary)
+            Text(job.summary(for: store.maint.caps?.alignment)).font(TypeScale.secondary).foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
             Spacer(minLength: 0)
             HStack {
                 Button("Start") { store.maint.open(job) }
                     .primaryAction()
-                    .disabled(!store.canMaintain || !supported)
-                if !supported {
-                    Text("Not supported by this printer").font(TypeScale.note).foregroundStyle(.secondary)
-                }
+                    .disabled(!store.canMaintain)
             }
         }
     }

@@ -43,7 +43,7 @@ struct MaintenanceSheet: View {
             Image(systemName: job.symbol).font(.title2).foregroundStyle(Color.accentColor)
             Text(job.title).font(TypeScale.screenTitle)
             Spacer(minLength: Space.l)
-            ProgressDots(steps: MaintenanceController.steps(for: job), current: maint.reached, failed: isFailed)
+            ProgressDots(steps: MaintenanceController.steps(for: job, alignment: maint.caps?.alignment), current: maint.reached, failed: isFailed)
         }
     }
 
@@ -87,12 +87,16 @@ struct MaintenanceSheet: View {
             Text("Put plain paper in the printer").font(TypeScale.heroTitle)
             Text("Open the tray at the back and slide in a few sheets of plain white paper.")
                 .font(TypeScale.lead)
-            Text(job.summary).font(TypeScale.secondary).foregroundStyle(.secondary)
+            Text(job.summary(for: maint.caps?.alignment)).font(TypeScale.secondary).foregroundStyle(.secondary)
             switch job {
             case .deepClean:
                 Banner { Label("Deep clean uses more ink. Try a normal clean first.", systemImage: "drop.fill") }
             case .align:
-                Banner(tint: .accentColor) { Label("You will put the printed page on the scanner. Stay near the printer.", systemImage: "scanner") }
+                if maint.caps?.alignment == .automatic {
+                    Text("The printer lines up the print heads by itself. It uses one sheet of paper.").font(TypeScale.secondary).foregroundStyle(.secondary)
+                } else {
+                    Banner(tint: .accentColor) { Label("You will put the printed page on the scanner. Stay near the printer.", systemImage: "scanner") }
+                }
             default:
                 Text("This uses a little ink and one sheet of paper.").font(TypeScale.secondary).foregroundStyle(.secondary)
             }
@@ -225,9 +229,13 @@ struct MaintenanceSheet: View {
         case .align:
             guide(art: .done) {
                 Text("Alignment is finished").font(TypeScale.heroTitle)
-                Text("The printer scanned the page and is ready.").font(TypeScale.lead)
-                Text("If the Attention light on the printer blinks, it did not work. Put the page back on the glass and try again.")
-                    .font(TypeScale.secondary).foregroundStyle(.secondary)
+                if maint.caps?.alignment == .automatic {
+                    Text("The printer lined up its print heads and is ready.").font(TypeScale.lead)
+                } else {
+                    Text("The printer scanned the page and is ready.").font(TypeScale.lead)
+                    Text("If the Attention light on the printer blinks, it did not work. Put the page back on the glass and try again.")
+                        .font(TypeScale.secondary).foregroundStyle(.secondary)
+                }
                 notes
             }
         }
