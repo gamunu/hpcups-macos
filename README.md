@@ -75,6 +75,47 @@ Print a test page:
 If a job fails, `log show --last 5m --predicate 'process == "hpcups"'` and
 `/var/log/cups/error_log` show the filter messages.
 
+## Status app
+
+`hpcups Status` is a small menu bar app (SwiftUI, no Xcode project) for the
+queue. It talks to CUPS through libcups, not `lpstat`.
+
+- Lists queues whose PPD make-and-model contains "hpcups-macos" (all queues
+  if none match). `HP_DeskJet_2300` is the default.
+- Shows the printer state, the state message and the state reasons in plain
+  words, for example "Out of paper" or "Printer offline or unplugged".
+  Reasons starting with `com.hp.` are shown raw as "Driver reported".
+- Checks that the USB device is connected by matching the serial in the
+  queue's device URI against the USB registry.
+- Shows ink levels when the queue reports them.
+- Lists active and recent jobs with a cancel button, plus cancel all,
+  pause or resume the printer, and a test page.
+- The menu bar icon changes when the printer is processing, and shows a
+  warning when it is stopped, offline or reports an error.
+- Polls every 3 seconds and sends a notification when a job completes or
+  fails. It asks for notification permission on first launch.
+
+Build:
+
+    scripts/build-app.sh
+
+This runs `swift build -c release` in `app/` and writes
+`build/hpcups Status.app`, ad-hoc signed. Run it with:
+
+    open "build/hpcups Status.app"
+
+The app has no Dock icon. Look for the printer icon in the menu bar. Quit
+from the Quit button in the popover.
+
+For a text check without the GUI:
+
+    "build/hpcups Status.app/Contents/MacOS/hpcups Status" --dump
+
+Ink levels depend on the printer reporting supplies to CUPS
+(`marker-names`, `marker-levels`, `marker-colors`). When the queue reports
+none, the app shows "Ink levels not available yet" and nothing else. It
+does not estimate levels.
+
 ## Uninstall
 
     sudo lpadmin -x HP_DeskJet_2300
