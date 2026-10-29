@@ -1,4 +1,7 @@
 #!/bin/sh
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Copyright (C) 2026 Gamunu Balagalla
+
 # Build the hpcups Status window app with a menu bar item and wrap it into
 # build/hpcups Status.app, with Sparkle embedded and everything ad-hoc signed.
 #
@@ -54,6 +57,7 @@ cat > "$OUT/Contents/Info.plist" <<PLIST
     <key>CFBundleShortVersionString</key><string>$VERSION</string>
     <key>CFBundleVersion</key><string>$VERSION</string>
     <key>LSMinimumSystemVersion</key><string>14.0</string>
+    <key>NSHumanReadableCopyright</key><string>Copyright (C) 2026 Gamunu Balagalla. AGPL-3.0-or-later.</string>
     <key>NSHighResolutionCapable</key><true/>
     <key>SUFeedURL</key><string>$FEED_URL</string>
     <key>SUEnableAutomaticChecks</key><true/>

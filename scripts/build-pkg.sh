@@ -1,4 +1,7 @@
 #!/bin/bash
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Copyright (C) 2026 Gamunu Balagalla
+
 # Build one unsigned installer package into build/. Does not install anything.
 # It installs the CUPS driver (filter and PPD) and /Applications/hpcups Status.app.
 # The version comes from scripts/version.sh (VERSION env, git tag vX.Y.Z, VERSION file).
@@ -23,7 +26,7 @@ install -m 755 "$root/build/hpcups" "$stage/Library/Printers/hpcups-macos/filter
 gzip -9 -n -c "$root/ppd/HP DeskJet 2300 series.ppd" \
     > "$stage/Library/Printers/PPDs/Contents/Resources/HP DeskJet 2300 series (hpcups-macos).ppd.gz"
 chmod 644 "$stage/Library/Printers/PPDs/Contents/Resources/"*.ppd.gz
-cp "$root/COPYING" "$stage/Library/Printers/hpcups-macos/COPYING"
+cp "$root/COPYING" "$root/LICENSE" "$root/LICENSING.md" "$stage/Library/Printers/hpcups-macos/"
 ditto --norsrc "$root/build/$app" "$stage/Applications/$app"
 
 xattr -cr "$stage"
@@ -45,6 +48,29 @@ pkgbuild --root "$stage" \
          --install-location / \
          "$root/build/component.pkg"
 
-productbuild --package "$root/build/component.pkg" "$out"
-rm -f "$root/build/component.pkg" "$root/build/component.plist"
+# The distribution file gives the Installer a title and a license pane.
+res="$root/build/pkgres"
+rm -rf "$res"
+mkdir -p "$res"
+cp "$root/LICENSE" "$res/LICENSE.txt"
+cat > "$root/build/distribution.xml" <<DIST
+<?xml version="1.0" encoding="utf-8"?>
+<installer-gui-script minSpecVersion="2">
+    <title>hpcups-macos $version</title>
+    <license file="LICENSE.txt" mime-type="text/plain"/>
+    <options customize="never" require-scripts="false" hostArchitectures="arm64"/>
+    <choices-outline>
+        <line choice="default"/>
+    </choices-outline>
+    <choice id="default" title="hpcups-macos (AGPL-3.0-or-later)">
+        <pkg-ref id="$id"/>
+    </choice>
+    <pkg-ref id="$id" version="$version">component.pkg</pkg-ref>
+</installer-gui-script>
+DIST
+productbuild --distribution "$root/build/distribution.xml" \
+             --resources "$res" \
+             --package-path "$root/build" \
+             "$out"
+rm -rf "$root/build/component.pkg" "$root/build/component.plist" "$root/build/distribution.xml" "$res"
 echo "built $out"

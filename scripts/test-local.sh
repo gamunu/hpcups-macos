@@ -1,4 +1,7 @@
 #!/bin/bash
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Copyright (C) 2026 Gamunu Balagalla
+
 # Offline test: render a text page to CUPS raster with macOS cupsfilter,
 # run it through build/hpcups, and check the output looks like PCL3GUI2.
 set -euo pipefail

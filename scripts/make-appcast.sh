@@ -1,4 +1,7 @@
 #!/bin/bash
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Copyright (C) 2026 Gamunu Balagalla
+
 # Write an appcast.xml for a package built by build-pkg.sh.
 #   scripts/make-appcast.sh <pkg> <out appcast.xml> [release notes file]
 # Needs SPARKLE_PRIVATE_KEY (the key exported by Sparkle's generate_keys -x)

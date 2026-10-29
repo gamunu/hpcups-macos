@@ -1,4 +1,7 @@
 #!/bin/sh
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Copyright (C) 2026 Gamunu Balagalla
+
 # Print the release version without a leading "v".
 # Order: $VERSION, tag build (GITHUB_REF_NAME or exact git tag vX.Y.Z), VERSION file, 0.0.0-dev.
 set -eu

@@ -1,4 +1,7 @@
 #!/bin/bash
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Copyright (C) 2026 Gamunu Balagalla
+
 # Remove hpcups-macos: the app, the filter, the PPD and the installer receipt.
 # Run with sudo. Printer queues are not touched; remove them first with
 #   sudo lpadmin -x <queue name>

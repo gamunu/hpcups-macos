@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2026 Gamunu Balagalla
+
 import SwiftUI
 
 /// Shared spacing, radius and type scale. Every screen uses these so edges line up.

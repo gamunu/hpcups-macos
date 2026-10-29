@@ -277,4 +277,12 @@ It removes the app, the filter, the PPD and the installer receipt.
 
 ## License
 
-See `LICENSE`. HPLIP sources keep their original headers (GPL v2, MIT, BSD).
+hpcups-macos is licensed under AGPL-3.0-or-later. See `LICENSE`.
+
+HP's code in `src/hpcups/` and `src/common/` keeps its original headers
+(BSD-style, GPL-2.0-or-later, or none) and is not relicensed. HPLIP's own
+license text is in `COPYING`. `LICENSING.md` lists which files carry which
+license and why the combined driver is AGPL-3.0-or-later.
+
+Source files written for this project start with an SPDX line.
+`scripts/check-spdx.sh` checks that, and CI runs it.

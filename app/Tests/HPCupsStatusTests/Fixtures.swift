@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2026 Gamunu Balagalla
+
 import Foundation
 
 /// Reply bodies in the shapes the DeskJet 2300 sends over LEDM. Namespaces,

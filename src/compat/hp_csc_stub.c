@@ -1,3 +1,7 @@
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * Copyright (C) 2026 Gamunu Balagalla
+ */
+
 /* hpcups-macos: replacement for hp_rgb_ycc_setup() from HPLIP's jccolor.c.
  *
  * The original selects a modified RGB->YCC table ("Mojave CSC") for the

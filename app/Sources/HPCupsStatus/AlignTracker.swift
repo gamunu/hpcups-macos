@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2026 Gamunu Balagalla
+
 import Foundation
 
 /// Decides what an alignment run is doing from the polled printer state. It holds

@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Copyright (C) 2026 Gamunu Balagalla
+
 name: ci
 
 on:
@@ -21,6 +24,9 @@ jobs:
       SPARKLE_PUBLIC_KEY: ${{ vars.SPARKLE_PUBLIC_KEY }}
     steps:
       - uses: actions/checkout@v7.0.1
+
+      - name: Check license headers
+        run: scripts/check-spdx.sh
 
       - name: Select Xcode
         run: |
