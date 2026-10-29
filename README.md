@@ -146,12 +146,11 @@ You need Xcode and `brew install jpeg-turbo pkgconf`.
 
 The app checks for updates with Sparkle once a day, and **Check for Updates...** is in the app menu. An update is the same `.pkg` as a fresh install, so the driver and the app move together.
 
-To cut a release, tag it and push the tag:
+Releases come from [release-please](https://github.com/googleapis/release-please). Nobody tags by hand.
 
-    git tag -a v0.1.0 -m "What changed"
-    git push origin v0.1.0
-
-The release workflow builds the package, signs it for Sparkle, writes `appcast.xml` and publishes a GitHub Release. Tags with a `-`, such as `v0.2.0-rc1`, become pre-releases and are not offered to installed apps.
+1. Merge pull requests into `main` with Conventional Commit messages. `fix:` bumps the patch version, `feat:` the minor version, and a `!` or `BREAKING CHANGE:` the major version.
+2. release-please keeps a "chore(main): release x.y.z" pull request open with the next version and the `CHANGELOG.md` entry.
+3. Merging that pull request tags `vX.Y.Z` and creates the GitHub Release. The release workflow then builds the package, signs it for Sparkle, writes `appcast.xml` and attaches both.
 
 ### One-time setup for maintainers
 
