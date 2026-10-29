@@ -51,12 +51,25 @@ struct MainWindow: View {
                 }
             }
             .navigationTitle((selection ?? .overview).title)
+            // Without this the detail column draws its own toolbar strip with a
+            // divider, which does not line up with the sidebar's title area.
+            .modifier(HiddenToolbarBackground())
         }
         .task {
             if let spec = PreviewMode.spec { store.maint.applyPreview(spec) } else { store.start() }
         }
         .sheet(isPresented: Binding(get: { store.maint.job != nil }, set: { if !$0 { store.maint.close() } })) {
             MaintenanceSheet(store: store, maint: store.maint)
+        }
+    }
+}
+
+private struct HiddenToolbarBackground: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(macOS 15.0, *) {
+            content.toolbarBackgroundVisibility(.hidden, for: .windowToolbar)
+        } else {
+            content.toolbarBackground(.hidden, for: .windowToolbar)
         }
     }
 }
