@@ -1,0 +1,26 @@
+HPLIP 3.25.2
+https://sourceforge.net/projects/hplip/files/hplip/3.25.2/hplip-3.25.2.tar.gz
+
+ppd/hplip/*.ppd.gz are copied unchanged from ppd/hpcups/ in the tarball.
+They are HP's files and keep HP's headers. Only the PPDs the package can
+serve are vendored (see the rules at the top of scripts/gen-ppds.py);
+ppd/hplip/manifest.tsv lists them and ppd/hplip/excluded.tsv lists the
+rest with the reason each was left out.
+
+To refresh after an HPLIP upgrade, unpack the tarball and run:
+
+    scripts/gen-ppds.py select --hplip <path to hplip-X.Y.Z>
+
+That rewrites the vendored files, both manifests and
+docs/supported-printers.md.
+
+The installed PPDs are made at build time by `scripts/gen-ppds.py build`.
+Changes made to each PPD on the way:
+- *cupsFilter points at /Library/Printers/hpcups-macos/filter/hpcups.
+- *NickName becomes "<model name>, hpcups-macos" and *ShortNickName is
+  rewritten to fit the 31 character limit.
+- Duplicate *PageSize, *PageRegion, *PaperDimension and *ImageableArea
+  choices are dropped, and *UIConstraints that name a paper size the PPD
+  does not offer are dropped. cupstestppd rejects both.
+*1284DeviceID, *Product and *ModelName are left alone so macOS can match
+a plugged-in printer to its PPD.

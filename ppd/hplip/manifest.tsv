@@ -1,0 +1,779 @@
+# ppd	language	model name	products
+apollo-2100.ppd	pcl3	Apollo 2100	Apollo 2100 Printer
+apollo-2150.ppd	pcl3	Apollo 2150	Apollo 2150 Printer
+apollo-2200.ppd	pcl3	Apollo 2200	Apollo 2200 Printer
+apollo-2500.ppd	pcl3	Apollo 2500	Apollo 2500 Printer
+apollo-2600.ppd	pcl3	Apollo 2600	Apollo 2600 Printer
+apollo-2650.ppd	pcl3	Apollo 2650	Apollo 2650 Printer
+apollo-p2000-u.ppd	pcl3	Apollo p2000-u	Apollo P2000-U Printer
+apollo-p2250.ppd	pcl3	Apollo p2250	Apollo P2250 Printer
+hp-2000c.ppd	pcl3gui	HP 2000c	HP 2000cse Printer|HP 2000c Printer|HP 2000cn Printer|HP 2000cxi Printer
+hp-2500c.ppd	pcl3gui	HP 2500c	HP 2500c Plus Printer|HP 2500c Printer|HP 2500cm Printer|HP 2500cse Printer|HP 2500cxi Printer
+hp-910.ppd	lidil	HP 910	HP 910 Printer
+hp-915.ppd	lidil	HP 915	HP 915 Inkjet All-in-one Printer
+hp-amp.ppd	pcl3gui2	HP Amp	HP Amp All-in-one|HP Amp 130 All-in-one
+hp-business_inkjet_1000.ppd	pcl3gui2	HP Business Inkjet 1000	HP Business Inkjet 1000 Printer
+hp-business_inkjet_1100.ppd	pcl3gui2	HP Business Inkjet 1100	HP Business Inkjet 1100d Printer|HP Business Inkjet 1100dtn Printer|HP Business Inkjet 1100 Printer
+hp-business_inkjet_1200.ppd	pcl3gui2	HP Business Inkjet 1200	HP Business Inkjet 1200dtn Printer|HP Business Inkjet 1200dn Printer|HP Business Inkjet 1200dtwn Printer|HP Business Inkjet 1200d Printer|HP Business Inkjet 1200 Printer
+hp-business_inkjet_2200.ppd	pcl3gui2	HP Business Inkjet 2200	HP Business Inkjet 2200 Printer|HP Business Inkjet 2200se Printer|HP Business Inkjet 2200xi Printer
+hp-business_inkjet_2230.ppd	pcl3gui2	HP Business Inkjet 2230	HP Business Inkjet 2230 Printer
+hp-business_inkjet_2250-pcl3.ppd	pcl3gui2	HP Business Inkjet 2250	HP Business Inkjet 2250 Printer|HP Business Inkjet 2250tn Printer
+hp-business_inkjet_2280-pcl3.ppd	pcl3gui2	HP Business Inkjet 2280	HP Business Inkjet 2280 Printer|HP Business Inkjet 2280tn Printer
+hp-business_inkjet_2300-pcl3.ppd	ljcolor	HP Business Inkjet 2300	HP Business Inkjet 2300 Printer|HP Business Inkjet 2300n Printer|HP Business Inkjet 2300dtn Printer
+hp-business_inkjet_2600-pcl3.ppd	ljcolor	HP Business Inkjet 2600	HP Business Inkjet 2600 Printer|HP Business Inkjet 2600dn Printer
+hp-business_inkjet_2800-pcl3.ppd	ljcolor	HP Business Inkjet 2800	HP Business Inkjet 2800 Printer|HP Business Inkjet 2800dt Printer|HP Business Inkjet 2800dtn Printer
+hp-business_inkjet_3000-pcl3.ppd	ljcolor	HP Business Inkjet 3000	HP Business Inkjet 3000 Printer|HP Business Inkjet 3000dtn Printer|HP Business Inkjet 3000n Printer
+hp-color_inkjet_printer_cp1700.ppd	pcl3gui2	HP Color Inkjet Printer cp1700	HP Color Inkjet cp1700 Printer|HP Color Inkjet cp1700ps Printer|HP Color Inkjet cp1700d Printer
+hp-color_laserjet_2500_series.ppd	ljcolor	HP Color LaserJet 2500 Series	HP Color LaserJet 2500l Printer|HP Color LaserJet 2500lse Printer|HP Color LaserJet 2500n Printer|HP Color LaserJet 2500tn Printer|HP Color LaserJet 2500 Printer
+hp-color_laserjet_3000-pcl3.ppd	ljcolor	HP Color LaserJet 3000	HP Color LaserJet 3000 Printer|HP Color LaserJet 3000n Printer|HP Color LaserJet 3000dn Printer|HP Color LaserJet 3000dtn Printer
+hp-color_laserjet_3700-pcl3.ppd	ljcolor	HP Color LaserJet 3700	HP Color LaserJet 3700 Printer
+hp-color_laserjet_3700n.ppd	ljcolor	HP Color LaserJet 3700n	HP Color LaserJet 3700n Printer|HP Color LaserJet 3700dtn Printer|HP Color LaserJet 3700dn Printer|HP Color LaserJet 3700d Printer
+hp-color_laserjet_3800-pcl3.ppd	ljcolor	HP Color LaserJet 3800	HP Color LaserJet 3800 Printer|HP Color LaserJet 3800n Printer|HP Color LaserJet 3800dn Printer|HP Color LaserJet 3800dtn Printer
+hp-color_laserjet_4500-pcl3.ppd	ljcolor	HP Color LaserJet 4500	HP Color LaserJet 4500 Printer|HP Color LaserJet 4500dn Printer|HP Color LaserJet 4500n Printer
+hp-color_laserjet_4550-pcl3.ppd	ljcolor	HP Color LaserJet 4550	HP Color LaserJet 4550 Printer|HP Color LaserJet 4550n Printer|HP Color LaserJet 4550dn Printer|HP Color LaserJet 4550hdn Printer|HP Color LaserJet 4550n Plus Printer|HP Color LaserJet 4550hdn Plus Printer
+hp-color_laserjet_4600-pcl3.ppd	ljcolor	HP Color LaserJet 4600	HP Color LaserJet 4600 Series Printer
+hp-color_laserjet_4610-pcl3.ppd	ljcolor	HP Color LaserJet 4610	HP Color LaserJet 4610n Printer
+hp-color_laserjet_4650-pcl3.ppd	ljcolor	HP Color LaserJet 4650	HP Color LaserJet 4650 Printer|HP Color LaserJet 4650n Printer|HP Color LaserJet 4650dn Printer|HP Color LaserJet 4650dtn Printer|HP Color LaserJet 4650hdn Printer
+hp-color_laserjet_4700-pcl3.ppd	ljcolor	HP Color LaserJet 4700	HP Color LaserJet 4700 Printer|HP Color LaserJet 4700dn Printer|HP Color LaserJet 4700dtn Printer|HP Color LaserJet 4700n Printer|HP Color LaserJet 4700ph+ Printer
+hp-color_laserjet_4730mfp-pcl3.ppd	ljcolor	HP Color LaserJet 4730mfp	HP Color LaserJet 4730xs Multifunction Printer|HP Color LaserJet 4730xm Multifunction Printer|HP Color LaserJet 4730x Multifunction Printer|HP Color LaserJet 4730 Multifunction Printer
+hp-color_laserjet_5.ppd	ljcolor	HP Color LaserJet 5	HP Color LaserJet 5 Printer
+hp-color_laserjet_5500-pcl3.ppd	ljcolor	HP Color LaserJet 5500	HP Color LaserJet 5500 Printer|HP Color LaserJet 5500n Printer|HP Color LaserJet 5500dn Printer|HP Color LaserJet 5500dtn Printer|HP Color LaserJet 5500hdn Printer
+hp-color_laserjet_5550-pcl3.ppd	ljcolor	HP Color LaserJet 5550	HP Color LaserJet 5550n Printer|HP Color LaserJet 5550 Printer|HP Color LaserJet 5550dn Printer|HP Color LaserJet 5550dtn Printer|HP Color LaserJet 5550hdn Printer
+hp-color_laserjet_5m-pcl3.ppd	ljcolor	HP Color LaserJet 5m	HP Color LaserJet 5m Printer
+hp-color_laserjet_8500-pcl3.ppd	ljcolor	HP Color LaserJet 8500	HP Color LaserJet 8500 Printer|HP Color LaserJet 8500n Printer|HP Color LaserJet 8500dn Printer
+hp-color_laserjet_8550-pcl3.ppd	ljcolor	HP Color LaserJet 8550	HP Color LaserJet 8550dn Printer|HP Color LaserJet 8550gn Printer|HP Color LaserJet 8550mn Printer|HP Color LaserJet 8550 Multifunction Printer|HP Color LaserJet 8550mfp-dlvry/unpkging|HP Color LaserJet 8550 Printer
+hp-color_laserjet_9500-pcl3.ppd	ljcolor	HP Color LaserJet 9500	HP Color LaserJet 9500n Printer|HP Color LaserJet 9500hdn Printer|HP Color LaserJet 9500gp Printer|HP Color LaserJet 9500 Printer|HP Color LaserJet 9500 Multifunction Printer
+hp-color_laserjet_cm3530_mfp-pcl3.ppd	ljcolor	HP Color LaserJet cm3530 MFP	HP Color LaserJet cm3530 Multifunction Printer|HP Color LaserJet cm3530fs Multifunction Printer
+hp-color_laserjet_cm4540_mfp-pcl3.ppd	ljcolor	HP Color LaserJet cm4540 MFP	HP Color LaserJet cm4540 Multifunction Printer
+hp-color_laserjet_cm4730_mfp-pcl3.ppd	ljcolor	HP Color LaserJet cm4730 MFP	HP Color LaserJet cm4730 Multifunction Printer|HP Color LaserJet cm4730f Multifunction Printer|HP Color LaserJet cm4730fm Multifunction Printer|HP Color LaserJet cm4730fsk Multifunction Printer
+hp-color_laserjet_cm6030_mfp-pcl3.ppd	ljcolor	HP Color LaserJet cm6030 MFP	HP Color LaserJet cm6030 Multifunction Printer|HP Color LaserJet cm6030f Multifunction Printer
+hp-color_laserjet_cm6040_mfp.ppd	ljcolor	HP Color LaserJet cm6040 MFP	HP Color LaserJet cm6040 Multifunction Printer|HP Color LaserJet cm6040f Multifunction Printer|HP Color LaserJet cm6049f Multifunction Printer
+hp-color_laserjet_cm6049_mfp.ppd	ljcolor	HP Color LaserJet cm6049 MFP	HP Color LaserJet cm6049 MFP
+hp-color_laserjet_cp1514n-pcl3.ppd	ljcolor	HP Color LaserJet cp1514n	HP Color LaserJet cp1514n Printer
+hp-color_laserjet_cp1515n-pcl3.ppd	ljcolor	HP Color LaserJet cp1515n	HP Color LaserJet cp1515n Printer
+hp-color_laserjet_cp1518ni-pcl3.ppd	ljcolor	HP Color LaserJet cp1518ni	HP Color LaserJet cp1518ni Printer
+hp-color_laserjet_cp2025-pcl3.ppd	ljcolor	HP Color LaserJet cp2025	HP Color LaserJet cp2025 Printer
+hp-color_laserjet_cp2025dn-pcl3.ppd	ljcolor	HP Color LaserJet cp2025dn	HP Color LaserJet cp2025dn Printer
+hp-color_laserjet_cp2025n-pcl3.ppd	ljcolor	HP Color LaserJet cp2025n	HP Color LaserJet cp2025n Printer
+hp-color_laserjet_cp2025x-pcl3.ppd	ljcolor	HP Color LaserJet cp2025x	HP Color LaserJet cp2025x Printer
+hp-color_laserjet_cp3505-pcl3.ppd	ljcolor	HP Color LaserJet cp3505	HP Color LaserJet cp3505n Printer|HP Color LaserJet cp3505dn Printer|HP Color LaserJet cp3505x Printer|HP Color LaserJet cp3505 Printer
+hp-color_laserjet_cp3525-pcl3.ppd	ljcolor	HP Color LaserJet cp3525	HP Color LaserJet cp3525 Printer|HP Color LaserJet cp3525n Printer|HP Color LaserJet cp3525dn Printer|HP Color LaserJet cp3525x Printer
+hp-color_laserjet_cp4005-pcl3.ppd	ljcolor	HP Color LaserJet cp4005	HP Color LaserJet cp4005n Printer|HP Color LaserJet cp4005dn Printer|HP Color LaserJet cp4005 Series Printer
+hp-color_laserjet_cp4020_series-pcl3.ppd	ljcolor	HP Color LaserJet cp4020 Series	HP Color LaserJet cp4020 Series Printer
+hp-color_laserjet_cp4520_series-pcl3.ppd	ljcolor	HP Color LaserJet cp4520 Series	HP Color LaserJet cp4520 Series Printer
+hp-color_laserjet_cp5225-pcl3.ppd	ljcolor	HP Color LaserJet cp5225	HP Color LaserJet cp5225
+hp-color_laserjet_cp5225dn-pcl3.ppd	ljcolor	HP Color LaserJet cp5225dn	HP Color LaserJet cp5225dn
+hp-color_laserjet_cp5225n-pcl3.ppd	ljcolor	HP Color LaserJet cp5225n	HP Color LaserJet cp5225n
+hp-color_laserjet_cp5520_series-pcl3.ppd	ljcolor	HP Color LaserJet cp5520 Series	HP Color LaserJet cp5520 Series Printer
+hp-color_laserjet_cp6015-pcl3.ppd	ljcolor	HP Color LaserJet cp6015	HP Color LaserJet cp6015dn Printer|HP Color LaserJet cp6015x Printer|HP Color LaserJet cp6015xh Printer|HP Color LaserJet cp6015de Printer|HP Color LaserJet cp6015n Printer
+hp-color_laserjet_pro_mfp_m177fw.ppd	hbpl1	HP Color LaserJet Pro MFP m177fw	HP Color LaserJet Pro Mpf m177fw
+hp-cp1160.ppd	pcl3gui2	HP cp1160	HP Color Inkjet cp1160 Printer|HP Color Inkjet cp1160tn Printer
+hp-deskjet_1000_j110_series.ppd	pcl3gui2	HP Deskjet 1000 j110 Series	HP Deskjet 1000 j110 Series
+hp-deskjet_1010_series.ppd	pcl3gui2	HP Deskjet 1010 Series	HP Deskjet 1010 Printer|HP Deskjet 1011 Printer|HP Deskjet 1012 Printer|HP Deskjet Ink Advantage 1010 Printer Series|HP Deskjet Ink Advantage 1015 Printer|HP Deskjet Ink Advantage 1018 Printer
+hp-deskjet_1050_j410_series.ppd	pcl3gui2	HP Deskjet 1050 j410 Series	HP Deskjet 1050 j410 All-in-one Printer|HP Deskjet 1051 All-in-one Printer|HP Deskjet 1055 All-in-one Printer -j410e|HP Deskjet 1056 All-in-one Printer -j410a
+hp-deskjet_1100.ppd	pcl3	HP Deskjet 1100	HP Deskjet 1100c Printer
+hp-deskjet_1110_series.ppd	pcl3gui2	HP Deskjet 1110 Series	HP Deskjet 1110 Printer|HP Deskjet 1111 Printer|HP Deskjet 1112 Printer|HP Deskjet Ink Advantage 1110 Printer|HP Deskjet Ink Advantage 1115 Printer|HP Deskjet Ink Advantage 1118 Printer
+hp-deskjet_1120.ppd	pcl3gui	HP Deskjet 1120	HP Deskjet 1120cxi Printer|HP Deskjet 1120cse Printer|HP Deskjet 1120c Printer
+hp-deskjet_1125.ppd	pcl3gui	HP Deskjet 1125	HP Deskjet 1125c Printer
+hp-deskjet_1200_series.ppd	pcl3gui2	HP Deskjet 1200 Series	HP Deskjet 1200|HP Deskjet Ink Advantage 1200
+hp-deskjet_1200c.ppd	ljcolor	HP Deskjet 1200c	HP Deskjet 1200c/ps Printer
+hp-deskjet_1220c.ppd	pcl3gui	HP Deskjet 1220c	HP Deskjet 1220c Printer|HP Deskjet 1220cse Printer|HP Deskjet 1220cxi Printer|HP Deskjet 1220c/ps Printer
+hp-deskjet_1280.ppd	pcl3gui	HP Deskjet 1280	HP Deskjet 1280 Printer
+hp-deskjet_1510_series.ppd	pcl3gui2	HP Deskjet 1510 Series	HP Deskjet 1510 All-in-one Printer|HP Deskjet 1511 All-in-one Printer|HP Deskjet 1512 All-in-one Printer|HP Deskjet 1513 All-in-one Printer|HP Deskjet 1514 All-in-one Printer|HP Deskjet Ink Advantage 1510 All-in-one Printer Series|HP Deskjet Ink Advantage 1515 All-in-one Printer|HP Deskjet Ink Advantage 1516 All-in-one Printer|HP Deskjet Ink Advantage 1518 All-in-one Printer
+hp-deskjet_1600c.ppd	ljcolor	HP Deskjet 1600c	HP Deskjet 1600c Printer
+hp-deskjet_1600cm.ppd	ljcolor	HP Deskjet 1600cm	HP Deskjet 1600cm Printer
+hp-deskjet_1600cn.ppd	ljcolor	HP Deskjet 1600cn	HP Deskjet 1600cn Printer
+hp-deskjet_2000_j210_series.ppd	pcl3gui2	HP Deskjet 2000 j210 Series	HP Deskjet 2000 j210 Series
+hp-deskjet_2020_series.ppd	pcl3gui2	HP Deskjet 2020 Series	HP Deskjet Ink Advantage 2020hc Printer|HP Deskjet Ultra Ink Advantage 2029 Printer
+hp-deskjet_2050_j510_series.ppd	pcl3gui2	HP Deskjet 2050 j510 Series	HP Deskjet 2050 j510 All-in-one Printer
+hp-deskjet_2130_series.ppd	pcl3gui2	HP Deskjet 2130 Series	HP Deskjet 2130 All-in-one Printer Series|HP Deskjet 2131 All-in-one Printer|HP Deskjet 2132 All-in-one Printer|HP Deskjet 2134 All-in-one Printer|HP Deskjet Ink Advantage 2130 All-in_one Printer|HP Deskjet Ink Advantage 2135 All-in_one Printer|HP Deskjet Ink Advantage 2136 All-in_one Printer|HP Deskjet Ink Advantage 2138 All-in_one Printer
+hp-deskjet_2200_series.ppd	pcl3gui2	HP Deskjet 2200 Series	HP Deskjet 2200 All-in-one|HP Deskjet Ink Advantage 2200 All-in-one
+hp-deskjet_2300_series.ppd	pcl3gui2	HP Deskjet 2300 Series	HP Deskjet 2300 All-in-one|HP Deskjet Ink Advantage 2300 All-in-one
+hp-deskjet_2510_series.ppd	pcl3gui2	HP Deskjet 2510 Series	HP Deskjet Ink Advantage 2510 All-in-one|HP Deskjet Ink Advantage 2515 All-in-one Printer|HP Deskjet Ink Advantage 2516 All-in-one Printer|HP Deskjet 2510 All-in-one Printer|HP Deskjet 2511 All-in-one Printer|HP Deskjet 2512 All-in-one Printer|HP Deskjet 2514 All-in-one Printer
+hp-deskjet_2520_series.ppd	pcl3gui2	HP Deskjet 2520 Series	HP Deskjet Ink Advantage 2520hc All-in-one|HP Deskjet Ink Advantage Ultra 2529 All-in-one Printer
+hp-deskjet_2540_series.ppd	pcl3gui2	HP Deskjet 2540 Series	HP Deskjet 2540 All-in-one Printer|HP Deskjet 2541 All-in-one Printer|HP Deskjet 2542 All-in-one Printer|HP Deskjet 2543 All-in-one Printer|HP Deskjet 2544 All-in-one Printer|HP Deskjet 2545 All-in-one Printer|HP Deskjet 2549 All-in-one Printer|HP Deskjet Ink Advantage 2540 All-in-one Printer Series|HP Deskjet Ink Advantage 2545 All-in-one Printer|HP Deskjet Ink Advantage 2546 All-in-one Printer|HP Deskjet Ink Advantage 2548 All-in-one Printer|HP Deskjet 2546b All-in-one Printer|HP Deskjet 2546p All-in-one Printer|HP Deskjet 2546r All-in-one Printer
+hp-deskjet_2600_series.ppd	pcl3gui2	HP Deskjet 2600 Series	HP Deskjet 2620 All-in-one|HP Deskjet 2621 All-in-one|HP Deskjet 2622 All-in-one|HP Deskjet 2623 All-in-one|HP Deskjet Ink Advantage 2635 All-in-one|HP Deskjet Ink Advantage 2636 All-in-one|HP Deskjet Ink Advantage 2675 All-in-one|HP Deskjet Ink Advantage 2676 All-in-one|HP Deskjet Ink Advantage 2677 All-in-one|HP Deskjet Ink Advantage 2678 All-in-one
+hp-deskjet_2640_series.ppd	pcl3gui2	HP Deskjet 2640 Series	HP Deskjet Ink Advantage 2645 All-in-one Printer|HP Deskjet Ink Advantage 2646 All-in-one Printer
+hp-deskjet_2700_series.ppd	pcl3gui2	HP Deskjet 2700 Series	HP Deskjet 2700 All-in-one Printer Series|HP Deskjet Ink Advantage 2700 All-in-one Printer Series
+hp-deskjet_3000_j310_series.ppd	pcl3gui2	HP Deskjet 3000 j310 Series	HP Deskjet 3000 j310 Series
+hp-deskjet_3050_j610_series.ppd	pcl3gui2	HP Deskjet 3050 j610 Series	HP Deskjet 3050 j610 Series
+hp-deskjet_3050a_j611_series.ppd	pcl3gui2	HP Deskjet 3050a j611 Series	HP Deskjet 3050a j611 Series|HP Deskjet 3054a E-all-in-one Printer j611c|HP Deskjet 3054a E-all-in-one Printer j611d|HP Deskjet 3054a E-all-in-one Printer j611j|HP Deskjet 3055a E-all-in-one Printer j611n|HP Deskjet 3057a E-all-in-one Printer j611n|HP Deskjet 3059a E-all-in-one Printer j611n|HP Deskjet 3056a E-all-in-one Printer|HP Deskjet 3051a E-all-in-one Printer j611h|HP Deskjet 3052a E-all-in-one Printer j611e|HP Deskjet 3052a E-all-in-one Printer j611f|HP Deskjet 3052a E-all-in-one Printer j611g
+hp-deskjet_3070_b611_series.ppd	pcl3gui2	HP Deskjet 3070 b611 Series	HP Deskjet 3070 b611 Series
+hp-deskjet_3320.ppd	lidil	HP Deskjet 3320	HP Deskjet 3320v Color Inkjet Printer|HP Deskjet 3320 Color Inkjet Printer|HP Deskjet 3322 Color Inkjet Printer|HP Deskjet 3323 Color Inkjet Printer
+hp-deskjet_3325.ppd	lidil	HP Deskjet 3325	HP Deskjet 3325 Printer/scanjet 3530c
+hp-deskjet_3420.ppd	lidil	HP Deskjet 3420	HP Deskjet 3420 Color Inkjet Printer|HP Deskjet 3420v Color Inkjet Printer
+hp-deskjet_3425.ppd	lidil	HP Deskjet 3425	HP Deskjet 3425 Printer
+hp-deskjet_3450.ppd	lidil	HP Deskjet 3450	HP Deskjet 3450 Color Inkjet Printer
+hp-deskjet_350.ppd	pcl3	HP Deskjet 350	HP Deskjet 350c Printer|HP Deskjet 350cbi Printer|HP dj350
+hp-deskjet_3500.ppd	lidil	HP Deskjet 3500	HP Deskjet 3500 Color Inkjet Printer|HP Deskjet 3520w Color Inkjet Printer|HP Deskjet 3520 Color Inkjet Printer|HP Deskjet 3520v Color Inkjet Printer|HP Deskjet 3535 Color Inkjet Printer|HP Deskjet 3538 Color Inkjet Printer
+hp-deskjet_3510_series.ppd	pcl3gui2	HP Deskjet 3510 Series	HP Deskjet Ink Advantage 3515 E-all-in-one|HP Deskjet Ink Advantage 3516 E-all-in-one|HP Deskjet 3510 E-all-in-one|HP Deskjet 3511 E-all-in-one|HP Deskjet 3512 E-all-in-one
+hp-deskjet_3520_series.ppd	pcl3gui2	HP Deskjet 3520 Series	HP Deskjet 3520 E-all-in-one Series|HP Deskjet Ink Advantage 3525 E-all-in-one|HP Deskjet 3521 E-all-in-one Printer|HP Deskjet 3522 E-all-in-one Printer|HP Deskjet 3524 E-all-in-one Printer|HP Deskjet 3526 E-all-in-one Printer
+hp-deskjet_3540_series.ppd	pcl3gui2	HP Deskjet 3540 Series	HP Deskjet Ink Advantage 3540 E-all-in-one Printer Series|HP Deskjet Ink Advantage 3545 E-all-in-one Printer|HP Deskjet Ink Advantage 3546 E-all-in-one Printer
+hp-deskjet_3550.ppd	lidil	HP Deskjet 3550	HP Deskjet 3550 Color Inkjet Printer|HP Deskjet 3550v Color Inkjet Printer|HP Deskjet 3550w Color Inkjet Printer|HP Deskjet 3558 Color Inkjet Printer
+hp-deskjet_3600.ppd	lidil	HP Deskjet 3600	HP Deskjet 3600 Color Inkjet Printer|HP Deskjet 3620 Color Inkjet Printer|HP Deskjet 3645 Color Inkjet Printer|HP Deskjet 3647 Color Inkjet Printer
+hp-deskjet_3630_series.ppd	pcl3gui2	HP Deskjet 3630 Series	HP Deskjet 3630 All-in-one Printer|HP Deskjet 3632 All-in-one Printer|HP Deskjet 3633 All-in-one Printer|HP Deskjet 3634 All-in-one Printer|HP Deskjet Ink Advantage 3630 All-in-one Printer|HP Deskjet Ink Advantage 3635 All-in-one Printer|HP Deskjet Ink Advantage 3636 All-in-one Printer|HP Deskjet Ink Advantage 3638 All-in-one Printer
+hp-deskjet_3650.ppd	lidil	HP Deskjet 3650	HP Deskjet 3650 Color Inkjet Printer|HP Deskjet 3651 Color Inkjet Printer|HP Deskjet 3652 Color Inkjet Printer|HP Deskjet 3653 Color Inkjet Printer|HP Deskjet 3658 Color Inkjet Printer|HP Deskjet 3668 Color Inkjet Printer
+hp-deskjet_3700_series.ppd	pcl3gui2	HP Deskjet 3700 Series	HP Deskjet 3700 All-in-one|HP Deskjet 3720 All-in-one|HP Deskjet 3730 All-in-one|HP Deskjet 3755 All-in-one|HP Deskjet Ink Advantage 3775 All-in-one|HP Deskjet Ink Advantage 3776 All-in-one|HP Deskjet Ink Advantage 3785 All-in-one
+hp-deskjet_3740.ppd	lidil	HP Deskjet 3740	HP Deskjet 3740 Color Inkjet Printer|HP Deskjet 3743 Color Inkjet Printer|HP Deskjet 3744 Color Inkjet Printer|HP Deskjet 3745 Color Inkjet Printer|HP Deskjet 3745v Color Inkjet Printer|HP Deskjet 3747 Color Inkjet Printer|HP Deskjet 3748 Color Inkjet Printer
+hp-deskjet_3810.ppd	pcl3gui	HP Deskjet 3810	HP Deskjet 3810 Color Inkjet Printer
+hp-deskjet_3816.ppd	pcl3gui	HP Deskjet 3816	HP Deskjet 3816 Color Inkjet Printer|HP Deskjet 3818 Color Inkjet Printer
+hp-deskjet_3819.ppd	pcl3gui	HP Deskjet 3819	HP Deskjet 3819 Color Inkjet Printer
+hp-deskjet_3820.ppd	pcl3gui	HP Deskjet 3820	HP Deskjet 3820 Color Inkjet Printer|HP Deskjet 3820v Color Inkjet Printer|HP Deskjet 3820w Color Inkjet Printer
+hp-deskjet_3822.ppd	pcl3gui	HP Deskjet 3822	HP Deskjet 3822 Color Inkjet Printer
+hp-deskjet_3830_series.ppd	pcl3gui2	HP Deskjet 3830 Series	HP Deskjet Ink Advantage 3830 All-in-one Printer|HP Deskjet Ink Advantage 3835 All-in-one Printer|HP Deskjet Ink Advantage 3836 All-in-one Printer
+hp-deskjet_3840.ppd	lidil	HP Deskjet 3840	HP Deskjet 3843 Color Inkjet Printer|HP Deskjet 3844 Color Inkjet Printer|HP Deskjet 3845xi Color Inkjet Printer|HP Deskjet 3845 Color Inkjet Printer|HP Deskjet 3847 Color Inkjet Printer|HP Deskjet 3848 Color Inkjet Printer
+hp-deskjet_3870.ppd	pcl3gui	HP Deskjet 3870	HP Deskjet 3870 Color Inkjet Printer
+hp-deskjet_3900.ppd	lidil	HP Deskjet 3900	HP Deskjet 3900 Color Inkjet Printer
+hp-deskjet_3910.ppd	lidil	HP Deskjet 3910	HP Deskjet 3910 Color Inkjet Printer|HP Deskjet 3915 Color Inkjet Printer|HP Deskjet 3918 Color Inkjet Printer|HP Deskjet 3930v Color Inkjet Printer|HP Deskjet 3930 Color Inkjet Printer|HP Deskjet 3938 Color Inkjet Printer
+hp-deskjet_3920.ppd	lidil	HP Deskjet 3920	HP Deskjet 3920 Color Inkjet Printer
+hp-deskjet_3940.ppd	lidil	HP Deskjet 3940	HP Deskjet 3940 Color Inkjet Printer|HP Deskjet 3940v Color Inkjet Printer
+hp-deskjet_400.ppd	pcl3	HP Deskjet 400	HP Deskjet 400 Printer|HP Deskjet 400 Color Capable Printer
+hp-deskjet_400l.ppd	pcl3	HP Deskjet 400l	HP Deskjet 400l Printer
+hp-deskjet_4100_series.ppd	pcl3gui2	HP Deskjet 4100 Series	HP Deskjet Ink Advantage 4100 All-in-one Printer Series
+hp-deskjet_450.ppd	pcl3gui2	HP Deskjet 450	HP Deskjet 450ci Mobile Printer|HP Deskjet 450cbi Mobile Printer|HP Deskjet 450wbt Mobile Printer|HP dj450
+hp-deskjet_4510_series.ppd	pcl3gui2	HP Deskjet 4510 Series	HP Deskjet Ink Advantage 4515 E-all-in-one Printer|HP Deskjet Ink Advantage 4518 E-all-in-one Printer
+hp-deskjet_4530_series.ppd	pcl3gui2	HP Deskjet 4530 Series	HP Deskjet Ink Advantage 4530 All-in-one|HP Deskjet Ink Advantage 4535 All-in-one|HP Deskjet Ink Advantage 4536 All-in-one
+hp-deskjet_460.ppd	pcl3gui2	HP Deskjet 460	HP Deskjet 460c Mobile Printer|HP Deskjet 460cb Mobile Printer|HP Deskjet 460wf Mobile Printer|HP Deskjet 460wbt Mobile Printer
+hp-deskjet_4610_series.ppd	pcl3gui2	HP Deskjet 4610 Series	HP Deskjet Ink Advantage 4610 All-in-one Printer Series|HP Deskjet Ink Advantage 4615 All-in-one Printer
+hp-deskjet_4620_series.ppd	pcl3gui2	HP Deskjet 4620 Series	HP Deskjet Ink Advantage 4620 E-all-in-one Printer|HP Deskjet Ink Advantage 4625 E-all-in-one Printer
+hp-deskjet_4640_series.ppd	pcl3gui2	HP Deskjet 4640 Series	HP Deskjet Ink Advantage 4640 E-all-in-one Printer Series|HP Deskjet Ink Advantage 4645 E-all-in-one Printer|HP Deskjet Ink Advantage 4646 E-all-in-one Printer|HP Deskjet Ink Advantage 4648 E-all-in-one Printer
+hp-deskjet_4670_series.ppd	pcl3gui2	HP Deskjet 4670 Series	HP Deskjet Ink Advantage 4670 All-in-one|HP Deskjet Ink Advantage 4675 All-in-one|HP Deskjet Ink Advantage 4676 All-in-one
+hp-deskjet_4720_series.ppd	pcl3gui2	HP Deskjet 4720 Series	HP Deskjet Ink Advantage Ultra 4720 All-in-one Printer Series|HP Deskjet Ink Advantage Ultra 4729 All-in-one Printer
+hp-deskjet_4800_series.ppd	pcl3gui2	HP Deskjet 4800 Series	HP Deskjet Ink Advantage Ultra 4800 All-in-one Printer Series
+hp-deskjet_500.ppd	pcl3	HP Deskjet 500	HP Deskjet 500 Printer|HP Deskjet 500j Printer|HP Deskjet 500q Printer|HP Deskjet 500k Printer
+hp-deskjet_5000_series.ppd	pcl3gui2	HP Deskjet 5000 Series	HP Deskjet Ink Advantage 5075 All-in-one
+hp-deskjet_500c.ppd	pcl3	HP Deskjet 500c	HP Deskjet 500c Printer
+hp-deskjet_505j.ppd	pcl3	HP Deskjet 505j	HP Deskjet 505j Printer
+hp-deskjet_510.ppd	pcl3	HP Deskjet 510	HP Deskjet 510 Printer
+hp-deskjet_5100.ppd	pcl3gui2	HP Deskjet 5100	HP Deskjet 5100 Color Inkjet Printer|HP Deskjet 5145 Color Inkjet Printer|HP Deskjet 5150v Color Inkjet Printer|HP Deskjet 5150w Color Inkjet Printer|HP Deskjet 5150 Color Inkjet Printer|HP Deskjet 5151 Color Inkjet Printer|HP Deskjet 5160 Color Inkjet Printer|HP Deskjet 5168 Color Inkjet Printer
+hp-deskjet_520.ppd	pcl3	HP Deskjet 520	HP Deskjet 520 Printer
+hp-deskjet_5200_series.ppd	pcl3gui2	HP Deskjet 5200 Series	HP Deskjet Ink Advantage 5275 All-in-one
+hp-deskjet_540.ppd	pcl3	HP Deskjet 540	HP Deskjet 540 Printer
+hp-deskjet_5400_series.ppd	pcl3gui2	HP Deskjet 5400 Series	HP Deskjet 5420v Photo Printer|HP Deskjet 5432 Photo Printer|HP Deskjet 5438 Photo Printer|HP Deskjet 5440v Photo Printer|HP Deskjet 5440 Photo Printer|HP Deskjet 5440xi Photo Printer|HP Deskjet 5442 Photo Printer|HP Deskjet 5443 Photo Printer
+hp-deskjet_550c.ppd	pcl3	HP Deskjet 550c	HP Deskjet 550c Printer
+hp-deskjet_5520_series.ppd	pcl3gui2	HP Deskjet 5520 Series	HP Deskjet Ink Advantage 5525 E-all-in-one
+hp-deskjet_5550.ppd	pcl3gui2	HP Deskjet 5550	HP Deskjet 5550 Color Inkjet Printer|HP Deskjet 5550w Color Inkjet Printer|HP Deskjet 5550v Color Inkjet Printer
+hp-deskjet_5551.ppd	pcl3gui2	HP Deskjet 5551	HP Deskjet 5551 Color Inkjet Printer
+hp-deskjet_5552.ppd	pcl3gui2	HP Deskjet 5552	HP Deskjet 5552 Color Inkjet Printer
+hp-deskjet_5570_series.ppd	pcl3gui2	HP Deskjet 5570 Series	HP Deskjet Ink Advantage 5570 All-in-one|HP Deskjet Ink Advantage 5575 All-in-one
+hp-deskjet_5600.ppd	pcl3gui2	HP Deskjet 5600	HP Deskjet 5600 Color Inkjet Printer
+hp-deskjet_5640_series.ppd	pcl3gui2	HP Deskjet 5640 Series	HP Deskjet Ink Advantage 5640 All-in-one Printer Series|HP Deskjet Ink Advantage 5645 All-in-one Printer
+hp-deskjet_5650.ppd	pcl3gui2	HP Deskjet 5650	HP Deskjet 5650 Color Inkjet Printer|HP Deskjet 5650w Color Inkjet Printer|HP Deskjet 5650v Color Inkjet Printer|HP Deskjet 5655 Color Inkjet Printer
+hp-deskjet_5652.ppd	pcl3gui2	HP Deskjet 5652	HP Deskjet 5652 Color Inkjet Printer
+hp-deskjet_5700.ppd	pcl3gui2	HP Deskjet 5700	HP Deskjet 5700 Color Inkjet Printer|HP Deskjet 5740 Color Inkjet Printer|HP Deskjet 5740xi Color Inkjet Printer|HP Deskjet 5743 Color Inkjet Printer|HP Deskjet 5745 Color Inkjet Printer|HP Deskjet 5748 Color Inkjet Printer
+hp-deskjet_5730_series.ppd	pcl3gui2	HP Deskjet 5730 Series	HP Deskjet Ink Advantage Ultra 5738 All-in-one Printer|HP Deskjet Ink Advantage Ultra 5739 All-in-one Printer
+hp-deskjet_5800.ppd	pcl3gui2	HP Deskjet 5800	HP Deskjet 5800 Color Inkjet Printer
+hp-deskjet_5810_series.ppd	pcl3gui2	HP Deskjet 5810 Series	HP Deskjet Gt 5810 All-in-one Printer
+hp-deskjet_5820_series.ppd	pcl3gui2	HP Deskjet 5820 Series	HP Deskjet Gt 5820 All-in-one Printer
+hp-deskjet_5850.ppd	pcl3gui2	HP Deskjet 5850	HP Deskjet 5850 Color Inkjet Printer|HP Deskjet 5850w Color Inkjet Printer
+hp-deskjet_5900_series.ppd	pcl3gui2	HP Deskjet 5900 Series	HP Deskjet 5938 Photo Printer|HP Deskjet 5940 Photo Printer|HP Deskjet 5940xi Photo Printer|HP Deskjet 5943 Photo Printer
+hp-deskjet_600.ppd	pcl3	HP Deskjet 600	HP Deskjet 600c Printer|HP Deskjet 600 Printer|HP Deskjet 600k Printer
+hp-deskjet_610c.ppd	pcl3	HP Deskjet 610c	HP Deskjet 610c Printer
+hp-deskjet_610cl.ppd	pcl3	HP Deskjet 610cl	HP Deskjet 610cl Printer
+hp-deskjet_6120.ppd	pcl3gui2	HP Deskjet 6120	HP Deskjet 6120 Color Inkjet Printer
+hp-deskjet_6122.ppd	pcl3gui2	HP Deskjet 6122	HP Deskjet 6122 Color Inkjet Printer
+hp-deskjet_6127.ppd	pcl3gui2	HP Deskjet 6127	HP Deskjet 6127 Color Inkjet Printer
+hp-deskjet_612c.ppd	pcl3	HP Deskjet 612c	HP Deskjet 612c Printer
+hp-deskjet_630c.ppd	pcl3	HP Deskjet 630c	HP Deskjet 630c Printer
+hp-deskjet_632c.ppd	pcl3	HP Deskjet 632c	HP Deskjet 632c Printer
+hp-deskjet_640c.ppd	pcl3	HP Deskjet 640c	HP Deskjet 640c Lite Printer|HP Deskjet 640c Printer|HP Deskjet 640u Printer|HP Deskjet 640c Pavilion Turbo Printer|HP Deskjet 642c Printer
+hp-deskjet_648c.ppd	pcl3	HP Deskjet 648c	HP Deskjet 648c Printer
+hp-deskjet_6500.ppd	pcl3gui2	HP Deskjet 6500	HP Deskjet 6500 Color Inkjet Printer|HP Deskjet 6548 Color Inkjet Printer|HP Deskjet 6520 Color Inkjet Printer|HP Deskjet 6520xi Color Inkjet Printer|HP Deskjet 6540d Color Inkjet Printer|HP Deskjet 6540 Color Inkjet Printer|HP Deskjet 6540xi Color Inkjet Printer|HP Deskjet 6540dt Color Inkjet Printer|HP Deskjet 6543 Color Inkjet Printer|HP Deskjet 6543d Color Inkjet Printer
+hp-deskjet_6520_series.ppd	pcl3gui2	HP Deskjet 6520 Series	HP Deskjet Ink Advantage 6525 E-all-in-one
+hp-deskjet_656c.ppd	pcl3	HP Deskjet 656c	HP Deskjet 656c Printer|HP Deskjet 656cvr Printer
+hp-deskjet_660.ppd	pcl3	HP Deskjet 660	HP Deskjet 660k Printer|HP Deskjet 660c Printer|HP Deskjet 660cse Printer
+hp-deskjet_6600.ppd	pcl3gui2	HP Deskjet 6600	HP Deskjet 6600 Series Color Inkjet Printer|HP Deskjet 6620 Color Inkjet Printer|HP Deskjet 6620xi Color Inkjet Printer|HP Deskjet 6623 Color Inkjet Printer|HP Deskjet 6628 Color Inkjet Printer
+hp-deskjet_670.ppd	pcl3	HP Deskjet 670	HP Deskjet 670k Printer
+hp-deskjet_670c.ppd	pcl3	HP Deskjet 670c	HP Deskjet 670c Printer
+hp-deskjet_670tv.ppd	pcl3	HP Deskjet 670tv	HP Deskjet 670tv Printer
+hp-deskjet_672c.ppd	pcl3	HP Deskjet 672c	HP Deskjet 672c Printer
+hp-deskjet_680.ppd	pcl3	HP Deskjet 680	HP Deskjet 680c Printer
+hp-deskjet_6800.ppd	pcl3gui2	HP Deskjet 6800	HP Deskjet 6800 Color Inkjet Printer|HP Deskjet 6830v Color Inkjet Printer|HP Deskjet 6840xi Color Inkjet Printer|HP Deskjet 6840dt Color Inkjet Printer|HP Deskjet 6840 Color Inkjet Printer|HP Deskjet 6843 Color Inkjet Printer|HP Deskjet 6848 Color Inkjet Printer|HP Deskjet 6850 Color Inkjet Printer
+hp-deskjet_682.ppd	pcl3	HP Deskjet 682	HP Deskjet 682c Printer
+hp-deskjet_690c.ppd	pcl3	HP Deskjet 690c	HP Deskjet 690 Printer|HP Deskjet 690c Plus Printer|HP Deskjet 690c Printer
+hp-deskjet_692.ppd	pcl3	HP Deskjet 692	HP Deskjet 692k Printer|HP Deskjet 692c Printer
+hp-deskjet_693.ppd	pcl3	HP Deskjet 693	HP Deskjet 693c Printer
+hp-deskjet_694.ppd	pcl3	HP Deskjet 694	HP Deskjet 694c Printer
+hp-deskjet_6940_series.ppd	pcl3gui2	HP Deskjet 6940 Series	HP Deskjet 6940 Printer|HP Deskjet 6940dt Printer|HP Deskjet 6943 Printer
+hp-deskjet_695.ppd	pcl3	HP Deskjet 695	HP Deskjet 695cci Printer|HP Deskjet 695c Printer
+hp-deskjet_697.ppd	pcl3	HP Deskjet 697	HP Deskjet 697c Printer
+hp-deskjet_6980_series.ppd	pcl3gui2	HP Deskjet 6980 Series	HP Deskjet 6980xi Printer|HP Deskjet 6980 Printer|HP Deskjet 6980dt Printer|HP Deskjet 6983 Printer|HP Deskjet 6988dt Printer|HP Deskjet 6988xi Printer|HP Deskjet 6988 Printer
+hp-deskjet_810c.ppd	pcl3gui	HP Deskjet 810c	HP Deskjet 810c Printer
+hp-deskjet_812c.ppd	pcl3gui	HP Deskjet 812c	HP Deskjet 812c Printer
+hp-deskjet_815c.ppd	pcl3gui	HP Deskjet 815c	HP Deskjet 815c Printer
+hp-deskjet_816c.ppd	pcl3gui	HP Deskjet 816c	HP Deskjet 816 Printer
+hp-deskjet_825c.ppd	pcl3gui	HP Deskjet 825c	HP Deskjet 825cvr Printer|HP Deskjet 825c Printer
+hp-deskjet_830c.ppd	pcl3gui	HP Deskjet 830c	HP Deskjet 830c Printer
+hp-deskjet_832c.ppd	pcl3gui	HP Deskjet 832c	HP Deskjet 832c Printer
+hp-deskjet_840c.ppd	pcl3gui	HP Deskjet 840c	HP Deskjet 840c Printer
+hp-deskjet_841c.ppd	pcl3gui	HP Deskjet 841c	HP Deskjet 841c Printer
+hp-deskjet_842c.ppd	pcl3gui	HP Deskjet 842c	HP Deskjet 842c Printer
+hp-deskjet_843c.ppd	pcl3gui	HP Deskjet 843c	HP Deskjet 843c Printer|HP Deskjet 843cxe Printer
+hp-deskjet_845c.ppd	pcl3gui	HP Deskjet 845c	HP Deskjet 845c Printer|HP Deskjet 845cvr Printer
+hp-deskjet_850c.ppd	pcl3	HP Deskjet 850c	HP Deskjet 850k Printer|HP Deskjet 850c Printer
+hp-deskjet_855c.ppd	pcl3	HP Deskjet 855c	HP Deskjet 855cxi Printer|HP Deskjet 855c Printer|HP Deskjet 855cse Printer
+hp-deskjet_870c.ppd	pcl3	HP Deskjet 870c	HP Deskjet 870k Printer|HP Deskjet 870c Printer|HP Deskjet 870cse Printer|HP Deskjet 870cxi Printer
+hp-deskjet_880c.ppd	pcl3gui	HP Deskjet 880c	HP Deskjet 880c Printer
+hp-deskjet_882c.ppd	pcl3gui	HP Deskjet 882c	HP Deskjet 882c Printer
+hp-deskjet_890c.ppd	pcl3gui	HP Deskjet 890c	HP Deskjet 890cse Printer|HP Deskjet 890c Printer
+hp-deskjet_895c.ppd	pcl3gui	HP Deskjet 895c	HP Deskjet 895cse Printer|HP Deskjet 895c Printer|HP Deskjet 895cxi Printer
+hp-deskjet_916c.ppd	pcl3gui	HP Deskjet 916c	HP Deskjet 916c Printer
+hp-deskjet_920c.ppd	pcl3gui	HP Deskjet 920c	HP Deskjet 920c Printer|HP Deskjet 920cvr Printer|HP Deskjet 920cw Printer|HP Deskjet 920cxi Printer
+hp-deskjet_9300.ppd	pcl3gui	HP Deskjet 9300	HP Deskjet 9300 Printer
+hp-deskjet_930c.ppd	pcl3gui	HP Deskjet 930c	HP Deskjet 930c Printer|HP Deskjet 930cm Printer
+hp-deskjet_932c.ppd	pcl3gui	HP Deskjet 932c	HP Deskjet 932c Printer
+hp-deskjet_933c.ppd	pcl3gui	HP Deskjet 933c	HP Deskjet 933c Printer
+hp-deskjet_934c.ppd	pcl3gui	HP Deskjet 934c	HP Deskjet 934c Printer
+hp-deskjet_935c.ppd	pcl3gui	HP Deskjet 935c	HP Deskjet 935c Printer
+hp-deskjet_940c.ppd	pcl3gui	HP Deskjet 940c	HP Deskjet 940cvr Printer|HP Deskjet 940c Printer|HP Deskjet 940cw Printer|HP Deskjet 940cxi Printer
+hp-deskjet_948c.ppd	pcl3gui	HP Deskjet 948c	HP Deskjet 948c Printer
+hp-deskjet_950c.ppd	pcl3gui	HP Deskjet 950c	HP Deskjet 950c Printer
+hp-deskjet_952c.ppd	pcl3gui	HP Deskjet 952c	HP Deskjet 952c Printer
+hp-deskjet_955c.ppd	pcl3gui	HP Deskjet 955c	HP Deskjet 955c Printer|HP Deskjet 995ck Color Inkjet Printer
+hp-deskjet_957c.ppd	pcl3gui	HP Deskjet 957c	HP Deskjet 957c Printer
+hp-deskjet_959c.ppd	pcl3gui	HP Deskjet 959c	HP Deskjet 959c Printer
+hp-deskjet_9600.ppd	pcl3gui2	HP Deskjet 9600	HP Deskjet 9650 Printer|HP Deskjet 9670 Printer|HP Deskjet 9680 Printer|HP Deskjet 9680gp Printer
+hp-deskjet_960c.ppd	pcl3gui2	HP Deskjet 960c	HP Deskjet 960cse Printer|HP Deskjet 960cxi Printer|HP Deskjet 960c Printer
+hp-deskjet_970c.ppd	pcl3gui	HP Deskjet 970c	HP Deskjet 970cxi Printer|HP Deskjet 970cse Printer|HP Deskjet 970c Printer
+hp-deskjet_975c.ppd	pcl3gui	HP Deskjet 975c	HP Deskjet 975c Printer|HP Deskjet 975cse Printer|HP Deskjet 975cxi Printer
+hp-deskjet_9800.ppd	pcl3gui2	HP Deskjet 9800	HP Deskjet 9800 Printer|HP Deskjet 9800d Printer|HP Deskjet 9803 Printer|HP Deskjet 9803d Printer|HP Deskjet 9808 Printer|HP Deskjet 9808d Printer|HP Deskjet 9860 Printer|HP Deskjet 9868 Printer
+hp-deskjet_980c.ppd	pcl3gui2	HP Deskjet 980c	HP Deskjet 980cxi Printer|HP Deskjet 980c Printer
+hp-deskjet_990c.ppd	pcl3gui2	HP Deskjet 990c	HP Deskjet 990cxi Printer|HP Deskjet 990cse Printer|HP Deskjet 990cm Printer|HP Deskjet 990c Printer
+hp-deskjet_995c.ppd	pcl3gui2	HP Deskjet 995c	HP Deskjet 995c Printer|HP Deskjet 995ck Printer
+hp-deskjet_d1300_series.ppd	lidil	HP Deskjet d1300 Series	HP Deskjet d1311 Printer|HP Deskjet d1320 Printer|HP Deskjet d1330 Printer|HP Deskjet d1341 Printer|HP Deskjet d1360 Printer|HP Deskjet d1368 Printer
+hp-deskjet_d1400_series.ppd	lidil	HP Deskjet d1400 Series	HP Deskjet d1415 Printer|HP Deskjet d1420 Printer|HP Deskjet d1430 Printer|HP Deskjet d1445 Printer|HP Deskjet d1455 Printer|HP Deskjet d1460 Printer|HP Deskjet d1468 Printer|HP Deskjet d1470 Printer
+hp-deskjet_d1500_series.ppd	lidil	HP Deskjet d1500 Series	HP Deskjet d1520 Printer|HP Deskjet d1530 Printer|HP Deskjet d1550 Printer|HP Deskjet d1555 Printer|HP Deskjet d1558 Printer|HP Deskjet d1560 Printer|HP Deskjet d1568 Printer
+hp-deskjet_d1600_series.ppd	lidil	HP Deskjet d1600 Series	HP Deskjet d1620 Printer|HP Deskjet d1630 Printer|HP Deskjet d1650 Printer|HP Deskjet d1658 Printer|HP Deskjet d1660 Printer|HP Deskjet d1663 Printer|HP Deskjet d1668 Printer
+hp-deskjet_d2300_series.ppd	lidil	HP Deskjet d2300 Series	HP Deskjet d2320 Printer|HP Deskjet d2330 Printer|HP Deskjet d2345 Printer|HP Deskjet d2360 Printer|HP Deskjet d2368 Printer
+hp-deskjet_d2400_series.ppd	lidil	HP Deskjet d2400 Series	HP Deskjet d2430 Printer|HP Deskjet d2445 Printer|HP Deskjet d2460 Printer|HP Deskjet d2466 Printer|HP Deskjet d2468 Printer|HP Deskjet d4263 Printer
+hp-deskjet_d2500_series.ppd	pcl3gui2	HP Deskjet d2500 Series	HP Deskjet d2530 Printer|HP Deskjet d2545 Printer|HP Deskjet d2560 Printer|HP Deskjet d2563 Printer|HP Deskjet d2566 Printer|HP Deskjet d2568 Printer
+hp-deskjet_d2600_series.ppd	lidil	HP Deskjet d2600 Series	HP Deskjet d2660 Printer|HP Deskjet d2645 Printer|HP Deskjet d2663 Printer|HP Deskjet d2666 Printer|HP Deskjet d2668 Printer|HP Deskjet d2680 Printer
+hp-deskjet_d4100_series.ppd	lidil	HP Deskjet d4100 Series	HP Deskjet d4145 Printer|HP Deskjet d4145 Printer|HP Deskjet d4155 Printer|HP Deskjet d4155 Printer|HP Deskjet d4160 Printer|HP Deskjet d4163 Printer|HP Deskjet d4168 Printer
+hp-deskjet_d4200_series.ppd	lidil	HP Deskjet d4200 Series	HP Deskjet d4245 Printer|HP Deskjet d4260 Printer|HP Deskjet d4266 Printer|HP Deskjet d4268 Printer
+hp-deskjet_d4300_series.ppd	lidil	HP Deskjet d4300 Series	HP Deskjet d4360 Printer|HP Deskjet d4363 Printer|HP Deskjet d4368 Printer
+hp-deskjet_d5500_series.ppd	pcl3gui2	HP Deskjet d5500 Series	HP Deskjet d5545 Printer|HP Deskjet d5560 Printer|HP Deskjet d5563 Printer|HP Deskjet d5568 Printer
+hp-deskjet_d730.ppd	pcl3gui2	HP Deskjet d730	HP Deskjet d730 Printer
+hp-deskjet_f2100_series.ppd	lidil	HP Deskjet f2100 Series	HP Deskjet f2110 All-in-one Printer|HP Deskjet f2120 All-in-one Printer|HP Deskjet f2128 All-in-one Printer|HP Deskjet f2140 All-in-one Printer|HP Deskjet f2179 All-in-one Printer|HP Deskjet f2180 All-in-one Printer|HP Deskjet f2185 All-in-one Printer|HP Deskjet f2187 All-in-one Printer|HP Deskjet f2188 All-in-one Printer
+hp-deskjet_f2200_series.ppd	lidil	HP Deskjet f2200 Series	HP Deskjet f2210 All-in-one Printer|HP Deskjet f2276 All-in-one Printer|HP Deskjet f2280 All-in-one Printer|HP Deskjet f2288 All-in-one Printer|HP Deskjet f2290 All-in-one Printer|HP Deskjet f2212 All-in-one Printer|HP Deskjet f2214 All-in-one Printer|HP Deskjet f2224 All-in-one Printer|HP Deskjet f2235 All-in-one Printer|HP Deskjet f2238 All-in-one Printer|HP Deskjet f2240 All-in-one Printer|HP Deskjet f2250 All-in-one Printer|HP Deskjet f2275 All-in-one Printer
+hp-deskjet_f2400_series.ppd	pcl3gui2	HP Deskjet f2400 Series	HP Deskjet f2410 All-in-one Printer|HP Deskjet f2488 All-in-one Printer|HP Deskjet f2492 All-in-one Printer|HP Deskjet f2493 All-in-one Printer|HP Deskjet f2418 All-in-one Printer|HP Deskjet f2420 All-in-one Printer|HP Deskjet f2423 All-in-one Printer|HP Deskjet f2430 All-in-one Printer|HP Deskjet f2440 All-in-one Printer|HP Deskjet f2476 All-in-one Printer|HP Deskjet f2480 All-in-one Printer|HP Deskjet f2483 All-in-one Printer
+hp-deskjet_f300_series.ppd	lidil	HP Deskjet f300 Series	HP Deskjet f310 All-in-one Printer|HP Deskjet f380 All-in-one Printer|HP Deskjet f385 All-in-one Printer|HP Deskjet f388 All-in-one Printer|HP Deskjet f390 All-in-one Printer|HP Deskjet f394 All-in-one Printer|HP Deskjet f325 All-in-one Printer|HP Deskjet f335 All-in-one Printer|HP Deskjet f340 All-in-one Printer|HP Deskjet f350 All-in-one Printer|HP Deskjet f370 All-in-one Printer|HP Deskjet f375 All-in-one Printer|HP Deskjet f378 All-in-one Printer|HP Deskjet f379 All-in-one Printer
+hp-deskjet_f4100_series.ppd	lidil	HP Deskjet f4100 Series	HP Deskjet f4135 All-in-one Printer|HP Deskjet f4190 All-in-one Printer|HP Deskjet f4194 All-in-one Printer|HP Deskjet f4140 All-in-one Printer|HP Deskjet f4150 All-in-one Printer|HP Deskjet f4172 All-in-one Printer|HP Deskjet f4172 All-in-one Printer|HP Deskjet f4175 All-in-one Printer|HP Deskjet f4180 All-in-one Printer|HP Deskjet f4185 All-in-one Printer|HP Deskjet f4188 All-in-one Printer
+hp-deskjet_f4200_series.ppd	pcl3gui2	HP Deskjet f4200 Series	HP Deskjet f4210 All-in-one Printer|HP Deskjet f4213 All-in-one Printer|HP Deskjet f4224 All-in-one Printer|HP Deskjet f4230 All-in-one Printer|HP Deskjet f4235 All-in-one Printer|HP Deskjet f4238 All-in-one Printer|HP Deskjet f4240 All-in-one Printer|HP Deskjet f4250 All-in-one Printer|HP Deskjet f4272 All-in-one Printer|HP Deskjet f4273 All-in-one Printer|HP Deskjet f4274 All-in-one Printer|HP Deskjet f4275 All-in-one Printer|HP Deskjet f4280 All-in-one Printer|HP Deskjet f4283 All-in-one Printer|HP Deskjet f4288 All-in-one Printer|HP Deskjet f4292 All-in-one Printer|HP Deskjet f4293 All-in-one Printer|HP Deskjet f4294 All-in-one Printer
+hp-deskjet_f4400_series.ppd	pcl3gui2	HP Deskjet f4400 Series	HP Deskjet f4440 All-in-one Printer|HP Deskjet f4492 All-in-one Printer|HP Deskjet f4435 All-in-one Printer|HP Deskjet f4450 All-in-one Printer|HP Deskjet f4470 All-in-one Printer|HP Deskjet f4472 All-in-one Printer|HP Deskjet f4473 All-in-one Printer|HP Deskjet f4480 All-in-one Printer|HP Deskjet f4483 All-in-one Printer|HP Deskjet f4488 All-in-one Printer
+hp-deskjet_f4500_series.ppd	pcl3gui2	HP Deskjet f4500 Series	HP Deskjet f4500 All-in-one Printer Series
+hp-deskjet_f735.ppd	pcl3gui2	HP Deskjet f735	HP Deskjet f735 All-in-one Printer
+hp-deskjet_ink_adv_2010_k010.ppd	pcl3gui2	HP Deskjet Ink Adv 2010 k010	HP Deskjet Ink Adv 2010 k010
+hp-deskjet_ink_adv_2060_k110.ppd	pcl3gui2	HP Deskjet Ink Adv 2060 k110	HP Deskjet Ink Adv 2060 k110
+hp-deskjet_ink_advant_k109a-z.ppd	lidil	HP Deskjet Ink Advant k109a-z	HP Deskjet Ink Advantage k109a Printer
+hp-deskjet_ink_advant_k209a-z.ppd	pcl3gui2	HP Deskjet Ink Advant k209a-z	HP Deskjet Ink Advantage k209a All-in-one Printer
+hp-deskjet_plus_4100_series.ppd	pcl3gui2	HP Deskjet Plus 4100 Series	HP Deskjet Plus 4100 All-in-one Printer Series
+hp-deskjet_plus_6000_series.ppd	pcl3gui2	HP Deskjet Plus 6000 Series	HP Deskjet Plus 6000 Series
+hp-deskjet_plus_6400_series.ppd	pcl3gui2	HP Deskjet Plus 6400 Series	HP Deskjet Plus 6400 Series
+hp-envy_100_d410_series.ppd	pcl3gui2	HP Envy 100 d410 Series	HP Envy 100 d410 Series
+hp-envy_110_series.ppd	pcl3gui2	HP Envy 110 Series	HP Envy 110 E-all-in-one|HP Envy 111 E-all-in-one|HP Envy 114 E-all-in-one
+hp-envy_120_series.ppd	pcl3gui2	HP Envy 120 Series	HP Envy 120 E-all-in-one|HP Envy 121 E-all-in-one
+hp-envy_4500_series.ppd	pcl3gui2	HP Envy 4500 Series	HP Envy 4500 E-all-in-one|HP Envy 4501 E-all-in-one|HP Envy 4502 E-all-in-one|HP Envy 4503 E-all-in-one|HP Envy 4504 E-all-in-one|HP Envy 4505 E-all-in-one|HP Envy 4507 E-all-in-one|HP Envy 4508 E-all-in-one
+hp-envy_4510_series.ppd	pcl3gui2	HP Envy 4510 Series	HP Envy 4510 All-in-one|HP Envy 4512 All-in-one|HP Envy 4516 All-in-one
+hp-envy_4520_series.ppd	pcl3gui2	HP Envy 4520 Series	HP Envy 4520 All-in-one Printer Series|HP Envy 4520 All-in-one Printer|HP Envy 4522 All-in-one Printer
+hp-envy_5000_series.ppd	pcl3gui2	HP Envy 5000 Series	HP Envy 5000 All-in-one|HP Envy 5020 All-in-one|HP Envy 5032 All-in-one|HP Envy 5030 All-in-one
+hp-envy_5530_series.ppd	pcl3gui2	HP Envy 5530 Series	HP Envy 5530 E-all-in-one Printer|HP Envy 5531 E-all-in-one Printer|HP Envy 5532 E-all-in-one Printer|HP Envy 5534 E-all-in-one Printer|HP Envy 5535 E-all-in-one Printer|HP Envy 5536 E-all-in-one Printer|HP Envy 5539 E-all-in-one Printer
+hp-envy_5540_series.ppd	pcl3gui2	HP Envy 5540 Series	HP Envy 5540 All-in-one Printer Series|HP Envy 5540 All-in-one Printer|HP Envy 5545 E-all-in-one Printer|HP Envy 5543 All-in-one Printer|HP Envy 5544 All-in-one Printer|HP Envy 5542 E-all-in-one Printer|HP Envy 5546 All-in-one Printer
+hp-envy_5640_series.ppd	pcl3gui2	HP Envy 5640 Series	HP Envy 5640 E-all-in-one|HP Envy 5642 E-all-in-one|HP Envy 5643 E-all-in-one|HP Envy 5644 E-all-in-one
+hp-envy_5660_series.ppd	pcl3gui2	HP Envy 5660 Series	HP Envy 5660 E-all-in-one|HP Envy 5665 E-all-in-one
+hp-envy_6000_series.ppd	pcl3gui2	HP Envy 6000 Series	HP Envy 6000 Series
+hp-envy_6400_series.ppd	pcl3gui2	HP Envy 6400 Series	HP Envy 6400 Series
+hp-envy_7640_series.ppd	pcl3gui2	HP Envy 7640 Series	HP Envy 7640 E-all-in-one|HP Envy 7645 E-all-in-one
+hp-envy_8000_series.ppd	pcl3gui2	HP Envy 8000 Series	HP Envy 8000 E-all-in-one
+hp-envy_inspire_7200_series.ppd	pcl3gui2	HP Envy Inspire 7200 Series	HP Envy Inspire 7200e Series
+hp-envy_inspire_7900_series.ppd	pcl3gui2	HP Envy Inspire 7900 Series	HP Envy Inspire 7900e Series
+hp-envy_photo_6200_series.ppd	pcl3gui2	HP Envy Photo 6200 Series	HP Envy Photo 6200 All-in-one|HP Envy Photo 6220 All-in-one|HP Envy Photo 6232 All-in-one|HP Envy Photo 6234 All-in-one|HP Envy Photo 6230 All-in-one
+hp-envy_photo_7100_series.ppd	pcl3gui2	HP Envy Photo 7100 Series	HP Envy Photo 7100 All-in-one|HP Envy Photo 7120 All-in-one|HP Envy Photo 7134 All-in-one|HP Envy Photo 7155 All-in-one|HP Envy Photo 7164 All-in-one|HP Envy Photo 7130 All-in-one
+hp-envy_photo_7800_series.ppd	pcl3gui2	HP Envy Photo 7800 Series	HP Envy Photo 7800 All-in-one|HP Envy Photo 7820 All-in-one|HP Envy Photo 7830 All-in-one|HP Envy Photo 7855 All-in-one
+hp-envy_pro_6400_series.ppd	pcl3gui2	HP Envy Pro 6400 Series	HP Envy Pro 6400 Series
+hp-ink_tank_110_series.ppd	pcl3gui2	HP Ink Tank 110 Series	HP Ink Tank 115
+hp-ink_tank_310_series.ppd	pcl3gui2	HP Ink Tank 310 Series	HP Ink Tank 310
+hp-ink_tank_wireless_410_series.ppd	pcl3gui2	HP Ink Tank Wireless 410 Series	HP Ink Tank Wireless 410
+hp-laser_ns_1020.ppd	hbpl1	HP Laser Ns 1020	HP Laser Ns 1020|HP Laser Ns 1020w|HP Laser Ns 1020n
+hp-laser_ns_mfp_1005.ppd	hbpl1	HP Laser Ns MFP 1005	HP Laser Ns MFP 1005|HP Laser Ns MFP 1005w|HP Laser Ns MFP 1005n
+hp-laserjet_1010.ppd	ljfastraster	HP LaserJet 1010	HP LaserJet 1010 Printer
+hp-laserjet_1012.ppd	ljfastraster	HP LaserJet 1012	HP LaserJet 1012 Printer
+hp-laserjet_1015.ppd	ljmono	HP LaserJet 1015	HP LaserJet 1015 Printer
+hp-laserjet_1100.ppd	ljmono	HP LaserJet 1100	HP LaserJet 1100 Printer|HP LaserJet 1100se Printer
+hp-laserjet_1100a.ppd	ljmono	HP LaserJet 1100a	HP LaserJet 1100a All-in-one Printer|HP LaserJet 1100a Se All-in-one Printer
+hp-laserjet_1100xi.ppd	ljmono	HP LaserJet 1100xi	HP LaserJet 1100a Xi All-in-one Printer
+hp-laserjet_1150.ppd	ljmono	HP LaserJet 1150	HP LaserJet 1150 Printer
+hp-laserjet_1160_series.ppd	ljmono	HP LaserJet 1160 Series	HP LaserJet 1160 Series Printer|HP LaserJet 1160 Printer|HP LaserJet 1160le Printer
+hp-laserjet_1200-pcl3.ppd	ljmono	HP LaserJet 1200	HP LaserJet 1200 Printer|HP LaserJet 1200se Printer
+hp-laserjet_1200n.ppd	ljmono	HP LaserJet 1200n	HP LaserJet 1200n Printer
+hp-laserjet_1220-pcl3.ppd	ljmono	HP LaserJet 1220	HP LaserJet 1220 All-in-one Printer
+hp-laserjet_1220se.ppd	ljmono	HP LaserJet 1220se	HP LaserJet 1220se All-in-one Printer
+hp-laserjet_1300-pcl3.ppd	ljmono	HP LaserJet 1300	HP LaserJet 1300 Printer|HP LaserJet 1300t Printer
+hp-laserjet_1300n-pcl3.ppd	ljmono	HP LaserJet 1300n	HP LaserJet 1300n Printer
+hp-laserjet_1300xi-pcl3.ppd	ljmono	HP LaserJet 1300xi	HP LaserJet 1300xi Printer
+hp-laserjet_1320.ppd	ljmono	HP LaserJet 1320	HP LaserJet 1320 Printer|HP LaserJet 1320t Printer
+hp-laserjet_1320_series-pcl3.ppd	ljmono	HP LaserJet 1320 Series	HP LaserJet 1320 Series Printer
+hp-laserjet_1320n.ppd	ljmono	HP LaserJet 1320n	HP LaserJet 1320n Printer
+hp-laserjet_1320nw.ppd	ljmono	HP LaserJet 1320nw	HP LaserJet 1320nw Printer
+hp-laserjet_1320tn.ppd	ljmono	HP LaserJet 1320tn	HP LaserJet 1320tn Printer
+hp-laserjet_2100_series-pcl3.ppd	ljmono	HP LaserJet 2100 Series	HP LaserJet 2100 Series Printer
+hp-laserjet_2200_series.ppd	ljmono	HP LaserJet 2200 Series	HP LaserJet 2200 Series Printer|HP LaserJet 2200 Printer|HP LaserJet 2200dn Printer|HP LaserJet 2200dt Printer|HP LaserJet 2200dse Printer|HP LaserJet 2200tn  Printer|HP LaserJet 2200d Printer
+hp-laserjet_2300_series.ppd	ljmono	HP LaserJet 2300 Series	HP LaserJet 2300 Series Printer|HP LaserJet 2300 Printer|HP LaserJet 2300n Printer|HP LaserJet 2300d Printer|HP LaserJet 2300dn Printer|HP LaserJet 2300dtn Printer|HP LaserJet 2300l Printer
+hp-laserjet_2410-pcl3.ppd	ljmono	HP LaserJet 2410	HP LaserJet 2410 Printer
+hp-laserjet_2420-pcl3.ppd	ljmono	HP LaserJet 2420	HP LaserJet 2420 Printer|HP LaserJet 2420d Printer|HP LaserJet 2420dn Printer|HP LaserJet 2420n Printer
+hp-laserjet_2430-pcl3.ppd	ljmono	HP LaserJet 2430	HP LaserJet 2430t Printer|HP LaserJet 2430 Printer|HP LaserJet 2430dtn Printer|HP LaserJet 2430n Printer|HP LaserJet 2430tn Printer
+hp-laserjet_3015-pcl3.ppd	ljmono	HP LaserJet 3015	HP LaserJet 3015 All-in-one Printer
+hp-laserjet_3020-pcl3.ppd	ljmono	HP LaserJet 3020	HP LaserJet 3020 All-in-one Printer
+hp-laserjet_3030-pcl3.ppd	ljmono	HP LaserJet 3030	HP LaserJet 3030 All-in-one Printer
+hp-laserjet_3050-pcl3.ppd	ljmono	HP LaserJet 3050	HP LaserJet 3050 All-in-one Printer|HP LaserJet 3050z All-in-one Printer
+hp-laserjet_3052-pcl3.ppd	ljmono	HP LaserJet 3052	HP LaserJet 3052 All-in-one Printer
+hp-laserjet_3055.ppd	ljmono	HP LaserJet 3055	HP LaserJet 3055 All-in-one Printer
+hp-laserjet_3100.ppd	ljmono	HP LaserJet 3100	HP LaserJet 3100 All-in-one Printer|HP LaserJet 3100se All-in-one Printer|HP LaserJet 3100xi All-in-one Printer
+hp-laserjet_3150.ppd	ljmono	HP LaserJet 3150	HP LaserJet 3150xi All-in-one Printer|HP LaserJet 3150se All-in-one Printer|HP LaserJet 3150 All-in-one Printer
+hp-laserjet_3200.ppd	ljmono	HP LaserJet 3200	HP LaserJet 3200 All-in-one Printer|HP LaserJet 3200se All-in-one Printer
+hp-laserjet_3300_3310_3320-pcl3.ppd	ljmono	HP LaserJet 3300 3310 3320	HP LaserJet 3300 Multifunction Printer|HP LaserJet 3310 Digital Printer Copier|HP LaserJet 3320n Multifunction Printer|HP LaserJet 3320 Multifunction Printer
+hp-laserjet_3330.ppd	ljmono	HP LaserJet 3330	HP LaserJet 3330 Multifunction Printer
+hp-laserjet_3380-pcl3.ppd	ljmono	HP LaserJet 3380	HP LaserJet 3380 All-in-one Printer
+hp-laserjet_3390-pcl3.ppd	ljmono	HP LaserJet 3390	HP LaserJet 3390 All-in-one Printer
+hp-laserjet_3392.ppd	ljmono	HP LaserJet 3392	HP LaserJet 3392 All-in-one Printer
+hp-laserjet_4000_series-pcl3.ppd	ljmono	HP LaserJet 4000 Series	HP LaserJet 4000 Printer|HP LaserJet 4000n Printer|HP LaserJet 4000se Printer|HP LaserJet 4000t Printer|HP LaserJet 4000tn Printer
+hp-laserjet_4050_series-pcl3.ppd	ljmono	HP LaserJet 4050 Series	HP LaserJet 4050 Printer|HP LaserJet 4050n Printer|HP LaserJet 4050se Printer|HP LaserJet 4050t Printer|HP LaserJet 4050tn Printer
+hp-laserjet_4100_mfp-pcl3.ppd	ljmono	HP LaserJet 4100 MFP	HP LaserJet 4100 Multifunction Printer|HP LaserJet 4101 Multifunction Printer
+hp-laserjet_4100_series-pcl3.ppd	ljmono	HP LaserJet 4100 Series	HP LaserJet 410dtn Printer|HP LaserJet 4100tn Printer|HP LaserJet 4100n Printer|HP LaserJet 4100 Printer
+hp-laserjet_4150_series.ppd	ljmono	HP LaserJet 4150 Series	HP LaserJet 4150 Printer
+hp-laserjet_4200-pcl3.ppd	ljmono	HP LaserJet 4200	HP LaserJet 4200 Printer|HP LaserJet 4200l Printer|HP LaserJet 4200ln Printer|HP LaserJet 4200lvn Printer|HP LaserJet 4200dtn Printer|HP LaserJet 4200dtns Printer|HP LaserJet 4200dtnsl Printer|HP LaserJet 4200n Printer|HP LaserJet 4200tn Printer
+hp-laserjet_4240-pcl3.ppd	ljmono	HP LaserJet 4240	HP LaserJet 4240n Printer|HP LaserJet 4240 Printer
+hp-laserjet_4250-pcl3.ppd	ljmono	HP LaserJet 4250	HP LaserJet 4250 Printer|HP LaserJet 4250dtn Printer|HP LaserJet 4250dtnsl Printer|HP LaserJet 4250n Printer|HP LaserJet 4250tn Printer
+hp-laserjet_4300-pcl3.ppd	ljmono	HP LaserJet 4300	HP LaserJet 4300 Printer|HP LaserJet 4300dtn Printer|HP LaserJet 4300dtns Printer|HP LaserJet 4300dtnsl Printer|HP LaserJet 4300n Printer|HP LaserJet 4300tn Printer
+hp-laserjet_4345_mfp-pcl3.ppd	ljmono	HP LaserJet 4345 MFP	HP LaserJet 4345 Multifunction Printer|HP LaserJet 4345x Multifunction Printer|HP LaserJet 4345xs Multifunction Printer|HP LaserJet 4345xm Multifunction Printer
+hp-laserjet_4350-pcl3.ppd	ljmono	HP LaserJet 4350	HP LaserJet 4350 Printer|HP LaserJet 4350dtn Printer|HP LaserJet 4350dtnsl Printer|HP LaserJet 4350n Printer|HP LaserJet 4350tn Printer
+hp-laserjet_4_plus-pcl3.ppd	ljmono	HP LaserJet 4 Plus	HP LaserJet 4 Plus Printer|HP LaserJet 4m Plus Printer
+hp-laserjet_4l.ppd	ljmono	HP LaserJet 4l	HP LaserJet 4l Printer|HP LaserJet 4l Pro Printer|HP LaserJet 4lc Printer
+hp-laserjet_4ml.ppd	ljmono	HP LaserJet 4ml	HP LaserJet 4ml Printer
+hp-laserjet_4mp-pcl3.ppd	ljmono	HP LaserJet 4mp	HP LaserJet 4mp Printer
+hp-laserjet_4si-pcl3.ppd	ljmono	HP LaserJet 4si	HP LaserJet 4si Printer|HP LaserJet 4si Mx Printer
+hp-laserjet_4v-pcl3.ppd	ljmono	HP LaserJet 4v	HP LaserJet 4v Printer
+hp-laserjet_5000_series-pcl3.ppd	ljmono	HP LaserJet 5000 Series	HP LaserJet 5000 Series Printer|HP LaserJet 5000 Printer|HP LaserJet 5000le Printer|HP LaserJet 5000dn Printer|HP LaserJet 5000gn Printer|HP LaserJet 5000n Printer
+hp-laserjet_5100_series-pcl3.ppd	ljmono	HP LaserJet 5100 Series	HP LaserJet 5100 Printer|HP LaserJet 5100le Printer|HP LaserJet 5100dtn Printer|HP LaserJet 5100se Printer|HP LaserJet 5100tn Printer
+hp-laserjet_5200-pcl3.ppd	ljmono	HP LaserJet 5200	HP LaserJet 5200 Printer|HP LaserJet 5200n Printer|HP LaserJet 5200tn Printer|HP LaserJet 5200dtn Printer
+hp-laserjet_5200l-pcl3.ppd	ljmono	HP LaserJet 5200l	HP LaserJet 5200l Printer
+hp-laserjet_5200lx.ppd	ljmono	HP LaserJet 5200lx	HP LaserJet 5200lx Printer
+hp-laserjet_5l.ppd	ljmono	HP LaserJet 5l	HP LaserJet 5l Printer|HP LaserJet 5l-fs Printer|HP LaserJet 5l Xtra Printer
+hp-laserjet_5mp-pcl3.ppd	ljmono	HP LaserJet 5mp	HP LaserJet 5mp Printer
+hp-laserjet_5p.ppd	ljmono	HP LaserJet 5p	HP LaserJet 5p Printer
+hp-laserjet_5si-pcl3.ppd	ljmono	HP LaserJet 5si	HP LaserJet 5si Printer|HP LaserJet 5si Hm Printer|HP LaserJet 5si Mx Printer|HP LaserJet 5si Nx Printer
+hp-laserjet_5si_mopier-pcl3.ppd	ljmono	HP LaserJet 5si Mopier	HP LaserJet 5si Mopier|HP LaserJet 5si Mopier Engine
+hp-laserjet_6l.ppd	ljmono	HP LaserJet 6l	HP LaserJet 6l Printer|HP LaserJet 6lse Printer|HP LaserJet 6lxi Printer|HP LaserJet 6l Gold Printer|HP LaserJet 6l Pro Printer
+hp-laserjet_6mp-pcl3.ppd	ljmono	HP LaserJet 6mp	HP LaserJet 6mp Printer|HP LaserJet 6mp Se Printer|HP LaserJet 6mp Xi Printer
+hp-laserjet_6p.ppd	ljmono	HP LaserJet 6p	HP LaserJet 6p Printer
+hp-laserjet_8000_series-pcl3.ppd	ljmono	HP LaserJet 8000 Series	HP LaserJet 8000 Series Printer|HP LaserJet 8000 Printer|HP LaserJet 8000dn Printer|HP LaserJet 8000n Printer
+hp-laserjet_8100_mfp.ppd	ljmono	HP LaserJet 8100 MFP	HP LaserJet 8100 Multifunction Printer
+hp-laserjet_8100_series-pcl3.ppd	ljmono	HP LaserJet 8100 Series	HP LaserJet 8100 Printer|HP LaserJet 8100dn Printer|HP LaserJet 8100n Printer
+hp-laserjet_8150_mfp.ppd	ljmono	HP LaserJet 8150 MFP	HP LaserJet 8150 Multifunction Printer
+hp-laserjet_8150_series-pcl3.ppd	ljmono	HP LaserJet 8150 Series	HP LaserJet 8150 Printer|HP LaserJet 8150n Printer|HP LaserJet 8150hn Printer|HP LaserJet 8150dn Printer
+hp-laserjet_9000_mfp-pcl3.ppd	ljmono	HP LaserJet 9000 MFP	HP LaserJet 9000 Multifunction Printer|HP LaserJet 9000l Multifunction Printer
+hp-laserjet_9000_series-pcl3.ppd	ljmono	HP LaserJet 9000 Series	HP LaserJet 9000 Printer|HP LaserJet 9000n Printer|HP LaserJet 9000dn Printer|HP LaserJet 9000hns Printer|HP LaserJet 9000hnf Printer
+hp-laserjet_9040-pcl3.ppd	ljmono	HP LaserJet 9040	HP LaserJet 9040 Printer|HP LaserJet 9040n Printer|HP LaserJet 9040dn Printer
+hp-laserjet_9040_mfp-pcl3.ppd	ljmono	HP LaserJet 9040 MFP	HP LaserJet 9040 Multifunction Printer
+hp-laserjet_9050-pcl3.ppd	ljmono	HP LaserJet 9050	HP LaserJet 9050 Printer|HP LaserJet 9050n Printer|HP LaserJet 9050dn Printer
+hp-laserjet_9050_mfp-pcl3.ppd	ljmono	HP LaserJet 9050 MFP	HP LaserJet 9050 Multifunction Printer
+hp-laserjet_9055mfp-pcl3.ppd	ljmono	HP LaserJet 9055mfp	HP LaserJet 9055 Multifunction Printer
+hp-laserjet_9065mfp-pcl3.ppd	ljmono	HP LaserJet 9065mfp	HP LaserJet 9065 Multifunction Printer
+hp-laserjet_cm1411fn-pcl3.ppd	ljcolor	HP LaserJet cm1411fn	HP LaserJet Professional cm1411fn
+hp-laserjet_cm1412fn-pcl3.ppd	ljcolor	HP LaserJet cm1412fn	HP LaserJet Professional cm1412fn
+hp-laserjet_cm1413fn-pcl3.ppd	ljcolor	HP LaserJet cm1413fn	HP LaserJet Professional cm1413fn
+hp-laserjet_cm1415fn-pcl3.ppd	ljcolor	HP LaserJet cm1415fn	HP LaserJet Professional cm1415fn
+hp-laserjet_cm1415fnw-pcl3.ppd	ljcolor	HP LaserJet cm1415fnw	HP LaserJet Professional cm1415fnw
+hp-laserjet_cm1416fnw-pcl3.ppd	ljcolor	HP LaserJet cm1416fnw	HP LaserJet Professional cm1416fnw
+hp-laserjet_cm1417fnw-pcl3.ppd	ljcolor	HP LaserJet cm1417fnw	HP LaserJet Professional cm1417fnw
+hp-laserjet_cm1418fnw-pcl3.ppd	ljcolor	HP LaserJet cm1418fnw	HP LaserJet Professional cm1418fnw
+hp-laserjet_m101-m106.ppd	hbpl1	HP LaserJet m101-m106	HP LaserJet m102a|HP LaserJet m102w|HP LaserJet m104a|HP LaserJet m104w|HP LaserJet m106w
+hp-laserjet_m109-m112.ppd	hbpl1	HP LaserJet m109-m112	HP LaserJet m109-m112
+hp-laserjet_m14-m17.ppd	hbpl1	HP LaserJet m14-m17	HP LaserJet Pro m15w|HP LaserJet Pro m14w|HP LaserJet Pro m17w|HP LaserJet Pro m16w|HP LaserJet Pro m14cw|HP LaserJet Pro m17cw
+hp-laserjet_m1537dnf_mfp-pcl3.ppd	ljmono	HP LaserJet m1537dnf MFP	HP LaserJet m1537dnf MFP
+hp-laserjet_m1538dnf_mfp-pcl3.ppd	ljmono	HP LaserJet m1538dnf MFP	HP LaserJet m1538dnf MFP
+hp-laserjet_m1539dnf_mfp-pcl3.ppd	ljmono	HP LaserJet m1539dnf MFP	HP LaserJet m1539dnf MFP
+hp-laserjet_m207-m212.ppd	hbpl1	HP LaserJet m207-m212	HP LaserJet m207d|HP LaserJet m208d|HP LaserJet m209d|HP LaserJet m210d|HP LaserJet m212d|HP Lasejet  m211d|HP LaserJet m209dw|HP LaserJet m209dwe|HP LaserJet m210dw|HP LaserJet m210dwe|HP LaserJet m212dw|HP LaserJet m212dwe|HP LaserJet m208dw|HP LaserJet m207dw|HP LaserJet m211dw
+hp-laserjet_m3027_mfp-pcl3.ppd	ljmono	HP LaserJet m3027 MFP	HP LaserJet m3027 Multifunction Printer|HP LaserJet m3027x Multifunction Printer
+hp-laserjet_m3035_mfp-pcl3.ppd	ljmono	HP LaserJet m3035 MFP	HP LaserJet m3035 Multifunction Printer|HP LaserJet m3035xs Multifunction Printer
+hp-laserjet_m4345_mfp-pcl3.ppd	ljmono	HP LaserJet m4345 MFP	HP LaserJet m4345 Multifunction Printer|HP LaserJet m4345x Multifunction Printer|HP LaserJet m4345xs Multifunction Printer|HP LaserJet m4345xm Multifunction Printer
+hp-laserjet_m4349_mfp-pcl3.ppd	ljmono	HP LaserJet m4349 MFP	HP LaserJet m4349 MFP
+hp-laserjet_m5025_mfp-pcl3.ppd	ljmono	HP LaserJet m5025 MFP	HP LaserJet m5025 Multifunction Printer
+hp-laserjet_m5035_mfp-pcl3.ppd	ljmono	HP LaserJet m5035 MFP	HP LaserJet m5035 Multifunction Printer|HP LaserJet m5035x Multifunction Printer|HP LaserJet m5035xs Multifunction Printer
+hp-laserjet_m5039_mfp-pcl3.ppd	ljmono	HP LaserJet m5039 MFP	HP LaserJet m5039 Multifunction Printer
+hp-laserjet_m9040_mfp-pcl3.ppd	ljmono	HP LaserJet m9040 MFP	HP LaserJet m9040 Multifunction Printer
+hp-laserjet_m9050_mfp-pcl3.ppd	ljmono	HP LaserJet m9050 MFP	HP LaserJet m9050 Multifunction Printer
+hp-laserjet_m9059_mfp-pcl3.ppd	ljmono	HP LaserJet m9059 MFP	HP LaserJet m9059 MFP
+hp-laserjet_mfp_m129-m134.ppd	hbpl1	HP LaserJet MFP m129-m134	HP LaserJet Pro MFP m132a|HP LaserJet Pro MFP m132nw|HP LaserJet Pro MFP m132snw|HP LaserJet Pro MFP m134a|HP LaserJet Pro MFP m132fw|HP LaserJet Pro MFP m132fn|HP LaserJet Pro MFP m132fp|HP LaserJet Pro MFP m134fn|HP LaserJet Pro MFP m130a|HP LaserJet Pro MFP m130nw|HP LaserJet Pro MFP m130fn|HP LaserJet Pro MFP m130fw
+hp-laserjet_mfp_m139-m142.ppd	hbpl1	HP LaserJet MFP m139-m142	HP LaserJet MFP m139-m142
+hp-laserjet_mfp_m232-m237.ppd	hbpl1	HP LaserJet MFP m232-m237	HP LaserJet MFP m234dw|HP LaserJet MFP m234dwe|HP LaserJet MFP m233d|HP LaserJet MFP m232d|HP LaserJet MFP m235d|HP LaserJet MFP m237d|HP LaserJet MFP m236d|HP LaserJet MFP m232dw|HP LaserJet MFP m232dwc|HP LaserJet MFP m233dw|HP LaserJet MFP m236dw|HP LaserJet MFP m235dw|HP LaserJet MFP m235dwe|HP LaserJet MFP m237dwe|HP LaserJet MFP m237dw|HP LaserJet MFP m232sdn|HP LaserJet MFP m233sdn|HP LaserJet MFP m236sdn|HP LaserJet MFP m234sdn|HP LaserJet MFP m234sdne|HP LaserJet MFP m235sdn|HP LaserJet MFP m235sdne|HP LaserJet MFP m237sdne|HP LaserJet MFP m237sdn|HP LaserJet MFP m232sdw|HP LaserJet MFP m233sdw|HP LaserJet MFP m236sdw|HP LaserJet MFP m234sdw|HP LaserJet MFP m234sdwe|HP LaserJet MFP m235sdw|HP LaserJet MFP m235sdwe|HP LaserJet MFP m237sdwe|HP LaserJet MFP m237sdw
+hp-laserjet_mfp_m28-m31.ppd	hbpl1	HP LaserJet MFP m28-m31	HP LaserJet Pro MFP m28w|HP LaserJet Pro MFP m30w|HP LaserJet Pro MFP m31w|HP LaserJet Pro MFP m29w|HP LaserJet Pro MFP m30cw|HP LaserJet Pro MFP m31cw
+hp-laserjet_p2015_series-pcl3.ppd	ljmono	HP LaserJet p2015 Series	HP LaserJet p2015 Printer
+hp-laserjet_p2015d_series.ppd	ljmono	HP LaserJet p2015d Series	HP LaserJet p2015d Printer
+hp-laserjet_p2015dn_series.ppd	ljmono	HP LaserJet p2015dn Series	HP LaserJet p2015dn Printer
+hp-laserjet_p2015n_series.ppd	ljmono	HP LaserJet p2015n Series	HP LaserJet p2015n Printer
+hp-laserjet_p2015x_series.ppd	ljmono	HP LaserJet p2015x Series	HP LaserJet p2015x Printer
+hp-laserjet_p2055-pcl3.ppd	ljmono	HP LaserJet p2055	HP LaserJet p2055 Printer
+hp-laserjet_p2055d-pcl3.ppd	ljmono	HP LaserJet p2055d	HP LaserJet p2055d Printer
+hp-laserjet_p2055dn-pcl3.ppd	ljmono	HP LaserJet p2055dn	HP LaserJet p2055dn Printer
+hp-laserjet_p2055x-pcl3.ppd	ljmono	HP LaserJet p2055x	HP LaserJet p2055x Printer
+hp-laserjet_p3004-pcl3.ppd	ljmono	HP LaserJet p3004	HP LaserJet p3004 Printer
+hp-laserjet_p3005-pcl3.ppd	ljmono	HP LaserJet p3005	HP LaserJet p3005 Printer|HP LaserJet p3005d Printer|HP LaserJet p3005dn Printer|HP LaserJet p3005n Printer|HP LaserJet p3005x Printer|HP LaserJet p3005dtn Printer
+hp-laserjet_p3010_series-pcl3.ppd	ljmono	HP LaserJet p3010 Series	HP LaserJet p3015 Printer|HP LaserJet p3011 Printer
+hp-laserjet_p4014.ppd	ljmono	HP LaserJet p4014	HP LaserJet p4014 Printer
+hp-laserjet_p4014dn.ppd	ljmono	HP LaserJet p4014dn	HP LaserJet p4014dn Printer
+hp-laserjet_p4014n.ppd	ljmono	HP LaserJet p4014n	HP LaserJet p4014n Printer
+hp-laserjet_p4015.ppd	ljmono	HP LaserJet p4015	HP LaserJet p4015 Printer
+hp-laserjet_p4015dn.ppd	ljmono	HP LaserJet p4015dn	HP LaserJet p4015dn Printer
+hp-laserjet_p4015n.ppd	ljmono	HP LaserJet p4015n	HP LaserJet p4015n Printer
+hp-laserjet_p4015tn.ppd	ljmono	HP LaserJet p4015tn	HP LaserJet p4015tn Printer
+hp-laserjet_p4015x.ppd	ljmono	HP LaserJet p4015x	HP LaserJet p4015x Printer
+hp-laserjet_p4515.ppd	ljmono	HP LaserJet p4515	HP LaserJet p4515 Printer
+hp-laserjet_p4515n.ppd	ljmono	HP LaserJet p4515n	HP LaserJet p4515n Printer
+hp-laserjet_p4515tn.ppd	ljmono	HP LaserJet p4515tn	HP LaserJet p4515tn Printer
+hp-laserjet_p4515x.ppd	ljmono	HP LaserJet p4515x	HP LaserJet p4515x Printer
+hp-laserjet_p4515xm.ppd	ljmono	HP LaserJet p4515xm	HP LaserJet p4515xm Printer
+hp-laserjet_pro_mfp_m125a.ppd	hbpl1	HP LaserJet Pro MFP m125a	HP LaserJet Pro MFP m125a
+hp-laserjet_pro_mfp_m125nr.ppd	hbpl1	HP LaserJet Pro MFP m125nr	HP LaserJet Pro MFP m125nr
+hp-laserjet_pro_mfp_m125nw.ppd	hbpl1	HP LaserJet Pro MFP m125nw	HP LaserJet Pro MFP m125nw
+hp-laserjet_pro_mfp_m125r.ppd	hbpl1	HP LaserJet Pro MFP m125r	HP LaserJet Pro MFP m125r
+hp-laserjet_pro_mfp_m125rnw.ppd	hbpl1	HP LaserJet Pro MFP m125rnw	HP LaserJet Pro MFP m125rnw
+hp-laserjet_pro_mfp_m125s.ppd	hbpl1	HP LaserJet Pro MFP m125s	HP LaserJet Pro MFP m125s
+hp-laserjet_pro_mfp_m126a.ppd	hbpl1	HP LaserJet Pro MFP m126a	HP LaserJet Pro MFP m126a
+hp-laserjet_pro_mfp_m126nw.ppd	hbpl1	HP LaserJet Pro MFP m126nw	HP LaserJet Pro MFP m126nw
+hp-laserjet_pro_mfp_m127fn.ppd	hbpl1	HP LaserJet Pro MFP m127fn	HP LaserJet Pro MFP m127fn
+hp-laserjet_pro_mfp_m127fp.ppd	hbpl1	HP LaserJet Pro MFP m127fp	HP LaserJet Pro MFP m127fp
+hp-laserjet_pro_mfp_m127fs.ppd	hbpl1	HP LaserJet Pro MFP m127fs	HP LaserJet Pro MFP m127fs
+hp-laserjet_pro_mfp_m128fn.ppd	hbpl1	HP LaserJet Pro MFP m128fn	HP LaserJet Pro MFP m128fn
+hp-laserjet_pro_mfp_m128fp.ppd	hbpl1	HP LaserJet Pro MFP m128fp	HP LaserJet Pro MFP m128fp
+hp-laserjet_pro_mfp_m128fw.ppd	hbpl1	HP LaserJet Pro MFP m128fw	HP LaserJet Pro MFP m128fw
+hp-laserjet_pro_mfp_m25a.ppd	hbpl1	HP LaserJet Pro MFP m25a	HP LaserJet Pro MFP m25a
+hp-laserjet_pro_mfp_m25nw.ppd	hbpl1	HP LaserJet Pro MFP m25nw	HP LaserJet Pro MFP m25nw
+hp-laserjet_pro_mfp_m26a.ppd	hbpl1	HP LaserJet Pro MFP m26a	HP LaserJet Pro MFP m26a
+hp-laserjet_pro_mfp_m26nw.ppd	hbpl1	HP LaserJet Pro MFP m26nw	HP LaserJet Pro MFP m26nw
+hp-laserjet_pro_mfp_m27c.ppd	hbpl1	HP LaserJet Pro MFP m27c	HP LaserJet Pro MFP m27c
+hp-laserjet_pro_mfp_m27cnw.ppd	hbpl1	HP LaserJet Pro MFP m27cnw	HP LaserJet Pro MFP m27cnw
+hp-laserjet_pro_p1100_plus_series.ppd	hbpl1	HP LaserJet Pro p1100 Plus Series	HP LaserJet Pro p1106 Plus|HP LaserJet Pro p1108 Plus
+hp-laserjet_tank_1020.ppd	hbpl1	HP LaserJet Tank 1020	HP LaserJet Tank 1020|HP LaserJet Tank 1020w|HP LaserJet Tank 1020nw
+hp-laserjet_tank_150x.ppd	hbpl1	HP LaserJet Tank 150x	HP LaserJet Tank 1502a|HP LaserJet Tank 1502w|HP LaserJet Tank 1504w
+hp-laserjet_tank_250x.ppd	hbpl1	HP LaserJet Tank 250x	HP LaserJet Tank 2502dw|HP LaserJet Tank 2502dn|HP LaserJet Tank 2504dw|HP LaserJet Tank 2503dw|HP LaserJet Tank 2506dw|HP LaserJet Tank 2506d|HP LaserJet Tank 2506dn
+hp-laserjet_tank_mfp_1005.ppd	hbpl1	HP LaserJet Tank MFP 1005	HP LaserJet Tank MFP 1005|HP LaserJet Tank MFP 1005w|HP LaserJet Tank MFP 1005nw
+hp-laserjet_tank_mfp_160x.ppd	hbpl1	HP LaserJet Tank MFP 160x	HP LaserJet Tank MFP 1602a|HP LaserJet Tank MFP 1602w|HP LaserJet Tank MFP 1604w
+hp-laserjet_tank_mfp_260x.ppd	hbpl1	HP LaserJet Tank MFP 260x	HP LaserJet Tank MFP 2602dn|HP LaserJet Tank MFP 2602sdn|HP LaserJet Tank MFP 2602sdw|HP LaserJet Tank MFP 2602dw|HP LaserJet Tank MFP 2604dw|HP LaserJet Tank MFP 2604sdw|HP LaserJet Tank MFP 2603dw|HP LaserJet Tank MFP 2603sdw|HP LaserJet Tank MFP 2605sdw|HP LaserJet Tank MFP 2606dn|HP LaserJet Tank MFP 2606sdn|HP LaserJet Tank MFP 2606sdw|HP LaserJet Tank MFP 2606dw|HP LaserJet Tank MFP 2606dc
+hp-mopier_240-pcl3.ppd	ljmono	HP Mopier 240	HP Mopier 240 Printer
+hp-mopier_320-pcl3.ppd	ljmono	HP Mopier 320	HP Mopier 320 Printer
+hp-neverstop_laser_100x.ppd	hbpl1	HP Neverstop Laser 100x	HP Neverstop Laser 1000a|HP Neverstop Laser 1000w|HP Neverstop Laser 1000n|HP Neverstop Laser 1001nw
+hp-neverstop_laser_mfp_120x.ppd	hbpl1	HP Neverstop Laser MFP 120x	HP Neverstop Laser MFP 1200a|HP Neverstop Laser MFP 1200w|HP Neverstop Laser MFP 1200n|HP Neverstop Laser MFP 1201n|HP Neverstop Laser MFP 1200nw|HP Neverstop Laser MFP 1202nw
+hp-officejet.ppd	pcl3	HP Officejet	HP Officejet All-in-one Printer
+hp-officejet_100_mobile_l411.ppd	pcl3gui2	HP Officejet 100 Mobile l411	HP Officejet 100 Mobile l411
+hp-officejet_150_mobile_l511.ppd	pcl3gui2	HP Officejet 150 Mobile l511	HP Officejet 150 Mobile All-in-one
+hp-officejet_200_mobile_series.ppd	pcl3gui2	HP Officejet 200 Mobile Series	HP Officejet 200 Mobile Printer
+hp-officejet_250_mobile_series.ppd	pcl3gui2	HP Officejet 250 Mobile Series	HP Officejet 250 Mobile All-in-one|HP Officejet 250c Mobile All-in-one|HP Officejet 252 Mobile All-in-one|HP Officejet 252c Mobile All-in-one|HP Officejet 258 Mobile All-in-one
+hp-officejet_2620_series.ppd	pcl3gui2	HP Officejet 2620 Series	HP Officejet 2620 All-in-one|HP Officejet 2621 All-in-one|HP Officejet 2622 All-in-one
+hp-officejet_3830_series.ppd	pcl3gui2	HP Officejet 3830 Series	HP Officejet 3830 All-in-one Printer|HP Officejet 3832 All-in-one Printer|HP Officejet 3834 All-in-one Printer
+hp-officejet_4000_k210.ppd	lidil	HP Officejet 4000 k210	HP Officejet 4000 k210 Printer
+hp-officejet_4100_series.ppd	lidil	HP Officejet 4100 Series	HP Officejet 4100 Series All-in-one Printer|HP Officejet 4110xi All-in-one Printer|HP Officejet 4110 All-in-one Printer|HP Officejet 4110v All-in-one Printer
+hp-officejet_4105.ppd	lidil	HP Officejet 4105	HP Officejet 4105 All-in-one Printer
+hp-officejet_4115_series.ppd	lidil	HP Officejet 4115 Series	HP Officejet 4115 All-in-one Printer
+hp-officejet_4200_series.ppd	lidil	HP Officejet 4200 Series	HP Officejet 4200 All-in-one Printer|HP Officejet 4211 All-in-one Printer|HP Officejet 4212 All-in-one Printer|HP Officejet 4215 All-in-one Printer|HP Officejet 4215xi All-in-one Printer|HP Officejet 4215v All-in-one Printer|HP Officejet 4219 All-in-one Printer
+hp-officejet_4255.ppd	lidil	HP Officejet 4255	HP Officejet 4251 All-in-one Printer|HP Officejet 4252 All-in-one Printer|HP Officejet 4255 All-in-one Printer|HP Officejet 4256 All-in-one Printer|HP Officejet 4259 All-in-one Printer
+hp-officejet_4300_series.ppd	lidil	HP Officejet 4300 Series	HP Officejet 4308 All-in-one Printer|HP Officejet 4338 All-in-one Printer|HP Officejet 4352 All-in-one Printer|HP Officejet 4353 All-in-one Printer|HP Officejet 4355 All-in-one Printer|HP Officejet 4357 All-in-one Printer|HP Officejet 4359 All-in-one Printer|HP Officejet 4311 All-in-one Printer|HP Officejet 4312 All-in-one Printer|HP Officejet 4314 All-in-one Printer|HP Officejet 4315 All-in-one Printer|HP Officejet 4315v All-in-one Printer|HP Officejet 4315xi All-in-one Printer|HP Officejet 4317 All-in-one Printer|HP Officejet 4319 All-in-one Printer
+hp-officejet_4400_k410.ppd	pcl3gui2	HP Officejet 4400 k410	HP Officejet 4400 k410 All-in-one Printer
+hp-officejet_4500_g510a-f.ppd	pcl3gui2	HP Officejet 4500 g510a-f	HP Officejet 4500 Desktop All-in-one Printer - g510a|HP Officejet 4500 All-in-one Desktop Printer - g510b
+hp-officejet_4500_g510g-m.ppd	pcl3gui2	HP Officejet 4500 g510g-m	HP Officejet 4500 All-in-one Printer - g510g|HP Officejet 4500 All-in-one Printer - g510h
+hp-officejet_4500_g510n-z.ppd	pcl3gui2	HP Officejet 4500 g510n-z	HP Officejet 4500 g510n-z All-in-one Printer
+hp-officejet_4500_k710.ppd	pcl3gui2	HP Officejet 4500 k710	HP Officejet 4500 All-in-one Printer - k710
+hp-officejet_4610_series.ppd	pcl3gui2	HP Officejet 4610 Series	HP Officejet 4610 All-in-one Printer Series
+hp-officejet_4620_series.ppd	pcl3gui2	HP Officejet 4620 Series	HP Officejet 4620 E-all-in-one Printer|HP Officejet 4622 E-all-in-one Printer
+hp-officejet_4630_series.ppd	pcl3gui2	HP Officejet 4630 Series	HP Officejet 4630 E-all-in-one Printer|HP Officejet 4631 E-all-in-one Printer|HP Officejet 4632 E-all-in-one Printer|HP Officejet 4634 E-all-in-one Printer|HP Officejet 4635 E-all-in-one Printer|HP Officejet 4636 E-all-in-one Printer
+hp-officejet_4650_series.ppd	pcl3gui2	HP Officejet 4650 Series	HP Officejet 4650 All-in-one Printer Series|HP Officejet 4650 All-in-one Printer|HP Officejet 4652 All-in-one Printer|HP Officejet 4654 All-in-one Printer|HP Officejet 4655 All-in-one Printer
+hp-officejet_5100_series.ppd	pcl3gui	HP Officejet 5100 Series	HP Officejet 5100 All-in-one Printer|HP Officejet 5105 All-in-one Printer|HP Officejet 5110v All-in-one Printer|HP Officejet 5110xi All-in-one Printer|HP Officejet 5110 All-in-one Printer
+hp-officejet_5200_series.ppd	pcl3gui2	HP Officejet 5200 Series	HP Officejet 5200 All-in-one|HP Officejet 5220 All-in-one|HP Officejet 5230 All-in-one|HP Officejet 5232 All-in-one
+hp-officejet_5500_series.ppd	lidil	HP Officejet 5500 Series	HP Officejet 5505 All-in-one Printer|HP Officejet 5508 All-in-one Printer|HP Officejet 5510v All-in-one Printer|HP Officejet 5510 All-in-one Printer|HP Officejet 5510xi All-in-one Printer|HP Officejet 5515 All-in-one Printer
+hp-officejet_5600_series.ppd	lidil	HP Officejet 5600 Series	HP Officejet 5600 Series All-in-one Printer|HP Officejet 5679 All-in-one Printer|HP Officejet 5680 All-in-one Printer|HP Officejet 5605 All-in-one Printer|HP Officejet 5607 All-in-one Printer|HP Officejet 5608 All-in-one Printer|HP Officejet 5609 All-in-one Printer|HP Officejet 5610 All-in-one Printer|HP Officejet 5610xi All-in-one Printer|HP Officejet 5610v All-in-one Printer|HP Officejet 5615 All-in-one Printer
+hp-officejet_5740_series.ppd	pcl3gui2	HP Officejet 5740 Series	HP Officejet 5740 E-all-in-one|HP Officejet 5742 E-all-in-one|HP Officejet 5745 E-all-in-one|HP Officejet 5744 E-all-in-one
+hp-officejet_6000_e609a.ppd	pcl3gui2	HP Officejet 6000 e609a	HP Officejet 6000 Printer - e609a
+hp-officejet_6000_e609n.ppd	pcl3gui2	HP Officejet 6000 e609n	HP Officejet 6000 Wireless Printer - e609n
+hp-officejet_6100.ppd	pcl3gui2	HP Officejet 6100	HP Officejet 6100 Eprinter h611a
+hp-officejet_6100_series.ppd	pcl3gui2	HP Officejet 6100 Series	HP Officejet 6105 All-in-one Printer|HP Officejet 6110xi All-in-one Printer|HP Officejet 6110v All-in-one Printer|HP Officejet 6110 All-in-one Printer
+hp-officejet_6150_series.ppd	pcl3gui2	HP Officejet 6150 Series	HP Officejet 6150 All-in-one Printer
+hp-officejet_6200_series.ppd	pcl3gui2	HP Officejet 6200 Series	HP Officejet 6200 All-in-one Printer|HP Officejet 6203 All-in-one Printer|HP Officejet 6205 All-in-one Printer|HP Officejet 6208 All-in-one Printer|HP Officejet 6210xi All-in-one Printer|HP Officejet 6210v All-in-one Printer|HP Officejet 6210 All-in-one Printer|HP Officejet 6213 All-in-one Printer|HP Officejet 6215 All-in-one Printer
+hp-officejet_6300_series.ppd	pcl3gui2	HP Officejet 6300 Series	HP Officejet 6301 All-in-one Printer|HP Officejet 6315 All-in-one Printer|HP Officejet 6318 All-in-one Printer|HP Officejet 6304 All-in-one Printer|HP Officejet 6305 All-in-one Printer|HP Officejet 6307 All-in-one Printer|HP Officejet 6308 All-in-one Printer|HP Officejet 6310 All-in-one Printer|HP Officejet 6310xi All-in-one Printer|HP Officejet 6310v All-in-one Printer|HP Officejet 6313 All-in-one Printer
+hp-officejet_6500_e709a.ppd	pcl3gui2	HP Officejet 6500 e709a	HP Officejet 6500 All-in-one Printer - e709a|HP Officejet 6500 All-in-one Printer - e709c
+hp-officejet_6500_e709n.ppd	pcl3gui2	HP Officejet 6500 e709n	HP Officejet 6500 Wireless All-in-one Printer - e709n|HP Officejet 6500 Wireless All-in-one Printer - e709q
+hp-officejet_6500_e710a-f.ppd	pcl3gui2	HP Officejet 6500 e710a-f	HP Officejet 6500 e710
+hp-officejet_6500_e710n-z.ppd	pcl3gui2	HP Officejet 6500 e710n-z	HP Officejet 6500 e710n-z
+hp-officejet_6600.ppd	pcl3gui2	HP Officejet 6600	HP Officejet 6600 E-all-in-one Printer - h711a
+hp-officejet_6700.ppd	pcl3gui2	HP Officejet 6700	HP Officejet 6700 Premium E-all-in-one Printer-h711n
+hp-officejet_6800.ppd	pcl3gui2	HP Officejet 6800	HP Officejet 6800 E-all-in-one|HP Officejet 6810 E-all-in-one Printer Series|HP Officejet 6812 E-all-in-one Printer|HP Officejet 6815 E-all-in-one Printer|HP Officejet 6820 E-all-in-one Printer
+hp-officejet_6950.ppd	pcl3gui2	HP Officejet 6950	HP Officejet 6950 All-in-one
+hp-officejet_6960.ppd	pcl3gui2	HP Officejet 6960	HP Officejet 6960 All-in-one
+hp-officejet_7000_e809a_series.ppd	pcl3gui2	HP Officejet 7000 e809a Series	HP Officejet 7000 e809 Series|HP Officejet 7000 Wide Format Printer -e809a|HP Officejet 7000 e809 Printer
+hp-officejet_7100_series.ppd	pcl3gui2	HP Officejet 7100 Series	HP Officejet 7100 All-in-one Printer|HP Officejet 7110 All-in-one Printer|HP Officejet 7110xi All-in-one Printer|HP Officejet 7115 All-in-one Printer|HP Officejet 7130 All-in-one Printer|HP Officejet 7130xi All-in-one Printer|HP Officejet 7135xi All-in-one Printer|HP Officejet 7140xi All-in-one Printer
+hp-officejet_7110_series.ppd	pcl3gui2	HP Officejet 7110 Series	HP Officejet 7110 Wide Format Eprinter
+hp-officejet_7200_series.ppd	pcl3gui2	HP Officejet 7200 Series	HP Officejet 7205 All-in-one Printer|HP Officejet 7208 All-in-one Printer|HP Officejet 7210v All-in-one Printer|HP Officejet 7210xi All-in-one Printer|HP Officejet 7210 All-in-one Printer|HP Officejet 7213 All-in-one Printer|HP Officejet 7215 All-in-one Printer
+hp-officejet_7300_series.ppd	pcl3gui2	HP Officejet 7300 Series	HP Officejet 7310 All-in-one Printer|HP Officejet 7310xi All-in-one Printer|HP Officejet 7313 All-in-one Printer
+hp-officejet_7400_series.ppd	pcl3gui2	HP Officejet 7400 Series	HP Officejet 7408 All-in-one Printer|HP Officejet 7410 All-in-one Printer|HP Officejet 7410xi All-in-one Printer|HP Officejet 7413 All-in-one Printer
+hp-officejet_7500_e910.ppd	pcl3gui2	HP Officejet 7500 e910	HP Officejet 7500 e910
+hp-officejet_7510_series.ppd	pcl3gui2	HP Officejet 7510 Series	HP Officejet 7510 Wide Format E-all-in-one Printer
+hp-officejet_7610_series.ppd	pcl3gui2	HP Officejet 7610 Series	HP Officejet 7610 Wide Format E-all-in-one Printer|HP Officejet 7612 Wide Format E-all-in-one Printer
+hp-officejet_8010_series.ppd	pcl3gui2	HP Officejet 8010 Series	HP Officejet 8010 All-in-one Printer Series
+hp-officejet_8020_series.ppd	pcl3gui2	HP Officejet 8020 Series	HP Officejet 8020 All-in-one Printer Series
+hp-officejet_8040_series.ppd	pcl3gui2	HP Officejet 8040 Series	HP Officejet 8040 E-all-in-one
+hp-officejet_8120_series.ppd	pcl3gui2	HP Officejet 8120 Series	HP Officejet 8120 All-in-one Series
+hp-officejet_8120e_series.ppd	pcl3gui2	HP Officejet 8120e Series	HP Officejet 8120 All-in-one Series
+hp-officejet_8130_series.ppd	pcl3gui2	HP Officejet 8130 Series	HP Officejet 8130 All-in-one Series
+hp-officejet_8130e_series.ppd	pcl3gui2	HP Officejet 8130e Series	HP Officejet 8130 All-in-one Series
+hp-officejet_8700.ppd	pcl3gui2	HP Officejet 8700	HP Officejet 8702 All-in-one
+hp-officejet_9010_series.ppd	pcl3gui2	HP Officejet 9010 Series	HP Officejet All-in-one 9010
+hp-officejet_9100_series-pcl3.ppd	ljcolor	HP Officejet 9100 Series	HP Officejet 9110 All-in-one Printer|HP Officejet 9120 All-in-one Printer|HP Officejet 9130 All-in-one Printer
+hp-officejet_d_series.ppd	pcl3gui2	HP Officejet D Series	HP Officejet d125xi All-in-one Printer|HP Officejet d135 All-in-one Printer|HP Officejet d135xi All-in-one Printer|HP Officejet d145xi All-in-one Printer|HP Officejet d145 All-in-one Printer|HP Officejet d155xi All-in-one Printer
+hp-officejet_g55.ppd	pcl3gui	HP Officejet g55	HP Officejet g55 All-in-one Printer
+hp-officejet_g55xi.ppd	pcl3gui	HP Officejet g55xi	HP Officejet g55xi All-in-one Printer
+hp-officejet_g85.ppd	pcl3gui	HP Officejet g85	HP Officejet g85 All-in-one Printer
+hp-officejet_g85xi.ppd	pcl3gui	HP Officejet g85xi	HP Officejet g85xi All-in-one Printer
+hp-officejet_g95.ppd	pcl3gui	HP Officejet g95	HP Officejet g95 All-in-one Printer
+hp-officejet_h470.ppd	pcl3gui2	HP Officejet h470	HP Officejet h470 Mobile Printer|HP Officejet h470wbt Mobile Printer|HP Officejet h470wf Mobile Printer|HP Officejet h470bt Mobile Printer
+hp-officejet_j3500_series.ppd	lidil	HP Officejet j3500 Series	HP Officejet j3508 All-in-one Printer
+hp-officejet_j3600_series.ppd	lidil	HP Officejet j3600 Series	HP Officejet j3608 All-in-one Printer|HP Officejet j3625 All-in-one Printer|HP Officejet j3635 All-in-one Printer|HP Officejet j3640 All-in-one Printer|HP Officejet j3650 All-in-one Printer|HP Officejet j3680 All-in-one Printer
+hp-officejet_j4500_series.ppd	pcl3gui2	HP Officejet j4500 Series	HP Officejet j4524 All-in-one Printer|HP Officejet j4525 All-in-one Printer|HP Officejet j4535 All-in-one Printer|HP Officejet j4540 All-in-one Printer|HP Officejet j4550 All-in-one Printer|HP Officejet j4560 All-in-one Printer|HP Officejet j4580 All-in-one Printer|HP Officejet j4580c All-in-one Printer|HP Officejet j4585 All-in-one Printer
+hp-officejet_j4660_series.ppd	pcl3gui2	HP Officejet j4660 Series	HP Officejet j4660 All-in-one Printer
+hp-officejet_j4680_series.ppd	pcl3gui2	HP Officejet j4680 Series	HP Officejet j4680c All-in-one Printer|HP Officejet j4680 All-in-one Printer
+hp-officejet_j5500_series.ppd	lidil	HP Officejet j5500 Series	HP Officejet j5505 All-in-one Printer|HP Officejet j5508 All-in-one Printer|HP Officejet j5510xi All-in-one Printer|HP Officejet j5510 All-in-one Printer|HP Officejet j5510v All-in-one Printer|HP Officejet j5515 All-in-one Printer|HP Officejet j5520 All-in-one Printer
+hp-officejet_j5700_series.ppd	pcl3gui2	HP Officejet j5700 Series	HP Officejet j5725 All-in-one Printer|HP Officejet j5785 All-in-one Printer|HP Officejet j5788 All-in-one Printer|HP Officejet j5790 All-in-one Printer|HP Officejet j5725 All-in-one Printer|HP Officejet j5730 All-in-one Printer|HP Officejet j5735 All-in-one Printer|HP Officejet j5738 All-in-one Printer|HP Officejet j5740 All-in-one Printer|HP Officejet j5750 All-in-one Printer|HP Officejet j5780 All-in-one Printer|HP Officejet j5783 All-in-one Printer
+hp-officejet_j6400_series.ppd	pcl3gui2	HP Officejet j6400 Series	HP Officejet j6405 All-in-one Printer|HP Officejet j6410 All-in-one Printer|HP Officejet j6413 All-in-one Printer|HP Officejet j6415 All-in-one Printer|HP Officejet j6424 All-in-one Printer|HP Officejet j6450 All-in-one Printer|HP Officejet j6480 All-in-one Printer|HP Officejet j6488 All-in-one Printer
+hp-officejet_k60.ppd	pcl3gui	HP Officejet k60	HP Officejet k60 All-in-one Printer
+hp-officejet_k60xi.ppd	pcl3gui	HP Officejet k60xi	HP Officejet k60xi All-in-one Printer
+hp-officejet_k7100.ppd	pcl3gui2	HP Officejet k7100	HP Officejet k7100 Printer|HP Officejet k7103 Printer|HP Officejet k7108 Printer
+hp-officejet_k80.ppd	pcl3gui	HP Officejet k80	HP Officejet k80 All-in-one Printer
+hp-officejet_k80xi.ppd	pcl3gui	HP Officejet k80xi	HP Officejet k80xi All-in-one Printer
+hp-officejet_lx.ppd	pcl3	HP Officejet Lx	HP Officejet Lx All-in-one Printer
+hp-officejet_pro_1150c.ppd	pcl3	HP Officejet Pro 1150c	HP Officejet Pro 1150c All-in-one Printer|HP Officejet Pro 1150cse All-in-one Printer
+hp-officejet_pro_1170c_series.ppd	pcl3gui	HP Officejet Pro 1170c Series	HP Officejet Pro 1170c All-in-one Printer|HP Officejet Pro 1170cse All-in-one Printer|HP Officejet Pro 1170cxi All-in-one Printer|HP Officejet Pro 1175c All-in-one Printer|HP Officejet Pro 1175cse All-in-one Printer|HP Officejet Pro 1175cxi All-in-one Printer
+hp-officejet_pro_3610.ppd	pcl3gui2	HP Officejet Pro 3610	HP Officejet Pro 3610 Black And White E-all-in-one
+hp-officejet_pro_3620.ppd	pcl3gui2	HP Officejet Pro 3620	HP Officejet Pro 3620 Black And White E-all-in-one
+hp-officejet_pro_6230.ppd	pcl3gui2	HP Officejet Pro 6230	HP Officejet Pro 6230 Eprinter
+hp-officejet_pro_6830.ppd	pcl3gui2	HP Officejet Pro 6830	HP Officejet Pro 6830 E-all-in-one|HP Officejet Pro 6835 E-all-in-one
+hp-officejet_pro_6960.ppd	pcl3gui2	HP Officejet Pro 6960	HP Officejet Pro 6960 All-in-one|HP Officejet Pro 6968 All-in-one
+hp-officejet_pro_6970.ppd	pcl3gui2	HP Officejet Pro 6970	HP Officejet Pro 6970 All-in-one|HP Officejet Pro 6975 All-in-one|HP Officejet Pro 6978 All-in-one
+hp-officejet_pro_7720_series.ppd	pcl3gui2	HP Officejet Pro 7720 Series	HP Officejet Pro 7720 Wide Format All-in-one
+hp-officejet_pro_7730_series.ppd	pcl3gui2	HP Officejet Pro 7730 Series	HP Officejet Pro 7730 Wide Format All-in-one
+hp-officejet_pro_7740_series.ppd	pcl3gui2	HP Officejet Pro 7740 Series	HP Officejet Pro 7740 Wide Format All-in-one
+hp-officejet_pro_8000_a809.ppd	pcl3gui2	HP Officejet Pro 8000 a809	HP Officejet Pro 8000 Printer - a809a|HP Officejet Pro 8000 Wireless Printer - a809n
+hp-officejet_pro_8020_series.ppd	pcl3gui2	HP Officejet Pro 8020 Series	HP Officejet Pro 8020 All-in-one Printer Series
+hp-officejet_pro_8030_series.ppd	pcl3gui2	HP Officejet Pro 8030 Series	HP Officejet Pro 8030 All-in-one Printer Series
+hp-officejet_pro_8100.ppd	pcl3gui2	HP Officejet Pro 8100	HP Officejet Pro 8100 Eprinter-n811a
+hp-officejet_pro_8120_series.ppd	pcl3gui2	HP Officejet Pro 8120 Series	HP Officejet Pro 8120 All-in-one Series
+hp-officejet_pro_8120e_series.ppd	pcl3gui2	HP Officejet Pro 8120e Series	HP Officejet Pro 8120 All-in-one Series
+hp-officejet_pro_8130_series.ppd	pcl3gui2	HP Officejet Pro 8130 Series	HP Officejet Pro 8130 All-in-one Series
+hp-officejet_pro_8130e_series.ppd	pcl3gui2	HP Officejet Pro 8130e Series	HP Officejet Pro 8130 All-in-one Series
+hp-officejet_pro_8500_a909a.ppd	pcl3gui2	HP Officejet Pro 8500 a909a	HP Officejet Pro 8500 All-in-one Printer - a909a
+hp-officejet_pro_8500_a909g.ppd	pcl3gui2	HP Officejet Pro 8500 a909g	HP Officejet Pro 8500 Wireless All-in-one Printer - a909g
+hp-officejet_pro_8500_a909n.ppd	pcl3gui2	HP Officejet Pro 8500 a909n	HP Officejet Pro 8500 Premier All-in-one Printer - a909n
+hp-officejet_pro_8500_a910.ppd	pcl3gui2	HP Officejet Pro 8500 a910	HP Officejet Pro 8500a Plus E-aio Printer - a910g|HP Officejet Pro 8500a Premium E-aio Printer - a910n|HP Officejet Pro 8500a E-aio Printer - a910a
+hp-officejet_pro_8600.ppd	pcl3gui2	HP Officejet Pro 8600	HP Officejet Pro 8600 E-aio n911a|HP Officejet Pro 8600 Plus E-aio n911g|HP Officejet Pro 8600 Premium E-aio n911n
+hp-officejet_pro_8610.ppd	pcl3gui2	HP Officejet Pro 8610	HP Officejet Pro 8610 E-all-in-one Printer|HP Officejet Pro 8615 E-all-in-one Printer|HP Officejet Pro 8616 E-all-in-one Printer
+hp-officejet_pro_8620.ppd	pcl3gui2	HP Officejet Pro 8620	HP Officejet Pro 8620 E-all-in-one Printer|HP Officejet Pro 8625 E-all-in-one Printer
+hp-officejet_pro_8630.ppd	pcl3gui2	HP Officejet Pro 8630	HP Officejet Pro 8630 E-all-in-one Printer
+hp-officejet_pro_8640.ppd	pcl3gui2	HP Officejet Pro 8640	HP Officejet Pro 8640 E-all-in-one Printer
+hp-officejet_pro_8660.ppd	pcl3gui2	HP Officejet Pro 8660	HP Officejet Pro 8660 E-all-in-one Printer
+hp-officejet_pro_8710.ppd	pcl3gui2	HP Officejet Pro 8710	HP Officejet Pro 8710 All-in-one Printer|HP Officejet Pro 8715 All-in-one Printer
+hp-officejet_pro_8720.ppd	pcl3gui2	HP Officejet Pro 8720	HP Officejet Pro 8720 All-in-one Printer|HP Officejet Pro 8725 All-in-one Printer
+hp-officejet_pro_9010_series.ppd	pcl3gui2	HP Officejet Pro 9010 Series	HP Officejet Pro All-in-one 9010
+hp-officejet_pro_9020_series.ppd	pcl3gui2	HP Officejet Pro 9020 Series	HP Officejet Pro All-in-one 9020
+hp-officejet_pro_9110b_series.ppd	pcl3gui2	HP Officejet Pro 9110b Series	HP Officejet Pro 9110b Series
+hp-officejet_pro_9120b_series.ppd	pcl3gui2	HP Officejet Pro 9120b Series	HP Officejet Pro 9120b Series
+hp-officejet_pro_9130b_series.ppd	pcl3gui2	HP Officejet Pro 9130b Series	HP Officejet Pro 9130b Series
+hp-officejet_pro_9720_series.ppd	pcl3gui2	HP Officejet Pro 9720 Series	HP Officejet Pro 9720 Series
+hp-officejet_pro_9720e_series.ppd	pcl3gui2	HP Officejet Pro 9720e Series	HP Officejet Pro 9720 Series
+hp-officejet_pro_9730_series.ppd	pcl3gui2	HP Officejet Pro 9730 Series	HP Officejet Pro 9730 Series
+hp-officejet_pro_9730e_series.ppd	pcl3gui2	HP Officejet Pro 9730e Series	HP Officejet Pro 9730 Series
+hp-officejet_pro_k5300.ppd	pcl3gui2	HP Officejet Pro k5300	HP Officejet Pro k5300 Printer
+hp-officejet_pro_k5400.ppd	pcl3gui2	HP Officejet Pro k5400	HP Officejet Pro k5400dn Printer|HP Officejet Pro k5400dtn Printer|HP Officejet Pro k5400n Printer|HP Officejet Pro k5400 Printer|HP Officejet Pro k5400z Printer
+hp-officejet_pro_k550.ppd	pcl3gui2	HP Officejet Pro k550	HP Officejet Pro k550dtwn Printer|HP Officejet Pro k550dtn Printer|HP Officejet Pro k550 Printer|HP Officejet Pro k550xi Printer
+hp-officejet_pro_k850.ppd	pcl3gui2	HP Officejet Pro k850	HP Officejet Pro k850 Printer|HP Officejet Pro k850dn Printer
+hp-officejet_pro_k8600.ppd	pcl3gui2	HP Officejet Pro k8600	HP Officejet Pro k8600 Color Printer|HP Officejet Pro k8600dn Color Printer
+hp-officejet_pro_l7300.ppd	pcl3gui2	HP Officejet Pro l7300	HP Officejet Pro l7300 Series All-in-one Printer|HP Officejet Pro l7380 All-in-one Printer
+hp-officejet_pro_l7400.ppd	pcl3gui2	HP Officejet Pro l7400	HP Officejet Pro l7480 All-in-one Printer
+hp-officejet_pro_l7500.ppd	pcl3gui2	HP Officejet Pro l7500	HP Officejet Pro l7500 Series All-in-one Printer|HP Officejet Pro l7550 All-in-one Printer|HP Officejet Pro l7555 All-in-one Printer|HP Officejet Pro l7580 All-in-one Printer|HP Officejet Pro l7590 All-in-one Printer
+hp-officejet_pro_l7600.ppd	pcl3gui2	HP Officejet Pro l7600	HP Officejet Pro l7600 Series All-in-one Printer|HP Officejet Pro l7650 All-in-one Printer|HP Officejet Pro l7680 All-in-one Printer|HP Officejet Pro l7681 All-in-one Printer
+hp-officejet_pro_l7700.ppd	pcl3gui2	HP Officejet Pro l7700	HP Officejet Pro l7700 Series All-in-one Printer|HP Officejet Pro l7710 All-in-one Printer|HP Officejet Pro l7750 All-in-one Printer|HP Officejet Pro l7780 All-in-one Printer
+hp-officejet_r40.ppd	pcl3gui	HP Officejet r40	HP Officejet r40 All-in-one Printer
+hp-officejet_r40xi.ppd	pcl3gui	HP Officejet r40xi	HP Officejet r40xi All-in-one Printer
+hp-officejet_r45.ppd	pcl3gui	HP Officejet r45	HP Officejet r45 All-in-one Printer
+hp-officejet_r60.ppd	pcl3gui	HP Officejet r60	HP Officejet r60 All-in-one Printer
+hp-officejet_r65.ppd	pcl3gui	HP Officejet r65	HP Officejet r65 All-in-one Printer
+hp-officejet_r80.ppd	pcl3gui	HP Officejet r80	HP Officejet r80 All-in-one Printer
+hp-officejet_r80xi.ppd	pcl3gui	HP Officejet r80xi	HP Officejet r80xi All-in-one Printer
+hp-officejet_series_300.ppd	pcl3	HP Officejet Series 300	HP Officejet 300 All-in-one Printer
+hp-officejet_series_310.ppd	pcl3	HP Officejet Series 310	HP Officejet 310 All-in-one Series Printer
+hp-officejet_series_320.ppd	pcl3	HP Officejet Series 320	HP Officejet 320 All-in-one Series Printer
+hp-officejet_series_330.ppd	pcl3	HP Officejet Series 330	HP Officejet 330 All-in-one Printer
+hp-officejet_series_350.ppd	pcl3	HP Officejet Series 350	HP Officejet 350 All-in-one Printer
+hp-officejet_series_520.ppd	pcl3	HP Officejet Series 520	HP Officejet 520 All-in-one Printer
+hp-officejet_series_570.ppd	pcl3	HP Officejet Series 570	HP Officejet 570 All-in-one Printer
+hp-officejet_series_580.ppd	pcl3	HP Officejet Series 580	HP Officejet 580 All-in-one Printer
+hp-officejet_series_590.ppd	pcl3	HP Officejet Series 590	HP Officejet 590 All-in-one Printer
+hp-officejet_series_600.ppd	pcl3	HP Officejet Series 600	HP Officejet 600 All-in-one Printer
+hp-officejet_series_610.ppd	pcl3	HP Officejet Series 610	HP Officejet 610 All-in-one Printer
+hp-officejet_series_630.ppd	pcl3	HP Officejet Series 630	HP Officejet 630 All-in-one Printer|HP Officejet 635 All-in-one Printer
+hp-officejet_series_700.ppd	pcl3	HP Officejet Series 700	HP Officejet 700 All-in-one Printer
+hp-officejet_series_710.ppd	pcl3	HP Officejet Series 710	HP Officejet 710 All-in-one Printer
+hp-officejet_series_720.ppd	pcl3	HP Officejet Series 720	HP Officejet 720 All-in-one Printer
+hp-officejet_series_725.ppd	pcl3	HP Officejet Series 725	HP Officejet 725 All-in-one Printer
+hp-officejet_t_series.ppd	pcl3gui	HP Officejet T Series	HP Officejet t45 All-in-one Printer|HP Officejet t45xi All-in-one Printer|HP Officejet t65 All-in-one Printer|HP Officejet t65xi All-in-one Printer
+hp-officejet_v30.ppd	pcl3gui	HP Officejet v30	HP Officejet v30 All-in-one Printer
+hp-officejet_v40.ppd	pcl3gui	HP Officejet v40	HP Officejet v40 All-in-one Printer|HP Officejet v40s All-in-one Printer
+hp-officejet_v40xi.ppd	pcl3gui	HP Officejet v40xi	HP Officejet v40xi All-in-one Printer
+hp-officejet_v45.ppd	pcl3gui	HP Officejet v45	HP Officejet v45 All-in-one Printer
+hp-photosmart_100.ppd	pcl3gui2	HP Photosmart 100	HP Photosmart 100 Printer
+hp-photosmart_1115.ppd	pcl3gui2	HP Photosmart 1115	HP Photosmart 1115 Printer
+hp-photosmart_1215.ppd	pcl3gui2	HP Photosmart 1215	HP Photosmart 1215 Printer|HP Photosmart 1215vm Printer
+hp-photosmart_1218.ppd	pcl3gui2	HP Photosmart 1218	HP Photosmart 1218 Printer|HP Photosmart 1218xi Printer
+hp-photosmart_130.ppd	pcl3gui2	HP Photosmart 130	HP Photosmart 130 Printer|HP Photosmart 130v Printer|HP Photosmart 130xi Printer
+hp-photosmart_1315.ppd	pcl3gui2	HP Photosmart 1315	HP Photosmart 1315 Printer
+hp-photosmart_140_series.ppd	pcl3gui2	HP Photosmart 140 Series	HP Photosmart 140 Compact Photo Printer|HP Photosmart 145v Compact Photo Printer|HP Photosmart 145xi Compact Photo Printer|HP Photosmart 145 Compact Photo Printer|HP Photosmart 148 Compact Photo Printer
+hp-photosmart_230.ppd	pcl3gui2	HP Photosmart 230	HP Photosmart 230 Printer|HP Photosmart 230v Printer|HP Photosmart 230xi Printer
+hp-photosmart_240_series.ppd	pcl3gui2	HP Photosmart 240 Series	HP Photosmart 240 Compact Photo Printer|HP Photosmart 245v Compact Photo Printer|HP Photosmart 245xi Compact Photo Printer|HP Photosmart 245 Compact Photo Printer
+hp-photosmart_2570_series.ppd	pcl3gui2	HP Photosmart 2570 Series	HP Photosmart 2570 All-in-one Printer|HP Photosmart 2571 All-in-one Printer|HP Photosmart 2573 All-in-one Printer|HP Photosmart 2574 All-in-one Printer|HP Photosmart 2575 All-in-one Printer|HP Photosmart 2575xi All-in-one Printer|HP Photosmart 2575v All-in-one Printer|HP Photosmart 2575a All-in-one Printer|HP Photosmart 2578 All-in-one Printer
+hp-photosmart_2600_series.ppd	pcl3gui2	HP Photosmart 2600 Series	HP Photosmart 2605 All-in-one Printer|HP Photosmart 2608 All-in-one Printer|HP Photosmart 2610v All-in-one Printer|HP Photosmart 2610xi All-in-one Printer|HP Photosmart 2610 All-in-one Printer|HP Photosmart 2613 All-in-one Printer|HP Photosmart 2615 All-in-one Printer
+hp-photosmart_2700_series.ppd	pcl3gui2	HP Photosmart 2700 Series	HP Photosmart 2710 All-in-one Printer|HP Photosmart 2710xi All-in-one Printer|HP Photosmart 2713 All-in-one Printer
+hp-photosmart_3100_series.ppd	pcl3gui2	HP Photosmart 3100 Series	HP Photosmart 3108 All-in-one Printer|HP Photosmart 3110 All-in-one Printer|HP Photosmart 3110v All-in-one Printer
+hp-photosmart_3200_series.ppd	pcl3gui2	HP Photosmart 3200 Series	HP Photosmart 3207 All-in-one Printer|HP Photosmart 3210 All-in-one Printer|HP Photosmart 3210xi All-in-one Printer|HP Photosmart 3210v All-in-one Printer|HP Photosmart 3210a All-in-one Printer|HP Photosmart 3213 All-in-one Printer|HP Photosmart 3214 All-in-one Printer
+hp-photosmart_320_series.ppd	pcl3gui2	HP Photosmart 320 Series	HP Photosmart 320 Compact Photo Printer|HP Photosmart 325xi Compact Photo Printer|HP Photosmart 325v Compact Photo Printer|HP Photosmart 325 Compact Photo Printer|HP Photosmart 329 Compact Photo Printer
+hp-photosmart_3300_series.ppd	pcl3gui2	HP Photosmart 3300 Series	HP Photosmart 3308 All-in-one Printer|HP Photosmart 3310 All-in-one Printer|HP Photosmart 3310xi All-in-one Printer|HP Photosmart 3313 All-in-one Printer|HP Photosmart 3314 All-in-one Printer
+hp-photosmart_330_series.ppd	pcl3gui2	HP Photosmart 330 Series	HP Photosmart 330 Series Compact Photo Printer|HP Photosmart 335 Compact Photo Printer|HP Photosmart 335xi Compact Photo Printer|HP Photosmart 335v Compact Photo Printer|HP Photosmart 337 Compact Photo Printer|HP Photosmart 338 Compact Photo Printer
+hp-photosmart_370_series.ppd	pcl3gui2	HP Photosmart 370 Series	HP Photosmart 370 Compact Photo Printer|HP Photosmart 375xi Compact Photo Printer|HP Photosmart 375v Compact Photo Printer|HP Photosmart 375 Compact Photo Printer|HP Photosmart 375bxi Compact Photo Printer With Battery|HP Photosmart 375b Compact Photo Printer With Battery
+hp-photosmart_380_series.ppd	pcl3gui2	HP Photosmart 380 Series	HP Photosmart 385 Compact Photo Printer|HP Photosmart 385xi Compact Photo Printer|HP Photosmart 385v Compact Photo Printer
+hp-photosmart_420_series.ppd	pcl3gui2	HP Photosmart 420 Series	HP Photosmart 420 Compact Photo Printer|HP Photosmart 422 Compact Photo Printer|HP Photosmart 422v Compact Photo Printer|HP Photosmart 422xi Compact Photo Printer|HP Photosmart 425 Compact Photo Printer|HP Photosmart 425v Compact Photo Printer|HP Photosmart 428 Compact Photo Printer|HP Photosmart 428v Compact Photo Printer|HP Photosmart 428xi Compact Photo Printer
+hp-photosmart_470_series.ppd	pcl3gui2	HP Photosmart 470 Series	HP Photosmart 470 Series Compact Photo Printer|HP Photosmart 475xi Compact Photo Printer|HP Photosmart 475v Compact Photo Printer|HP Photosmart 475 Compact Photo Printer
+hp-photosmart_5510_series.ppd	pcl3gui2	HP Photosmart 5510 Series	HP Photosmart 5510 E-all-in-one
+hp-photosmart_5510d_series.ppd	pcl3gui2	HP Photosmart 5510d Series	HP Photosmart 5510d E-all-in-one
+hp-photosmart_5520_series.ppd	pcl3gui2	HP Photosmart 5520 Series	HP Photosmart 5520 E-all-in-one|HP Photosmart 5522 E-all-in-one Printer|HP Photosmart 5524 E-all-in-one Printer|HP Photosmart 5525 E-all-in-one Printer|HP Photosmart 5521 E-all-in-one Printer
+hp-photosmart_6510_series.ppd	pcl3gui2	HP Photosmart 6510 Series	HP Photosmart 6510 E-all-in-one
+hp-photosmart_6520_series.ppd	pcl3gui2	HP Photosmart 6520 Series	HP Photsmart 6520 E All-in-one|HP Photosmart 6525 E All-in-one
+hp-photosmart_7200_series.ppd	pcl3gui2	HP Photosmart 7200 Series	HP Photosmart 7260w Photo Printer|HP Photosmart 7260 Photo Printer|HP Photosmart 7260v Photo Printer|HP Photosmart 7268 Photo Printer
+hp-photosmart_7345.ppd	pcl3gui2	HP Photosmart 7345	HP Photosmart 7345 Printer
+hp-photosmart_7400_series.ppd	pcl3gui2	HP Photosmart 7400 Series	HP Photosmart 7450 Photo Printer|HP Photosmart 7450v Photo Printer|HP Photosmart 7450xi Photo Printer|HP Photosmart 7458 Photo Printer|HP Photosmart 7459 Photo Printer
+hp-photosmart_7510_series.ppd	pcl3gui2	HP Photosmart 7510 Series	HP Photosmart 7510 E-all-in-one
+hp-photosmart_7520_series.ppd	pcl3gui2	HP Photosmart 7520 Series	HP Photosmart 7520 E-all-in-one|HP Photosmart 7525 E-all-in-one
+hp-photosmart_7550.ppd	pcl3gui2	HP Photosmart 7550	HP Photosmart 7550 Printer|HP Photosmart 7550v Printer|HP Photosmart 7550w Printer
+hp-photosmart_7600_series.ppd	pcl3gui2	HP Photosmart 7600 Series	HP Photosmart 7655 Photo Printer|HP Photosmart 7660 Photo Printer
+hp-photosmart_7700_series.ppd	pcl3gui2	HP Photosmart 7700 Series	HP Photosmart 7755 Photo Printer|HP Photosmart 7760od Photo Printer|HP Photosmart 7760 Photo Printer|HP Photosmart 7760v Photo Printer|HP Photosmart 7760w Photo Printer|HP Photosmart 7762w Photo Printer|HP Photosmart 7762w Photo Printer|HP Photosmart 7762 Photo Printer
+hp-photosmart_7800_series.ppd	pcl3gui2	HP Photosmart 7800 Series	HP Photosmart 7830 Printer|HP Photosmart 7838 Printer|HP Photosmart 7850 Printer|HP Photosmart 7850v Printer|HP Photosmart 7850vxi Printer|HP Photosmart 7853 Printer
+hp-photosmart_7900_series.ppd	pcl3gui2	HP Photosmart 7900 Series	HP Photosmart 7960 Photo Printer|HP Photosmart 7960v Photo Printer|HP Photosmart 7960w Photo Printer|HP Photosmart 7960gp Photo Printer
+hp-photosmart_8000_series.ppd	pcl3gui2	HP Photosmart 8000 Series	HP Photosmart 8030 Printer|HP Photosmart 8038 Printer|HP Photosmart 8049 Printer|HP Photosmart 8050xi Printer|HP Photosmart 8050 Printer|HP Photosmart 8050v Printer|HP Photosmart 8053 Printer
+hp-photosmart_8100_series.ppd	pcl3gui2	HP Photosmart 8100 Series	HP Photosmart 8150 Photo Printer|HP Photosmart 8150v Photo Printer|HP Photosmart 8150xi Photo Printer|HP Photosmart 8153 Photo Printer|HP Photosmart 8158 Photo Printer
+hp-photosmart_8200_series.ppd	pcl3gui2	HP Photosmart 8200 Series	HP Photosmart 8230 Printer|HP Photosmart 8238 Printer|HP Photosmart 8250 Printer|HP Photosmart 8250xi Printer|HP Photosmart 8250v Printer|HP Photosmart 8253 Printer
+hp-photosmart_8400_series.ppd	pcl3gui2	HP Photosmart 8400 Series	HP Photosmart 8450gp Photo Printer|HP Photosmart 8450v Photo Printer|HP Photosmart 8450 Photo Printer|HP Photosmart 8450xi Photo Printer|HP Photosmart 8453 Photo Printer|HP Photosmart 8458 Photo Printer
+hp-photosmart_8700_series.ppd	pcl3gui2	HP Photosmart 8700 Series	HP Photosmart 8750 Professional Photo Printer|HP Photosmart 8750xi Professional Photo Printer|HP Photosmart 8750gp Professional Photo Printer|HP Photosmart 8753 Professional Photo Printer|HP Photosmart 8758 Professional Photo Printer
+hp-photosmart_a310_series.ppd	pcl3gui2	HP Photosmart a310 Series	HP Photosmart a310 Compact Photo Printer|HP Photosmart a311 Compact Photo Printer|HP Photosmart a314 Compact Photo Printer|HP Photosmart a316 Compact Photo Printer
+hp-photosmart_a320_series.ppd	pcl3gui2	HP Photosmart a320 Series	HP Photosmart a320 Compact Photo Printer|HP Photosmart a321 Compact Photo Printer
+hp-photosmart_a430_series.ppd	pcl3gui2	HP Photosmart a430 Series	HP Photosmart a430 Compact Photo Printer|HP Photosmart a432 Compact Photo Printer|HP Photosmart a433 Compact Photo Printer|HP Photosmart a434 Compact Photo Printer|HP Photosmart a436 Compact Photo Printer
+hp-photosmart_a440_series.ppd	pcl3gui2	HP Photosmart a440 Series	HP Photosmart a440 Compact Photo Printer|HP Photosmart a442 Compact Photo Printer|HP Photosmart a446 Compact Photo Printer
+hp-photosmart_a510_series.ppd	pcl3gui2	HP Photosmart a510 Series	HP Photosmart a510 Compact Photo Printer|HP Photosmart a512 Compact Photo Printer|HP Photosmart a516 Compact Photo Printer
+hp-photosmart_a520_series.ppd	pcl3gui2	HP Photosmart a520 Series	HP Photosmart a522xi Compact Photo Printer|HP Photosmart a522 Compact Photo Printer|HP Photosmart a525 Compact Photo Printer|HP Photosmart a526 Compact Photo Printer|HP Photosmart a528 Compact Photo Printer
+hp-photosmart_a610_series.ppd	pcl3gui2	HP Photosmart a610 Series	HP Photosmart a610 Compact Photo Printer|HP Photosmart a612 Compact Photo Printer|HP Photosmart a616 Compact Photo Printer|HP Photosmart a617 Compact Photo Printer|HP Photosmart a618 Compact Photo Printer
+hp-photosmart_a620_series.ppd	pcl3gui2	HP Photosmart a620 Series	HP Photosmart a620 Compact Photo Printer|HP Photosmart a622 Compact Photo Printer|HP Photosmart a626 Compact Photo Printer|HP Photosmart a627 Compact Photo Printer|HP Photosmart a628 Compact Photo Printer
+hp-photosmart_a710_series.ppd	pcl3gui2	HP Photosmart a710 Series	HP Photosmart a712 Compact Photo Printer|HP Photosmart a716 Compact Photo Printer|HP Photosmart a717 Compact Photo Printer
+hp-photosmart_a820_series.ppd	pcl3gui2	HP Photosmart a820 Series	HP Photosmart a826 Home Photo Center|HP Photosmart a827 Home Photo Center|HP Photosmart a828 Home Photo Center
+hp-photosmart_b010_series.ppd	pcl3gui2	HP Photosmart b010 Series	HP Photosmart All-in-one Printer - b010
+hp-photosmart_b109a_series.ppd	pcl3gui2	HP Photosmart b109a Series	HP Photosmart b109a Series
+hp-photosmart_b110_series.ppd	pcl3gui2	HP Photosmart b110 Series	HP Photosmart Wireless All-in-one Printer - b110
+hp-photosmart_b8500_series.ppd	pcl3gui2	HP Photosmart b8500 Series	HP Photosmart b8550 Photo Printer|HP Photosmart b8553 Photo Printer|HP Photosmart b8558 Photo Printer
+hp-photosmart_c309a_series.ppd	pcl3gui2	HP Photosmart c309a Series	HP Photosmart Premium Fax All-in-one Printer - c309a
+hp-photosmart_c3100_series.ppd	pcl3gui2	HP Photosmart c3100 Series	HP Photosmart c3110 All-in-one Printer|HP Photosmart c3183 All-in-one Printer|HP Photosmart c3188 All-in-one Printer|HP Photosmart c3190 All-in-one Printer|HP Photosmart c3193 All-in-one Printer|HP Photosmart c3194 All-in-one Printer|HP Photosmart c3125 All-in-one Printer|HP Photosmart c3135 All-in-one Printer|HP Photosmart c3140 All-in-one Printer|HP Photosmart c3150 All-in-one Printer|HP Photosmart c3170 All-in-one Printer|HP Photosmart c3173 All-in-one Printer|HP Photosmart c3175 All-in-one Printer|HP Photosmart c3180 All-in-one Printer
+hp-photosmart_c4100_series.ppd	pcl3gui2	HP Photosmart c4100 Series	HP Photosmart c4110 All-in-one Printer|HP Photosmart c4190 All-in-one Printer|HP Photosmart c4193 All-in-one Printer|HP Photosmart c4194 All-in-one Printer|HP Photosmart c4140 All-in-one Printer|HP Photosmart c4150 All-in-one Printer|HP Photosmart c4170 All-in-one Printer|HP Photosmart c4173 All-in-one Printer|HP Photosmart c4175 All-in-one Printer|HP Photosmart c4180 All-in-one Printer|HP Photosmart c4183 All-in-one Printer|HP Photosmart c4188 All-in-one Printer
+hp-photosmart_c4200_series.ppd	pcl3gui2	HP Photosmart c4200 Series	HP Photosmart c4205 All-in-one Printer|HP Photosmart c4280 All-in-one Printer|HP Photosmart c4283 All-in-one Printer|HP Photosmart c4285 All-in-one Printer|HP Photosmart c4288 All-in-one Printer|HP Photosmart c4293 All-in-one Printer|HP Photosmart c4294 All-in-one Printer|HP Photosmart c4210 All-in-one Printer|HP Photosmart c4235 All-in-one Printer|HP Photosmart c4240 All-in-one Printer|HP Photosmart c4250 All-in-one Printer|HP Photosmart c4270 All-in-one Printer|HP Photosmart c4272 All-in-one Printer|HP Photosmart c4273 All-in-one Printer|HP Photosmart c4275 All-in-one Printer
+hp-photosmart_c4340_series.ppd	pcl3gui2	HP Photosmart c4340 Series	HP Photosmart c4340 All-in-one Printer|HP Photosmart c4342 All-in-one Printer|HP Photosmart c4343 All-in-one Printer|HP Photosmart c4344 All-in-one Printer|HP Photosmart c4345 All-in-one Printer|HP Photosmart c4348 All-in-one Printer
+hp-photosmart_c4380_series.ppd	pcl3gui2	HP Photosmart c4380 Series	HP Photosmart c4380 All-in-one Printer|HP Photosmart c4383 All-in-one Printer|HP Photosmart c4384 All-in-one Printer|HP Photosmart c4385 All-in-one Printer|HP Photosmart c4388 All-in-one Printer
+hp-photosmart_c4400_series.ppd	pcl3gui2	HP Photosmart c4400 Series	HP Photosmart c4410 All-in-one Printer|HP Photosmart c4483 All-in-one Printer|HP Photosmart c4485 All-in-one Printer|HP Photosmart c4486 All-in-one Printer|HP Photosmart c4488 All-in-one Printer|HP Photosmart c4490 All-in-one Printer|HP Photosmart c4493 All-in-one Printer|HP Photosmart c4494 All-in-one Printer|HP Photosmart c4424 All-in-one Printer|HP Photosmart c4435 All-in-one Printer|HP Photosmart c4440 All-in-one Printer|HP Photosmart c4450 All-in-one Printer|HP Photosmart c4470 All-in-one Printer|HP Photosmart c4472 All-in-one Printer|HP Photosmart c4473 All-in-one Printer|HP Photosmart c4480 All-in-one Printer
+hp-photosmart_c4500_series.ppd	pcl3gui2	HP Photosmart c4500 Series	HP Photosmart c4540 All-in-one Printer|HP Photosmart c4588 All-in-one Printer|HP Photosmart c4593 All-in-one Printer|HP Photosmart c4599 All-in-one Printer|HP Photosmart c4550 All-in-one Printer|HP Photosmart c4570 All-in-one Printer|HP Photosmart c4572 All-in-one Printer|HP Photosmart c4573 All-in-one Printer|HP Photosmart c4575 All-in-one Printer|HP Photosmart c4580 All-in-one Printer|HP Photosmart c4583 All-in-one Printer|HP Photosmart c4585 All-in-one Printer
+hp-photosmart_c4600_series.ppd	pcl3gui2	HP Photosmart c4600 Series	HP Photosmart c4640 All-in-one Printer|HP Photosmart c4688 All-in-one Printer|HP Photosmart c4650 All-in-one Printer|HP Photosmart c4680 All-in-one Printer|HP Photosmart c4610 All-in-one Printer|HP Photosmart c4635 All-in-one Printer|HP Photosmart c4670 All-in-one Printer|HP Photosmart c4673 All-in-one Printer|HP Photosmart c4680 All-in-one Printer|HP Photosmart c4683 All-in-one Printer
+hp-photosmart_c4700_series.ppd	pcl3gui2	HP Photosmart c4700 Series	HP Photosmart c4740 All-in-one Printer|HP Photosmart c4799 All-in-one Printer|HP Photosmart c4750 All-in-one Printer|HP Photosmart c4780 All-in-one Printer|HP Photosmart c4783 All-in-one Printer|HP Photosmart c4785 All-in-one Printer|HP Photosmart c4788 All-in-one Printer|HP Photosmart c4793 All-in-one Printer|HP Photosmart c4795 All-in-one Printer|HP Photosmart c4798 All-in-one Printer
+hp-photosmart_c5100_series.ppd	pcl3gui2	HP Photosmart c5100 Series	HP Photosmart c5140 All-in-one Printer|HP Photosmart c5194 All-in-one Printer|HP Photosmart c5150 All-in-one Printer|HP Photosmart c5170 All-in-one Printer|HP Photosmart c5173 All-in-one Printer|HP Photosmart c5175 All-in-one Printer|HP Photosmart c5180 All-in-one Printer|HP Photosmart c5183 All-in-one Printer|HP Photosmart c5185 All-in-one Printer|HP Photosmart c5188 All-in-one Printer
+hp-photosmart_c5200_series.ppd	pcl3gui2	HP Photosmart c5200 Series	HP Photosmart c5240 All-in-one Printer|HP Photosmart c5293 All-in-one Printer|HP Photosmart c5250 All-in-one Printer|HP Photosmart c5270 All-in-one Printer|HP Photosmart c5273 All-in-one Printer|HP Photosmart c5275 All-in-one Printer|HP Photosmart c5280 All-in-one Printer|HP Photosmart c5283 All-in-one Printer|HP Photosmart c5288 All-in-one Printer|HP Photosmart c5290 All-in-one Printer
+hp-photosmart_c5300_series.ppd	pcl3gui2	HP Photosmart c5300 Series	HP Photosmart c5370 All-in-one Printer|HP Photosmart c5373 All-in-one Printer|HP Photosmart c5380 All-in-one Printer|HP Photosmart c5383 All-in-one Printer|HP Photosmart c5388 All-in-one Printer|HP Photosmart c5390 All-in-one Printer|HP Photosmart c5393 All-in-one Printer
+hp-photosmart_c5500_series.ppd	pcl3gui2	HP Photosmart c5500 Series	HP Photosmart c5540 All-in-one Printer|HP Photosmart c5550 All-in-one Printer|HP Photosmart c5570 All-in-one Printer|HP Photosmart c5580 All-in-one Printer
+hp-photosmart_c6100_series.ppd	pcl3gui2	HP Photosmart c6100 Series	HP Photosmart c6150 All-in-one Printer|HP Photosmart c6154 All-in-one Printer|HP Photosmart c6170 All-in-one Printer|HP Photosmart c6175 All-in-one Printer|HP Photosmart c6180 All-in-one Printer|HP Photosmart c6183 All-in-one Printer|HP Photosmart c6185 All-in-one Printer|HP Photosmart c6188 All-in-one Printer|HP Photosmart c6190 All-in-one Printer
+hp-photosmart_c6200_series.ppd	pcl3gui2	HP Photosmart c6200 Series	HP Photosmart c6240 All-in-one Printer|HP Photosmart c6283 All-in-one Printer|HP Photosmart c6285 All-in-one Printer|HP Photosmart c6286 All-in-one Printer|HP Photosmart c6288 All-in-one Printer|HP Photosmart c6245 All-in-one Printer|HP Photosmart c6250 All-in-one Printer|HP Photosmart c6260 All-in-one Printer|HP Photosmart c6263 All-in-one Printer|HP Photosmart c6268 All-in-one Printer|HP Photosmart c6270 All-in-one Printer|HP Photosmart c6275 All-in-one Printer|HP Photosmart c6280 All-in-one Printer
+hp-photosmart_c6300_series.ppd	pcl3gui2	HP Photosmart c6300 Series	HP Photosmart c6324 All-in-one Printer|HP Photosmart c6340 All-in-one Printer|HP Photosmart c6350 All-in-one Printer|HP Photosmart c6375 All-in-one Printer|HP Photosmart c6380 All-in-one Printer|HP Photosmart c6383 All-in-one Printer|HP Photosmart c6388 All-in-one Printer
+hp-photosmart_c7100_series.ppd	pcl3gui2	HP Photosmart c7100 Series	HP Photosmart c7150 All-in-one Printer|HP Photosmart c7154 All-in-one Printer|HP Photosmart c7170 All-in-one Printer|HP Photosmart c7180 All-in-one Printer|HP Photosmart c7183 All-in-one Printer|HP Photosmart c7185 All-in-one Printer|HP Photosmart c7188 All-in-one Printer|HP Photosmart c7190 All-in-one Printer
+hp-photosmart_c7200_series.ppd	pcl3gui2	HP Photosmart c7200 Series	HP Photosmart c7250 All-in-one Printer|HP Photosmart c7275 All-in-one Printer|HP Photosmart c7280 All-in-one Printer|HP Photosmart c7283 All-in-one Printer|HP Photosmart c7288 All-in-one Printer
+hp-photosmart_c8100_series.ppd	pcl3gui2	HP Photosmart c8100 Series	HP Photosmart c8150 All-in-one Printer|HP Photosmart c8180 All-in-one Printer|HP Photosmart c8183 All-in-one Printer|HP Photosmart c8188 All-in-one Printer
+hp-photosmart_d110_series.ppd	pcl3gui2	HP Photosmart d110 Series	HP Photosmart d110 Series Printer
+hp-photosmart_d5060_series.ppd	pcl3gui2	HP Photosmart d5060 Series	HP Photosmart d5060 Printer|HP Photosmart d5063 Printer|HP Photosmart d5065 Printer|HP Photosmart d5069 Printer
+hp-photosmart_d5100_series.ppd	pcl3gui2	HP Photosmart d5100 Series	HP Photosmart d5145 Printer|HP Photosmart d5155 Printer|HP Photosmart d5156 Printer|HP Photosmart d5160 Printer|HP Photosmart d5163 Printer|HP Photosmart d5168 Printer
+hp-photosmart_d5300_series.ppd	pcl3gui2	HP Photosmart d5300 Series	HP Photosmart d5345 Printer|HP Photosmart d5360 Printer|HP Photosmart d5363 Printer|HP Photosmart d5368 Printer
+hp-photosmart_d5400_series.ppd	pcl3gui2	HP Photosmart d5400 Series	HP Photosmart d5460 Printer|HP Photosmart d5463 Printer|HP Photosmart d5468 Printer
+hp-photosmart_d6100_series.ppd	pcl3gui2	HP Photosmart d6100 Series	HP Photosmart d6160 Printer|HP Photosmart d6163 Printer|HP Photosmart d6168 Printer
+hp-photosmart_d7100_series.ppd	pcl3gui2	HP Photosmart d7100 Series	HP Photosmart d7145 Printer|HP Photosmart d7155 Printer|HP Photosmart d7160 Printer|HP Photosmart d7163 Printer|HP Photosmart d7168 Printer
+hp-photosmart_d7200_series.ppd	pcl3gui2	HP Photosmart d7200 Series	HP Photosmart d7245 Printer|HP Photosmart d7255 Printer|HP Photosmart d7260 Printer|HP Photosmart d7263 Printer|HP Photosmart d7268 Printer
+hp-photosmart_d7300_series.ppd	pcl3gui2	HP Photosmart d7300 Series	HP Photosmart d7345 Printer|HP Photosmart d7355 Printer|HP Photosmart d7360 Printer|HP Photosmart d7363 Printer|HP Photosmart d7368 Printer
+hp-photosmart_d7400_series.ppd	pcl3gui2	HP Photosmart d7400 Series	HP Photosmart d7460 Printer|HP Photosmart d7463 Printer|HP Photosmart d7468 Printer
+hp-photosmart_d7500_series.ppd	pcl3gui2	HP Photosmart d7500 Series	HP Photosmart d7560 Printer
+hp-photosmart_estn_c510_series.ppd	pcl3gui2	HP Photosmart Estn c510 Series	HP Photosmart Estn c510 Series
+hp-photosmart_ink_adv_k510.ppd	pcl3gui2	HP Photosmart Ink Adv k510	HP Photosmart Ink Adv k510
+hp-photosmart_p1000.ppd	pcl3gui	HP Photosmart p1000	HP Photosmart p1000/1000 Printer|HP Photosmart p1000xi Printer
+hp-photosmart_p1100.ppd	pcl3gui	HP Photosmart p1100	HP Photosmart p1100 Printer|HP Photosmart p1100xi Printer
+hp-photosmart_plus_b209a-m.ppd	pcl3gui2	HP Photosmart Plus b209a-m	HP Photosmart Plus All-in-one Printer - b209a|HP Photosmart Plus All-in-one Printer - b209b|HP Photosmart Plus All-in-one Printer - b209c
+hp-photosmart_plus_b210_series.ppd	pcl3gui2	HP Photosmart Plus b210 Series	HP Photosmart Plus b210 Series
+hp-photosmart_prem-web_c309n-s.ppd	pcl3gui2	HP Photosmart Prem-web c309n-s	HP Photosmart Premium Fax All-in-one Printer Series -c309a|HP Photosmart Premium Fax All-in-one Printer Series -c309c
+hp-photosmart_prem_c310_series.ppd	pcl3gui2	HP Photosmart Prem c310 Series	HP Photosmart Prem c310 Series
+hp-photosmart_prem_c410_series.ppd	pcl3gui2	HP Photosmart Prem c410 Series	HP Photosmart Prem c410 Series
+hp-photosmart_premium_c309g-m.ppd	pcl3gui2	HP Photosmart Premium c309g-m	HP Photosmart Premium All-in-one Printer Series - c309g|HP Photosmart Premium All-in-one Printer Series - c309h
+hp-photosmart_pro_b8300_series.ppd	pcl3gui2	HP Photosmart Pro b8300 Series	HP Photosmart Pro b8330 Printer|HP Photosmart Pro b8338 Printer|HP Photosmart Pro b8350 Printer|HP Photosmart Pro b8353 Printer
+hp-photosmart_pro_b8800_series.ppd	pcl3gui2	HP Photosmart Pro b8800 Series	HP Photosmart Pro b8850 Printer
+hp-photosmart_wireless_b109n-z.ppd	pcl3gui2	HP Photosmart Wireless b109n-z	HP Photosmart Wireless All-in-one Printer - b109n|HP Photosmart Wireless All-in-one Printer - b109q|HP Photosmart Wireless All-in-one Printer - b109qr
+hp-printer_scanner_copier_300.ppd	pcl3	HP Printer Scanner Copier 300	HP Printer Scanner Copier 300
+hp-psc_1000_series.ppd	lidil	HP PSC 1000 Series	HP PSC 1000 Series
+hp-psc_1100_series.ppd	lidil	HP PSC 1100 Series	HP PSC 1110 All-in-one Printer|HP PSC 1110v All-in-one Printer|HP PSC 1118 All-in-one Printer
+hp-psc_1200_series.ppd	lidil	HP PSC 1200 Series	HP PSC 1200 All-in-one Printer|HP PSC 1217 All-in-one Printer|HP PSC 1218 All-in-one Printer|HP PSC 1219 All-in-one Printer|HP PSC 1205 All-in-one Printer|HP PSC 1209 All-in-one Printer|HP PSC 1210 All-in-one Printer|HP PSC 1210xi All-in-one Printer|HP PSC 1210v All-in-one Printer|HP PSC 1213 All-in-one Printer|HP PSC 1215 All-in-one Printer|HP PSC 1216 All-in-one Printer
+hp-psc_1300_series.ppd	lidil	HP PSC 1300 Series	HP PSC 1300 All-in-one Printer|HP PSC 1340 All-in-one Printer|HP PSC 1350v All-in-one Printer|HP PSC 1350xi All-in-one Printer|HP PSC 1350 All-in-one Printer|HP PSC 1355 All-in-one Printer
+hp-psc_1310_series.ppd	lidil	HP PSC 1310 Series	HP PSC 1310 All-in-one Printer|HP PSC 1311 All-in-one Printer|HP PSC 1312 All-in-one Printer|HP PSC 1315 All-in-one Printer|HP PSC 1315xi All-in-one Printer|HP PSC 1315v All-in-one Printer|HP PSC 1315s All-in-one Printer|HP PSC 1317 All-in-one Printer|HP PSC 1318 All-in-one Printer
+hp-psc_1358_series.ppd	lidil	HP PSC 1358 Series	HP PSC 1358 Series
+hp-psc_1400_series.ppd	lidil	HP PSC 1400 Series	HP PSC 1401 All-in-one Printer|HP PSC 1417 All-in-one Printer|HP PSC 1402 All-in-one Printer|HP PSC 1403 All-in-one Printer|HP PSC 1406 All-in-one Printer|HP PSC 1408 All-in-one Printer|HP PSC 1410 All-in-one Printer|HP PSC 1410v All-in-one Printer|HP PSC 1410xi All-in-one Printer|HP PSC 1415 All-in-one Printer
+hp-psc_1500_series.ppd	pcl3gui2	HP PSC 1500 Series	HP PSC 1508 All-in-one Printer|HP PSC 1510xi All-in-one Printer|HP PSC 1510v All-in-one Printer|HP PSC 1510s All-in-one Printer|HP PSC 1510 All-in-one Printer|HP PSC 1513s All-in-one Printer|HP PSC 1513 All-in-one Printer|HP PSC 1514 All-in-one Printer|HP PSC 1510 Series
+hp-psc_1600_series.ppd	pcl3gui2	HP PSC 1600 Series	HP PSC 1600 All-in-one Printer|HP PSC 1603 All-in-one Printer|HP PSC 1605 All-in-one Printer|HP PSC 1608 All-in-one Printer|HP PSC 1610xi All-in-one Printer|HP PSC 1610v All-in-one Printer|HP PSC 1610 All-in-one Printer|HP PSC 1613 All-in-one Printer|HP PSC 1615 All-in-one Printer
+hp-psc_2100_series.ppd	pcl3gui2	HP PSC 2100 Series	HP PSC 2105 All-in-one Printer|HP PSC 2108 All-in-one Printer|HP PSC 2110v All-in-one Printer|HP PSC 2110 All-in-one Printer|HP PSC 2110xi All-in-one Printer|HP PSC 2115 All-in-one Printer
+hp-psc_2150_series.ppd	pcl3gui2	HP PSC 2150 Series	HP PSC 2150 All-in-one Printer
+hp-psc_2170_series.ppd	pcl3gui2	HP PSC 2170 Series	HP PSC 2170 All-in-one Printer|HP PSC 2171 All-in-one Printer|HP PSC 2175xi All-in-one Printer|HP PSC 2175v All-in-one Printer|HP PSC 2175 All-in-one Printer|HP PSC 2179 All-in-one Printer
+hp-psc_2200_series.ppd	pcl3gui2	HP PSC 2200 Series	HP PSC 2200 All-in-one Printer
+hp-psc_2210_series.ppd	pcl3gui2	HP PSC 2210 Series	HP PSC 2210 All-in-one Printer|HP PSC 2210xi All-in-one Printer|HP PSC 2210v All-in-one Printer
+hp-psc_2300_series.ppd	pcl3gui2	HP PSC 2300 Series	HP PSC 2300 Series All-in-one Printer|HP PSC 2310 All-in-one Printer
+hp-psc_2350_series.ppd	pcl3gui2	HP PSC 2350 Series	HP PSC 2350 All-in-one Printer|HP PSC 2358 All-in-one Printer|HP PSC 2352 All-in-one Printer|HP PSC 2353 All-in-one Printer|HP PSC 2353p All-in-one Printer|HP PSC 2355xi All-in-one Printer|HP PSC 2355v All-in-one Printer|HP PSC 2355 All-in-one Printer|HP PSC 2355p All-in-one Printer|HP PSC 2357 All-in-one Printer
+hp-psc_2400_series.ppd	pcl3gui2	HP PSC 2400 Series	HP PSC 2405 Photosmart All-in-one Printer|HP PSC 2410xi Photosmart All-in-one Printer|HP PSC 2410v Photosmart All-in-one Printer|HP PSC 2410 Photosmart All-in-one Printer|HP PSC 2420 Photosmart All-in-one Printer|HP PSC 2450 Photosmart All-in-one Printer
+hp-psc_2500_series.ppd	pcl3gui2	HP PSC 2500 Series	HP PSC 2500 Photosmart All-in-one Printer|HP PSC 2510 Photosmart All-in-one Printer|HP PSC 2510xi Photosmart All-in-one Printer|HP PSC 2550 Photosmart All-in-one Printer
+hp-psc_500.ppd	pcl3gui	HP PSC 500	HP PSC 500 All-in-one Printer|HP PSC 500xi All-in-one Printer
+hp-psc_720.ppd	pcl3gui	HP PSC 720	HP PSC 720 All-in-one Printer
+hp-psc_750.ppd	pcl3gui	HP PSC 750	HP PSC 750 All-in-one Printer
+hp-psc_750xi.ppd	pcl3gui	HP PSC 750xi	HP PSC 750xi All-in-one Printer
+hp-psc_760.ppd	pcl3gui	HP PSC 760	HP PSC 760 All-in-one Printer
+hp-psc_780.ppd	pcl3gui	HP PSC 780	HP PSC 780 All-in-one Printer
+hp-psc_780xi.ppd	pcl3gui	HP PSC 780xi	HP PSC 780xi All-in-one Printer
+hp-psc_900_series.ppd	pcl3gui	HP PSC 900 Series	HP PSC 900 All-in-one Printer
+hp-psc_920.ppd	pcl3gui	HP PSC 920	HP PSC 920 All-in-one Printer
+hp-psc_950.ppd	pcl3gui	HP PSC 950	HP PSC 950 All-in-one Printer
+hp-psc_950vr.ppd	pcl3gui	HP PSC 950vr	HP PSC 950vr All-in-one Printer
+hp-psc_950xi.ppd	pcl3gui	HP PSC 950xi	HP PSC 950xi All-in-one Printer
+hp-smart_tank_210-220_series.ppd	pcl3gui2	HP Smart Tank 210-220 Series	HP Smart Tank 210_220 Series
+hp-smart_tank_350_series.ppd	pcl3gui2	HP Smart Tank 350 Series	HP Smart Tank 350
+hp-smart_tank_500_series.ppd	pcl3gui2	HP Smart Tank 500 Series	HP Smart Tank 500 Series
+hp-smart_tank_5100_series.ppd	pcl3gui2	HP Smart Tank 5100 Series	HP Smart Tank 5100 Series
+hp-smart_tank_510_series.ppd	pcl3gui2	HP Smart Tank 510 Series	HP Smart Tank 510
+hp-smart_tank_520_540_series.ppd	pcl3gui2	HP Smart Tank 520 540 Series	HP Smart Tank 520_540 Series
+hp-smart_tank_530_series.ppd	pcl3gui2	HP Smart Tank 530 Series	HP Smart Tank 530 Series
+hp-smart_tank_580-590_series.ppd	pcl3gui2	HP Smart Tank 580-590 Series	HP Smart Tank 580_590 Series
+hp-smart_tank_6000_series.ppd	pcl3gui2	HP Smart Tank 6000 Series	HP Smart Tank Plus 6000
+hp-smart_tank_610_series.ppd	pcl3gui2	HP Smart Tank 610 Series	HP Smart Tank 610
+hp-smart_tank_660-670_series.ppd	pcl3gui2	HP Smart Tank 660-670 Series	HP Smart Tank Plus 660-670
+hp-smart_tank_7000_series.ppd	pcl3gui2	HP Smart Tank 7000 Series	HP Smart Tank Plus 7000
+hp-smart_tank_710-720_series.ppd	pcl3gui2	HP Smart Tank 710-720 Series	HP Smart Tank Plus 710-720
+hp-smart_tank_7300_series.ppd	pcl3gui2	HP Smart Tank 7300 Series	HP Smart Tank 790
+hp-smart_tank_750_series.ppd	pcl3gui2	HP Smart Tank 750 Series	HP Smart Tank 750
+hp-smart_tank_7600_series.ppd	pcl3gui2	HP Smart Tank 7600 Series	HP Smart Tank 7600
+hp-smart_tank_790_series.ppd	pcl3gui2	HP Smart Tank 790 Series	HP Smart Tank 790
+hp-smart_tank_plus_550_series.ppd	pcl3gui2	HP Smart Tank Plus 550 Series	HP Smart Tank Plus 550
+hp-smart_tank_plus_570_series.ppd	pcl3gui2	HP Smart Tank Plus 570 Series	HP Smart Tank Plus 570 Series
+hp-smart_tank_plus_650_series.ppd	pcl3gui2	HP Smart Tank Plus 650 Series	HP Smart Tank Plus 650
+hp-smart_tank_wireless_450_series.ppd	pcl3gui2	HP Smart Tank Wireless 450 Series	HP Smart Tank Wireless 450
+hp-tango.ppd	pcl3gui2	HP Tango	HP Tango X|HP Tango
