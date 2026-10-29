@@ -40,6 +40,10 @@ build/obj/%.o: src/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+app:
+	scripts/build-app.sh
+
+# One installer with the driver and the app. Version: see scripts/version.sh.
 pkg: build/hpcups
 	scripts/build-pkg.sh
 
@@ -49,4 +53,4 @@ test: build/hpcups
 clean:
 	rm -rf build
 
-.PHONY: all pkg test clean
+.PHONY: all app pkg test clean
