@@ -7,13 +7,12 @@ import IOKit
 enum USBCheck {
     /// Pulls the serial out of a usb:// device URI, if present.
     static func serial(fromURI uri: String) -> String? {
-        guard uri.hasPrefix("usb:"), let c = URLComponents(string: uri) else { return nil }
-        return c.queryItems?.first(where: { $0.name == "serial" })?.value
+        DeviceURI.serial(uri)
     }
 
     /// nil when the URI is not USB (nothing to check).
     static func devicePresent(deviceURI: String) -> Bool? {
-        guard deviceURI.hasPrefix("usb:") else { return nil }
+        guard DeviceURI.isUSB(deviceURI) else { return nil }
         guard let serial = serial(fromURI: deviceURI) else { return nil }
         return connectedSerials().contains(serial)
     }

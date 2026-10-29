@@ -12,6 +12,7 @@ struct MenuBarView: View {
     var body: some View {
         let h = store.health
         VStack(alignment: .leading, spacing: Space.m) {
+            PrinterMenu(store: store)
             HStack(spacing: 10) {
                 Image(systemName: h.symbol).font(.title2).foregroundStyle(h.color)
                 VStack(alignment: .leading, spacing: 1) {

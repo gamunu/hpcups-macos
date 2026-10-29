@@ -10,6 +10,7 @@ enum LEDMError: Error, LocalizedError {
     case open(String)
     case io(String)
     case timeout
+    case noLEDM
     case badReply(String)
     case http(Int, String)
 
@@ -18,6 +19,7 @@ enum LEDMError: Error, LocalizedError {
         case .deviceNotFound: return "Printer USB interface not found"
         case .open(let m): return "Cannot open printer USB interface: \(m)"
         case .io(let m): return "USB transfer failed: \(m)"
+        case .noLEDM: return LEDMSupport.noInkReason
         case .timeout: return "Printer did not answer in time"
         case .badReply(let m): return "Unexpected printer reply: \(m)"
         case .http(let c, let m): return "Printer returned HTTP \(c) \(m)"
@@ -34,46 +36,23 @@ final class LEDMUSBConnection {
     private let inPipe: IOUSBHostPipe
     private let maxPacket: Int
 
-    /// Finds the first 255/4/1 interface of a device with this VID/PID (and
-    /// serial, when given) and claims it.
-    init(vendor: Int = 0x03f0, product: Int = 0x3654, serial: String? = nil) throws {
-        var iter: io_iterator_t = 0
-        guard IOServiceGetMatchingServices(kIOMainPortDefault,
-                                           IOServiceMatching("IOUSBHostInterface"), &iter) == KERN_SUCCESS
-        else { throw LEDMError.deviceNotFound }
-        defer { IOObjectRelease(iter) }
-
-        var best: (service: io_service_t, number: Int)?
-        while case let e = IOIteratorNext(iter), e != 0 {
-            func prop(_ k: String, of s: io_service_t) -> Any? {
-                IORegistryEntryCreateCFProperty(s, k as CFString, kCFAllocatorDefault, 0)?.takeRetainedValue()
-            }
-            var ok = false
-            if (prop("bInterfaceClass", of: e) as? Int) == 255,
-               (prop("bInterfaceSubClass", of: e) as? Int) == 4,
-               (prop("bInterfaceProtocol", of: e) as? Int) == 1,
-               let num = prop("bInterfaceNumber", of: e) as? Int {
-                var parent: io_registry_entry_t = 0
-                if IORegistryEntryGetParentEntry(e, kIOServicePlane, &parent) == KERN_SUCCESS {
-                    defer { IOObjectRelease(parent) }
-                    let vid = prop("idVendor", of: parent) as? Int
-                    let pid = prop("idProduct", of: parent) as? Int
-                    let sn = prop("USB Serial Number", of: parent) as? String
-                    if vid == vendor, pid == product, serial == nil || sn == serial {
-                        if best == nil || num < best!.number {
-                            if let b = best { IOObjectRelease(b.service) }
-                            IOObjectRetain(e)
-                            best = (e, num)
-                        }
-                        ok = true
-                    }
-                }
-            }
-            _ = ok
-            IOObjectRelease(e)
+    /// Opens the LEDM interface (255/4/1) of the HP device with this serial. Without a serial, the
+    /// only attached HP device is used. Throws `.noLEDM` when the device has no such interface.
+    init(serial: String?) throws {
+        let scan = USBScan.scan()
+        var keep: io_service_t = 0
+        defer {
+            for (_, byNumber) in scan.services { for (_, svc) in byNumber where svc != keep { IOObjectRelease(svc) } }
         }
-        guard let pick = best else { throw LEDMError.deviceNotFound }
-        defer { IOObjectRelease(pick.service) }
+        switch LEDMMatch.lookup(serial: serial, in: scan.devices) {
+        case .notConnected: throw LEDMError.deviceNotFound
+        case .noLEDM: throw LEDMError.noLEDM
+        case .found(let dev, let iface):
+            guard let svc = scan.services[dev.registryID]?[iface.number] else { throw LEDMError.deviceNotFound }
+            keep = svc
+        }
+        defer { IOObjectRelease(keep) }
+        let pick = (service: keep, number: 0)
 
         do {
             interface = try IOUSBHostInterface(__ioService: pick.service, options: [], queue: nil,
@@ -144,5 +123,54 @@ final class LEDMUSBConnection {
     /// Throws away anything the printer still has queued from earlier requests.
     func drain(quiet: TimeInterval) {
         while let d = try? read(timeout: quiet), !d.isEmpty {}
+    }
+}
+
+/// Reads the USB registry into plain values, keeping the interface services so one can be opened.
+enum USBScan {
+    static func prop(_ k: String, of s: io_service_t) -> Any? {
+        IORegistryEntryCreateCFProperty(s, k as CFString, kCFAllocatorDefault, 0)?.takeRetainedValue()
+    }
+
+    /// Every USB interface grouped by its device. The caller releases the services.
+    static func scan() -> (devices: [USBDeviceInfo], services: [UInt64: [Int: io_service_t]]) {
+        var iter: io_iterator_t = 0
+        guard IOServiceGetMatchingServices(kIOMainPortDefault,
+                                           IOServiceMatching("IOUSBHostInterface"), &iter) == KERN_SUCCESS
+        else { return ([], [:]) }
+        defer { IOObjectRelease(iter) }
+        var devices: [UInt64: USBDeviceInfo] = [:]
+        var services: [UInt64: [Int: io_service_t]] = [:]
+        while case let e = IOIteratorNext(iter), e != 0 {
+            var parent: io_registry_entry_t = 0
+            guard IORegistryEntryGetParentEntry(e, kIOServicePlane, &parent) == KERN_SUCCESS else {
+                IOObjectRelease(e); continue
+            }
+            defer { IOObjectRelease(parent) }
+            var id: UInt64 = 0
+            guard IORegistryEntryGetRegistryEntryID(parent, &id) == KERN_SUCCESS,
+                  let vid = prop("idVendor", of: parent) as? Int,
+                  let pid = prop("idProduct", of: parent) as? Int,
+                  let num = prop("bInterfaceNumber", of: e) as? Int else { IOObjectRelease(e); continue }
+            let iface = USBInterfaceInfo(number: num,
+                                         interfaceClass: prop("bInterfaceClass", of: e) as? Int ?? -1,
+                                         subclass: prop("bInterfaceSubClass", of: e) as? Int ?? -1,
+                                         protocolCode: prop("bInterfaceProtocol", of: e) as? Int ?? -1)
+            if devices[id] == nil {
+                devices[id] = USBDeviceInfo(vendor: vid, product: pid,
+                                            serial: prop("USB Serial Number", of: parent) as? String,
+                                            interfaces: [], registryID: id)
+            }
+            devices[id]!.interfaces.append(iface)
+            services[id, default: [:]][num] = e   // keeps the iterator's reference
+        }
+        return (devices.values.sorted { $0.registryID < $1.registryID }, services)
+    }
+
+    /// Plain snapshot of the attached USB devices.
+    static func devices() -> [USBDeviceInfo] {
+        let r = scan()
+        for (_, m) in r.services { for (_, s) in m { IOObjectRelease(s) } }
+        return r.devices
     }
 }

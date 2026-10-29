@@ -3,7 +3,7 @@
 # Copyright (C) 2026 Gamunu Balagalla
 
 # Fail when a source file written for this project lacks the SPDX line.
-# HP's files in src/hpcups/ and src/common/ keep their own headers and are not checked.
+# HP's files in src/hpcups/, src/common/ and ppd/hplip/ keep their own headers and are not checked.
 set -eu
 
 root=$(cd "$(dirname "$0")/.." && pwd)
@@ -24,7 +24,7 @@ list=$(
         find app/Sources app/Tests -type f \( -name '*.swift' -o -name '*.c' -o -name '*.h' \)
         echo app/Package.swift
         echo Makefile
-        find scripts -type f -name '*.sh'
+        find scripts -type f \( -name '*.sh' -o -name '*.py' \)
         find .github -type f \( -name '*.yml' -o -name '*.yaml' \)
         find src/compat -type f
     } | sort

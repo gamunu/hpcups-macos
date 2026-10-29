@@ -85,19 +85,75 @@ struct InkCartridge: Identifiable, Equatable, Sendable {
     var product: String?       // e.g. 682
 
     var id: String { label }
-    var name: String {
-        switch label {
-        case "K": return "Black"
-        case "CMY": return "Tri-color"
-        default: return label
+    var bands: [InkBand] { InkLabel.bands(label) }
+    var name: String { InkLabel.name(label) }
+    var isBlack: Bool { bands == [.black] }
+    var isMulti: Bool { bands.count > 1 }
+    var colorHex: String { bands.first?.hex ?? InkBand.other.hex }
+}
+
+/// One color stripe of a cartridge.
+enum InkBand: String, Equatable, Sendable {
+    case cyan, magenta, yellow, black, lightCyan, lightMagenta, photo, gray, other
+
+    var hex: String {
+        switch self {
+        case .cyan: return "#00ADEE"
+        case .magenta: return "#E6198C"
+        case .yellow: return "#FFD900"
+        case .black: return "#222222"
+        case .lightCyan: return "#7FD6F7"
+        case .lightMagenta: return "#F28CC5"
+        case .photo: return "#3B3B3B"
+        case .gray: return "#8A8A8A"
+        case .other: return "#888888"
         }
     }
-    var colorHex: String {
-        switch label {
-        case "K": return "#222222"
-        case "CMY": return "#2A9DF4"
-        default: return "#888888"
+    var title: String {
+        switch self {
+        case .cyan: return "Cyan"
+        case .magenta: return "Magenta"
+        case .yellow: return "Yellow"
+        case .black: return "Black"
+        case .lightCyan: return "Light cyan"
+        case .lightMagenta: return "Light magenta"
+        case .photo: return "Photo black"
+        case .gray: return "Gray"
+        case .other: return "Ink"
         }
+    }
+}
+
+/// Reads the label codes printers send (K, C, M, Y, CMY, CMYK, LC, LM, PK and so on).
+enum InkLabel {
+    static func bands(_ label: String) -> [InkBand] {
+        let l = label.uppercased()
+        switch l {
+        case "LC": return [.lightCyan]
+        case "LM": return [.lightMagenta]
+        case "PK", "PB": return [.photo]
+        case "GY", "G": return [.gray]
+        default: break
+        }
+        guard !l.isEmpty, l.allSatisfy({ "CMYK".contains($0) }) else { return [.other] }
+        return l.map { c in
+            switch c {
+            case "C": return .cyan
+            case "M": return .magenta
+            case "Y": return .yellow
+            default: return .black
+            }
+        }
+    }
+
+    static func name(_ label: String) -> String {
+        let b = bands(label)
+        if b == [.other] { return label }
+        if b.count == 1 { return b[0].title }
+        let l = label.uppercased()
+        if l == "CMY" { return "Tri-color" }
+        if l == "CMYK" { return "Four-color" }
+        return b.map(\.title).joined(separator: " + ")
     }
 }
 

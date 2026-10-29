@@ -3,7 +3,7 @@
 # Copyright (C) 2026 Gamunu Balagalla
 
 # Build one unsigned installer package into build/. Does not install anything.
-# It installs the CUPS driver (filter and PPD) and /Applications/hpcups Status.app.
+# It installs the CUPS driver (filter and PPDs) and /Applications/hpcups Status.app.
 # The version comes from scripts/version.sh (VERSION env, git tag vX.Y.Z, VERSION file).
 set -euo pipefail
 
@@ -23,9 +23,13 @@ mkdir -p "$stage/Library/Printers/hpcups-macos/filter" \
          "$stage/Applications"
 
 install -m 755 "$root/build/hpcups" "$stage/Library/Printers/hpcups-macos/filter/hpcups"
-gzip -9 -n -c "$root/ppd/HP DeskJet 2300 series.ppd" \
-    > "$stage/Library/Printers/PPDs/Contents/Resources/HP DeskJet 2300 series (hpcups-macos).ppd.gz"
-chmod 644 "$stage/Library/Printers/PPDs/Contents/Resources/"*.ppd.gz
+# One PPD per HPLIP model family, rewritten for macOS. The DeskJet 2300 keeps
+# its old top-level path; the rest go in a subfolder.
+ppds="$stage/Library/Printers/PPDs/Contents/Resources"
+python3 -I "$root/scripts/gen-ppds.py" build --out "$ppds"
+python3 -I "$root/scripts/gen-ppds.py" check "$ppds"
+find "$ppds" -type f -exec chmod 644 {} +
+find "$ppds" -type d -exec chmod 755 {} +
 cp "$root/COPYING" "$root/LICENSE" "$root/LICENSING.md" "$stage/Library/Printers/hpcups-macos/"
 ditto --norsrc "$root/build/$app" "$stage/Applications/$app"
 

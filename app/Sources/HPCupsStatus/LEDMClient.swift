@@ -153,11 +153,12 @@ struct LEDMReplyReader {
 /// time; each request drains stale bytes first and reads until a full reply
 /// whose root element matches the resource arrives.
 final class LEDMClient: @unchecked Sendable {
-    static let shared = LEDMClient()
-
     private let lock = NSLock()
     private let queue = DispatchQueue(label: "ledm.usb", qos: .utility)
-    var serial: String?
+    /// USB serial of the printer this client talks to. nil means the only attached HP device.
+    let serial: String?
+
+    init(serial: String?) { self.serial = serial }
     var overallTimeout: TimeInterval = 18
     var verbose = false
 
@@ -243,4 +244,41 @@ final class LEDMClient: @unchecked Sendable {
         }
         throw LEDMError.timeout
     }
+}
+
+/// One client per printer serial. Requests to one printer are serialized by its client;
+/// different printers do not wait for each other.
+final class LEDMClients: @unchecked Sendable {
+    static let shared = LEDMClients()
+    private let lock = NSLock()
+    private var clients: [String: LEDMClient] = [:]
+
+    private static func key(_ serial: String?) -> String { serial ?? "" }
+
+    func client(for serial: String?) -> LEDMClient {
+        lock.lock(); defer { lock.unlock() }
+        if let c = clients[Self.key(serial)] { return c }
+        let c = LEDMClient(serial: serial)
+        clients[Self.key(serial)] = c
+        return c
+    }
+
+    /// Forgets the client for a printer that was unplugged.
+    func drop(_ serial: String?) {
+        lock.lock(); defer { lock.unlock() }
+        clients[Self.key(serial)] = nil
+    }
+
+    func dropAll() {
+        lock.lock(); defer { lock.unlock() }
+        clients = [:]
+    }
+
+    /// Forgets every client except the one for the selected printer.
+    func keepOnly(_ serial: String?) {
+        lock.lock(); defer { lock.unlock() }
+        clients = clients.filter { $0.key == Self.key(serial) }
+    }
+
+    var count: Int { lock.lock(); defer { lock.unlock() }; return clients.count }
 }

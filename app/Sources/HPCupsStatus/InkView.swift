@@ -24,7 +24,7 @@ struct InkView: View {
                 }
                 if let r = store.ink, !r.cartridges.isEmpty {
                     CardRow {
-                        ForEach(r.cartridges.sorted { $0.label == "K" && $1.label != "K" }) { CartridgeCard(cartridge: $0) }
+                        ForEach(r.cartridges.sorted { $0.isBlack && !$1.isBlack }) { CartridgeCard(cartridge: $0) }
                     }
                 } else {
                     Card {
@@ -80,13 +80,13 @@ struct CartridgeCard: View {
     }
 }
 
-/// Cartridge outline with the level drawn as filled bands. K has one band, CMY has three.
+/// Cartridge outline with the level drawn as filled bands, one per ink color the label names.
 struct CartridgeShape: View {
     let cartridge: InkCartridge
     @Environment(\.colorScheme) private var scheme
 
     private var bands: [Color] {
-        cartridge.isBlack ? [blackInk(scheme)] : [inkCyan, inkMagenta, inkYellow]
+        cartridge.bands.map { bandColor($0, scheme) }
     }
 
     var body: some View {

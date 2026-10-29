@@ -42,7 +42,8 @@ struct MainWindow: View {
             List(SidebarItem.allCases, selection: $selection) { s in
                 Label(s.title, systemImage: s.symbol).tag(s)
             }
-            .navigationSplitViewColumnWidth(min: 160, ideal: 190, max: 240)
+            .safeAreaInset(edge: .top, spacing: 0) { PrinterList(store: store) }
+            .navigationSplitViewColumnWidth(min: 190, ideal: 220, max: 280)
         } detail: {
             Group {
                 switch selection ?? .overview {

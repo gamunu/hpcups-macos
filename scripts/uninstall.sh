@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # Copyright (C) 2026 Gamunu Balagalla
 
-# Remove hpcups-macos: the app, the filter, the PPD and the installer receipt.
+# Remove hpcups-macos: the app, the filter, the PPDs and the installer receipt.
 # Run with sudo. Printer queues are not touched; remove them first with
 #   sudo lpadmin -x <queue name>
 set -euo pipefail
@@ -17,6 +17,7 @@ pkill -x "hpcups Status" 2>/dev/null || true
 rm -rf "/Applications/hpcups Status.app"
 rm -rf /Library/Printers/hpcups-macos
 rm -f "/Library/Printers/PPDs/Contents/Resources/HP DeskJet 2300 series (hpcups-macos).ppd.gz"
+rm -rf /Library/Printers/PPDs/Contents/Resources/hpcups-macos
 pkgutil --forget io.github.hpcups-macos >/dev/null 2>&1 || true
 
 # Per-user settings of the app, for the user who ran sudo.

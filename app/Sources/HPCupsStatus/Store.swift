@@ -9,13 +9,22 @@ import Combine
 @MainActor
 final class StatusStore: ObservableObject {
     @Published var printers: [PrinterInfo] = []
-    @Published var selected: String = UserDefaults.standard.string(forKey: "printer") ?? "HP_DeskJet_2300" {
+    /// Queue name of the selected printer, remembered across launches. Empty until a queue is found.
+    @Published var selected: String = UserDefaults.standard.string(forKey: "printer") ?? "" {
         didSet {
+            guard selected != oldValue else { return }
             UserDefaults.standard.set(selected, forKey: "printer")
             previousJobStates = [:]
+            resetPrinterState()
             Task { await refresh() }
         }
     }
+    /// USB connection per queue name. A queue that is not USB, or has no serial, has no entry.
+    @Published var connection: [String: Bool] = [:]
+    /// Whether the selected printer speaks LEDM over USB.
+    @Published var ledmSupport: LEDMSupport = .unknown
+    private var currentSerial: String?
+    private var deviceOpen = false
     @Published var status: PrinterStatus?
     @Published var usbPresent: Bool?
     @Published var jobs: [PrintJob] = []
@@ -32,6 +41,61 @@ final class StatusStore: ObservableObject {
     @Published var inkLoading = false
     let maint = MaintenanceController()
     private var maintSink: AnyCancellable?
+
+    /// Name shown for a queue: underscores become spaces.
+    static func displayName(_ queue: String) -> String { queue.replacingOccurrences(of: "_", with: " ") }
+    var displayName: String { Self.displayName(selected) }
+    var selectedInfo: PrinterInfo? { printers.first { $0.name == selected } }
+
+    /// Forgets everything read from the previous printer.
+    private func resetPrinterState() {
+        ink = nil
+        inkError = nil
+        ledmCategories = nil
+        ledmSupport = .unknown
+        status = nil
+        usbPresent = nil
+        jobs = []
+        queueStuck = false
+        stuckRule = StuckQueueRule()
+        lastInkFetch = .distantPast
+        lastLedmFetch = .distantPast
+        closeDevice()
+    }
+
+    /// Closes every LEDM client and detaches the maintenance controller.
+    private func closeDevice() {
+        LEDMClients.shared.dropAll()
+        currentSerial = nil
+        deviceOpen = false
+        maint.configure(client: nil)
+    }
+
+    /// Called after each CUPS read. Opens the LEDM client for the selected printer, and closes it when
+    /// the printer is unplugged. Clients for other printers are closed.
+    private func updateDevice() {
+        guard let uri = status?.deviceURI, !uri.isEmpty else { return }
+        guard DeviceURI.isUSB(uri) else {
+            ledmSupport = .unavailable(LEDMSupport.noInkReason)
+            if deviceOpen { closeDevice() }
+            return
+        }
+        if usbPresent == false {
+            // Unplugged: close the client and probe again when it comes back.
+            if deviceOpen { closeDevice() }
+            ledmSupport = .unknown
+            return
+        }
+        let serial = DeviceURI.serial(uri)
+        if !deviceOpen || serial != currentSerial {
+            closeDevice()
+            currentSerial = serial
+            deviceOpen = true
+            LEDMClients.shared.keepOnly(serial)
+            maint.configure(client: LEDMClients.shared.client(for: serial))
+            Task { await refreshInk(force: true) }   // first contact: read ink and capabilities now
+        }
+    }
 
     init() {
         // Views read maint.cancelling and maint.cancelOutcome through the store.
@@ -95,6 +159,7 @@ final class StatusStore: ObservableObject {
     var maintenanceBlockReason: String? {
         if PreviewMode.isActive { return nil }
         if usbPresent == false { return "The printer is not connected over USB." }
+        if case .unavailable(let why) = ledmSupport { return "\(why), so maintenance is not available." }
         if maint.isBusy { return "A maintenance job is running." }
         if jobs.contains(where: \.isActive) { return "A print job is active. Wait for it to finish or cancel it." }
         if isCalibrating { return Self.calibratingNote }
@@ -135,7 +200,7 @@ final class StatusStore: ObservableObject {
     }
 
     static let stuckNote = "The printer looks busy, but nothing is printing."
-    static let calibratingNote = "The printer is lining up its print heads. If the page is out, put it face down on the scanner glass and press Color Copy. To stop, press the Cancel (X) button on the printer."
+    static let calibratingNote = "The printer is lining up its print heads. If it asks for the page to be scanned, put it face down on the scanner glass and press the Color Copy button. To stop, press the Cancel (X) button on the printer."
 
     /// The printer reports an alignment in progress (LEDM "calibrating").
     var isCalibrating: Bool { ledmCategories?.contains("calibrating") ?? false }
@@ -182,13 +247,17 @@ final class StatusStore: ObservableObject {
         guard !inkInFlight, !maint.isBusy else { return }
         guard force || Date().timeIntervalSince(lastInkFetch) > 10 else { return }
         if usbPresent == false { ink = nil; inkError = "Printer not connected over USB"; return }
+        if case .unavailable(let why) = ledmSupport { ink = nil; inkError = why; return }
+        guard let client = currentClient else { return }
         inkInFlight = true
         inkLoading = true
         defer { inkInFlight = false; inkLoading = false }
         lastInkFetch = Date()
-        if let uri = status?.deviceURI { LEDMClient.shared.serial = USBCheck.serial(fromURI: uri) }
+        let queue = selected
         do {
-            let r = try await LEDMClient.shared.getAsync("/DevMgmt/ConsumableConfigDyn.xml")
+            let r = try await client.getAsync("/DevMgmt/ConsumableConfigDyn.xml")
+            guard queue == selected else { return }
+            ledmSupport = .available
             guard r.status == 200, let report = InkParser.parse(r.body) else {
                 inkError = "The printer did not send its ink levels."
                 return
@@ -196,10 +265,27 @@ final class StatusStore: ObservableObject {
             ink = report
             inkError = nil
             notifyInk(report)
+        } catch LEDMError.noLEDM {
+            guard queue == selected else { return }
+            markNoLEDM()
+            return
         } catch {
+            guard queue == selected else { return }
             inkError = error.localizedDescription
         }
         await maint.loadCapabilities()
+    }
+
+    private var currentClient: LEDMClient? {
+        guard deviceOpen else { return nil }
+        return LEDMClients.shared.client(for: currentSerial)
+    }
+
+    private func markNoLEDM() {
+        ledmSupport = .unavailable(LEDMSupport.noInkReason)
+        ink = nil
+        inkError = LEDMSupport.noInkReason
+        ledmCategories = nil
     }
 
     /// One notification per cartridge each time its state changes to a problem state.
@@ -207,13 +293,14 @@ final class StatusStore: ObservableObject {
         guard UserDefaults.standard.bool(forKey: "notificationsEnabled") else { return }
         let d = UserDefaults.standard
         for c in report.cartridges {
-            let key = "inkState.\(c.label)"
+            let key = "inkState.\(selected).\(c.label)"
             let prev = d.string(forKey: key)
             guard prev != c.state.rawValue else { continue }
             d.set(c.state.rawValue, forKey: key)
             guard c.state.needsAttention else { continue }
             let pct = c.percent.map { ", \($0)% left" } ?? ""
-            notifier.post(title: "\(c.name) ink: \(c.state.text.lowercased())", body: "The \(c.name.lowercased()) cartridge is \(c.state.text.lowercased())\(pct).")
+            notifier.post(title: "\(displayName): \(c.name.lowercased()) ink \(c.state.text.lowercased())",
+                          body: "The \(c.name.lowercased()) cartridge in \(displayName) is \(c.state.text.lowercased())\(pct).")
         }
     }
 
@@ -221,17 +308,21 @@ final class StatusStore: ObservableObject {
         let name = selected
         let reloadList = printers.isEmpty || pollCount % 10 == 0
         pollCount += 1
+        let known = printers
         let snap = await Task.detached(priority: .utility) { () -> Snapshot in
-            Snapshot.load(selected: name, reloadList: reloadList)
+            Snapshot.load(selected: name, reloadList: reloadList, known: known)
         }.value
         if let list = snap.printers { printers = list }
+        connection = snap.connection
         if let chosen = snap.resolvedName, chosen != selected {
             selected = chosen
             return
         }
+        guard name == selected else { return }
         status = snap.status
         usbPresent = snap.usb
         jobs = snap.jobs
+        updateDevice()
         updateStale()
         checkNotifications(snap.jobs)
         await refreshLEDM()
@@ -249,15 +340,28 @@ final class StatusStore: ObservableObject {
             if usbPresent != true { ledmCategories = nil }
             return
         }
+        if case .unavailable = ledmSupport { ledmCategories = nil; return }
+        guard let client = currentClient else { return }
         guard Date().timeIntervalSince(lastLedmFetch) >= 5 else { return }
         ledmInFlight = true
         lastLedmFetch = Date()
         defer { ledmInFlight = false }
-        if let uri = status?.deviceURI { LEDMClient.shared.serial = USBCheck.serial(fromURI: uri) }
-        if let r = try? await LEDMClient.shared.getAsync("/DevMgmt/ProductStatusDyn.xml"), r.status == 200 {
-            let cats = Maintenance.statusCategories(r.body)
-            ledmCategories = cats.isEmpty ? nil : cats
-        } else {
+        let queue = selected
+        do {
+            let r = try await client.getAsync("/DevMgmt/ProductStatusDyn.xml")
+            guard queue == selected else { return }
+            if r.status == 200 {
+                ledmSupport = .available
+                let cats = Maintenance.statusCategories(r.body)
+                ledmCategories = cats.isEmpty ? nil : cats
+            } else {
+                ledmCategories = nil
+            }
+        } catch LEDMError.noLEDM {
+            guard queue == selected else { return }
+            markNoLEDM()
+        } catch {
+            guard queue == selected else { return }
             ledmCategories = nil
         }
         updateStale()
@@ -272,8 +376,8 @@ final class StatusStore: ObservableObject {
         guard !previousJobStates.isEmpty || !jobs.isEmpty else { return }
         for j in jobs {
             guard let old = previousJobStates[j.id], old >= 3, old <= 6 else { continue }
-            if j.stateCode == 9 { notifier.post(title: "Print job completed", body: j.title) }
-            else if j.stateCode == 8 { notifier.post(title: "Print job failed", body: j.title) }
+            if j.stateCode == 9 { notifier.post(title: "Print job completed", body: "\(displayName): \(j.title)") }
+            else if j.stateCode == 8 { notifier.post(title: "Print job failed", body: "\(displayName): \(j.title)") }
         }
     }
 
@@ -310,27 +414,29 @@ struct Snapshot: Sendable {
     var status: PrinterStatus?
     var usb: Bool?
     var jobs: [PrintJob] = []
+    var connection: [String: Bool] = [:]
 
-    static func filtered(_ all: [PrinterInfo]) -> [PrinterInfo] {
-        let ours = all.filter { $0.makeAndModel.localizedCaseInsensitiveContains("hpcups-macos") }
-        return ours.isEmpty ? all : ours
-    }
+    static func filtered(_ all: [PrinterInfo]) -> [PrinterInfo] { PrinterChoice.shown(all) }
 
-    static func load(selected: String, reloadList: Bool) -> Snapshot {
+    static func load(selected: String, reloadList: Bool, known: [PrinterInfo]) -> Snapshot {
         var snap = Snapshot()
-        var list = filtered(Cups.listPrinters())
-        if reloadList { snap.printers = list } else { list = [] }
-        var info = list.first(where: { $0.name == selected })
-        if reloadList, info == nil, let first = list.first {
-            // Selected queue is gone: fall back to the default or first match.
-            let pick = list.first(where: { $0.name == "HP_DeskJet_2300" }) ?? first
-            snap.resolvedName = pick.name
-            info = pick
+        let list = reloadList ? filtered(Cups.listPrinters()) : known
+        if reloadList { snap.printers = list }
+        let connected = USBCheck.connectedSerials()
+        for p in list {
+            if let c = PrinterChoice.connection(of: p, connected: connected) { snap.connection[p.name] = c }
         }
-        let target = info ?? PrinterInfo(name: selected, makeAndModel: "", deviceURI: "")
+        var info = list.first(where: { $0.name == selected })
+        if info == nil, let name = PrinterChoice.resolve(current: selected, in: list) {
+            // Selected queue is gone or nothing was chosen yet: take the first match.
+            snap.resolvedName = name
+            info = list.first { $0.name == name }
+        }
+        guard let target = info else { return snap }
+        if snap.resolvedName != nil { return snap }   // the store re-reads after switching
         let st = Cups.printerStatus(target)
         snap.status = st
-        snap.usb = USBCheck.devicePresent(deviceURI: st.deviceURI)
+        snap.usb = PrinterChoice.connection(of: target, connected: connected)
         snap.jobs = Cups.jobs(for: target.name, limit: 100)
         return snap
     }

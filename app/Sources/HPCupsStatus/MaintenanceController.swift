@@ -115,7 +115,7 @@ enum Maintenance {
 
     /// Cancels every active job on the printer, then waits up to 20 s for it to stop.
     /// Blocking: call off the main thread.
-    static func cancelActivePrinterJobs(client: LEDMClient = .shared) -> CancelResult {
+    static func cancelActivePrinterJobs(client: LEDMClient) -> CancelResult {
         var result = CancelResult()
         do {
             let list = try client.get("/Jobs/JobList", expectRoot: "JobList")
@@ -221,12 +221,13 @@ final class MaintenanceController: ObservableObject {
     @Published var attention: Attention?
     @Published var reached = 0                   // index of the furthest step shown
     @Published var note: String?                 // extra line on the done screen
-    @Published var supported: [String]?          // JobType values from InternalPrintCap
+    @Published var caps: PrinterCaps?            // read once per printer, nil until then
     @Published var cancelling = false            // a cancel request is in progress
     @Published var cancelOutcome: String?        // result of the last cancel, shown for a while
 
     private var task: Task<Void, Never>?
-    private let client = LEDMClient.shared
+    private var client: LEDMClient?
+    private var capsInFlight = false
     private let pollInterval: Duration = .seconds(2)
 
     var isBusy: Bool {
@@ -238,11 +239,12 @@ final class MaintenanceController: ObservableObject {
         }
     }
 
-    static func steps(for job: MaintenanceJob) -> [String] {
+    static func steps(for job: MaintenanceJob, alignment: AlignmentSupport? = nil) -> [String] {
         switch job {
         case .clean, .deepClean: return ["Prepare", "Cleaning", "Done"]
         case .diagnostics: return ["Prepare", "Printing", "Check"]
-        case .align: return ["Prepare", "Printing", "Scan", "Done"]
+        case .align:
+            return alignment == .automatic ? ["Prepare", "Aligning", "Done"] : ["Prepare", "Printing", "Scan", "Done"]
         }
     }
 
@@ -256,17 +258,35 @@ final class MaintenanceController: ObservableObject {
         calState = spec.calState
     }
 
-    func supports(_ job: MaintenanceJob) -> Bool {
-        guard let jt = job.jobType else { return true }   // alignment checked when it starts
-        return supported?.contains(jt) ?? true             // unknown until the capability read finishes
+    /// Points the controller at the selected printer's LEDM client. Forgets what it knew about the
+    /// previous printer.
+    func configure(client: LEDMClient?) {
+        guard client !== self.client else { return }
+        task?.cancel()
+        task = nil
+        self.client = client
+        caps = nil
+        job = nil
+        reset()
     }
 
+    func supports(_ job: MaintenanceJob) -> Bool { caps?.cards.contains(job) ?? false }
+
+    private func ledm() throws -> LEDMClient {
+        guard let client else { throw LEDMError.noLEDM }
+        return client
+    }
+
+    /// Reads what the printer can do. Runs on first contact and again until it succeeds.
     func loadCapabilities() async {
-        guard supported == nil else { return }
-        if let r = try? await client.getAsync("/DevMgmt/InternalPrintCap.xml"), r.status == 200 {
-            let list = Maintenance.supportedJobTypes(r.body)
-            if !list.isEmpty { supported = list }
-        }
+        guard caps == nil, !capsInFlight, let c = client else { return }
+        capsInFlight = true
+        defer { capsInFlight = false }
+        guard let r = try? await c.getAsync("/DevMgmt/InternalPrintCap.xml"), r.status == 200 else { return }
+        let cfg = try? await c.getAsync("/DevMgmt/ConsumableConfigDyn.xml")
+        let parsed = PrinterCaps.parse(printCap: r.body, consumables: cfg?.status == 200 ? cfg?.body : nil)
+        guard c === client else { return }   // the selection changed while reading
+        caps = parsed
     }
 
     // MARK: sheet control
@@ -305,7 +325,8 @@ final class MaintenanceController: ObservableObject {
     private func performCancel() async -> CancelResult {
         cancelling = true
         defer { cancelling = false }
-        return await Task.detached { Maintenance.cancelActivePrinterJobs() }.value
+        guard let c = client else { return CancelResult(error: LEDMError.noLEDM.localizedDescription) }
+        return await Task.detached { Maintenance.cancelActivePrinterJobs(client: c) }.value
     }
 
     /// Closes the sheet. The printer keeps going with a job it already started.
@@ -346,7 +367,7 @@ final class MaintenanceController: ObservableObject {
     private func fail(_ message: String) { stage = .failed(message) }
 
     private func readCategories() async -> [String]? {
-        guard let s = try? await client.getAsync("/DevMgmt/ProductStatusDyn.xml"), s.status == 200 else { return nil }
+        guard let s = try? await ledm().getAsync("/DevMgmt/ProductStatusDyn.xml"), s.status == 200 else { return nil }
         let cats = Maintenance.statusCategories(s.body)
         return cats.isEmpty ? nil : cats
     }
@@ -358,61 +379,67 @@ final class MaintenanceController: ObservableObject {
     private func runJob(_ job: MaintenanceJob) async {
         guard let jt = job.jobType else { return }
         do {
-            let r = try await client.postAsync("/DevMgmt/InternalPrintDyn.xml", xml: Maintenance.jobXML(jt))
+            let r = try await ledm().postAsync("/DevMgmt/InternalPrintDyn.xml", xml: Maintenance.jobXML(jt))
             guard (200..<300).contains(r.status) else {
                 fail("The printer did not accept the request. Try again.\nDetails: HTTP \(r.status) \(r.reason)")
                 return
             }
             stage = .running
-            var sawBusy = false, quiet = 0, failures = 0
-            let started = Date()
-            while true {
-                try await Task.sleep(for: pollInterval)
-                if Date().timeIntervalSince(started) > 300 {
-                    fail("The printer did not finish within 5 minutes. Check it, then try again.")
-                    return
-                }
-                guard let cats = await readCategories() else {
-                    failures += 1
-                    if failures >= 10 { fail("The printer stopped answering."); return }
-                    continue
-                }
-                failures = 0
-                categories = cats
-                let a = Maintenance.attention(cats)
-                attention = a
-                if Maintenance.isBusy(cats) { sawBusy = true; quiet = 0 }
-                else if a == nil { quiet += 1 }
-                else { quiet = 0 }
-                if (sawBusy && quiet >= 2) || (!sawBusy && quiet >= 10) {
-                    if !sawBusy { note = "The printer did not report any activity, so the job may have finished very quickly." }
-                    stage = .done
-                    reached = 2
-                    return
-                }
-            }
+            try await watchUntilQuiet(doneReached: 2)
         } catch is CancellationError {
         } catch {
             fail(error.localizedDescription)
         }
     }
 
+    /// Watches the status categories every 2 s. Done when the printer was busy and is ready again
+    /// with nothing for the user to fix.
+    private func watchUntilQuiet(doneReached: Int) async throws {
+        var sawBusy = false, quiet = 0, failures = 0
+        let started = Date()
+        while true {
+            try await Task.sleep(for: pollInterval)
+            if Date().timeIntervalSince(started) > 300 {
+                fail("The printer did not finish within 5 minutes. Check it, then try again.")
+                return
+            }
+            guard let cats = await readCategories() else {
+                failures += 1
+                if failures >= 10 { fail("The printer stopped answering."); return }
+                continue
+            }
+            failures = 0
+            categories = cats
+            let a = Maintenance.attention(cats)
+            attention = a
+            if Maintenance.isBusy(cats) { sawBusy = true; quiet = 0 }
+            else if a == nil { quiet += 1 }
+            else { quiet = 0 }
+            if (sawBusy && quiet >= 2) || (!sawBusy && quiet >= 10) {
+                if !sawBusy { note = "The printer did not report any activity, so the job may have finished very quickly." }
+                stage = .done
+                reached = doneReached
+                return
+            }
+        }
+    }
+
     // MARK: alignment (base/maint.py dataModelHelper, AlignType15)
 
     private func readCalibration() async -> String? {
-        guard let s = try? await client.getAsync("/Calibration/State", expectRoot: "CalibrationState"),
+        guard let s = try? await ledm().getAsync("/Calibration/State", expectRoot: "CalibrationState"),
               s.status == 200 else { return nil }
         return Maintenance.calibrationWord(s.text)
     }
 
-    /// Sequence seen on a DeskJet 2300 over USB:
+    /// Sequence seen on a semi-automatic printer (DeskJet 2300) over USB:
     /// CalibrationRequired -> Printing (calibrating) -> ScanRequested -> Scanning -> CalibrationRequired + ready.
     /// The printer does not report CalibrationValid after a good alignment, so success is
     /// "passed through Scanning, then ready with nothing to fix". CalibrationValid also counts.
     private func runAlign() async {
         do {
-            var state = try await client.getAsync("/Calibration/State", expectRoot: "CalibrationState")
-            if state.body.isEmpty { state = try await client.getAsync("/Calibration/State", expectRoot: "CalibrationState") }
+            var state = try await ledm().getAsync("/Calibration/State", expectRoot: "CalibrationState")
+            if state.body.isEmpty { state = try await ledm().getAsync("/Calibration/State", expectRoot: "CalibrationState") }
             if state.status == 404 {
                 fail("This printer does not support alignment over this channel.")
                 return
@@ -426,7 +453,7 @@ final class MaintenanceController: ObservableObject {
                 fail("A previous alignment job has not finished. Wait for the printer to go idle.")
                 return
             }
-            let cfg = try await client.getAsync("/DevMgmt/ConsumableConfigDyn.xml")
+            let cfg = try await ledm().getAsync("/DevMgmt/ConsumableConfigDyn.xml")
             let mode = InkParser.parse(cfg.body)?.alignmentMode ?? ""
             guard cfg.text.contains("AlignmentMode") else {
                 fail("This printer does not report an alignment mode.")
@@ -436,15 +463,15 @@ final class MaintenanceController: ObservableObject {
                 fail("This printer uses manual alignment, which this app does not support.")
                 return
             }
-            let r = try await client.postFooterAsync("/Calibration/Session", xml: Maintenance.calibrationPrintingXML)
+            let r = try await ledm().postFooterAsync("/Calibration/Session", xml: Maintenance.calibrationPrintingXML)
             guard (200..<300).contains(r.status) else {
                 fail("The printer did not accept the request. Try again.\nDetails: HTTP \(r.status) \(r.reason)")
                 return
             }
             if mode == "automatic" {
-                note = "The printer aligns itself. Wait for its lights to stop."
-                stage = .done
-                reached = 3
+                note = "The printer aligns itself. You do not need to scan anything."
+                stage = .running
+                try await watchUntilQuiet(doneReached: 2)
                 return
             }
             stage = .running
