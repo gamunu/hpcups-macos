@@ -66,12 +66,23 @@ Fuck you, HP.
 
 ## Install
 
-1. Download `hpcups-macos-<version>.pkg` from the [latest release](https://github.com/gamunu/hpcups-macos/releases/latest).
-2. The package is not signed with an Apple Developer ID. Right click it in Finder, choose **Open**, then **Open** again.
-3. Plug in the printer.
-4. Open **System Settings > Printers & Scanners**, click **Add Printer**, pick **DeskJet 2300 series**, and set **Use** to "HP DeskJet 2300 series, hpcups-macos".
+Paste this into Terminal:
 
-If macOS still refuses the package, **System Settings > Privacy & Security** shows an **Open Anyway** button for it.
+    curl -fsSL https://raw.githubusercontent.com/gamunu/hpcups-macos/main/install.sh | sh
+
+The script downloads the latest release, checks it against the release's `SHA256SUMS`, and installs it with Apple's `installer` command. It asks for your Mac password once.
+
+Then plug in the printer, open **System Settings > Printers & Scanners**, click **Add Printer**, pick your HP printer, and set **Use** to the "..., hpcups-macos" driver.
+
+### Installing the .pkg by hand
+
+The package is not signed with a paid Apple Developer ID, so macOS says it "could not verify" it when you open it from Finder. To install it anyway:
+
+1. Download `hpcups-macos-<version>.pkg` from the [latest release](https://github.com/gamunu/hpcups-macos/releases/latest) and double-click it.
+2. Click **Done** on the warning. Do not move it to the Bin.
+3. Open **System Settings > Privacy & Security**, scroll down, and click **Open Anyway** next to the package name.
+
+Right click > Open no longer skips this check on macOS 15 and later. Updates from inside the app are checked against this project's signing key and do not show the warning.
 
 The package installs the filter, a PPD for each supported printer, and `/Applications/hpcups Status.app`. It does not add the printer for you.
 
