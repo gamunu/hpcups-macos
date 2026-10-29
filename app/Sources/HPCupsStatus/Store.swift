@@ -87,6 +87,7 @@ final class StatusStore: ObservableObject {
         if usbPresent == false { return "The printer is not connected over USB." }
         if maint.isBusy { return "A maintenance job is running." }
         if jobs.contains(where: \.isActive) { return "A print job is active. Wait for it to finish or cancel it." }
+        if isCalibrating { return Self.calibratingNote }
         if isBusy { return "The printer is busy printing." }
         return nil
     }
@@ -117,13 +118,17 @@ final class StatusStore: ObservableObject {
     var healthTitle: String {
         switch health {
         case .ready: return "Ready"
-        case .printing: return "Printing"
+        case .printing: return isCalibrating && activeJob == nil ? "Aligning" : "Printing"
         case .attention: return "Needs attention"
         case .disconnected: return "Disconnected"
         }
     }
 
     static let stuckNote = "The print queue reports a job that does not exist."
+    static let calibratingNote = "The printer is in the middle of a head alignment. If the alignment page is out, place it face down on the scanner glass and press Color Copy. To stop the alignment instead, press the Cancel (X) button on the printer."
+
+    /// The printer reports an alignment in progress (LEDM "calibrating").
+    var isCalibrating: Bool { ledmCategories?.contains("calibrating") ?? false }
 
     /// Plain-language reasons behind the current state.
     var healthDetails: [String] {
@@ -132,6 +137,7 @@ final class StatusStore: ObservableObject {
         if usbPresent == false { out.append("The USB cable is unplugged or the printer is off.") }
         if let e = s.error { out.append(e) }
         if s.stateCode == 5 { out.append("The queue is paused or stopped.") }
+        if isCalibrating && activeJob == nil { out.append(Self.calibratingNote) }
         out += reasonLines
         if let ink = ink {
             for c in ink.cartridges where c.state == .empty || c.state == .missing || c.state == .veryLow || c.state == .low {
