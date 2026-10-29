@@ -1,0 +1,80 @@
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: macos-26
+    timeout-minutes: 45
+    env:
+      SPARKLE_PUBLIC_KEY: ${{ vars.SPARKLE_PUBLIC_KEY }}
+      SPARKLE_PRIVATE_KEY: ${{ secrets.SPARKLE_PRIVATE_KEY }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Select Xcode
+        run: |
+          sudo xcode-select -s /Applications/Xcode_26.6.app
+          xcodebuild -version
+          swift --version
+
+      - name: Install jpeg-turbo
+        run: brew install jpeg-turbo pkgconf
+
+      - name: Check Sparkle keys
+        run: |
+          if [ -z "$SPARKLE_PUBLIC_KEY" ]; then
+            echo "::warning::Repository variable SPARKLE_PUBLIC_KEY is not set. The app is built without SUPublicEDKey and cannot verify updates."
+          fi
+          if [ -z "$SPARKLE_PRIVATE_KEY" ]; then
+            echo "::warning::Secret SPARKLE_PRIVATE_KEY is not set. The release has no appcast.xml, so installed apps will not see this update."
+          fi
+
+      - name: Build filter
+        run: make
+
+      - name: Test filter
+        run: make test
+
+      - name: Build pkg
+        run: scripts/build-pkg.sh
+
+      - name: Release notes
+        run: |
+          tag="$GITHUB_REF_NAME"
+          # Annotated tag message first, otherwise the commits since the previous tag.
+          git fetch --force --tags origin
+          git for-each-ref --format='%(contents)' "refs/tags/$tag" | sed '/^-----BEGIN PGP SIGNATURE-----/,$d' > build/notes.md
+          if ! grep -q '[^[:space:]]' build/notes.md; then
+            prev=$(git describe --tags --abbrev=0 --match 'v[0-9]*' "$tag^" 2>/dev/null || true)
+            range=${prev:+$prev..}$tag
+            git log --no-merges --format='- %s' "$range" > build/notes.md
+          fi
+          cat build/notes.md
+
+      - name: Build appcast
+        run: |
+          if [ -z "$SPARKLE_PRIVATE_KEY" ]; then
+            echo "::warning::Skipping appcast.xml because SPARKLE_PRIVATE_KEY is not set."
+            exit 0
+          fi
+          scripts/make-appcast.sh build/hpcups-macos-*.pkg build/appcast.xml build/notes.md
+          cat build/appcast.xml
+
+      - name: Create release
+        uses: softprops/action-gh-release@v3.0.3
+        with:
+          files: |
+            build/hpcups-macos-*.pkg
+            build/appcast.xml
+          body_path: build/notes.md
+          prerelease: ${{ contains(github.ref_name, '-') }}
+          fail_on_unmatched_files: false
