@@ -3,7 +3,8 @@
 # Copyright (C) 2026 Gamunu Balagalla
 
 # Fail when a source file written for this project lacks the SPDX line.
-# HP's files in src/hpcups/, src/common/ and ppd/hplip/ keep their own headers and are not checked.
+# HP's files in src/hpcups/, src/common/ and ppd/hplip/, and jbigkit's in
+# src/jbigkit/, keep their own headers and are not checked.
 set -eu
 
 root=$(cd "$(dirname "$0")/.." && pwd)
@@ -27,6 +28,7 @@ list=$(
         find scripts -type f \( -name '*.sh' -o -name '*.py' \)
         find .github -type f \( -name '*.yml' -o -name '*.yaml' \)
         find src/compat -type f
+        find tests -type f
     } | sort
 )
 
