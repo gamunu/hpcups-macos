@@ -3,6 +3,7 @@
 # Copyright (C) 2026 Gamunu Balagalla
 
 # Offline test, no printer needed.
+#  0. The firmware loader (scripts/test-firmware.sh).
 #  1. Build every PPD and check them (keywords, filter path, cupstestppd).
 #  2. For each print language we serve, render a text page to CUPS raster with
 #     macOS cupsfilter, run it through build/hpcups with one representative
@@ -21,6 +22,9 @@ tmp=$(mktemp -d)
 trap 'rm -rf "$tmp"' EXIT
 
 [ -x "$filter" ] || { echo "missing $filter, run make first" >&2; exit 1; }
+
+# ---- 0. the firmware loader ----
+"$root/scripts/test-firmware.sh"
 
 # ---- 1. the PPD set ----
 ppds="$tmp/ppds"

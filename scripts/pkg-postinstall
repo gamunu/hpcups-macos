@@ -1,0 +1,10 @@
+#!/bin/sh
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Copyright (C) 2026 Gamunu Balagalla
+
+# Installer postinstall: start the firmware loader's LaunchDaemon now, so a
+# printer that is already plugged in and powered on is served without a reboot.
+plist=/Library/LaunchDaemons/io.github.gamunu.smudge.firmware.plist
+launchctl bootout system "$plist" > /dev/null 2>&1 || true
+launchctl bootstrap system "$plist" > /dev/null 2>&1 || true
+exit 0

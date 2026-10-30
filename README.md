@@ -101,6 +101,16 @@ From a shell, the same steps are:
     sudo lpadmin -p HP_DeskJet_2300 -E -v "<usb uri from lpinfo>" \
         -P "/Library/Printers/PPDs/Contents/Resources/HP DeskJet 2300 series (Smudge).ppd.gz"
 
+### LaserJets that need firmware
+
+The LaserJet 1000, 1005, 1018, 1020, P1005 to P1009, P1505 and P1566 keep no firmware in flash. After every power-on they need HP's firmware sent over USB before they print. HP does not allow the firmware to be redistributed, so the package does not carry it. Download it once from HP's own HPLIP 3.25.2 plugin:
+
+    sudo /Library/Printers/smudge/bin/smudge-fetch-firmware
+
+The script checks the download against a pinned SHA-256 and unpacks only the `hp_laserjet_*.fw.gz` files into `/Library/Printers/smudge/firmware`. It never runs anything from the plugin.
+
+The package also installs a LaunchDaemon, `io.github.gamunu.smudge.firmware`. launchd starts `smudge-firmware-load` when one of these printers appears on USB. It reads the printer's IEEE-1284 device ID through Apple's `usb` backend. A device ID without `FWVER` means no firmware is running, so the loader sends the file for that model through the same backend. A printer that already runs firmware is left alone. Give the printer a few seconds after power-on before the first job. Progress goes to `/var/log/smudge-firmware.log`. The queue is a plain `usb://` queue, added with `lpadmin` as above, using the PPD for your model. To load firmware by hand, run `sudo /Library/Printers/smudge/bin/smudge-firmware-load`.
+
 ## Using the app
 
 Open **Smudge** from Applications. The Overview tells you whether the printer is ready and what to do if it is not.
@@ -190,7 +200,7 @@ Back the private key up in a password manager. Lose it and every installed copy 
     sudo lpadmin -x HP_DeskJet_2300
     sudo scripts/uninstall.sh
 
-This removes the app, the filter, the PPDs and the installer receipt.
+This removes the app, the filter, the PPDs, the firmware loader (its LaunchDaemon and `/Library/Printers/smudge/bin`), any firmware downloaded to `/Library/Printers/smudge/firmware`, and the installer receipt.
 
 ## License
 

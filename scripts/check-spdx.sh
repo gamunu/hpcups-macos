@@ -25,7 +25,9 @@ list=$(
         find app/Sources app/Tests -type f \( -name '*.swift' -o -name '*.c' -o -name '*.h' \)
         echo app/Package.swift
         echo Makefile
-        find scripts -type f \( -name '*.sh' -o -name '*.py' \)
+        find scripts -type f \( -name '*.sh' -o -name '*.py' -o -name '*.plist' \)
+        echo scripts/smudge-firmware-load
+        echo scripts/pkg-postinstall
         find .github -type f \( -name '*.yml' -o -name '*.yaml' \)
         find src/compat -type f
         find tests -type f

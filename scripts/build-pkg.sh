@@ -3,7 +3,8 @@
 # Copyright (C) 2026 Gamunu Balagalla
 
 # Build one unsigned installer package into build/. Does not install anything.
-# It installs the CUPS driver (filter and PPDs) and /Applications/Smudge.app.
+# It installs the CUPS driver (filter and PPDs), the firmware tools for the
+# LaserJets that need firmware after every power-on, and /Applications/Smudge.app.
 # The version comes from scripts/version.sh (VERSION env, git tag vX.Y.Z, VERSION file).
 set -euo pipefail
 
@@ -19,10 +20,20 @@ VERSION=$version "$root/scripts/build-app.sh"
 
 rm -rf "$stage" "$root/build/component.pkg" "$root/build/component.plist"
 mkdir -p "$stage/Library/Printers/smudge/filter" \
+         "$stage/Library/Printers/smudge/bin" \
+         "$stage/Library/LaunchDaemons" \
          "$stage/Library/Printers/PPDs/Contents/Resources" \
          "$stage/Applications"
 
 install -m 755 "$root/build/hpcups" "$stage/Library/Printers/smudge/filter/hpcups"
+# Firmware tools. HP's firmware is not shipped; smudge-fetch-firmware downloads it.
+install -m 755 "$root/scripts/fetch-firmware.sh" "$stage/Library/Printers/smudge/bin/smudge-fetch-firmware"
+install -m 755 "$root/scripts/smudge-firmware-load" "$stage/Library/Printers/smudge/bin/smudge-firmware-load"
+install -m 644 "$root/scripts/io.github.gamunu.smudge.firmware.plist" "$stage/Library/LaunchDaemons/"
+pkgscripts="$root/build/pkgscripts"
+rm -rf "$pkgscripts"
+mkdir -p "$pkgscripts"
+install -m 755 "$root/scripts/pkg-postinstall" "$pkgscripts/postinstall"
 # One PPD per HPLIP model family, rewritten for macOS. The DeskJet 2300 keeps
 # its old top-level path; the rest go in a subfolder.
 ppds="$stage/Library/Printers/PPDs/Contents/Resources"
@@ -49,6 +60,7 @@ pkgbuild --root "$stage" \
          --identifier "$id" \
          --version "$version" \
          --ownership recommended \
+         --scripts "$pkgscripts" \
          --install-location / \
          "$root/build/component.pkg"
 
@@ -76,5 +88,5 @@ productbuild --distribution "$root/build/distribution.xml" \
              --resources "$res" \
              --package-path "$root/build" \
              "$out"
-rm -rf "$root/build/component.pkg" "$root/build/component.plist" "$root/build/distribution.xml" "$res"
+rm -rf "$root/build/component.pkg" "$root/build/component.plist" "$root/build/distribution.xml" "$res" "$pkgscripts"
 echo "built $out"
