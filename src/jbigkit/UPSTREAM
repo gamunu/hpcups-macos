@@ -1,0 +1,10 @@
+jbigkit 2.1 (Markus Kuhn), libjbig only
+https://www.cl.cam.ac.uk/~mgk25/jbigkit/download/jbigkit-2.1.tar.gz
+sha256 de7106b6bfaf495d6865c7dd7ac6ca1381bd12e0d81405ea81e7f2167263d932
+
+License: GPL-2.0-or-later (see COPYING and the headers in each file).
+
+Files are copied unchanged from libjbig/ in the tarball (jbig.c, jbig.h,
+jbig_ar.c, jbig_ar.h), plus COPYING from the top level. The filter uses
+the encoder through src/compat/hp_jbig.c. The test script builds a decoder
+from the same jbig.c (tests/jbigdec.c).
