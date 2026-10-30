@@ -73,12 +73,10 @@ LANGUAGES = {
     "ljzxstream": ZJS,
     "ljfastraster": None,
     "hbpl1": None,
-    # The JPEG paths call hp_rgb_ycc_setup(), which HPLIP uses to install a
-    # modified RGB to YCC table. src/compat/hp_csc_stub.c makes it a no-op, so
-    # colors come out of the stock libjpeg converter and nobody has compared
-    # them with HP's. Left out until that table is ported and checked.
-    "ljjetready": "JPEG color table stubbed (see src/hpcups/UPSTREAM)",
-    "quickconnect": "JPEG color table stubbed (see src/hpcups/UPSTREAM)",
+    # The JPEG paths use HP's modified RGB to YCC table. src/compat/hp_csc.c
+    # redoes it and tests/csc-check.c compares it with jccolor.c.
+    "ljjetready": None,
+    "quickconnect": None,
 }
 
 # The queue the README has always told people to create points at this path,

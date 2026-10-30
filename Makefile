@@ -24,9 +24,9 @@ CXXFLAGS := $(COMMON) -std=gnu++14
 LDLIBS  := $(JPEG_LIB) -lcups -lz
 
 CPP_SRCS := $(wildcard src/hpcups/*.cpp)
-# jccolor.c is a copy of IJG's stock colour converter (the Mojave variant is
-# compiled out) and needs libjpeg 6b private headers. Use the one in libjpeg.
-C_SRCS   := $(filter-out src/hpcups/jccolor.c,$(wildcard src/hpcups/*.c)) src/common/hplip_utils.c src/compat/hp_csc_stub.c
+# jccolor.c holds HP's patched colour converter and needs libjpeg 6b private
+# headers. src/compat/hp_csc.c redoes its table math for the JetReady path.
+C_SRCS   := $(filter-out src/hpcups/jccolor.c,$(wildcard src/hpcups/*.c)) src/common/hplip_utils.c src/compat/hp_csc.c
 OBJS     := $(patsubst src/%.cpp,build/obj/%.o,$(CPP_SRCS)) \
             $(patsubst src/%.c,build/obj/%.o,$(C_SRCS))
 
@@ -50,7 +50,12 @@ app:
 pkg: build/hpcups
 	scripts/build-pkg.sh
 
-test: build/hpcups
+build/csc-check: tests/csc-check.c src/compat/hp_csc.c src/compat/hp_csc.h
+	@mkdir -p build
+	$(CC) $(CFLAGS) -o $@ tests/csc-check.c src/compat/hp_csc.c
+
+test: build/hpcups build/csc-check
+	build/csc-check
 	scripts/test-local.sh
 
 clean:

@@ -11,4 +11,7 @@ Local changes to upstream sources:
   use it (macOS file systems are case-insensitive and "utils.h" matched
   Utils.h in this directory).
 - genPCLm.cpp includes "hplip_utils.h" instead of "./../../common/utils.h".
-- jccolor.c is kept for reference but is not built; see src/compat/.
+- jccolor.c is kept for reference but is not built (it needs libjpeg 6b
+  private headers). src/compat/hp_csc.c redoes its Mojave and standard
+  RGB to YCbCr tables, and ModeJpeg.cpp converts JetReady rows with it and
+  passes YCbCr to libjpeg. tests/csc-check.c compares the two.

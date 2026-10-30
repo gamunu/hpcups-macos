@@ -2,7 +2,7 @@
 
 # Supported printers
 
-796 PPD files from HPLIP 3.25.2 cover 2239 model names. Every one prints through the hpcups filter in this package, with no HP plugin.
+804 PPD files from HPLIP 3.25.2 cover 2254 model names. Every one prints through the hpcups filter in this package, with no HP plugin.
 Only the DeskJet 2300 series has been tested on real hardware.
 
 ## Print languages
@@ -16,17 +16,18 @@ Only the DeskJet 2300 series has been tested on real hardware.
 | pcl3 | 64 |
 | lidil | 51 |
 | hbpl1 | 42 |
+| ljjetready | 5 |
+| quickconnect | 3 |
 | ljfastraster | 2 |
 
 ## Left out
 
-64 PPD files from the same HPLIP tree are not installed.
+56 PPD files from the same HPLIP tree are not installed.
 
 | Reason | PPD files |
 | --- | ---: |
 | language: JBIG compressor is in the HP plugin (filter fails, error 48) | 42 |
 | needs firmware upload | 14 |
-| language: JPEG color table stubbed (see src/hpcups/UPSTREAM) | 8 |
 
 The full list with reasons is `ppd/hplip/excluded.tsv`.
 
@@ -97,6 +98,15 @@ The full list with reasons is `ppd/hplip/excluded.tsv`.
 | HP Color LaserJet 3000dn Printer | ljcolor |
 | HP Color LaserJet 3000dtn Printer | ljcolor |
 | HP Color LaserJet 3000n Printer | ljcolor |
+| HP Color LaserJet 3500 Printer | ljjetready |
+| HP Color LaserJet 3500dn Printer | ljjetready |
+| HP Color LaserJet 3500dtn Printer | ljjetready |
+| HP Color LaserJet 3500n Printer | ljjetready |
+| HP Color LaserJet 3550 Printer | ljjetready |
+| HP Color LaserJet 3550n Printer | ljjetready |
+| HP Color LaserJet 3600 Printer | ljjetready |
+| HP Color LaserJet 3600dn Printer | ljjetready |
+| HP Color LaserJet 3600n Printer | ljjetready |
 | HP Color LaserJet 3700 Printer | ljcolor |
 | HP Color LaserJet 3700d Printer | ljcolor |
 | HP Color LaserJet 3700dn Printer | ljcolor |
@@ -1874,6 +1884,9 @@ The full list with reasons is `ppd/hplip/excluded.tsv`.
 | HP Photosmart a525 Compact Photo Printer | pcl3gui2 |
 | HP Photosmart a526 Compact Photo Printer | pcl3gui2 |
 | HP Photosmart a528 Compact Photo Printer | pcl3gui2 |
+| HP Photosmart a532 Compact Photo Printer | quickconnect |
+| HP Photosmart a536 Compact Photo Printer | quickconnect |
+| HP Photosmart a538 Compact Photo Printer | quickconnect |
 | HP Photosmart a610 Compact Photo Printer | pcl3gui2 |
 | HP Photosmart a612 Compact Photo Printer | pcl3gui2 |
 | HP Photosmart a616 Compact Photo Printer | pcl3gui2 |
@@ -1884,6 +1897,9 @@ The full list with reasons is `ppd/hplip/excluded.tsv`.
 | HP Photosmart a626 Compact Photo Printer | pcl3gui2 |
 | HP Photosmart a627 Compact Photo Printer | pcl3gui2 |
 | HP Photosmart a628 Compact Photo Printer | pcl3gui2 |
+| HP Photosmart a636 Compact Photo Printer | quickconnect |
+| HP Photosmart a637 Compact Photo Printer | quickconnect |
+| HP Photosmart a640 Printer Series | quickconnect |
 | HP Photosmart a712 Compact Photo Printer | pcl3gui2 |
 | HP Photosmart a716 Compact Photo Printer | pcl3gui2 |
 | HP Photosmart a717 Compact Photo Printer | pcl3gui2 |

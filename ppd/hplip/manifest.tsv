@@ -29,6 +29,11 @@ hp-business_inkjet_3000-pcl3.ppd	ljcolor	HP Business Inkjet 3000	HP Business Ink
 hp-color_inkjet_printer_cp1700.ppd	pcl3gui2	HP Color Inkjet Printer cp1700	HP Color Inkjet cp1700 Printer|HP Color Inkjet cp1700ps Printer|HP Color Inkjet cp1700d Printer
 hp-color_laserjet_2500_series.ppd	ljcolor	HP Color LaserJet 2500 Series	HP Color LaserJet 2500l Printer|HP Color LaserJet 2500lse Printer|HP Color LaserJet 2500n Printer|HP Color LaserJet 2500tn Printer|HP Color LaserJet 2500 Printer
 hp-color_laserjet_3000-pcl3.ppd	ljcolor	HP Color LaserJet 3000	HP Color LaserJet 3000 Printer|HP Color LaserJet 3000n Printer|HP Color LaserJet 3000dn Printer|HP Color LaserJet 3000dtn Printer
+hp-color_laserjet_3500.ppd	ljjetready	HP Color LaserJet 3500	HP Color LaserJet 3500 Printer|HP Color LaserJet 3500dn Printer|HP Color LaserJet 3500dtn Printer
+hp-color_laserjet_3500n.ppd	ljjetready	HP Color LaserJet 3500n	HP Color LaserJet 3500n Printer
+hp-color_laserjet_3550.ppd	ljjetready	HP Color LaserJet 3550	HP Color LaserJet 3550 Printer
+hp-color_laserjet_3550n.ppd	ljjetready	HP Color LaserJet 3550n	HP Color LaserJet 3550n Printer
+hp-color_laserjet_3600.ppd	ljjetready	HP Color LaserJet 3600	HP Color LaserJet 3600 Printer|HP Color LaserJet 3600n Printer|HP Color LaserJet 3600dn Printer
 hp-color_laserjet_3700-pcl3.ppd	ljcolor	HP Color LaserJet 3700	HP Color LaserJet 3700 Printer
 hp-color_laserjet_3700n.ppd	ljcolor	HP Color LaserJet 3700n	HP Color LaserJet 3700n Printer|HP Color LaserJet 3700dtn Printer|HP Color LaserJet 3700dn Printer|HP Color LaserJet 3700d Printer
 hp-color_laserjet_3800-pcl3.ppd	ljcolor	HP Color LaserJet 3800	HP Color LaserJet 3800 Printer|HP Color LaserJet 3800n Printer|HP Color LaserJet 3800dn Printer|HP Color LaserJet 3800dtn Printer
@@ -690,8 +695,11 @@ hp-photosmart_a430_series.ppd	pcl3gui2	HP Photosmart a430 Series	HP Photosmart a
 hp-photosmart_a440_series.ppd	pcl3gui2	HP Photosmart a440 Series	HP Photosmart a440 Compact Photo Printer|HP Photosmart a442 Compact Photo Printer|HP Photosmart a446 Compact Photo Printer
 hp-photosmart_a510_series.ppd	pcl3gui2	HP Photosmart a510 Series	HP Photosmart a510 Compact Photo Printer|HP Photosmart a512 Compact Photo Printer|HP Photosmart a516 Compact Photo Printer
 hp-photosmart_a520_series.ppd	pcl3gui2	HP Photosmart a520 Series	HP Photosmart a522xi Compact Photo Printer|HP Photosmart a522 Compact Photo Printer|HP Photosmart a525 Compact Photo Printer|HP Photosmart a526 Compact Photo Printer|HP Photosmart a528 Compact Photo Printer
+hp-photosmart_a530_series.ppd	quickconnect	HP Photosmart a530 Series	HP Photosmart a532 Compact Photo Printer|HP Photosmart a536 Compact Photo Printer|HP Photosmart a538 Compact Photo Printer
 hp-photosmart_a610_series.ppd	pcl3gui2	HP Photosmart a610 Series	HP Photosmart a610 Compact Photo Printer|HP Photosmart a612 Compact Photo Printer|HP Photosmart a616 Compact Photo Printer|HP Photosmart a617 Compact Photo Printer|HP Photosmart a618 Compact Photo Printer
 hp-photosmart_a620_series.ppd	pcl3gui2	HP Photosmart a620 Series	HP Photosmart a620 Compact Photo Printer|HP Photosmart a622 Compact Photo Printer|HP Photosmart a626 Compact Photo Printer|HP Photosmart a627 Compact Photo Printer|HP Photosmart a628 Compact Photo Printer
+hp-photosmart_a630_series.ppd	quickconnect	HP Photosmart a630 Series	HP Photosmart a636 Compact Photo Printer|HP Photosmart a637 Compact Photo Printer
+hp-photosmart_a640_series.ppd	quickconnect	HP Photosmart a640 Series	HP Photosmart a640 Printer Series
 hp-photosmart_a710_series.ppd	pcl3gui2	HP Photosmart a710 Series	HP Photosmart a712 Compact Photo Printer|HP Photosmart a716 Compact Photo Printer|HP Photosmart a717 Compact Photo Printer
 hp-photosmart_a820_series.ppd	pcl3gui2	HP Photosmart a820 Series	HP Photosmart a826 Home Photo Center|HP Photosmart a827 Home Photo Center|HP Photosmart a828 Home Photo Center
 hp-photosmart_b010_series.ppd	pcl3gui2	HP Photosmart b010 Series	HP Photosmart All-in-one Printer - b010

@@ -81,6 +81,12 @@ check_language() {
         starts "${ESC}E${UEL}@PJL" && has '@PJL ENTER LANGUAGE=PCL' ;;
     ljfastraster)
         starts "${ESC}E${UEL}@PJL" && has '@PJL ENTER LANGUAGE=PCLXL' ;;
+    ljjetready)
+        # PCLXL job. The JPEG start of image is cut off (the quant tables go
+        # out in their own block), so there is no marker to look for.
+        starts "${ESC}E${UEL}@PJL" && has '@PJL ENTER LANGUAGE=PCLXL' && has 'JetReady generator' ;;
+    quickconnect)
+        has '@PJL ENTER LANGUAGE=PHOTOJPEG' && has $'\xff\xd8\xff' ;;
     hbpl1)
         # The filter writes PCLm, which is a PDF with a PCLm comment.
         starts '%PDF-' && has '%PCLm' ;;
@@ -98,7 +104,9 @@ lidil:hp-910
 ljmono:hp-laserjet_1015
 ljcolor:hp-business_inkjet_2300-pcl3
 ljfastraster:hp-laserjet_1010
-hbpl1:hp-color_laserjet_pro_mfp_m177fw"
+hbpl1:hp-color_laserjet_pro_mfp_m177fw
+ljjetready:hp-color_laserjet_3500
+quickconnect:hp-photosmart_a530_series"
 
 for lang in $(grep -v '^#' "$root/ppd/hplip/manifest.tsv" | cut -f2 | sort -u); do
     echo "$reps" | grep -q "^$lang:" \

@@ -246,6 +246,7 @@ extern "C"
 {
     void jpeg_buffer_dest (j_compress_ptr cinfo, JOCTET* outbuff, void* flush_output_buffer_callback);
     void hp_rgb_ycc_setup (int iFlag);
+    void hp_rgb_ycc_convert_row (const unsigned char *in, unsigned char *out, unsigned npix);
 }
 
 void ModeJpeg::compress () 
@@ -363,7 +364,9 @@ void ModeJpeg::jpegCompressForJetReady()
     }
 
     jpeg_create_compress (&cinfo);
-    cinfo.in_color_space = (m_iColorMode == 0) ? JCS_RGB : JCS_GRAYSCALE;
+//  smudge: libjpeg-turbo has no hook for HP's table, so the rows are converted
+//  to YCbCr below (src/compat/hp_csc.c) and libjpeg is told they already are.
+    cinfo.in_color_space = (m_iColorMode == 0) ? JCS_YCbCr : JCS_GRAYSCALE;
     jpeg_set_defaults (&cinfo);
     cinfo.image_width = m_iRowWidth / 3;
     cinfo.image_height = m_iBandHeight;
@@ -468,13 +471,23 @@ void ModeJpeg::jpegCompressForJetReady()
     jpeg_start_compress (&cinfo, TRUE);
     JSAMPROW    pRowArray[1];
     BYTE        *pScanLine = m_pbyInputBuffer;
+    BYTE        *pYccRow = (m_iColorMode == 0) ? new BYTE[m_iRowWidth] : NULL;
     int         i;
     for (i = 0; i < m_iBandHeight; i++)
     {
-        pRowArray[0] = (JSAMPROW) pScanLine;
+        if (pYccRow)
+        {
+            hp_rgb_ycc_convert_row (pScanLine, pYccRow, m_iRowWidth / 3);
+            pRowArray[0] = (JSAMPROW) pYccRow;
+        }
+        else
+        {
+            pRowArray[0] = (JSAMPROW) pScanLine;
+        }
         jpeg_write_scanlines (&cinfo, pRowArray, 1);
         pScanLine += (row_width);
     }
+    delete [] pYccRow;
     jpeg_finish_compress (&cinfo);
 
 //  Read the quantization table used for this compression

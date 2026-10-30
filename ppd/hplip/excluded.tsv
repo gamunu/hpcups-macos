@@ -1,11 +1,6 @@
 # ppd	language	model name	products	reason
 hp-color_laserjet_1600.ppd	ljzjstream	HP Color LaserJet 1600	HP Color LaserJet 1600 Printer	language: JBIG compressor is in the HP plugin (filter fails, error 48)
 hp-color_laserjet_2600n.ppd	ljzjstream	HP Color LaserJet 2600n	HP Color LaserJet 2600n Printer	language: JBIG compressor is in the HP plugin (filter fails, error 48)
-hp-color_laserjet_3500.ppd	ljjetready	HP Color LaserJet 3500	HP Color LaserJet 3500 Printer|HP Color LaserJet 3500dn Printer|HP Color LaserJet 3500dtn Printer	language: JPEG color table stubbed (see src/hpcups/UPSTREAM)
-hp-color_laserjet_3500n.ppd	ljjetready	HP Color LaserJet 3500n	HP Color LaserJet 3500n Printer	language: JPEG color table stubbed (see src/hpcups/UPSTREAM)
-hp-color_laserjet_3550.ppd	ljjetready	HP Color LaserJet 3550	HP Color LaserJet 3550 Printer	language: JPEG color table stubbed (see src/hpcups/UPSTREAM)
-hp-color_laserjet_3550n.ppd	ljjetready	HP Color LaserJet 3550n	HP Color LaserJet 3550n Printer	language: JPEG color table stubbed (see src/hpcups/UPSTREAM)
-hp-color_laserjet_3600.ppd	ljjetready	HP Color LaserJet 3600	HP Color LaserJet 3600 Printer|HP Color LaserJet 3600n Printer|HP Color LaserJet 3600dn Printer	language: JPEG color table stubbed (see src/hpcups/UPSTREAM)
 hp-color_laserjet_cp1215.ppd	ljzjstream	HP Color LaserJet cp1215	HP Color LaserJet cp1215 Printer	language: JBIG compressor is in the HP plugin (filter fails, error 48)
 hp-color_laserjet_cp1217.ppd	ljzjstream	HP Color LaserJet cp1217	HP Color LaserJet cp1217 Printer	language: JBIG compressor is in the HP plugin (filter fails, error 48)
 hp-laserjet_1000.ppd	ljzjstream	HP LaserJet 1000	HP LaserJet 1000 Printer	needs firmware upload
@@ -60,6 +55,3 @@ hp-laserjet_professional_p1607dn.ppd	ljzjstream	HP LaserJet Professional p1607dn
 hp-laserjet_professional_p1608dn.ppd	ljzjstream	HP LaserJet Professional p1608dn	HP LaserJet Professional p1608dn Printer	language: JBIG compressor is in the HP plugin (filter fails, error 48)
 hp-laserjet_professional_p1609dn.ppd	ljzjstream	HP LaserJet Professional p1609dn	HP LaserJet Professional p1609dn Printer	language: JBIG compressor is in the HP plugin (filter fails, error 48)
 hp-laserjet_professional_p_1102w.ppd	ljzjstream	HP LaserJet Professional p 1102w	HP LaserJet Professional p 1102w Printer	language: JBIG compressor is in the HP plugin (filter fails, error 48)
-hp-photosmart_a530_series.ppd	quickconnect	HP Photosmart a530 Series	HP Photosmart a532 Compact Photo Printer|HP Photosmart a536 Compact Photo Printer|HP Photosmart a538 Compact Photo Printer	language: JPEG color table stubbed (see src/hpcups/UPSTREAM)
-hp-photosmart_a630_series.ppd	quickconnect	HP Photosmart a630 Series	HP Photosmart a636 Compact Photo Printer|HP Photosmart a637 Compact Photo Printer	language: JPEG color table stubbed (see src/hpcups/UPSTREAM)
-hp-photosmart_a640_series.ppd	quickconnect	HP Photosmart a640 Series	HP Photosmart a640 Printer Series	language: JPEG color table stubbed (see src/hpcups/UPSTREAM)
