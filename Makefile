@@ -18,7 +18,7 @@ JPEG_LIB    ?= $(JPEG_PREFIX)/lib/libjpeg.a
 
 DEFS    := -DDISABLE_IMAGEPROCESSOR -DAPDK_LITTLE_ENDIAN -D_GNU_SOURCE -DCONFDIR='"/etc/hp"'
 COMMON  := $(ARCHFLAGS) -mmacosx-version-min=$(MINVER) -O2 -g0 -w \
-           -Isrc/hpcups -Isrc/common -Isrc/compat -I$(JPEG_INC) $(DEFS)
+           -Isrc/hpcups -Isrc/common -Isrc/compat -Isrc/jbigkit -I$(JPEG_INC) $(DEFS)
 CFLAGS  := $(COMMON)
 CXXFLAGS := $(COMMON) -std=gnu++14
 LDLIBS  := $(JPEG_LIB) -lcups -lz
@@ -26,7 +26,8 @@ LDLIBS  := $(JPEG_LIB) -lcups -lz
 CPP_SRCS := $(wildcard src/hpcups/*.cpp)
 # jccolor.c holds HP's patched colour converter and needs libjpeg 6b private
 # headers. src/compat/hp_csc.c redoes its table math for the JetReady path.
-C_SRCS   := $(filter-out src/hpcups/jccolor.c,$(wildcard src/hpcups/*.c)) src/common/hplip_utils.c src/compat/hp_csc.c
+C_SRCS   := $(filter-out src/hpcups/jccolor.c,$(wildcard src/hpcups/*.c)) src/common/hplip_utils.c src/compat/hp_csc.c \
+            src/compat/hp_jbig.c $(wildcard src/jbigkit/*.c)
 OBJS     := $(patsubst src/%.cpp,build/obj/%.o,$(CPP_SRCS)) \
             $(patsubst src/%.c,build/obj/%.o,$(C_SRCS))
 

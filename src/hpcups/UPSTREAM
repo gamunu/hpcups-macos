@@ -15,3 +15,10 @@ Local changes to upstream sources:
   private headers). src/compat/hp_csc.c redoes its Mojave and standard
   RGB to YCbCr tables, and ModeJpeg.cpp converts JetReady rows with it and
   passes YCbCr to libjpeg. tests/csc-check.c compares the two.
+- ModeJbig.cpp no longer loads HP's plugin library (lj.so) and its
+  hp_encode_bits_to_jbig symbol. It calls the built-in
+  hp_encode_bits_to_jbig() from src/compat/hp_jbig.c, which uses jbigkit
+  (src/jbigkit/). The function pointers HPLJJBGCompress and HPLJSoInit and
+  the unload_library() call in the destructor are gone, and compressBuf is
+  allocated at twice the raw size plus 4096 bytes so a JBIG stream that is
+  larger than its input still fits.
