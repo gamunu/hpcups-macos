@@ -56,12 +56,6 @@ SUBDIR = "smudge"
 # Languages whose encapsulator is compiled into build/hpcups (every
 # src/hpcups/*.cpp is built and EncapsulatorFactory.cpp knows all of them).
 # value: None when the language is served, else the reason it is left out.
-# LJZjStream and LJZxStream always run ModeJbig, which loads the JBIG
-# compressor from HP's plugin (lj.so). Without it the filter stops with
-# PLUGIN_LIBRARY_MISSING (error 48) before it writes a page, even though
-# models.dat says plugin=0 for most of these models.
-ZJS = "JBIG compressor is in the HP plugin (filter fails, error 48)"
-
 LANGUAGES = {
     "pcl3": None,
     "pcl3gui": None,
@@ -69,8 +63,8 @@ LANGUAGES = {
     "lidil": None,
     "ljmono": None,
     "ljcolor": None,
-    "ljzjstream": ZJS,
-    "ljzxstream": ZJS,
+    "ljzjstream": None,
+    "ljzxstream": None,
     "ljfastraster": None,
     "hbpl1": None,
     # The JPEG paths use HP's modified RGB to YCC table. src/compat/hp_csc.c
