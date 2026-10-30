@@ -41,9 +41,9 @@
 
 extern "C"
 {
-int (*HPLJJBGCompress) (int iWidth, int iHeight, unsigned char **pBuff,
-                        HPLJZjcBuff *pOutBuff, HPLJZjsJbgEncSt *pJbgEncSt);
-int (*HPLJSoInit) (int iFlag);
+/* smudge: built in (src/compat/hp_jbig.c), no longer loaded from lj.so. */
+int hp_encode_bits_to_jbig (int iWidth, int iHeight, unsigned char **pBuff,
+                            HPLJZjcBuff *pOutBuff, HPLJZjsJbgEncSt *pJbgEncSt);
 }
 
 const BYTE ModeJbig::szByte1[256] =
@@ -116,8 +116,6 @@ ModeJbig::ModeJbig (unsigned int RasterSize) : Compressor (RasterSize, false)
 
 ModeJbig::~ModeJbig()
 {
-    unload_library(m_hHPLibHandle);
-
     if (m_pszInputRasterData)
     {
         delete [] m_pszInputRasterData;
@@ -131,22 +129,6 @@ DRIVER_ERROR ModeJbig::Init(int iLastRaster, int iPlanes, int iBPP, ZJPLATFORM z
     m_iPlanes      = iPlanes;
     m_iBPP         = iBPP;
     m_ezj_platform = zj_platform;
-
-    m_hHPLibHandle = load_plugin_library(UTILS_PRINT_PLUGIN_LIBRARY, PRNT_PLUGIN_LJ);
-    if (m_hHPLibHandle)
-    {
-        dlerror ();
-        *(void **) (&HPLJJBGCompress) = get_library_symbol(m_hHPLibHandle, "hp_encode_bits_to_jbig");
-        *(void **) (&HPLJSoInit) = get_library_symbol(m_hHPLibHandle, "hp_init_lib");
-        //if (!HPLJSoInit || (HPLJSoInit && !HPLJSoInit (1)))
-        //{
-        //    return PLUGIN_LIBRARY_MISSING;
-        //}
-    }
-    else
-    {
-        return PLUGIN_LIBRARY_MISSING;
-    }
 
     if (iPlanes == 4)
     {
@@ -167,7 +149,9 @@ DRIVER_ERROR ModeJbig::Init(int iLastRaster, int iPlanes, int iBPP, ZJPLATFORM z
     {
         return ALLOCMEM_ERROR;
     }
-    compressBuf = new BYTE[m_iWidth * m_iLastRaster * m_iBPP];
+    /* Room for the JBIG stream, which can grow past the raw size on noisy
+       input, plus the HPLJZjsJbgEncSt that compress() appends. */
+    compressBuf = new BYTE[m_iWidth * m_iLastRaster * m_iBPP * 2 + 4096];
     if (compressBuf == NULL)
     {
         return ALLOCMEM_ERROR;
@@ -336,7 +320,7 @@ void ModeJbig::compress (int plane_number)
     BYTE    *p = m_pszInputRasterData + (m_iWidth * m_iBPP * m_iLastRaster * plane_number);
 
     memset (myBuffer.pszCompressedData, 0, m_iWidth * m_iLastRaster * m_iBPP);
-    HPLJJBGCompress (m_iWidth * 8 * m_iBPP, m_iLastRaster, &p, &myBuffer, &se);
+    hp_encode_bits_to_jbig (m_iWidth * 8 * m_iBPP, m_iLastRaster, &p, &myBuffer, &se);
 
     compressedsize = myBuffer.dwTotalSize;
     memcpy(compressBuf+compressedsize, &se, sizeof(se));

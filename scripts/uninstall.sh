@@ -2,7 +2,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # Copyright (C) 2026 Gamunu Balagalla
 
-# Remove Smudge: the app, the filter, the PPDs and the installer receipt.
+# Remove Smudge: the app, the filter, the PPDs, the firmware loader and its
+# downloaded firmware, and the installer receipt.
 # Run with sudo. Printer queues are not touched; remove them first with
 #   sudo lpadmin -x <queue name>
 set -euo pipefail
@@ -14,7 +15,13 @@ fi
 
 pkill -x "Smudge" 2>/dev/null || true
 
+fwplist=/Library/LaunchDaemons/io.github.gamunu.smudge.firmware.plist
+launchctl bootout system "$fwplist" > /dev/null 2>&1 || true
+rm -f "$fwplist" /var/log/smudge-firmware.log
+rm -rf /var/run/smudge-firmware.lock
+
 rm -rf "/Applications/Smudge.app"
+# Includes bin/ (the firmware tools) and firmware/ (HP's files, downloaded later).
 rm -rf /Library/Printers/smudge
 rm -f "/Library/Printers/PPDs/Contents/Resources/HP DeskJet 2300 series (Smudge).ppd.gz"
 rm -rf /Library/Printers/PPDs/Contents/Resources/smudge

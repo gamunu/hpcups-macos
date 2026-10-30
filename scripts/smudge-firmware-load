@@ -1,0 +1,138 @@
+#!/bin/sh
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Copyright (C) 2026 Gamunu Balagalla
+
+# Send HP's firmware to LaserJets that lost it at power-off.
+#
+# The LaserJet 1000, 1005, 1018, 1020, P1005 to P1009, P1505 and P1566 keep no
+# firmware in flash. After every power-on they need it sent over USB before
+# they print. On Linux udev runs hp-firmware at plug-in. Here launchd runs this
+# script when an HP printer of one of those USB product IDs appears (see
+# io.github.gamunu.smudge.firmware.plist).
+#
+# The rule, from foo2zjs's hplj1000 script: the printer's IEEE-1284 device ID
+# carries FWVER once firmware is running. No FWVER means send it. The firmware
+# is HP's, fetched by smudge-fetch-firmware. It goes out through Apple's own usb
+# backend, which also lists the device ID, so no USB code is needed here.
+#
+# Environment (all optional, used by the tests):
+#   SMUDGE_FIRMWARE_DIR  directory of hp_laserjet_*.fw.gz
+#   SMUDGE_USB_BACKEND   the CUPS usb backend
+#   SMUDGE_DEVICE_LIST   read the backend's device list from this file
+#   SMUDGE_DRY_RUN       set to print what would be sent and send nothing
+#   SMUDGE_FW_SOURCE_ONLY  set to load the functions and run nothing
+set -u
+
+FWDIR=${SMUDGE_FIRMWARE_DIR:-/Library/Printers/smudge/firmware}
+USB_BACKEND=${SMUDGE_USB_BACKEND:-/usr/libexec/cups/backend/usb}
+
+say() { printf '%s smudge-firmware: %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*" >&2; }
+
+# True when the 1284 device ID in $1 shows running firmware.
+fw_loaded() {
+    case $1 in
+    *FWVER*) return 0 ;;
+    esac
+    return 1
+}
+
+# The model name from a 1284 device ID: the MDL (or MODEL) field.
+id_model() {
+    printf '%s' "$1" | tr ';' '\n' | sed -nE 's/^ *(MDL|MODEL):(.*)$/\2/p' | head -n 1
+}
+
+# "HP LaserJet P1006" -> hp_laserjet_p1006, the stem of HPLIP's firmware names.
+fw_stem() {
+    s=$(printf '%s' "$1" | tr 'A-Z' 'a-z' | sed 's/[^a-z0-9][^a-z0-9]*/_/g; s/^_//; s/_$//')
+    case $s in
+    hp_*) ;;
+    *) s=hp_$s ;;
+    esac
+    printf '%s' "$s"
+}
+
+# The firmware file for a model name, empty when there is none. HP names the
+# 1005 "series" and some IDs carry a trailing n (P1505n) the file name lacks.
+fw_file() {
+    stem=$(fw_stem "$1")
+    for c in "$stem" "${stem}_series" "${stem%n}"; do
+        if [ -f "$FWDIR/$c.fw.gz" ]; then
+            printf '%s' "$FWDIR/$c.fw.gz"
+            return 0
+        fi
+    done
+    return 1
+}
+
+# The usb backend's device list: direct usb://... "make model" "info" "1284 id" "".
+device_list() {
+    if [ -n "${SMUDGE_DEVICE_LIST:-}" ]; then
+        cat "$SMUDGE_DEVICE_LIST"
+    else
+        "$USB_BACKEND" 2> /dev/null
+    fi
+}
+
+list_uri() { printf '%s' "$1" | sed -n 's/^[a-z]* \([^ ]*\) .*/\1/p'; }
+list_id() { printf '%s' "$1" | awk -F'"' '{print $6}'; }
+
+send() { # uri file
+    if [ -n "${SMUDGE_DRY_RUN:-}" ]; then
+        say "dry run: would send $2 to $1"
+        return 0
+    fi
+    gzip -dc "$2" | DEVICE_URI="$1" "$USB_BACKEND" 1 root firmware 1 ""
+}
+
+main() {
+    set -- "$FWDIR"/hp_laserjet_*.fw.gz
+    if [ ! -f "$1" ]; then
+        say "no firmware in $FWDIR, run: sudo /Library/Printers/smudge/bin/smudge-fetch-firmware"
+        return 0
+    fi
+
+    # One run at a time: sending firmware makes the printer reappear, which
+    # starts this script again.
+    lock=${SMUDGE_FW_LOCK:-/var/run/smudge-firmware.lock}
+    if ! mkdir "$lock" 2> /dev/null; then
+        if [ -f "$lock/pid" ] && kill -0 "$(cat "$lock/pid")" 2> /dev/null; then
+            say "already running"
+            return 0
+        fi
+        rm -rf "$lock"
+        mkdir "$lock" || return 1
+    fi
+    echo $$ > "$lock/pid"
+    trap 'rm -rf "$lock"' EXIT INT TERM
+
+    list=$(device_list)
+    printf '%s\n' "$list" | while IFS= read -r line; do
+        case $line in
+        direct\ *) ;;
+        *) continue ;;
+        esac
+        id=$(list_id "$line")
+        uri=$(list_uri "$line")
+        model=$(id_model "$id")
+        [ -n "$model" ] || continue
+        fw=$(fw_file "$model") || continue
+        if fw_loaded "$id"; then
+            say "$model: firmware already running"
+            continue
+        fi
+        say "$model: no firmware, sending $(basename "$fw")"
+        n=0
+        while [ "$n" -lt 3 ]; do
+            if send "$uri" "$fw"; then
+                say "$model: firmware sent"
+                break
+            fi
+            n=$((n + 1))
+            say "$model: send failed (attempt $n)"
+            [ -n "${SMUDGE_DRY_RUN:-}" ] || sleep 3
+        done
+    done
+}
+
+[ -n "${SMUDGE_FW_SOURCE_ONLY:-}" ] && return 0
+main

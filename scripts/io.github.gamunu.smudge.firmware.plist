@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
+<!-- Copyright (C) 2026 Gamunu Balagalla -->
+<!--
+  Runs smudge-firmware-load when an HP LaserJet that needs firmware after every
+  power-on shows up on USB (the models with fw-download=True in HPLIP's
+  models.dat). idVendor 0x03f0 is HP. Product IDs, decimal (hex):
+    1303 (0517) LaserJet 1000
+    4887 (1317) LaserJet 1005
+   16663 (4117) LaserJet 1018, P1005, P1006, P1007, P1008, P1505
+   11031 (2b17) LaserJet 1020
+   15895 (3e17) LaserJet P1009
+    2346 (092a) LaserJet Professional P1566
+-->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>io.github.gamunu.smudge.firmware</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Library/Printers/smudge/bin/smudge-firmware-load</string>
+    </array>
+    <key>ThrottleInterval</key>
+    <integer>10</integer>
+    <key>StandardErrorPath</key>
+    <string>/var/log/smudge-firmware.log</string>
+    <key>LaunchEvents</key>
+    <dict>
+        <key>com.apple.iokit.matching</key>
+        <dict>
+            <key>lj1000</key>
+            <dict>
+                <key>IOProviderClass</key>
+                <string>IOUSBHostDevice</string>
+                <key>idVendor</key>
+                <integer>1008</integer>
+                <key>idProduct</key>
+                <integer>1303</integer>
+            </dict>
+            <key>lj1005</key>
+            <dict>
+                <key>IOProviderClass</key>
+                <string>IOUSBHostDevice</string>
+                <key>idVendor</key>
+                <integer>1008</integer>
+                <key>idProduct</key>
+                <integer>4887</integer>
+            </dict>
+            <key>lj1018</key>
+            <dict>
+                <key>IOProviderClass</key>
+                <string>IOUSBHostDevice</string>
+                <key>idVendor</key>
+                <integer>1008</integer>
+                <key>idProduct</key>
+                <integer>16663</integer>
+            </dict>
+            <key>lj1020</key>
+            <dict>
+                <key>IOProviderClass</key>
+                <string>IOUSBHostDevice</string>
+                <key>idVendor</key>
+                <integer>1008</integer>
+                <key>idProduct</key>
+                <integer>11031</integer>
+            </dict>
+            <key>ljp1009</key>
+            <dict>
+                <key>IOProviderClass</key>
+                <string>IOUSBHostDevice</string>
+                <key>idVendor</key>
+                <integer>1008</integer>
+                <key>idProduct</key>
+                <integer>15895</integer>
+            </dict>
+            <key>ljp1566</key>
+            <dict>
+                <key>IOProviderClass</key>
+                <string>IOUSBHostDevice</string>
+                <key>idVendor</key>
+                <integer>1008</integer>
+                <key>idProduct</key>
+                <integer>2346</integer>
+            </dict>
+        </dict>
+    </dict>
+</dict>
+</plist>

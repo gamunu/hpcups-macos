@@ -20,10 +20,19 @@ Subcommands:
 
 Selection rules, in order. A PPD is excluded when:
   1. its *cupsFilter is not the hpcups raster filter,
-  2. a models.dat entry for one of its products has plugin=1 or plugin=2
-     (HP's closed binary plugin is required),
+  2. a models.dat entry for one of its products has fw-download=True (the
+     printer needs firmware sent after power-on) and HP's plugin has no
+     firmware file for the model (see FIRMWARE),
   3. its *hpPrinterLanguage is one we leave out (see LANGUAGES),
   4. no models.dat entry matches any of its products (plugin status unknown).
+
+models.dat plugin=1 or plugin=2 does not exclude a PPD by itself. The plugin
+(hplip-plugin) holds the JBIG compressor lj.so, the hp_laserjet_*.fw.gz firmware files and
+the scanner and fax libraries. The only print path that loads it is ModeJbig
+(ZJS and ZX stream languages, left out through LANGUAGES), ModeJpeg's optional
+Taos compressor (falls back to JPEG when the plugin is absent) and a commented
+out Hbpl1 loader. For the other models the plugin is needed for scanning or
+faster printing, so the filter prints without it.
 """
 
 import argparse
@@ -48,12 +57,6 @@ SUBDIR = "smudge"
 # Languages whose encapsulator is compiled into build/hpcups (every
 # src/hpcups/*.cpp is built and EncapsulatorFactory.cpp knows all of them).
 # value: None when the language is served, else the reason it is left out.
-# LJZjStream and LJZxStream always run ModeJbig, which loads the JBIG
-# compressor from HP's plugin (lj.so). Without it the filter stops with
-# PLUGIN_LIBRARY_MISSING (error 48) before it writes a page, even though
-# models.dat says plugin=0 for most of these models.
-ZJS = "JBIG compressor is in the HP plugin (filter fails, error 48)"
-
 LANGUAGES = {
     "pcl3": None,
     "pcl3gui": None,
@@ -61,17 +64,31 @@ LANGUAGES = {
     "lidil": None,
     "ljmono": None,
     "ljcolor": None,
-    "ljzjstream": ZJS,
-    "ljzxstream": ZJS,
+    "ljzjstream": None,
+    "ljzxstream": None,
     "ljfastraster": None,
     "hbpl1": None,
-    # The JPEG paths call hp_rgb_ycc_setup(), which HPLIP uses to install a
-    # modified RGB to YCC table. src/compat/hp_csc_stub.c makes it a no-op, so
-    # colors come out of the stock libjpeg converter and nobody has compared
-    # them with HP's. Left out until that table is ported and checked.
-    "ljjetready": "JPEG color table stubbed (see src/hpcups/UPSTREAM)",
-    "quickconnect": "JPEG color table stubbed (see src/hpcups/UPSTREAM)",
+    # The JPEG paths use HP's modified RGB to YCC table. src/compat/hp_csc.c
+    # redoes it and tests/csc-check.c compares it with jccolor.c.
+    "ljjetready": None,
+    "quickconnect": None,
 }
+
+# Firmware files in HP's plugin for HPLIP 3.25.2 (hp_laserjet_*.fw.gz), which
+# scripts/fetch-firmware.sh extracts and smudge-firmware-load sends to the
+# printer after power-on. Named after the PPD model, see fw_stem().
+FIRMWARE = {
+    "hp_laserjet_1000", "hp_laserjet_1005_series", "hp_laserjet_1018",
+    "hp_laserjet_1020", "hp_laserjet_p1005", "hp_laserjet_p1006",
+    "hp_laserjet_p1007", "hp_laserjet_p1008", "hp_laserjet_p1009",
+    "hp_laserjet_p1505", "hp_laserjet_professional_p1102",
+    "hp_laserjet_professional_p1102w", "hp_laserjet_professional_p1566",
+}
+
+
+def fw_stem(model):
+    return re.sub(r"[^a-z0-9]+", "_", (model or "").lower()).strip("_")
+
 
 # The queue the README has always told people to create points at this path,
 # and the Status app's users have it installed. Keep it byte for byte.
@@ -135,19 +152,19 @@ def cmd_select(args):
         keys = set()
         for p in f["products"] + [f["model"]]:
             keys |= idx.get(norm(p), set())
-        plugins = {models[k].get("plugin", "0") for k in keys}
+        fw = any(models[k].get("fw-download", "False") == "True" for k in keys)
 
         reason = None
         if not f["filter"] or f["filter"].group(0).split(":", 1)[1].strip() != '"%s"' % STOCK_FILTER:
             reason = "not the hpcups raster filter"
-        elif plugins - {"0"}:
-            reason = "needs HP plugin (plugin=%s)" % "/".join(sorted(plugins - {"0"}))
+        elif fw and fw_stem(f["model"]) not in FIRMWARE:
+            reason = "needs firmware upload, and HP's plugin has no firmware file for it"
         elif f["language"] not in LANGUAGES:
             reason = "language %s not built" % (f["language"] or "(none)")
         elif LANGUAGES[f["language"]]:
             reason = "language: " + LANGUAGES[f["language"]]
         elif not keys:
-            reason = "no models.dat entry, plugin status unknown"
+            reason = "no models.dat entry, firmware and plugin status unknown"
 
         row = (name, f["language"], f["model"], "|".join(f["products"]))
         if reason:
