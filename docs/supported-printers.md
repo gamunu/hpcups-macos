@@ -2,7 +2,7 @@
 
 # Supported printers
 
-846 PPD files from HPLIP 3.25.2 cover 2298 model names. Every one prints through the hpcups filter in this package, with no HP plugin.
+857 PPD files from HPLIP 3.25.2 cover 2311 model names. Every one prints through the hpcups filter in this package, with no HP plugin.
 Only the DeskJet 2300 series has been tested on real hardware.
 
 ## Print languages
@@ -15,20 +15,20 @@ Only the DeskJet 2300 series has been tested on real hardware.
 | ljcolor | 65 |
 | pcl3 | 64 |
 | lidil | 51 |
+| ljzjstream | 43 |
 | hbpl1 | 42 |
-| ljzjstream | 38 |
+| ljzxstream | 10 |
 | ljjetready | 5 |
-| ljzxstream | 4 |
 | quickconnect | 3 |
 | ljfastraster | 2 |
 
 ## Left out
 
-14 PPD files from the same HPLIP tree are not installed.
+3 PPD files from the same HPLIP tree are not installed.
 
 | Reason | PPD files |
 | --- | ---: |
-| needs firmware upload | 14 |
+| needs firmware upload, and HP's plugin has no firmware file for it | 3 |
 
 The full list with reasons is `ppd/hplip/excluded.tsv`.
 
@@ -923,9 +923,15 @@ The full list with reasons is `ppd/hplip/excluded.tsv`.
 | HP Laser Ns MFP 1005 | hbpl1 |
 | HP Laser Ns MFP 1005n | hbpl1 |
 | HP Laser Ns MFP 1005w | hbpl1 |
+| HP LaserJet 1000 Printer | ljzjstream |
+| HP LaserJet 1005 Printer | ljzjstream |
 | HP LaserJet 1010 Printer | ljfastraster |
 | HP LaserJet 1012 Printer | ljfastraster |
 | HP LaserJet 1015 Printer | ljmono |
+| HP LaserJet 1018 Printer | ljzjstream |
+| HP LaserJet 1018s Printer | ljzjstream |
+| HP LaserJet 1020 Plus Printer | ljzjstream |
+| HP LaserJet 1020 Printer | ljzjstream |
 | HP LaserJet 1022 Printer | ljmono |
 | HP LaserJet 1022n Printer | ljmono |
 | HP LaserJet 1022nw Printer | ljmono |
@@ -1208,6 +1214,12 @@ The full list with reasons is `ppd/hplip/excluded.tsv`.
 | HP LaserJet MFP m237sdne | hbpl1 |
 | HP LaserJet MFP m237sdw | hbpl1 |
 | HP LaserJet MFP m237sdwe | hbpl1 |
+| HP LaserJet p1005 Printer | ljzxstream |
+| HP LaserJet p1006 Printer | ljzxstream |
+| HP LaserJet p1007 Printer | ljzxstream |
+| HP LaserJet p1008 Printer | ljzxstream |
+| HP LaserJet p1009 Printer | ljzxstream |
+| HP LaserJet p1505 Printer | ljzxstream |
 | HP LaserJet p1505n Printer | ljzxstream |
 | HP LaserJet p2014 Printer | ljzxstream |
 | HP LaserJet p2014n Printer | ljzxstream |
@@ -1326,6 +1338,7 @@ The full list with reasons is `ppd/hplip/excluded.tsv`.
 | HP LaserJet Professional p1108w Printer | ljzjstream |
 | HP LaserJet Professional p1109 Printer | ljzjstream |
 | HP LaserJet Professional p1109w Printer | ljzjstream |
+| HP LaserJet Professional p1566 | ljzjstream |
 | HP LaserJet Professional p1606dn Printer | ljzjstream |
 | HP LaserJet Professional p1607dn Printer | ljzjstream |
 | HP LaserJet Professional p1608dn Printer | ljzjstream |

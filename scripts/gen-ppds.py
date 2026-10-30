@@ -21,12 +21,13 @@ Subcommands:
 Selection rules, in order. A PPD is excluded when:
   1. its *cupsFilter is not the hpcups raster filter,
   2. a models.dat entry for one of its products has fw-download=True (the
-     printer needs a firmware blob uploaded at print time),
+     printer needs firmware sent after power-on) and HP's plugin has no
+     firmware file for the model (see FIRMWARE),
   3. its *hpPrinterLanguage is one we leave out (see LANGUAGES),
   4. no models.dat entry matches any of its products (plugin status unknown).
 
 models.dat plugin=1 or plugin=2 does not exclude a PPD by itself. The plugin
-(hplip-plugin) holds the JBIG compressor lj.so, the sihp*.dl firmware files and
+(hplip-plugin) holds the JBIG compressor lj.so, the hp_laserjet_*.fw.gz firmware files and
 the scanner and fax libraries. The only print path that loads it is ModeJbig
 (ZJS and ZX stream languages, left out through LANGUAGES), ModeJpeg's optional
 Taos compressor (falls back to JPEG when the plugin is absent) and a commented
@@ -72,6 +73,22 @@ LANGUAGES = {
     "ljjetready": None,
     "quickconnect": None,
 }
+
+# Firmware files in HP's plugin for HPLIP 3.25.2 (hp_laserjet_*.fw.gz), which
+# scripts/fetch-firmware.sh extracts and smudge-firmware-load sends to the
+# printer after power-on. Named after the PPD model, see fw_stem().
+FIRMWARE = {
+    "hp_laserjet_1000", "hp_laserjet_1005_series", "hp_laserjet_1018",
+    "hp_laserjet_1020", "hp_laserjet_p1005", "hp_laserjet_p1006",
+    "hp_laserjet_p1007", "hp_laserjet_p1008", "hp_laserjet_p1009",
+    "hp_laserjet_p1505", "hp_laserjet_professional_p1102",
+    "hp_laserjet_professional_p1102w", "hp_laserjet_professional_p1566",
+}
+
+
+def fw_stem(model):
+    return re.sub(r"[^a-z0-9]+", "_", (model or "").lower()).strip("_")
+
 
 # The queue the README has always told people to create points at this path,
 # and the Status app's users have it installed. Keep it byte for byte.
@@ -140,8 +157,8 @@ def cmd_select(args):
         reason = None
         if not f["filter"] or f["filter"].group(0).split(":", 1)[1].strip() != '"%s"' % STOCK_FILTER:
             reason = "not the hpcups raster filter"
-        elif fw:
-            reason = "needs firmware upload"
+        elif fw and fw_stem(f["model"]) not in FIRMWARE:
+            reason = "needs firmware upload, and HP's plugin has no firmware file for it"
         elif f["language"] not in LANGUAGES:
             reason = "language %s not built" % (f["language"] or "(none)")
         elif LANGUAGES[f["language"]]:

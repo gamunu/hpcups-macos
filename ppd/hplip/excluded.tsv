@@ -1,15 +1,4 @@
 # ppd	language	model name	products	reason
-hp-laserjet_1000.ppd	ljzjstream	HP LaserJet 1000	HP LaserJet 1000 Printer	needs firmware upload
-hp-laserjet_1005_series.ppd	ljzjstream	HP LaserJet 1005 Series	HP LaserJet 1005 Printer	needs firmware upload
-hp-laserjet_1018.ppd	ljzjstream	HP LaserJet 1018	HP LaserJet 1018 Printer|HP LaserJet 1018s Printer	needs firmware upload
-hp-laserjet_1020.ppd	ljzjstream	HP LaserJet 1020	HP LaserJet 1020 Printer|HP LaserJet 1020 Plus Printer	needs firmware upload
-hp-laserjet_p1005.ppd	ljzxstream	HP LaserJet p1005	HP LaserJet p1005 Printer	needs firmware upload
-hp-laserjet_p1006.ppd	ljzxstream	HP LaserJet p1006	HP LaserJet p1006 Printer	needs firmware upload
-hp-laserjet_p1007.ppd	ljzxstream	HP LaserJet p1007	HP LaserJet p1007 Printer	needs firmware upload
-hp-laserjet_p1008.ppd	ljzxstream	HP LaserJet p1008	HP LaserJet p1008 Printer	needs firmware upload
-hp-laserjet_p1009.ppd	ljzxstream	HP LaserJet p1009	HP LaserJet p1009 Printer	needs firmware upload
-hp-laserjet_p1505.ppd	ljzxstream	HP LaserJet p1505	HP LaserJet p1505 Printer	needs firmware upload
-hp-laserjet_professional_p1566.ppd	ljzjstream	HP LaserJet Professional p1566	HP LaserJet Professional p1566	needs firmware upload
-hp-laserjet_professional_p1567.ppd	ljzjstream	HP LaserJet Professional p1567	HP LaserJet Professional p1567	needs firmware upload
-hp-laserjet_professional_p1568.ppd	ljzjstream	HP LaserJet Professional p1568	HP LaserJet Professional p1568	needs firmware upload
-hp-laserjet_professional_p1569.ppd	ljzjstream	HP LaserJet Professional p1569	HP LaserJet Professional p1569	needs firmware upload
+hp-laserjet_professional_p1567.ppd	ljzjstream	HP LaserJet Professional p1567	HP LaserJet Professional p1567	needs firmware upload, and HP's plugin has no firmware file for it
+hp-laserjet_professional_p1568.ppd	ljzjstream	HP LaserJet Professional p1568	HP LaserJet Professional p1568	needs firmware upload, and HP's plugin has no firmware file for it
+hp-laserjet_professional_p1569.ppd	ljzjstream	HP LaserJet Professional p1569	HP LaserJet Professional p1569	needs firmware upload, and HP's plugin has no firmware file for it

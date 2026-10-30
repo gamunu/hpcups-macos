@@ -314,9 +314,13 @@ hp-ink_tank_310_series.ppd	pcl3gui2	HP Ink Tank 310 Series	HP Ink Tank 310
 hp-ink_tank_wireless_410_series.ppd	pcl3gui2	HP Ink Tank Wireless 410 Series	HP Ink Tank Wireless 410
 hp-laser_ns_1020.ppd	hbpl1	HP Laser Ns 1020	HP Laser Ns 1020|HP Laser Ns 1020w|HP Laser Ns 1020n
 hp-laser_ns_mfp_1005.ppd	hbpl1	HP Laser Ns MFP 1005	HP Laser Ns MFP 1005|HP Laser Ns MFP 1005w|HP Laser Ns MFP 1005n
+hp-laserjet_1000.ppd	ljzjstream	HP LaserJet 1000	HP LaserJet 1000 Printer
+hp-laserjet_1005_series.ppd	ljzjstream	HP LaserJet 1005 Series	HP LaserJet 1005 Printer
 hp-laserjet_1010.ppd	ljfastraster	HP LaserJet 1010	HP LaserJet 1010 Printer
 hp-laserjet_1012.ppd	ljfastraster	HP LaserJet 1012	HP LaserJet 1012 Printer
 hp-laserjet_1015.ppd	ljmono	HP LaserJet 1015	HP LaserJet 1015 Printer
+hp-laserjet_1018.ppd	ljzjstream	HP LaserJet 1018	HP LaserJet 1018 Printer|HP LaserJet 1018s Printer
+hp-laserjet_1020.ppd	ljzjstream	HP LaserJet 1020	HP LaserJet 1020 Printer|HP LaserJet 1020 Plus Printer
 hp-laserjet_1022-pcl3.ppd	ljmono	HP LaserJet 1022	HP LaserJet 1022 Printer
 hp-laserjet_1022n-pcl3.ppd	ljmono	HP LaserJet 1022n	HP LaserJet 1022n Printer|HP LaserJet 1022nxi Printer
 hp-laserjet_1022nw-pcl3.ppd	ljmono	HP LaserJet 1022nw	HP LaserJet 1022nw Printer
@@ -437,6 +441,12 @@ hp-laserjet_mfp_m129-m134.ppd	hbpl1	HP LaserJet MFP m129-m134	HP LaserJet Pro MF
 hp-laserjet_mfp_m139-m142.ppd	hbpl1	HP LaserJet MFP m139-m142	HP LaserJet MFP m139-m142
 hp-laserjet_mfp_m232-m237.ppd	hbpl1	HP LaserJet MFP m232-m237	HP LaserJet MFP m234dw|HP LaserJet MFP m234dwe|HP LaserJet MFP m233d|HP LaserJet MFP m232d|HP LaserJet MFP m235d|HP LaserJet MFP m237d|HP LaserJet MFP m236d|HP LaserJet MFP m232dw|HP LaserJet MFP m232dwc|HP LaserJet MFP m233dw|HP LaserJet MFP m236dw|HP LaserJet MFP m235dw|HP LaserJet MFP m235dwe|HP LaserJet MFP m237dwe|HP LaserJet MFP m237dw|HP LaserJet MFP m232sdn|HP LaserJet MFP m233sdn|HP LaserJet MFP m236sdn|HP LaserJet MFP m234sdn|HP LaserJet MFP m234sdne|HP LaserJet MFP m235sdn|HP LaserJet MFP m235sdne|HP LaserJet MFP m237sdne|HP LaserJet MFP m237sdn|HP LaserJet MFP m232sdw|HP LaserJet MFP m233sdw|HP LaserJet MFP m236sdw|HP LaserJet MFP m234sdw|HP LaserJet MFP m234sdwe|HP LaserJet MFP m235sdw|HP LaserJet MFP m235sdwe|HP LaserJet MFP m237sdwe|HP LaserJet MFP m237sdw
 hp-laserjet_mfp_m28-m31.ppd	hbpl1	HP LaserJet MFP m28-m31	HP LaserJet Pro MFP m28w|HP LaserJet Pro MFP m30w|HP LaserJet Pro MFP m31w|HP LaserJet Pro MFP m29w|HP LaserJet Pro MFP m30cw|HP LaserJet Pro MFP m31cw
+hp-laserjet_p1005.ppd	ljzxstream	HP LaserJet p1005	HP LaserJet p1005 Printer
+hp-laserjet_p1006.ppd	ljzxstream	HP LaserJet p1006	HP LaserJet p1006 Printer
+hp-laserjet_p1007.ppd	ljzxstream	HP LaserJet p1007	HP LaserJet p1007 Printer
+hp-laserjet_p1008.ppd	ljzxstream	HP LaserJet p1008	HP LaserJet p1008 Printer
+hp-laserjet_p1009.ppd	ljzxstream	HP LaserJet p1009	HP LaserJet p1009 Printer
+hp-laserjet_p1505.ppd	ljzxstream	HP LaserJet p1505	HP LaserJet p1505 Printer
 hp-laserjet_p1505n-zxs.ppd	ljzxstream	HP LaserJet p1505n	HP LaserJet p1505n Printer
 hp-laserjet_p2014-zxs.ppd	ljzxstream	HP LaserJet p2014	HP LaserJet p2014 Printer
 hp-laserjet_p2014n-zxs.ppd	ljzxstream	HP LaserJet p2014n	HP LaserJet p2014n Printer
@@ -513,6 +523,7 @@ hp-laserjet_professional_p1108.ppd	ljzjstream	HP LaserJet Professional p1108	HP 
 hp-laserjet_professional_p1108w.ppd	ljzjstream	HP LaserJet Professional p1108w	HP LaserJet Professional p1108w Printer
 hp-laserjet_professional_p1109.ppd	ljzjstream	HP LaserJet Professional p1109	HP LaserJet Professional p1109 Printer
 hp-laserjet_professional_p1109w.ppd	ljzjstream	HP LaserJet Professional p1109w	HP LaserJet Professional p1109w Printer
+hp-laserjet_professional_p1566.ppd	ljzjstream	HP LaserJet Professional p1566	HP LaserJet Professional p1566
 hp-laserjet_professional_p1606dn.ppd	ljzjstream	HP LaserJet Professional p1606dn	HP LaserJet Professional p1606dn Printer
 hp-laserjet_professional_p1607dn.ppd	ljzjstream	HP LaserJet Professional p1607dn	HP LaserJet Professional p1607dn Printer
 hp-laserjet_professional_p1608dn.ppd	ljzjstream	HP LaserJet Professional p1608dn	HP LaserJet Professional p1608dn Printer
