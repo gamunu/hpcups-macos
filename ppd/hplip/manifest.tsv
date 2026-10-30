@@ -11,6 +11,9 @@ hp-2000c.ppd	pcl3gui	HP 2000c	HP 2000cse Printer|HP 2000c Printer|HP 2000cn Prin
 hp-2500c.ppd	pcl3gui	HP 2500c	HP 2500c Plus Printer|HP 2500c Printer|HP 2500cm Printer|HP 2500cse Printer|HP 2500cxi Printer
 hp-910.ppd	lidil	HP 910	HP 910 Printer
 hp-915.ppd	lidil	HP 915	HP 915 Inkjet All-in-one Printer
+hp-Deskjet_2800_series.ppd	pcl3gui2	HP Deskjet 2800 Series	HP Deskjet 2800 All-in-one Printer Series|HP Deskjet Ink Advantage 2800 All-in-one Printer Series|HP Deskjet 2800e All-in-one Printer Series
+hp-Deskjet_4200_series.ppd	pcl3gui2	HP Deskjet 4200 Series	HP Deskjet 4200 All-in-one Printer Series|HP Deskjet Ink Advantage 4200 All-in-one Printer Series|HP Deskjet 4200e All-in-one Printer Series
+hp-Deskjet_4900_series.ppd	pcl3gui2	HP Deskjet 4900 Series	HP Deskjet Ink Advantage 4900 All-in-one Printer Series
 hp-amp.ppd	pcl3gui2	HP Amp	HP Amp All-in-one|HP Amp 130 All-in-one
 hp-business_inkjet_1000.ppd	pcl3gui2	HP Business Inkjet 1000	HP Business Inkjet 1000 Printer
 hp-business_inkjet_1100.ppd	pcl3gui2	HP Business Inkjet 1100	HP Business Inkjet 1100d Printer|HP Business Inkjet 1100dtn Printer|HP Business Inkjet 1100 Printer
@@ -43,6 +46,12 @@ hp-color_laserjet_5m-pcl3.ppd	ljcolor	HP Color LaserJet 5m	HP Color LaserJet 5m 
 hp-color_laserjet_8500-pcl3.ppd	ljcolor	HP Color LaserJet 8500	HP Color LaserJet 8500 Printer|HP Color LaserJet 8500n Printer|HP Color LaserJet 8500dn Printer
 hp-color_laserjet_8550-pcl3.ppd	ljcolor	HP Color LaserJet 8550	HP Color LaserJet 8550dn Printer|HP Color LaserJet 8550gn Printer|HP Color LaserJet 8550mn Printer|HP Color LaserJet 8550 Multifunction Printer|HP Color LaserJet 8550mfp-dlvry/unpkging|HP Color LaserJet 8550 Printer
 hp-color_laserjet_9500-pcl3.ppd	ljcolor	HP Color LaserJet 9500	HP Color LaserJet 9500n Printer|HP Color LaserJet 9500hdn Printer|HP Color LaserJet 9500gp Printer|HP Color LaserJet 9500 Printer|HP Color LaserJet 9500 Multifunction Printer
+hp-color_laserjet_cm1312_mfp-pcl3.ppd	ljcolor	HP Color LaserJet cm1312 MFP	HP Color LaserJet cm1312 Multifunction Printer
+hp-color_laserjet_cm1312nfi_mfp-pcl3.ppd	ljcolor	HP Color LaserJet cm1312nfi MFP	HP Color LaserJet cm1312nfi Multifunction Printer
+hp-color_laserjet_cm2320_mfp-pcl3.ppd	ljcolor	HP Color LaserJet cm2320 MFP	HP Color LaserJet cm2320 Multifunction Printer
+hp-color_laserjet_cm2320fxi_mfp-pcl3.ppd	ljcolor	HP Color LaserJet cm2320fxi MFP	HP Color LaserJet cm2320fxi Multifunction Printer
+hp-color_laserjet_cm2320n_mfp-pcl3.ppd	ljcolor	HP Color LaserJet cm2320n MFP	HP Color LaserJet cm2320n Multifunction Printer
+hp-color_laserjet_cm2320nf_mfp-pcl3.ppd	ljcolor	HP Color LaserJet cm2320nf MFP	HP Color LaserJet cm2320nf Multifunction Printer
 hp-color_laserjet_cm3530_mfp-pcl3.ppd	ljcolor	HP Color LaserJet cm3530 MFP	HP Color LaserJet cm3530 Multifunction Printer|HP Color LaserJet cm3530fs Multifunction Printer
 hp-color_laserjet_cm4540_mfp-pcl3.ppd	ljcolor	HP Color LaserJet cm4540 MFP	HP Color LaserJet cm4540 Multifunction Printer
 hp-color_laserjet_cm4730_mfp-pcl3.ppd	ljcolor	HP Color LaserJet cm4730 MFP	HP Color LaserJet cm4730 Multifunction Printer|HP Color LaserJet cm4730f Multifunction Printer|HP Color LaserJet cm4730fm Multifunction Printer|HP Color LaserJet cm4730fsk Multifunction Printer
@@ -66,6 +75,7 @@ hp-color_laserjet_cp5225dn-pcl3.ppd	ljcolor	HP Color LaserJet cp5225dn	HP Color 
 hp-color_laserjet_cp5225n-pcl3.ppd	ljcolor	HP Color LaserJet cp5225n	HP Color LaserJet cp5225n
 hp-color_laserjet_cp5520_series-pcl3.ppd	ljcolor	HP Color LaserJet cp5520 Series	HP Color LaserJet cp5520 Series Printer
 hp-color_laserjet_cp6015-pcl3.ppd	ljcolor	HP Color LaserJet cp6015	HP Color LaserJet cp6015dn Printer|HP Color LaserJet cp6015x Printer|HP Color LaserJet cp6015xh Printer|HP Color LaserJet cp6015de Printer|HP Color LaserJet cp6015n Printer
+hp-color_laserjet_pro_mfp_m176n.ppd	hbpl1	HP Color LaserJet Pro MFP m176n	HP Color LaserJet Pro Mpf m176n
 hp-color_laserjet_pro_mfp_m177fw.ppd	hbpl1	HP Color LaserJet Pro MFP m177fw	HP Color LaserJet Pro Mpf m177fw
 hp-cp1160.ppd	pcl3gui2	HP cp1160	HP Color Inkjet cp1160 Printer|HP Color Inkjet cp1160tn Printer
 hp-deskjet_1000_j110_series.ppd	pcl3gui2	HP Deskjet 1000 j110 Series	HP Deskjet 1000 j110 Series
@@ -298,6 +308,9 @@ hp-laser_ns_mfp_1005.ppd	hbpl1	HP Laser Ns MFP 1005	HP Laser Ns MFP 1005|HP Lase
 hp-laserjet_1010.ppd	ljfastraster	HP LaserJet 1010	HP LaserJet 1010 Printer
 hp-laserjet_1012.ppd	ljfastraster	HP LaserJet 1012	HP LaserJet 1012 Printer
 hp-laserjet_1015.ppd	ljmono	HP LaserJet 1015	HP LaserJet 1015 Printer
+hp-laserjet_1022-pcl3.ppd	ljmono	HP LaserJet 1022	HP LaserJet 1022 Printer
+hp-laserjet_1022n-pcl3.ppd	ljmono	HP LaserJet 1022n	HP LaserJet 1022n Printer|HP LaserJet 1022nxi Printer
+hp-laserjet_1022nw-pcl3.ppd	ljmono	HP LaserJet 1022nw	HP LaserJet 1022nw Printer
 hp-laserjet_1100.ppd	ljmono	HP LaserJet 1100	HP LaserJet 1100 Printer|HP LaserJet 1100se Printer
 hp-laserjet_1100a.ppd	ljmono	HP LaserJet 1100a	HP LaserJet 1100a All-in-one Printer|HP LaserJet 1100a Se All-in-one Printer
 hp-laserjet_1100xi.ppd	ljmono	HP LaserJet 1100xi	HP LaserJet 1100a Xi All-in-one Printer
@@ -389,10 +402,12 @@ hp-laserjet_cm1418fnw-pcl3.ppd	ljcolor	HP LaserJet cm1418fnw	HP LaserJet Profess
 hp-laserjet_m101-m106.ppd	hbpl1	HP LaserJet m101-m106	HP LaserJet m102a|HP LaserJet m102w|HP LaserJet m104a|HP LaserJet m104w|HP LaserJet m106w
 hp-laserjet_m109-m112.ppd	hbpl1	HP LaserJet m109-m112	HP LaserJet m109-m112
 hp-laserjet_m14-m17.ppd	hbpl1	HP LaserJet m14-m17	HP LaserJet Pro m15w|HP LaserJet Pro m14w|HP LaserJet Pro m17w|HP LaserJet Pro m16w|HP LaserJet Pro m14cw|HP LaserJet Pro m17cw
+hp-laserjet_m1522nf_mfp-pcl3.ppd	ljmono	HP LaserJet m1522nf MFP	HP LaserJet m1522nf Multifunction Printer
 hp-laserjet_m1537dnf_mfp-pcl3.ppd	ljmono	HP LaserJet m1537dnf MFP	HP LaserJet m1537dnf MFP
 hp-laserjet_m1538dnf_mfp-pcl3.ppd	ljmono	HP LaserJet m1538dnf MFP	HP LaserJet m1538dnf MFP
 hp-laserjet_m1539dnf_mfp-pcl3.ppd	ljmono	HP LaserJet m1539dnf MFP	HP LaserJet m1539dnf MFP
 hp-laserjet_m207-m212.ppd	hbpl1	HP LaserJet m207-m212	HP LaserJet m207d|HP LaserJet m208d|HP LaserJet m209d|HP LaserJet m210d|HP LaserJet m212d|HP Lasejet  m211d|HP LaserJet m209dw|HP LaserJet m209dwe|HP LaserJet m210dw|HP LaserJet m210dwe|HP LaserJet m212dw|HP LaserJet m212dwe|HP LaserJet m208dw|HP LaserJet m207dw|HP LaserJet m211dw
+hp-laserjet_m2727_mfp-pcl3.ppd	ljmono	HP LaserJet m2727 MFP	HP LaserJet m2727 Multifunction Printer
 hp-laserjet_m3027_mfp-pcl3.ppd	ljmono	HP LaserJet m3027 MFP	HP LaserJet m3027 Multifunction Printer|HP LaserJet m3027x Multifunction Printer
 hp-laserjet_m3035_mfp-pcl3.ppd	ljmono	HP LaserJet m3035 MFP	HP LaserJet m3035 Multifunction Printer|HP LaserJet m3035xs Multifunction Printer
 hp-laserjet_m4345_mfp-pcl3.ppd	ljmono	HP LaserJet m4345 MFP	HP LaserJet m4345 Multifunction Printer|HP LaserJet m4345x Multifunction Printer|HP LaserJet m4345xs Multifunction Printer|HP LaserJet m4345xm Multifunction Printer
@@ -412,6 +427,8 @@ hp-laserjet_p2015d_series.ppd	ljmono	HP LaserJet p2015d Series	HP LaserJet p2015
 hp-laserjet_p2015dn_series.ppd	ljmono	HP LaserJet p2015dn Series	HP LaserJet p2015dn Printer
 hp-laserjet_p2015n_series.ppd	ljmono	HP LaserJet p2015n Series	HP LaserJet p2015n Printer
 hp-laserjet_p2015x_series.ppd	ljmono	HP LaserJet p2015x Series	HP LaserJet p2015x Printer
+hp-laserjet_p2035-pcl3.ppd	ljmono	HP LaserJet p2035	HP LaserJet p2035 Printer
+hp-laserjet_p2035n-pcl3.ppd	ljmono	HP LaserJet p2035n	HP LaserJet p2035n Printer
 hp-laserjet_p2055-pcl3.ppd	ljmono	HP LaserJet p2055	HP LaserJet p2055 Printer
 hp-laserjet_p2055d-pcl3.ppd	ljmono	HP LaserJet p2055d	HP LaserJet p2055d Printer
 hp-laserjet_p2055dn-pcl3.ppd	ljmono	HP LaserJet p2055dn	HP LaserJet p2055dn Printer
@@ -443,6 +460,7 @@ hp-laserjet_pro_mfp_m126nw.ppd	hbpl1	HP LaserJet Pro MFP m126nw	HP LaserJet Pro 
 hp-laserjet_pro_mfp_m127fn.ppd	hbpl1	HP LaserJet Pro MFP m127fn	HP LaserJet Pro MFP m127fn
 hp-laserjet_pro_mfp_m127fp.ppd	hbpl1	HP LaserJet Pro MFP m127fp	HP LaserJet Pro MFP m127fp
 hp-laserjet_pro_mfp_m127fs.ppd	hbpl1	HP LaserJet Pro MFP m127fs	HP LaserJet Pro MFP m127fs
+hp-laserjet_pro_mfp_m127fw.ppd	hbpl1	HP LaserJet Pro MFP m127fw	HP LaserJet Pro MFP m127fw
 hp-laserjet_pro_mfp_m128fn.ppd	hbpl1	HP LaserJet Pro MFP m128fn	HP LaserJet Pro MFP m128fn
 hp-laserjet_pro_mfp_m128fp.ppd	hbpl1	HP LaserJet Pro MFP m128fp	HP LaserJet Pro MFP m128fp
 hp-laserjet_pro_mfp_m128fw.ppd	hbpl1	HP LaserJet Pro MFP m128fw	HP LaserJet Pro MFP m128fw

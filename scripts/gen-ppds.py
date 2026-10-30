@@ -20,10 +20,18 @@ Subcommands:
 
 Selection rules, in order. A PPD is excluded when:
   1. its *cupsFilter is not the hpcups raster filter,
-  2. a models.dat entry for one of its products has plugin=1 or plugin=2
-     (HP's closed binary plugin is required),
+  2. a models.dat entry for one of its products has fw-download=True (the
+     printer needs a firmware blob uploaded at print time),
   3. its *hpPrinterLanguage is one we leave out (see LANGUAGES),
   4. no models.dat entry matches any of its products (plugin status unknown).
+
+models.dat plugin=1 or plugin=2 does not exclude a PPD by itself. The plugin
+(hplip-plugin) holds the JBIG compressor lj.so, the sihp*.dl firmware files and
+the scanner and fax libraries. The only print path that loads it is ModeJbig
+(ZJS and ZX stream languages, left out through LANGUAGES), ModeJpeg's optional
+Taos compressor (falls back to JPEG when the plugin is absent) and a commented
+out Hbpl1 loader. For the other models the plugin is needed for scanning or
+faster printing, so the filter prints without it.
 """
 
 import argparse
@@ -135,19 +143,19 @@ def cmd_select(args):
         keys = set()
         for p in f["products"] + [f["model"]]:
             keys |= idx.get(norm(p), set())
-        plugins = {models[k].get("plugin", "0") for k in keys}
+        fw = any(models[k].get("fw-download", "False") == "True" for k in keys)
 
         reason = None
         if not f["filter"] or f["filter"].group(0).split(":", 1)[1].strip() != '"%s"' % STOCK_FILTER:
             reason = "not the hpcups raster filter"
-        elif plugins - {"0"}:
-            reason = "needs HP plugin (plugin=%s)" % "/".join(sorted(plugins - {"0"}))
+        elif fw:
+            reason = "needs firmware upload"
         elif f["language"] not in LANGUAGES:
             reason = "language %s not built" % (f["language"] or "(none)")
         elif LANGUAGES[f["language"]]:
             reason = "language: " + LANGUAGES[f["language"]]
         elif not keys:
-            reason = "no models.dat entry, plugin status unknown"
+            reason = "no models.dat entry, firmware and plugin status unknown"
 
         row = (name, f["language"], f["model"], "|".join(f["products"]))
         if reason:

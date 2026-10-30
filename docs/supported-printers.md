@@ -2,32 +2,31 @@
 
 # Supported printers
 
-778 PPD files from HPLIP 3.25.2 cover 2216 model names. Every one prints through the hpcups filter in this package, with no HP plugin.
+796 PPD files from HPLIP 3.25.2 cover 2239 model names. Every one prints through the hpcups filter in this package, with no HP plugin.
 Only the DeskJet 2300 series has been tested on real hardware.
 
 ## Print languages
 
 | Language | PPD files |
 | --- | ---: |
-| pcl3gui2 | 359 |
-| ljmono | 121 |
+| pcl3gui2 | 362 |
+| ljmono | 128 |
 | pcl3gui | 82 |
+| ljcolor | 65 |
 | pcl3 | 64 |
-| ljcolor | 59 |
 | lidil | 51 |
-| hbpl1 | 40 |
+| hbpl1 | 42 |
 | ljfastraster | 2 |
 
 ## Left out
 
-82 PPD files from the same HPLIP tree are not installed.
+64 PPD files from the same HPLIP tree are not installed.
 
 | Reason | PPD files |
 | --- | ---: |
-| language: JBIG compressor is in the HP plugin (filter fails, error 48) | 33 |
-| needs HP plugin (plugin=1) | 32 |
-| needs HP plugin (plugin=2) | 14 |
-| language: JPEG color table stubbed (see src/hpcups/UPSTREAM) | 3 |
+| language: JBIG compressor is in the HP plugin (filter fails, error 48) | 42 |
+| needs firmware upload | 14 |
+| language: JPEG color table stubbed (see src/hpcups/UPSTREAM) | 8 |
 
 The full list with reasons is `ppd/hplip/excluded.tsv`.
 
@@ -158,6 +157,12 @@ The full list with reasons is `ppd/hplip/excluded.tsv`.
 | HP Color LaserJet 9500gp Printer | ljcolor |
 | HP Color LaserJet 9500hdn Printer | ljcolor |
 | HP Color LaserJet 9500n Printer | ljcolor |
+| HP Color LaserJet cm1312 Multifunction Printer | ljcolor |
+| HP Color LaserJet cm1312nfi Multifunction Printer | ljcolor |
+| HP Color LaserJet cm2320 Multifunction Printer | ljcolor |
+| HP Color LaserJet cm2320fxi Multifunction Printer | ljcolor |
+| HP Color LaserJet cm2320n Multifunction Printer | ljcolor |
+| HP Color LaserJet cm2320nf Multifunction Printer | ljcolor |
 | HP Color LaserJet cm3530 Multifunction Printer | ljcolor |
 | HP Color LaserJet cm3530fs Multifunction Printer | ljcolor |
 | HP Color LaserJet cm4540 Multifunction Printer | ljcolor |
@@ -200,6 +205,7 @@ The full list with reasons is `ppd/hplip/excluded.tsv`.
 | HP Color LaserJet cp6015n Printer | ljcolor |
 | HP Color LaserJet cp6015x Printer | ljcolor |
 | HP Color LaserJet cp6015xh Printer | ljcolor |
+| HP Color LaserJet Pro Mpf m176n | hbpl1 |
 | HP Color LaserJet Pro Mpf m177fw | hbpl1 |
 | HP Deskjet 1000 j110 Series | pcl3gui2 |
 | HP Deskjet 1010 Printer | pcl3gui2 |
@@ -259,6 +265,8 @@ The full list with reasons is `ppd/hplip/excluded.tsv`.
 | HP Deskjet 2622 All-in-one | pcl3gui2 |
 | HP Deskjet 2623 All-in-one | pcl3gui2 |
 | HP Deskjet 2700 All-in-one Printer Series | pcl3gui2 |
+| HP Deskjet 2800 All-in-one Printer Series | pcl3gui2 |
+| HP Deskjet 2800e All-in-one Printer Series | pcl3gui2 |
 | HP Deskjet 3000 j310 Series | pcl3gui2 |
 | HP Deskjet 3050 j610 Series | pcl3gui2 |
 | HP Deskjet 3050a j611 Series | pcl3gui2 |
@@ -356,6 +364,8 @@ The full list with reasons is `ppd/hplip/excluded.tsv`.
 | HP Deskjet 400 Color Capable Printer | pcl3 |
 | HP Deskjet 400 Printer | pcl3 |
 | HP Deskjet 400l Printer | pcl3 |
+| HP Deskjet 4200 All-in-one Printer Series | pcl3gui2 |
+| HP Deskjet 4200e All-in-one Printer Series | pcl3gui2 |
 | HP Deskjet 450cbi Mobile Printer | pcl3gui2 |
 | HP Deskjet 450ci Mobile Printer | pcl3gui2 |
 | HP Deskjet 450wbt Mobile Printer | pcl3gui2 |
@@ -762,6 +772,7 @@ The full list with reasons is `ppd/hplip/excluded.tsv`.
 | HP Deskjet Ink Advantage 2677 All-in-one | pcl3gui2 |
 | HP Deskjet Ink Advantage 2678 All-in-one | pcl3gui2 |
 | HP Deskjet Ink Advantage 2700 All-in-one Printer Series | pcl3gui2 |
+| HP Deskjet Ink Advantage 2800 All-in-one Printer Series | pcl3gui2 |
 | HP Deskjet Ink Advantage 3515 E-all-in-one | pcl3gui2 |
 | HP Deskjet Ink Advantage 3516 E-all-in-one | pcl3gui2 |
 | HP Deskjet Ink Advantage 3525 E-all-in-one | pcl3gui2 |
@@ -779,6 +790,7 @@ The full list with reasons is `ppd/hplip/excluded.tsv`.
 | HP Deskjet Ink Advantage 3835 All-in-one Printer | pcl3gui2 |
 | HP Deskjet Ink Advantage 3836 All-in-one Printer | pcl3gui2 |
 | HP Deskjet Ink Advantage 4100 All-in-one Printer Series | pcl3gui2 |
+| HP Deskjet Ink Advantage 4200 All-in-one Printer Series | pcl3gui2 |
 | HP Deskjet Ink Advantage 4515 E-all-in-one Printer | pcl3gui2 |
 | HP Deskjet Ink Advantage 4518 E-all-in-one Printer | pcl3gui2 |
 | HP Deskjet Ink Advantage 4530 All-in-one | pcl3gui2 |
@@ -795,6 +807,7 @@ The full list with reasons is `ppd/hplip/excluded.tsv`.
 | HP Deskjet Ink Advantage 4670 All-in-one | pcl3gui2 |
 | HP Deskjet Ink Advantage 4675 All-in-one | pcl3gui2 |
 | HP Deskjet Ink Advantage 4676 All-in-one | pcl3gui2 |
+| HP Deskjet Ink Advantage 4900 All-in-one Printer Series | pcl3gui2 |
 | HP Deskjet Ink Advantage 5075 All-in-one | pcl3gui2 |
 | HP Deskjet Ink Advantage 5275 All-in-one | pcl3gui2 |
 | HP Deskjet Ink Advantage 5525 E-all-in-one | pcl3gui2 |
@@ -897,6 +910,10 @@ The full list with reasons is `ppd/hplip/excluded.tsv`.
 | HP LaserJet 1010 Printer | ljfastraster |
 | HP LaserJet 1012 Printer | ljfastraster |
 | HP LaserJet 1015 Printer | ljmono |
+| HP LaserJet 1022 Printer | ljmono |
+| HP LaserJet 1022n Printer | ljmono |
+| HP LaserJet 1022nw Printer | ljmono |
+| HP LaserJet 1022nxi Printer | ljmono |
 | HP LaserJet 1100 Printer | ljmono |
 | HP LaserJet 1100a All-in-one Printer | ljmono |
 | HP LaserJet 1100a Se All-in-one Printer | ljmono |
@@ -1100,6 +1117,7 @@ The full list with reasons is `ppd/hplip/excluded.tsv`.
 | HP LaserJet m104w | hbpl1 |
 | HP LaserJet m106w | hbpl1 |
 | HP LaserJet m109-m112 | hbpl1 |
+| HP LaserJet m1522nf Multifunction Printer | ljmono |
 | HP LaserJet m1537dnf MFP | ljmono |
 | HP LaserJet m1538dnf MFP | ljmono |
 | HP LaserJet m1539dnf MFP | ljmono |
@@ -1117,6 +1135,7 @@ The full list with reasons is `ppd/hplip/excluded.tsv`.
 | HP LaserJet m212d | hbpl1 |
 | HP LaserJet m212dw | hbpl1 |
 | HP LaserJet m212dwe | hbpl1 |
+| HP LaserJet m2727 Multifunction Printer | ljmono |
 | HP LaserJet m3027 Multifunction Printer | ljmono |
 | HP LaserJet m3027x Multifunction Printer | ljmono |
 | HP LaserJet m3035 Multifunction Printer | ljmono |
@@ -1173,6 +1192,8 @@ The full list with reasons is `ppd/hplip/excluded.tsv`.
 | HP LaserJet p2015dn Printer | ljmono |
 | HP LaserJet p2015n Printer | ljmono |
 | HP LaserJet p2015x Printer | ljmono |
+| HP LaserJet p2035 Printer | ljmono |
+| HP LaserJet p2035n Printer | ljmono |
 | HP LaserJet p2055 Printer | ljmono |
 | HP LaserJet p2055d Printer | ljmono |
 | HP LaserJet p2055dn Printer | ljmono |
@@ -1216,6 +1237,7 @@ The full list with reasons is `ppd/hplip/excluded.tsv`.
 | HP LaserJet Pro MFP m127fn | hbpl1 |
 | HP LaserJet Pro MFP m127fp | hbpl1 |
 | HP LaserJet Pro MFP m127fs | hbpl1 |
+| HP LaserJet Pro MFP m127fw | hbpl1 |
 | HP LaserJet Pro MFP m128fn | hbpl1 |
 | HP LaserJet Pro MFP m128fp | hbpl1 |
 | HP LaserJet Pro MFP m128fw | hbpl1 |
